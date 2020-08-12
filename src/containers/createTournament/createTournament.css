@@ -1,0 +1,31 @@
+.createTournForm {
+    border: 1px solid #bbb;
+    width: 500px;
+    margin: 0 auto;
+}
+
+label {
+    margin-right: 10px;
+}
+
+.createTournForm p {
+    font-weight: bold;
+}
+
+.submitBtn {
+    margin: 20px;
+    font-size: 0.8rem;
+}
+
+.duration {
+    font-size: 0.9rem;
+}
+
+.Selected {
+    background-color: rgb(77, 134, 247);
+    color: white;
+}
+
+.No-display {
+    display: none;
+}

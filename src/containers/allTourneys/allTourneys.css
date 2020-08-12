@@ -1,0 +1,99 @@
+.AllTourneys {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 90vw;
+    height: auto;
+    box-sizing: border-box;
+}
+
+.NotActiveTourneys {
+    width: 80%;
+    min-width: 500px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.ActiveTourneys {
+    width: 80%;
+    min-width: 500px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.NotActiveTable {
+    margin: 0 auto;
+    border: 1px solid #ccc;
+}
+
+.ActiveTable {
+    margin: 0 auto;
+    border: 1px solid #ccc;
+}
+
+.NotActiveTable th {
+    width: 120px;
+}
+
+.NotActiveTable tr {
+    outline: thin solid #ccc;
+}
+
+.ActiveTable th {
+    width: 120px;
+}
+
+.ActiveTable tr {
+    outline: thin solid #ccc;
+}
+
+/* Small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
+    .AllTourneys {
+        font-size: 0.8rem;
+    }
+    
+    button {
+        font-size: 0.6rem;
+    }
+    
+    .NotActiveTable {
+        width: 80vw;
+    }
+    
+    .NotActiveTourneys {
+        width: 90vw;
+    }
+    
+    .ActiveTable {
+        width: 80vw;
+    }
+    
+    .ActiveTourneys {
+        width: 90vw;
+    }
+
+}
+
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-width: 768px) {  
+    
+
+}
+
+/* Large devices (desktops, 768px to 992px )*/
+@media (max-width: 992px) {  
+
+
+}
+
+/* large devices  desktops, 992px to 1200px)*/
+@media (max-width: 1200px) {  
+
+
+}
