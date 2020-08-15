@@ -287,16 +287,8 @@ class Tourney extends Component {
                         <h2>Products:</h2>
                         <div className="productListDiv">
                             <div className="exchangeSublist">
-                                <h3>Binance:</h3>
-                                {binanceProducts}
-                            </div>
-                            <div className="exchangeSublist">
                                 <h3>FTX:</h3>
                                 {FTXProducts}
-                            </div>
-                            <div className="exchangeSublist">
-                                <h3>Bitfinex:</h3>
-                                {bitfinexProducts}
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ from init import app, db
 from flask import request
 from sqlalchemy.orm import sessionmaker
 from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, ProductList
+import datetime
 
 engine = db.engine
 Session = sessionmaker(bind=engine)
@@ -11,32 +12,18 @@ Session = sessionmaker(bind=engine)
 def getAllProducts():
     session = Session()
     
-    response = {'products': {'Binance': {'spot': {'BTC': [], 'USDT': []}, 'margin': {'BTC': [], 'USDT': []} }} }
+    response = {'products': {'FTX': {'spot': {'USD': [], 'BTC': []}, 'future': []} } }
     
     for query in session.query(ProductList).all():
-#        product = {'symbol': query.symbol,
-#                    'exchange': query.exchange,
-#                    'spot': query.spot,
-#                    'margin': query.margin,
-#                    'baseSymbol': query.baseSymbol}
-        product = query.symbol
-        if query.spot == True and query.margin == True:
-            if query.baseSymbol == 'BTC':
-                response['products']['Binance']['spot']['BTC'].append(product)
-                response['products']['Binance']['margin']['BTC'].append(product)
-            elif query.baseSymbol == 'USDT':
-                response['products']['Binance']['spot']['USDT'].append(product)
-                response['products']['Binance']['margin']['USDT'].append(product)
-        elif query.spot == True and query.margin == False:
-            if query.baseSymbol == 'BTC':
-                response['products']['Binance']['spot']['BTC'].append(product)
-            elif query.baseSymbol == 'USDT':
-                response['products']['Binance']['spot']['USDT'].append(product)
-        elif query.spot == False and query.margin == True:
-            if query.baseSymbol == 'BTC':
-                response['products']['Binance']['margin']['BTC'].append(product)
-            elif query.baseSymbol == 'USDT':
-                response['products']['Binance']['margin']['USDT'].append(product)
+        
+        product = query.name
+        if query.productType == "future":
+            response['products']['FTX']['future'].append(product)
+        elif query.productType == "spot":
+            if (query.quoteCurrency) == "USD":
+                response['products']['FTX']['spot']['USD'].append(product)
+            elif (query.quoteCurrency) == "BTC":
+                response['products']['FTX']['spot']['BTC'].append(product)
         
     session.close()
         
@@ -234,8 +221,16 @@ def createTournament():
     content = request.json
     print(content)
     
+    # get the start and end timestamps from startDate and startTime / endDate and endTime strings
+    # datetime format: %Y-%m-%d %H:%M
+
+    startString = content["startDate"] + " " + content["startTime"]
+    endString = content["endDate"] + " " + content["endTime"]
+    startTS = datetime.datetime.strptime(startString, "%Y-%m-%d %H:%M").timestamp()
+    endTS = datetime.datetime.strptime(endString, "%Y-%m-%d %H:%M").timestamp()
+    
     session = Session()
-    dbEntry = RegistrationTourneys(hostId=content["hostId"] ,tourneyId = int(content["tourneyId"]), host=content["host"], maxEntrants=content["maxEntrants"],  minEntrants=content["minEntrants"],  noEntrants=0, startDate=content["startDate"], startTime=content["startTime"], endDate=content["endDate"], endTime=content["endTime"])
+    dbEntry = RegistrationTourneys(hostId=content["hostId"] ,tourneyId = int(content["tourneyId"]), host=content["host"], maxEntrants=content["maxEntrants"],  minEntrants=content["minEntrants"],  noEntrants=0, startDate=content["startDate"], startTime=content["startTime"], endDate=content["endDate"], endTime=content["endTime"], startTS=startTS, endTS=endTS)
     session.add(dbEntry)
     session.commit()
     session.close()
@@ -306,9 +301,10 @@ def registerProducts():
     session = Session()
     
     for exchange in content['products']:
-        for product in content['products'][exchange]:
-            dbEntry = RegisteringProducts(exchange=exchange, productName=product, tourneyId=content['tourneyId'])
-            session.add(dbEntry)
+        for productType in content['products'][exchange]:
+            for product in content['products'][exchange][productType]:
+                dbEntry = RegisteringProducts(exchange=exchange, productName=product, tourneyId=content['tourneyId'], productType=productType)
+                session.add(dbEntry)
     
     session.commit()
     session.close()

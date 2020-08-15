@@ -7,7 +7,8 @@ class CheckDropDown extends Component {
     
     state = {
         checkList: null,
-        productsSelected: []
+        productsSelected: [],
+        
     }
 
     componentDidMount() {
@@ -15,6 +16,7 @@ class CheckDropDown extends Component {
         this.setState({
             checkList: newRef
         })
+        console.log(this.props.productType);
     }
 
     selectHandler = () => {
@@ -43,7 +45,7 @@ class CheckDropDown extends Component {
             productsSelected: newProducts
         });
         
-        this.props.updateProductList(newProducts, this.props.exchange, this.props.productList);
+        this.props.updateProductList(newProducts, this.props.exchange, this.props.productList, this.props.productType);
     }
     
     render() {
@@ -70,7 +72,7 @@ class CheckDropDown extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateProductList: (productList, exchange, oldList) => dispatch(actions.updateProductList(productList, exchange, oldList))
+        updateProductList: (productList, exchange, oldList, productType) => dispatch(actions.updateProductList(productList, exchange, oldList, productType))
     };
 };
 

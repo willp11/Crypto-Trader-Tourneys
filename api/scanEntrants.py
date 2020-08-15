@@ -3,7 +3,12 @@ import datetime
 from binance.client import Client
 from init import db
 from sqlalchemy.orm import sessionmaker
-from models import ActiveTourneys, ActiveEntrants, ActiveProducts
+from models import ActiveTourneys, ActiveEntrants, ActiveProducts, Trades, CompletedEntrants
+import math
+import time
+import hmac
+import requests
+from requests import Request, Session
 
 engine = db.engine
 Session = sessionmaker(bind=engine)
@@ -20,13 +25,8 @@ class Position:
         self.invested = invested
         self.profit = profit
 
-
-binance = ccxt.binance({
-    'apiKey': "APQ7CSj5WesK7n61jSa8zSWobWoB0chASN9o3raiVTcE064iVK1YgscmeIJ5ZDod",
-    'secret': "oaYyrIkPV0HmFaRfvGArY0Tp3kl50PxXvWkUKTNv9BFemwBazjtWepFiasocijp7"
-})
-
-client = Client(api_key = "APQ7CSj5WesK7n61jSa8zSWobWoB0chASN9o3raiVTcE064iVK1YgscmeIJ5ZDod", api_secret="oaYyrIkPV0HmFaRfvGArY0Tp3kl50PxXvWkUKTNv9BFemwBazjtWepFiasocijp7")
+API_key = 'mW4bIM9k5Fz-EnSotKhr-3WdXXbPaF6h_WKveN6z'
+API_secret = 'ExCgCNok6eaQwCXMwfiohq5Yt580O3ef21ldyljI'
 
 # GET ALL ACTIVE TOURNAMENTS
 session = Session()
@@ -37,140 +37,185 @@ for query in session.query(ActiveTourneys).all():
 print(activeTournaments)
 
 for tournament in activeTournaments:
+    print("tournament: " + str(tournament))
     products = []
-    for query in session.query(ActiveProducts).all():
+    for query in session.query(ActiveProducts).filter_by(tourneyId=tournament).all():
+
         products.append({'name': query.productName, 'exchange': query.exchange})
-    print(products)
-        
-    users = []
+    
     for query in session.query(ActiveEntrants).filter_by(tourneyId=tournament).all():
-        users.append(query.userId)
-    print(users)
-    
-    for user in users:
+        
+        # get the user Id and starting balance
+        userId = query.userId
+        username =query.username
+        startingBalance = -100
+        # startingbalance = query.startingBalance
+        
+        print("User: " + userId)
+        
+        # array to store position objects
+        positions = []
+
+        #get the tournament's starting timestamp to use as payload for api call
+        startTS = query.timestamp
+        
         for product in products:
-            if product.exchange == 'Binance':
-                trades = client.get_margin_trades(symbol=product)
-    
+            
+            productName=product['name']
+            #print(product)
+            
+            string = "https://ftx.com/api/fills?market=" + productName
+
+            ts = int(time.time() * 1000)
+            
+            payload = {"start_time": startTS}
+            
+            #print("tournament start timestamp: " + str(startTS))
+            
+            # call the FTX API
+            request = Request('GET', string, params=payload)
+            prepared = request.prepare()
+
+            signature_payload = f'{ts}{prepared.method}{prepared.path_url}'.encode()
+            if prepared.body:
+                signature_payload += prepared.body
+
+            signature = hmac.new(API_secret.encode(), signature_payload, 'sha256').hexdigest()
+
+            prepared.headers['FTX-KEY'] = API_key
+            prepared.headers['FTX-SIGN'] = signature
+            prepared.headers['FTX-TS'] = str(ts)
+
+            s = requests.Session()
+            res = s.send(prepared)
+
+            trades = res.json()['result']
+            
+            # Create a position object for each product
             if len(trades) > 0:
+                
+                # initialise position object
                 position = Position(product, 0, 0, 0, 0, 0, 0, 0, 0)
-
+                
+                # iterate over all the trades and calculate the net position
                 for trade in trades:
+                    #print(trade)
 
-                    if trade['isBuyer'] == True:
-                        side = 'buy'
-                    else:
-                        side = 'sell'
+                    side = trade['side']
+                    price = trade['price']
+                    qty = trade['size']
 
-                    tradeQty = float(trade['qty'])
-                    tradePrice = float(trade['price'])
+                    tradeTime = trade['time'][0:len(trade['time'])-13]
+
+                    timestamp = datetime.datetime.strptime(tradeTime, "%Y-%m-%dT%H:%M:%S").timestamp()
+                    #print("trade timestamp: " + str(timestamp))
 
                     if side == 'buy':
-                        position.amountBought += tradeQty
-                        if position.amountBought == tradeQty:
-                            position.avgBuyPrice = tradePrice
+                        position.amountBought += qty
+                        if position.amountBought == qty:
+                                position.avgBuyPrice = price
                         else:
-                            position.avgBuyPrice = position.avgBuyPrice + ((tradePrice-position.avgBuyPrice)*(tradeQty/position.amountBought))
+                            position.avgBuyPrice = position.avgBuyPrice + ((price-position.avgBuyPrice)*(qty/position.amountBought))
                     elif side == 'sell':
-                        position.amountSold += tradeQty
-                        if position.amountSold == tradeQty:
-                            position.avgSellPrice = tradePrice
+                        position.amountSold += qty
+                        if position.amountSold == qty:
+                            position.avgSellPrice = price
                         else:
-                            position.avgSellPrice = position.avgSellPrice + ((tradePrice-position.avgSellPrice)*(tradeQty/position.amountSold))   
+                            position.avgSellPrice = position.avgSellPrice + ((price-position.avgSellPrice)*(qty/position.amountSold))   
 
                     position.sizeRemaining = position.amountBought - position.amountSold
+                
+                # get the current price and calculate the current value of the position then append to positions array
+                string = "https://ftx.com/api/markets/" + productName
 
-                currentPrice = float(binance.fetchTicker('BTC/USDT')['bid'])
+                res = requests.get(string)
+
+                bidPrice = res.json()['result']['bid']
+                askPrice = res.json()['result']['ask']
+                currentPrice = (float(bidPrice) + float(askPrice)) / 2
+
+                #print(currentPrice)
+                #print(position.sizeRemaining)
+
                 position.value = (position.sizeRemaining*currentPrice) + (position.amountSold*position.avgSellPrice)
                 position.invested = (position.amountBought * position.avgBuyPrice)
                 if position.invested != 0:
-                    position.profit = (position.value / position.invested) - 1
+                    position.profit = position.value - position.invested
 
                 positions.append(position)
-                print(position.value, position.invested, position.profit)
-                
+                #print(position.value, position.invested, position.profit)
+                    
         totalVal = 0
         totalInvested = 0
         for position in positions:
             totalVal += position.value
             totalInvested += position.invested
-            totalBought += position.amountBought
-            totalSold += position.amountSold
-            
-        totalProfit = (totalVal/totalInvested) - 1
-        print(totalProfit)
+
+        totalProfit = totalVal - totalInvested
+        print("Profit: " + str(totalProfit))
         
-        dbQuery = session.query(activeEntrants).filter_by(userId=user, tourneyId=tournament).one()
-        dbQuery.totalInvested = totalSold
-        dbQuery.totalValue = totalVal
+        # change the user's profit value in active entrants table
+        dbQuery = session.query(ActiveEntrants).filter_by(userId=userId).one()
         dbQuery.profit = totalProfit
-        #dbQuery.timestamp = 
         session.add(dbQuery)
+        
+        if totalProfit + startingBalance <= 0:
+            print("User is liquidated!")
+            
+            # if the user has been liquidated, then add all their trades to the trades list, add them to completed entrants table and remove from active entrants table
+            for product in products:
+                
+                currentTimestamp = datetime.datetime.utcnow().timestamp()
+                
+                # add to completed entrants
+                dbEntry = CompletedEntrants(tourneyId=tournament, userId=userId, username=username, totalInvested=totalInvested, totalValue=totalVal, profit=totalProfit, timestamp=currentTimestamp)
+                session.add(dbEntry)
+                
+                # delete from active entrants
+                session.delete(query)
+                        
+                # get all trades to add to trades list
+                productName=product['name']
+
+                string = "https://ftx.com/api/fills?market=" + productName
+
+                ts = int(time.time() * 1000)
+
+                payload = {"start_time": startTS}
+
+                # call the FTX API
+                request = Request('GET', string, params=payload)
+                prepared = request.prepare()
+
+                signature_payload = f'{ts}{prepared.method}{prepared.path_url}'.encode()
+                if prepared.body:
+                    signature_payload += prepared.body
+
+                signature = hmac.new(API_secret.encode(), signature_payload, 'sha256').hexdigest()
+
+                prepared.headers['FTX-KEY'] = API_key
+                prepared.headers['FTX-SIGN'] = signature
+                prepared.headers['FTX-TS'] = str(ts)
+
+                s = requests.Session()
+                res = s.send(prepared)
+
+                trades = res.json()['result']
+                
+                for trade in trades:
+                    side = trade['side']
+                    price = trade['price']
+                    qty = trade['size']
+
+                    tradeTime = trade['time'][0:len(trade['time'])-13]
+
+                    timestamp = datetime.datetime.strptime(tradeTime, "%Y-%m-%dT%H:%M:%S").timestamp()
+                    
+                    dbEntry = Trades(userId=userId, tourneyId=tournament, productName=productName,  exchange=product['exchange'], side=side, quantity=qty, price=price, timestamp=timestamp)
+                    session.add(dbEntry)
+                
+        #commit the changes for that user
         session.commit()
     
 session.close()
-
-#productList = ['BTCUSDT', 'ETHUSDT']
-#
-#positions = []
-#basePosition = {'product': '',
-#                'amountBought': 0,
-#                'amountSold': 0,
-#                'avgBuyPrice': 0,
-#                'avgSellPrice': 0,
-#                'sizeRemaining': 0,
-#                'value': 0,
-#                'invested': 0,
-#                'profit': 0
-#               }
-
-#for product in productList:
-#    trades = client.get_margin_trades(symbol=product)
-#    
-#    if len(trades) > 0:
-#        position = Position(product, 0, 0, 0, 0, 0, 0, 0, 0)
-#
-#        for trade in trades:
-#
-#            if trade['isBuyer'] == True:
-#                side = 'buy'
-#            else:
-#                side = 'sell'
-#
-#            tradeQty = float(trade['qty'])
-#            tradePrice = float(trade['price'])
-#
-#            #print(side, tradeQty, tradePrice)
-#
-#            if side == 'buy':
-#                position.amountBought += tradeQty
-#                if position.amountBought == tradeQty:
-#                    position.avgBuyPrice = tradePrice
-#                else:
-#                    position.avgBuyPrice = position.avgBuyPrice + ((tradePrice-position.avgBuyPrice)*(tradeQty/position.amountBought))
-#            elif side == 'sell':
-#                position.amountSold += tradeQty
-#                if position.amountSold == tradeQty:
-#                    position.avgSellPrice = tradePrice
-#                else:
-#                    position.avgSellPrice = position.avgSellPrice + ((tradePrice-position.avgSellPrice)*(tradeQty/position.amountSold))   
-#
-#            position.sizeRemaining = position.amountBought - position.amountSold
-#
-#        currentPrice = float(binance.fetchTicker('BTC/USDT')['bid'])
-#        position.value = (position.sizeRemaining*currentPrice) + (position.amountSold*position.avgSellPrice)
-#        position.invested = (position.amountBought * position.avgBuyPrice)
-#        if position.invested != 0:
-#            position.profit = (position.value / position.invested) - 1
-#
-#        positions.append(position)
-#        print(position.value, position.invested, position.profit)
-#    
-#totalVal = 0
-#totalInvested = 0
-#for position in positions:
-#    totalVal += position.value
-#    totalInvested += position.invested
-#    
-#totalProfit = (totalVal/totalInvested) - 1
-#print(totalProfit)
+    

@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../utility';
 
 const initialState = {
-    productList: [],
+    productList: {'FTX': {'spot': [], 'future': []}},
     loading: false,
     error: false,
 };

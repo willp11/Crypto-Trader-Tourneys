@@ -193,16 +193,17 @@ class CreateTournament extends Component {
                 <Redirect to="/login" />
             )
         }
-        
-        let binanceSpotProductsBTC = null;
-        let binanceMarginProductsBTC = null;
-        let binanceSpotProductsUSDT = null;
-        let binanceMarginProductsUSDT = null;
+ 
+        let FTXSpotProductUSD = null;
+        let FTXFuturesProductsUSD = null;
+        let FTXSpotProductBTC = null;
+        let FTXFuturesProductsBTC = null;
+
         if (this.state.productList) {
-            binanceSpotProductsBTC = this.state.productList.products.Binance.spot.BTC;
-            binanceMarginProductsBTC = this.state.productList.products.Binance.margin.BTC;
-            binanceSpotProductsUSDT = this.state.productList.products.Binance.spot.USDT;
-            binanceMarginProductsUSDT = this.state.productList.products.Binance.margin.USDT;
+            FTXSpotProductUSD = this.state.productList.products.FTX.spot.USD;
+            FTXFuturesProductsUSD = this.state.productList.products.FTX.future;
+            FTXSpotProductBTC = this.state.productList.products.FTX.spot.BTC;
+            FTXFuturesProductsBTC = null;
         }
         
         let productsDiv = <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>Choose a currency first.</p>
@@ -210,7 +211,7 @@ class CreateTournament extends Component {
         let buttonsDiv = (
             <div>
                 <button onClick={(event, product)=>this.showProductsHandler(event, "BTC")}>BTC</button>
-                <button onClick={(event, product)=>this.showProductsHandler(event, "USDT")}>USDT</button>
+                <button onClick={(event, product)=>this.showProductsHandler(event, "USD")}>USDT</button>
             </div>
         );
         
@@ -219,38 +220,38 @@ class CreateTournament extends Component {
                 buttonsDiv = (
                     <div>
                         <button className="Selected" onClick={(event, product)=>this.showProductsHandler(event, "BTC")}>BTC</button>
-                        <button onClick={(event, product)=>this.showProductsHandler(event, "USDT")}>USDT</button>
+                        <button onClick={(event, product)=>this.showProductsHandler(event, "USD")}>USD</button>
                     </div>
                 );
                 productsDiv = (
                     <div>
                         <div>
-                            <CheckDropdown exchange="Binance" title="Binance: Spot" products={binanceSpotProductsBTC} /> <br />
-                            <CheckDropdown exchange="Binance" title="Binance: Margin" products={binanceMarginProductsBTC} /> <br />
+                            <CheckDropdown exchange="FTX" title="FTX: Spot" products={FTXSpotProductBTC} productType="spot" /> <br />
+                            <CheckDropdown exchange="FTX" title="FTX: Futures" products={FTXFuturesProductsBTC} productType="future" /> <br />
                         </div>
                         <div className="No-display">
-                            <CheckDropdown exchange="Binance" title="Binance: Spot" products={binanceSpotProductsUSDT} /> <br />
-                            <CheckDropdown exchange="Binance" title="Binance: Margin" products={binanceMarginProductsUSDT} /> <br />
+                            <CheckDropdown exchange="FTX" title="FTX: Spot" products={FTXSpotProductUSD} productType="spot" /> <br />
+                            <CheckDropdown exchange="FTX" title="FTX: Futures" products={FTXFuturesProductsUSD} productType="future" /> <br />
                         </div>
                         <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>Maximum 50 products per tournament</p>
                     </div>
                 );
-            } else if (this.state.showProducts == 'USDT') {
+            } else if (this.state.showProducts == 'USD') {
                 buttonsDiv = (
                     <div>
                         <button onClick={(event, product)=>this.showProductsHandler(event, "BTC")}>BTC</button>
-                        <button className="Selected" onClick={(event, product)=>this.showProductsHandler(event, "USDT")}>USDT</button>
+                        <button className="Selected" onClick={(event, product)=>this.showProductsHandler(event, "USD")}>USD</button>
                     </div>
                 );
                 productsDiv = ( 
                     <div>
                         <div className="No-display">
-                            <CheckDropdown exchange="Binance" title="Binance: Spot" products={binanceSpotProductsBTC} /> <br />
-                            <CheckDropdown exchange="Binance" title="Binance: Margin" products={binanceMarginProductsBTC} /> <br />
+                            <CheckDropdown exchange="FTX" title="FTX: Spot" products={FTXSpotProductBTC} productType="spot" /> <br />
+                            <CheckDropdown exchange="FTX" title="FTX: Futures" products={FTXFuturesProductsBTC} productType="future" /> <br />
                         </div>
                         <div>
-                            <CheckDropdown exchange="Binance" title="Binance: Spot" products={binanceSpotProductsUSDT} /> <br />
-                            <CheckDropdown exchange="Binance" title="Binance: Margin" products={binanceMarginProductsUSDT} /> <br />
+                            <CheckDropdown exchange="FTX" title="FTX: Spot" products={FTXSpotProductUSD} productType="spot" /> <br />
+                            <CheckDropdown exchange="FTX" title="FTX: Futures" products={FTXFuturesProductsUSD} productType="future" /> <br />
                         </div>
                         <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>Maximum 50 products per tournament</p>
                     </div>

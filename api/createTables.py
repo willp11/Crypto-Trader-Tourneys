@@ -1,5 +1,5 @@
 from init import db
-from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts
+from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, Trades, ProductList, CompletedTourneys, CompletedEntrants
 from sqlalchemy.orm import sessionmaker
 
 engine = db.engine
@@ -14,8 +14,12 @@ session = Session()
 #RegistrationTourneys.__table__.drop(engine)
 #Usernames.__table__.drop(engine)
 #ActiveProducts.__table__.drop(engine)
-ActiveEntrants.__table__.drop(engine)
+#ActiveEntrants.__table__.drop(engine)
 #ActiveTourneys.__table__.drop(engine)
+#ProductList.__table__.drop(engine)
+#Trades.__table__.drop(engine)
+CompletedEntrants.__table__.drop(engine)
+CompletedTourneys.__table__.drop(engine)
 #session.commit()
 
 # create a table 
@@ -24,9 +28,13 @@ ActiveEntrants.__table__.drop(engine)
 #RegisteringProducts.__table__.create(session.bind)
 #UserAPI.__table__.create(session.bind)
 #Entrants.__table__.create(session.bind)
+#ProductList.__table__.create(session.bind)
 #ActiveTourneys.__table__.create(session.bind)
-ActiveEntrants.__table__.create(session.bind)
+#ActiveEntrants.__table__.create(session.bind)
 #ActiveProducts.__table__.create(session.bind)
+CompletedTourneys.__table__.create(session.bind)
+CompletedEntrants.__table__.create(session.bind)
+#Trades.__table__.create(session.bind)
 #session.commit()
 
 # add data to table
@@ -37,9 +45,9 @@ ActiveEntrants.__table__.create(session.bind)
 #dbEntry = UserAPI(userId="cGLF6C4EsGdDDQBKvuw2vAaX3Wn1")
 #session.add(dbEntry)
 #session.commit()
-dbEntry = ActiveEntrants(tourneyId=980262956 , userId="cGLF6C4EsGdDDQBKvuw2vAaX3Wn1", username="will", totalInvested=0.0, totalValue=0.0, profit=0.0)
-session.add(dbEntry)
-session.commit()
+#dbEntry = ActiveEntrants(tourneyId=980262956 , userId="cGLF6C4EsGdDDQBKvuw2vAaX3Wn1", username="will", totalInvested=0.0, totalValue=0.0, profit=0.0)
+#session.add(dbEntry)
+#session.commit()
 
 # query table
 #dbQuery = session.query(RegistrationTourneys).all()
@@ -58,7 +66,7 @@ session.commit()
 
 #dbQuery = session.query(Usernames).filter_by(username="will").first()
 #session.delete(dbQuery)
-#session.commit()
+session.commit()
 
 
 session.close()

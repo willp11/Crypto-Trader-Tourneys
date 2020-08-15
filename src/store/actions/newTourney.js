@@ -1,8 +1,9 @@
 import * as actionTypes from './actionTypes';
 
-export const updateProductList = (productList, exchange, oldList) => {
+export const updateProductList = (productList, exchange, oldList, productType) => {
     let list = {...oldList};
-    list[exchange] = productList;
+    console.log(productType)
+    list[exchange][productType] = productList;
     
     return {
         type: actionTypes.UPDATE_PRODUCT_LIST,
