@@ -4,7 +4,9 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import NavTop from './components/navigation/nav-top/nav-top';
 import Home from './containers/home/home';
 import CreateTournament from './containers/createTournament/createTournament';
-import AllTourneys from './containers/allTourneys/allTourneys';
+import RegistrationTourneys from './containers/registrationTourneys/registrationTourneys';
+import ActiveTourneys from './containers/activeTourneys/activeTourneys';
+import CompletedTourneys from './containers/completedTourneys/completedTourneys';
 import MyTourneys from './containers/myTourneys/myTourneys';
 import Login from './containers/login/login';
 import Register from './containers/register/register';
@@ -21,7 +23,9 @@ class App extends Component {
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
                 <Route path="/createTournament" component={CreateTournament} />
-                <Route path="/allTournaments" component={AllTourneys} />
+                <Route path="/registrationTourneys" component={RegistrationTourneys} />
+                <Route path="/activeTourneys" component={ActiveTourneys} />
+                <Route path="/completedTourneys" component={CompletedTourneys} />
                 <Route path="/myTournaments" component={MyTourneys} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/logout" component={Logout} />

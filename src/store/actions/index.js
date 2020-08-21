@@ -1,3 +1,3 @@
 export { auth, logout, setAuthRedirectPath, authCheckState, getUsernameEmail } from './auth';
 export {getTourneys, getMyTourneys} from './tourneys';
-export {updateProductList} from './newTourney';
+export {updateProductList, emptyProductList} from './newTourney';

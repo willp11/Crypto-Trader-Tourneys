@@ -10,3 +10,10 @@ export const updateProductList = (productList, exchange, oldList, productType) =
         productList: list
     }
 };
+
+export const emptyProductList = () => {
+    return {
+        type: actionTypes.EMPTY_PRODUCT_LIST,
+        productList: {'FTX': {'spot': [], 'future': []}}
+    }
+}

@@ -11,7 +11,9 @@ class NavTop extends Component {
     render() {
         let dropdownContent = (<div className="dropdown-content">
                     <NavLink to="/" style={{textDecoration: "none"}}><p>Home</p></NavLink>
-                    <NavLink to="/allTournaments" style={{textDecoration: "none"}}><p>All Tournaments</p></NavLink>
+                    <NavLink to="/registrationTourneys" style={{textDecoration: "none"}}><p>Tournament Registration</p></NavLink>
+                    <NavLink to="/activeTourneys" style={{textDecoration: "none"}}><p>Active Tournaments</p></NavLink>
+                    <NavLink to="/completedTourneys" style={{textDecoration: "none"}}><p>Completed Tournaments</p></NavLink>
                     <NavLink to="/register" style={{textDecoration: "none"}}><p>Create Account</p></NavLink>
                     <NavLink to="/login" style={{textDecoration: "none"}}><p>Login</p></NavLink>
                   </div>
@@ -20,7 +22,9 @@ class NavTop extends Component {
         if (this.props.isAuthenticated) {
             dropdownContent = (<div className="dropdown-content">
                     <NavLink to="/" style={{textDecoration: "none"}}><p>Home</p></NavLink>
-                    <NavLink to="/allTournaments" style={{textDecoration: "none"}}><p>All Tournaments</p></NavLink>
+                    <NavLink to="/registrationTourneys" style={{textDecoration: "none"}}><p>Tournament Registration</p></NavLink>
+                    <NavLink to="/activeTourneys" style={{textDecoration: "none"}}><p>Active Tournaments</p></NavLink>
+                    <NavLink to="/completedTourneys" style={{textDecoration: "none"}}><p>Completed Tournaments</p></NavLink>
                     <NavLink to="/createTournament" style={{textDecoration: "none"}}><p>Create Tournament</p></NavLink>
                     <NavLink to="/myTournaments" style={{textDecoration: "none"}}><p>My Tournaments</p></NavLink>
                     <NavLink to="/profile" style={{textDecoration: "none"}}><p>My Account</p></NavLink>

@@ -11,7 +11,11 @@ class MyTourneys extends Component {
     
     state = {
         tourneys: [],
-        activeTourneys: []
+        activeTourneys: [],
+        showProducts: false,
+        productsToShow: [],
+        indexToShow: null,
+        tableToShow: null
     }
     
     componentDidMount() {
@@ -31,20 +35,88 @@ class MyTourneys extends Component {
             });
         });
     }
+
+    componentDidUpdate() {
+        //console.log(this.state);
+    }
+
+    showProductsHandler = (event, index, table) => {
+        let products;
+        let showProducts;
+        let tableToShow;
+        if (!this.state.showProducts) {
+            if (table == "registration") {
+                products = this.state.tourneys[index].products;
+                showProducts = true;
+            } else if (table == "active") {
+                products = this.state.activeTourneys[index].products;
+                showProducts = true;
+            }
+            tableToShow = table;
+        } else {
+            products = [];
+            showProducts = false;
+            tableToShow = null;
+        }
+        this.setState({showProducts: showProducts, productsToShow: products, indexToShow: index, tableToShow: tableToShow});
+    }
+    
+    toggleFiltersHandler = (event) => {
+        this.setState({showFilters: !this.state.showFilters,
+                            search: {
+                                tourneyId: null,
+                                host: null,
+                                product: null,
+                                maxEntrants: null,
+                                hoursUntilStart: null
+                            }
+                      });
+    }
     
     render (){
         
+        let redirect = null;
+        if (!this.props.userId) {
+            redirect = (
+                <Redirect to="/login" />
+            )
+        }
+        
         let tourneys = null;
         if (this.state.tourneys.length > 0) {
-            tourneys = this.state.tourneys.map((tourney) => {
+            tourneys = this.state.tourneys.map((tourney, index) => {
                 let navPath = "/tourneys/" + tourney.tourneyId;
+                let showProdStr = "Show";
+                let products = null;
+                let productsDiv = null;
+                if (index == this.state.indexToShow && this.state.showProducts && this.state.tableToShow == "registration") {
+                    showProdStr = "Hide";
+                    products = this.state.productsToShow.map(product => {
+                        return (
+                            <li key={product}>{product}</li> 
+                        )
+                    });
+                    productsDiv = (
+                        <div className="showProducts">
+                            <ul>
+                                {products}
+                            </ul>
+                        </div>
+                    );
+                }
                 return (
                     <tr key={tourney.tourneyId}>
                         <td>{tourney.tourneyId}</td>
                         <td>{tourney.host}</td>
+                        <td>
+                            <button onClick={(event, i, table) => this.showProductsHandler(event, index, "registration")}>{showProdStr}</button> <br/> 
+                            {productsDiv}
+                        </td>
                         <td>{tourney.noEntrants}/{tourney.maxEntrants}</td>
-                        <td>{tourney.startDate} - {tourney.startTime}</td>
-                        <td>{tourney.endDate} - {tourney.endTime}</td>
+                        <td>{tourney.startDate} </td>
+                        <td>{tourney.startTime}</td>
+                        <td>{tourney.endDate}</td>
+                        <td>{tourney.endTime}</td>
                         <td><NavLink to={navPath} style={{textDecoration: "none"}}><button>Go to Lobby</button></NavLink></td>
                     </tr>
                 );
@@ -53,26 +125,44 @@ class MyTourneys extends Component {
         
         let activeTourneys = null;
         if (this.state.activeTourneys.length > 0) {
-            activeTourneys = this.state.activeTourneys.map((tourney) => {
+            activeTourneys = this.state.activeTourneys.map((tourney, index) => {
                 let navPath = "/tourneys/" + tourney.tourneyId;
+                let showProdStr = "Show";
+                let products = null;
+                let productsDiv = null;
+
+                if (index == this.state.indexToShow && this.state.showProducts && this.state.tableToShow == "active") {
+                    showProdStr = "Hide";
+                    products = this.state.productsToShow.map(product => {
+                        return (
+                            <li key={product}>{product}</li> 
+                        )
+                    });
+                    productsDiv = (
+                        <div className="showProducts">
+                            <ul>
+                                {products}
+                            </ul>
+                        </div>
+                    );
+                }
                 return (
                     <tr key={tourney.tourneyId}>
                         <td>{tourney.tourneyId}</td>
                         <td>{tourney.host}</td>
+                        <td>
+                            <button onClick={(event, i, table) => this.showProductsHandler(event, index, "active")}>{showProdStr}</button> <br/> 
+                            {productsDiv}
+                        </td>
                         <td>{tourney.noEntrants}/{tourney.maxEntrants}</td>
-                        <td>{tourney.startDate} - {tourney.startTime}</td>
-                        <td>{tourney.endDate} - {tourney.endTime}</td>
+                        <td>{tourney.startDate} </td>
+                        <td>{tourney.startTime}</td>
+                        <td>{tourney.endDate}</td>
+                        <td>{tourney.endTime}</td>
                         <td><NavLink to={navPath} style={{textDecoration: "none"}}><button>Go to Lobby</button></NavLink></td>
                     </tr>
                 );
             })
-        }
-        
-        let redirect = null;
-        if (!this.props.userId) {
-            redirect = (
-                <Redirect to="/login" />
-            )
         }
         
         return (
@@ -87,10 +177,13 @@ class MyTourneys extends Component {
                                 <tr>
                                     <th>Tournament id</th>
                                     <th>Host</th>
+                                    <th>Products</th>
                                     <th>Entrants</th>
+                                    <th>Start Date</th>
                                     <th>Start Time</th>
+                                    <th>End Date</th>
                                     <th>End Time</th>
-                                    <th>Lobby</th>
+                                    <th>Register</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,10 +198,13 @@ class MyTourneys extends Component {
                                 <tr>
                                     <th>Tournament id</th>
                                     <th>Host</th>
+                                    <th>Products</th>
                                     <th>Entrants</th>
+                                    <th>Start Date</th>
                                     <th>Start Time</th>
+                                    <th>End Date</th>
                                     <th>End Time</th>
-                                    <th>Lobby</th>
+                                    <th>Register</th>
                                 </tr>
                             </thead>
                             <tbody>

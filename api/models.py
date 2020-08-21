@@ -18,6 +18,11 @@ class ProductList(db.Model):
     productType = db.Column(db.String(16), nullable=False)
     baseCurrency = db.Column(db.String(16), nullable=True)
     quoteCurrency = db.Column(db.String(16), nullable=True)
+    
+class AllTourneys(db.Model):
+    __tablename__ = "allTourneys"
+    tourneyId = db.Column(db.Integer, primary_key=True)
+    state = db.Column(db.String(16), nullable=False)
 
 class RegistrationTourneys(db.Model):
     __tablename__ = "registrationTourneys"
@@ -33,6 +38,7 @@ class RegistrationTourneys(db.Model):
     endTime = db.Column(db.String(16), nullable=False)
     startTS = db.Column(db.Integer, nullable=False)
     endTS = db.Column(db.Integer, nullable=False)
+    quoteCurrency = db.Column(db.String(16), nullable=False)
     entrants = relationship("Entrants", cascade="all, delete")
     products = relationship("RegisteringProducts", cascade="all, delete")
     
@@ -42,7 +48,7 @@ class Entrants(db.Model):
     tourneyId = db.Column(db.Integer, db.ForeignKey('registrationTourneys.tourneyId'), nullable=False)
     userId = db.Column(db.String(50), db.ForeignKey('usernames.userId'), nullable=False)
     username = db.Column(db.String(100), nullable=False)
-    balance = db.Column(db.String(50), nullable=False)
+    balance = db.Column(db.Float, nullable=False)
     
 class RegisteringProducts(db.Model):
     __tablename__ = "registeringProducts"
@@ -73,6 +79,7 @@ class ActiveTourneys(db.Model):
     startTS = db.Column(db.Integer, nullable=False)
     endTS = db.Column(db.Integer, nullable=False)
     status = db.Column(db.String(16), nullable=False)
+    quoteCurrency = db.Column(db.String(16), nullable=False)
     entrants = relationship("ActiveEntrants", cascade="all, delete")
     products = relationship("ActiveProducts", cascade="all, delete")
     
@@ -86,6 +93,7 @@ class ActiveEntrants(db.Model):
     totalValue = db.Column(db.Float, nullable=False)
     profit = db.Column(db.Float, nullable=False)
     timestamp = db.Column(db.Integer, nullable=True)
+    balance = db.Column(db.Float, nullable=False)
     
 class ActiveProducts(db.Model):
     __tablename__ = "activeProducts"
@@ -120,6 +128,8 @@ class CompletedTourneys(db.Model):
     endTime = db.Column(db.String(16), nullable=False)
     startTS = db.Column(db.Integer, nullable=False)
     endTS = db.Column(db.Integer, nullable=False)
+    quoteCurrency = db.Column(db.String(16), nullable=False)
+    products = relationship("CompletedProducts", cascade="all, delete")
     
 class CompletedEntrants(db.Model):
     __tablename__ = "completedEntrants"
@@ -131,3 +141,12 @@ class CompletedEntrants(db.Model):
     totalValue = db.Column(db.Float, nullable=False)
     profit = db.Column(db.Float, nullable=False)
     timestamp = db.Column(db.Integer, nullable=True)
+    balance = db.Column(db.Float, nullable=False)
+    
+class CompletedProducts(db.Model):
+    __tablename__ = "completedProducts"
+    productId = db.Column(db.Integer, primary_key=True)
+    tourneyId = db.Column(db.Integer, db.ForeignKey('completedTourneys.tourneyId'), nullable=False)
+    productName = db.Column(db.String(20), nullable=False)
+    exchange = db.Column(db.String(20), nullable=False)
+    productType = db.Column(db.String(16), nullable=False)

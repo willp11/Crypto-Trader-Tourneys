@@ -1,6 +1,6 @@
 from init import db
 from sqlalchemy.orm import sessionmaker
-from models import RegistrationTourneys, Entrants, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts
+from models import RegistrationTourneys, Entrants, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, AllTourneys
 import datetime
 
 engine = db.engine
@@ -37,18 +37,23 @@ for query in session.query(RegistrationTourneys).all():
         print("active tourney: " + str(tourneyId))
         
         # copy the tournament to ActiveTourneys
-        dbEntry = ActiveTourneys(tourneyId=query.tourneyId, host=query.host, hostId=query.hostId, maxEntrants=query.maxEntrants, noEntrants=query.noEntrants, startTime=query.startTime, startDate=query.startDate, endTime=query.endTime, endDate=query.endDate, startTS=query.startTS, endTS=query.endTS, status="active")
+        dbEntry = ActiveTourneys(tourneyId=query.tourneyId, host=query.host, hostId=query.hostId, maxEntrants=query.maxEntrants, noEntrants=query.noEntrants, startTime=query.startTime, startDate=query.startDate, endTime=query.endTime, endDate=query.endDate, startTS=query.startTS, endTS=query.endTS, quoteCurrency=query.quoteCurrency, status="active")
         session.add(dbEntry)
         
         # copy the entrants to ActiveEntrants
         for entrant in session.query(Entrants).filter_by(tourneyId=query.tourneyId).all():
-            dbEntry = ActiveEntrants(tourneyId=query.tourneyId, userId=entrant.userId, username=entrant.username, totalInvested=0.0, totalValue=0.0, profit=0.0, timestamp=startTimestamp)
+            dbEntry = ActiveEntrants(tourneyId=query.tourneyId, userId=entrant.userId, username=entrant.username, totalInvested=0.0, totalValue=0.0, profit=0.0, timestamp=startTimestamp, balance=entrant.balance)
             session.add(dbEntry)
         
         # copy the products to ActiveProducts
         for product in session.query(RegisteringProducts).filter_by(tourneyId=query.tourneyId).all():
             dbEntry = ActiveProducts(tourneyId=query.tourneyId, productName=product.productName, exchange=product.exchange, productType=product.productType)
             session.add(dbEntry)
+            
+        # update the all tourneys table
+        dbQuery = session.query(AllTourneys).filter_by(tourneyId=query.tourneyId).one()
+        dbQuery.state = "active"
+        session.add(dbQuery)
         
         # delete the tournament from RegistrationTourneys, which will delete from entrants and products
         session.delete(query)

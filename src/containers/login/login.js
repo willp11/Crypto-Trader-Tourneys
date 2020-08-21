@@ -83,7 +83,7 @@ class Login extends Component {
                 </form>
                 <div style={{textAlign: "center"}}>  
                     <p>Don't have an account yet?</p>
-                    <button>Go To Sign-up Page</button>
+                    <NavLink to="/register" style={{textDecoration: "none"}}><button>Go To Sign-up Page</button></NavLink>
                 </div>
             </div>
         )

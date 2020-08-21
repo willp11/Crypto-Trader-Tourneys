@@ -151,7 +151,7 @@ class Register extends Component {
                     </form>
                     <div style={{textAlign: "center"}}>  
                         <p>Already have an account?</p>
-                        <button>Go To Login Page</button>
+                        <NavLink to="/login" style={{textDecoration: "none"}}><button>Go To Login Page</button></NavLink>
                     </div>
                 </div>
             </div>

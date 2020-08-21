@@ -15,15 +15,7 @@
     border: 1px solid black;
     margin: 0 auto;
     padding-bottom: 20px;
-}
-
-.ActiveTourneys {
-    width: 80%;
-    min-width: 500px;
-    box-sizing: border-box;
-    border: 1px solid black;
-    margin: 0 auto;
-    padding-bottom: 20px;
+    font-size: 0.9rem;
 }
 
 .NotActiveTable {
@@ -31,27 +23,63 @@
     border: 1px solid #ccc;
 }
 
-.ActiveTable {
-    margin: 0 auto;
-    border: 1px solid #ccc;
-}
-
 .NotActiveTable th {
     width: 120px;
+    outline: thin solid #ccc;
+}
+
+.NotActiveTable td {
+    width: 120px;
+    outline: thin solid #ccc;
 }
 
 .NotActiveTable tr {
     outline: thin solid #ccc;
 }
 
-.ActiveTable th {
-    width: 120px;
+.showProducts {
+    text-align: center;
+    z-index: 0.9;
+    position: absolute;
+    background-color: rgb(244, 244, 244);
+    padding: 20px;
+    border: 1px solid black;
 }
 
-.ActiveTable tr {
-    outline: thin solid #ccc;
+.showProducts ul {
+    list-style-type: none;
+    padding: 0;
 }
 
+.toggleSearchBtn {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.modalDiv {
+    z-index: 1;
+    position: absolute;
+    float: left;
+    left: 50%;
+    top: 38%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: rgb(244, 244, 244);
+    padding-top: 20px;
+    border: 1px solid black;
+}
+
+.searchForm {
+    margin-bottom: 20px;
+}
+
+.searchForm input {
+    text-align: center;
+}
+
+.searchTourneySubmitBtn {
+    margin-top: 10px;
+}
 
 /* Small devices (landscape phones, 576px and below)*/
 @media (max-width: 576px) {  

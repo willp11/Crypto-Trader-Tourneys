@@ -19,83 +19,181 @@ class Tourney extends Component {
         startTime: null,
         endTime: null, 
         entrants: [],
+        entrantProfits: [],
         registered: false,
         products: null,
         showConfirm: false,
         redirect: false,
-        active: null
+        active: null,
+        editingBalance: false,
+        quoteCurrency: null,
+        balance: null,
+        tourneyState: null
     }
 
     componentDidMount() {
         console.log(this.props.match.params.tourneyId);
-        // registering tournaments
-        axios.post('/getTourneyInfo', {"tourneyId": this.props.match.params.tourneyId} ).then(res => { 
-            let tourneyData = res.data;
+        
+        
+        // find which state the tournament is, registering/active/completed
+
+        // call the API and check which state the tourney is
+        axios.post('/getTourneyState', {"tourneyId": this.props.match.params.tourneyId} ).then(res => {
+            let tourneyState = res.data.tourneyState;
+            this.setState({tourneyState: tourneyState});
             
-            console.log(res.data);
-            
-            if (res.data.tourneyId != "No match") {
-                
-                let isRegistered = false;
+            // registering tournaments
+            if (tourneyState == "registering") {
 
-                let entrants;
+                axios.post('/getTourneyInfo', {"tourneyId": this.props.match.params.tourneyId} ).then(res => { 
+                    let tourneyData = res.data;
 
-                axios.post('/checkIfHost', {"tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
+                    console.log(res.data);
+                    this.setState({quoteCurrency: res.data.quoteCurrency});
 
-                    if (res.data.response) this.setState({hostId: true});
+                    axios.post('/checkIfHost', {"tourneyId": this.state.tourneyId, "userId": this.props.userId, "tourneyType": "registering"}).then(res => {
 
-                    axios.post('/getProducts', {"tourneyId": this.state.tourneyId}).then(res => {
-                        let products = res.data;
-                        axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
+                        if (res.data.response) this.setState({hostId: true});
 
-                            entrants = res.data.response;
+                        axios.post('/getProducts', {"tourneyId": this.state.tourneyId}).then(res => {
+                            let products = res.data;
 
-                            isRegistered = entrants.includes(this.props.username);
+                            axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
 
-                            this.setState({host: tourneyData.host,
-                                        noEntrants: tourneyData.noEntrants, 
-                                        maxEntrants: tourneyData.maxEntrants,
-                                        startDate: tourneyData.startDate,
-                                        endDate: tourneyData.endDate,
-                                        startTime: tourneyData.startTime,
-                                        endTime: tourneyData.endTime,
-                                        entrants: entrants,
-                                        registered: isRegistered,
-                                        products: products
+                                let entrants = res.data.response.entrants;
+                                let isRegistered = entrants.includes(this.props.username);
+                                let entrantProfits = res.data.response.profits;
+
+                                // if registered, get the entrant's balance
+                                axios.post('/getEntrantBalance', {"tourneyType": "registering", "tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
+                                    let balance = res.data.balance;
+                                    this.setState({host: tourneyData.host,
+                                                noEntrants: tourneyData.noEntrants, 
+                                                maxEntrants: tourneyData.maxEntrants,
+                                                startDate: tourneyData.startDate,
+                                                endDate: tourneyData.endDate,
+                                                startTime: tourneyData.startTime,
+                                                endTime: tourneyData.endTime,
+                                                entrants: entrants,
+                                                entrantProfits: entrantProfits,
+                                                registered: isRegistered,
+                                                products: products,
+                                                balance: balance,
+                                                active: false
+                                    });
+                                })
                             });
-                        });
-                    });   
+                        });   
+                    });
                 });
-            } else {
+            } else if (tourneyState == "active") {
                 // active tournaments
                 axios.post('/getActiveTourneyInfo', {"tourneyId": this.state.tourneyId} ).then(res => { 
 
                     let tourneyData = res.data;
-                    if (res.data.response) this.setState({hostId: true});
 
-                    axios.post('/getActiveProducts', {"tourneyId": this.state.tourneyId}).then(res => {
-                        let products = res.data;
-                        axios.post('/getActiveEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
-                            let entrants = res.data.response;
+                    // check if the user is the host
+                    axios.post('/checkIfHost', {"tourneyId": this.state.tourneyId, "userId": this.props.userId, "tourneyType": "active"}).then(res => {
+                        if (res.data.response) this.setState({hostId: true});
 
-                            this.setState({host: tourneyData.host,
-                                        noEntrants: tourneyData.noEntrants, 
-                                        maxEntrants: tourneyData.maxEntrants,
-                                        startDate: tourneyData.startDate,
-                                        endDate: tourneyData.endDate,
-                                        startTime: tourneyData.startTime,
-                                        endTime: tourneyData.endTime,
-                                        entrants: entrants,
-                                        products: products,
-                                        active: true
+                        // get the product list
+                        axios.post('/getActiveProducts', {"tourneyId": this.state.tourneyId}).then(res => {
+                            let products = res.data;
+
+                            // get the active entrants list
+                            axios.post('/getActiveEntrants', {"tourneyId": this.state.tourneyId, "entrantType": "active"}).then(res => {
+                                let entrants = res.data.response.entrants;
+                                let entrantProfits = res.data.response.profits;
+                                let isRegistered = entrants.includes(this.props.username);
+
+                                // get the liquidated entrants list
+                                axios.post('/getActiveEntrants', {"tourneyId": this.state.tourneyId, "entrantType": "liquidated"}).then(res => {
+                                    let liqEntrants = res.data.response.entrants;
+                                    let isLiq = liqEntrants.includes(this.props.username);
+
+                                    // if user is registered and not liquidated get the entrant's balance else set balance to 0.
+                                    if (!isLiq) {
+                                        axios.post('/getEntrantBalance', {"tourneyType": "active", "tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
+                                            let balance = res.data.balance;
+                                            this.setState({host: tourneyData.host,
+                                                        noEntrants: tourneyData.noEntrants, 
+                                                        maxEntrants: tourneyData.maxEntrants,
+                                                        startDate: tourneyData.startDate,
+                                                        endDate: tourneyData.endDate,
+                                                        startTime: tourneyData.startTime,
+                                                        endTime: tourneyData.endTime,
+                                                        entrants: entrants,
+                                                        entrantProfits: entrantProfits,
+                                                        products: products,
+                                                        registered: isRegistered,
+                                                        active: true,
+                                                        balance: balance
+                                            });
+                                        });
+                                    } else {
+                                        let balance = 0;
+                                        this.setState({host: tourneyData.host,
+                                                    noEntrants: tourneyData.noEntrants, 
+                                                    maxEntrants: tourneyData.maxEntrants,
+                                                    startDate: tourneyData.startDate,
+                                                    endDate: tourneyData.endDate,
+                                                    startTime: tourneyData.startTime,
+                                                    endTime: tourneyData.endTime,
+                                                    entrants: entrants,
+                                                    products: products,
+                                                    registered: isRegistered,
+                                                    active: true,
+                                                    balance: balance
+                                        });
+                                    }
+                                })
                             });
                         });
-                    });   
+                    });
+                });
+            } else if (tourneyState == "completed") {
+                // active tournaments
+                axios.post('/getCompletedTourneyInfo', {"tourneyId": this.state.tourneyId} ).then(res => { 
+                    let tourneyData = res.data;
+
+                    // check if the user is the host
+                    axios.post('/checkIfHost', {"tourneyId": this.state.tourneyId, "userId": this.props.userId, "tourneyType": "completed"}).then(res => {
+                        if (res.data.response) this.setState({hostId: true});
+
+                        // get the product list
+                        axios.post('/getCompletedProducts', {"tourneyId": this.state.tourneyId}).then(res => {
+                            let products = res.data;
+
+                            axios.post('/getCompletedEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
+
+                                let entrants = res.data.response.entrants;
+                                let isRegistered = entrants.includes(this.props.username);
+                                let entrantProfits = res.data.response.profits;
+
+                                // if registered, get the entrant's balance
+                                axios.post('/getEntrantBalance', {"tourneyType": "completed", "tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
+                                    let balance = res.data.balance;
+                                    this.setState({host: tourneyData.host,
+                                                noEntrants: tourneyData.noEntrants, 
+                                                maxEntrants: tourneyData.maxEntrants,
+                                                startDate: tourneyData.startDate,
+                                                endDate: tourneyData.endDate,
+                                                startTime: tourneyData.startTime,
+                                                endTime: tourneyData.endTime,
+                                                entrants: entrants,
+                                                entrantProfits: entrantProfits,
+                                                registered: isRegistered,
+                                                products: products,
+                                                balance: balance,
+                                                completed: true
+                                    });
+                                })
+                            });
+                        });   
+                    });
                 });
             }
         });
-        
-                
     }
 
     componentDidUpdate() {
@@ -114,11 +212,13 @@ class Tourney extends Component {
             axios.post("/tourneyUnregister", dbEntrantData).then(res => {
                 console.log(res);
                 axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
-                    let newEntrantsArr = res.data.response; 
+                    let newEntrantsArr = res.data.response.entrants; 
+                    let newProfitsArr = res.data.response.profits; 
                     let currentState = {...this.state};
                     currentState['registered'] = false;
                     currentState['noEntrants'] -= 1;
                     currentState['entrants'] = newEntrantsArr;
+                    currentState['entrantProfits'] = newProfitsArr;
                     this.setState(currentState);
                 });
             })
@@ -132,14 +232,17 @@ class Tourney extends Component {
             dbEntrantData["tourneyId"] = this.state.tourneyId;
             dbEntrantData["userId"] = this.props.userId;
             dbEntrantData["username"] = this.props.username;
+            dbEntrantData["balance"] = this.state.balance;
             axios.post("/tourneyRegistration", dbEntrantData).then(res => {
                 console.log(res);
                 axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
-                    let newEntrantsArr = res.data.response; 
+                    let newEntrantsArr = res.data.response.entrants; 
+                    let newProfitsArr = res.data.response.profits; 
                     let currentState = {...this.state};
                     currentState['registered'] = true;
                     currentState['noEntrants'] += 1;
                     currentState['entrants'] = newEntrantsArr;
+                    currentState['entrantProfits'] = newProfitsArr;
                     this.setState(currentState);
                 });
             })
@@ -166,10 +269,30 @@ class Tourney extends Component {
         this.setState({showConfirm: false});
     }
     
+        
+    showBalanceInput = () => {
+        this.setState({editingBalance: !this.state.editingBalance})
+    }
+    
+    editBalanceHandler = (event) => {
+        this.setState({balance: event.target.value});
+    }
+    
+    submitBalanceHandler = (event) => {
+        if (this.state.balance <= 0) {
+            alert("Please enter a number greater than 0.")
+        } else {
+            axios.post("/updateStartBalance", {"balance": this.state.balance, "tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
+                console.log(res.data);
+                this.setState({editingBalance: false});
+            });
+        }
+    }
+    
     render() {
         
         let deleteBtn = null;
-        if (this.state.hostId === true) {
+        if (this.state.hostId === true && this.state.active == false) {
             deleteBtn = (
                 <button onClick={this.deleteHandler}>Delete Tournament</button>
             );
@@ -192,10 +315,11 @@ class Tourney extends Component {
         )
         
         let entrants = null;
-        if (this.state.entrants) {
-            entrants = this.state.entrants.map(entrant => {
+        if (this.state.entrants && this.state.entrantProfits) {
+            console.log(this.state.entrants);
+            entrants = this.state.entrants.map((entrant, index) => {
                 return (
-                    <li key={entrant}>{entrant}</li>
+                    <li key={entrant}>{index+1}. {entrant}: {this.state.entrantProfits[index]}% </li>
                 );
             })
         }
@@ -203,12 +327,27 @@ class Tourney extends Component {
         let registerBtn = (
             <button onClick={this.submitHandler}>Register</button>
         );
+        let balance = (
+            <div>
+                <h2>Balance:</h2>
+                <p>Enter tournament starting balance ({this.state.quoteCurrency}):</p>
+                <input className="balanceInput" type="text" placeholder="Starting Balance" onChange={(event) => this.editBalanceHandler(event)} />
+            </div>
+        );
+        let editStartBalanceBtn = null;
         let startTimePa = <p>{this.state.startDate} - {this.state.startTime}</p>
+        let endTimePa = <p>{this.state.endDate} - {this.state.endTime}</p>
         
         if (this.state.registered) {
+            balance = (
+                <div>
+                    <h2>Balance:</h2>
+                    <p>{this.state.balance} {this.state.quoteCurrency}</p>
+                </div>
+            )
             registerBtn = (
                 <button onClick={this.submitHandler}>Unregister</button>
-            )
+            );
         }
         if (this.state.active) {
             registerBtn = null;
@@ -218,6 +357,35 @@ class Tourney extends Component {
                     <p>{this.state.startDate} - {this.state.startTime}</p>
                 </div>
             )
+        }
+        if (this.state.tourneyState == "completed") {
+            registerBtn = null;
+            startTimePa = (
+                <div>
+                    <p>{this.state.startDate} - {this.state.startTime}</p>
+                </div>
+            )
+            endTimePa = (
+                <div>
+                    <p>Ended</p>
+                    <p>{this.state.endDate} - {this.state.endTime}</p>
+                </div>
+            )
+        }
+        
+        if (this.state.registered && this.state.tourneyState == "registering") {
+            if (this.state.editingBalance) {
+                editStartBalanceBtn = (
+                    <div>
+                        <input className="editBalanceInput" type="text" placeholder={this.state.balance} onChange={(event) => this.editBalanceHandler(event)} />
+                        <button onClick={this.submitBalanceHandler}>Submit</button>
+                    </div>
+                );
+            } else {
+                editStartBalanceBtn = (
+                    <button onClick={this.showBalanceInput}>Edit Starting Balance</button>
+                );
+            }
         }
         
         if (this.state.host != null) {
@@ -230,8 +398,10 @@ class Tourney extends Component {
                     <h2>Start Time</h2>
                     {startTimePa}
                     <h2>End Time</h2>
-                    <p>{this.state.endDate} - {this.state.endTime}</p>
-                    {registerBtn}
+                    {endTimePa}
+                    {balance}
+                    {registerBtn}<br/>
+                    {editStartBalanceBtn}<br/>
                     {deleteBtn}
                     {confirmationBox}
                 </div>

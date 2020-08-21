@@ -7,34 +7,32 @@
     flex-wrap: nowrap;
     width: 90vw;
     margin: 0 auto;
-    height: 500px;
+    height: 700px;
 }
 
 .tourneyBody {
-    height: 500px;
+    height: 700px;
     width: 30vw;
     box-sizing: border-box;
     border: 0.5px solid #ccc;
 }
 
 .entrantsList {
-    height: 500px;
+    height: 700px;
     width: 30vw;
     overflow: scroll;
     box-sizing: border-box;
     border: 0.5px solid #ccc;
 }
 
-.entrantsList ul {
-    padding: 0;
-}
 
 .entrantsList ul {
     list-style-type: none;
+    padding: 0;
 }
 
 .productList {
-    height: 500px;
+    height: 700px;
     width: 30vw;
     overflow: scroll;
     box-sizing: border-box;
@@ -43,11 +41,22 @@
 
 .productListDiv {
     width: 30vw;
-    height: 500px;
+    height: 700px;
     display: flex;
     flex-direction: row;
     align-content: center;
     justify-content: space-around;
+}
+
+.editBalanceInput {
+    width: 50px;
+    text-align: center;
+}
+
+.balanceInput {
+    width: 100px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 900px) {

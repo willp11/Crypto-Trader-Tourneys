@@ -18,9 +18,9 @@ class CreateTournament extends Component {
             maxEntrants: null,
             minEntrants: null,
             startDate: null,
-            endDate: null,
             startTime: null,
-            endTime: null
+            duration: null,
+            quoteCurrency: null
         },
         redirect: false,
         errorMsg: '',
@@ -37,7 +37,11 @@ class CreateTournament extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.props.productList);
+//        console.log(this.props.productList);
+    }
+
+    componentWillUnmount() {
+        this.props.emptyProductList();
     }
 
     checkValidity = (dbData) => {
@@ -52,54 +56,44 @@ class CreateTournament extends Component {
         
         let givenStart = dbData.startDate + ' ' + dbData.startTime;
         let givenStartTS = new Date(givenStart).getTime();
-
-        let givenEnd = dbData.endDate + ' ' + dbData.endTime;
-        let givenEndTS = new Date(givenEnd).getTime();
-
-        let latestEndTS = givenStartTS + (60*60*24*1000*365);
         
-        console.log(dbData.startTime);
-        
-        if (dbData.maxEntrants === null || dbData.minEntrants === null || dbData.startDate === null || dbData.endDate === null || dbData.startTime === null || dbData.endTime === null) {
+        if (dbData.maxEntrants === null || dbData.minEntrants === null || dbData.startDate === null ||  dbData.startTime === null || dbData.duration === null) {
             valid = false;
             errorMsg = <p style={{"fontWeight": "bold"}}>Not all required information has been entered.</p>
         } else {
-            if (dbData.maxEntrants < 2 || dbData.maxEntrants > 1000) {
-                valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>You must have between 2 and 1000 maximum entrants.</p>
-            }
-
-            if (dbData.minEntrants < 2 || dbData.minEntrants > 1000) {
-                valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>You must have between 2 and 1000 minimum entrants.</p>
-            }
-
-            if (dbData.startTime[3] != 0 || dbData.startTime[4] != 0 || dbData.endTime[3] != 0 || dbData.endTime[4] != 0) {
-                valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>You must enter a start and end time with minutes 00.</p>
-            }
-            
-            if (dbData.productList.length == 0) {
-                valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>You must choose at least 1 trading product.</p>
-            }
+//            if (dbData.maxEntrants < 2 || dbData.maxEntrants > 1000) {
+//                valid = false;
+//                errorMsg = <p style={{"fontWeight": "bold"}}>You must have between 2 and 1000 maximum entrants.</p>
+//            }
+//
+//            if (dbData.minEntrants < 2 || dbData.minEntrants > 1000) {
+//                valid = false;
+//                errorMsg = <p style={{"fontWeight": "bold"}}>You must have between 2 and 1000 minimum entrants.</p>
+//            }
+//
+//            if (dbData.startTime[3] != 0 || dbData.startTime[4] != 0 ) {
+//                valid = false;
+//                errorMsg = <p style={{"fontWeight": "bold"}}>You must enter a start time in minutes 00.</p>
+//            }
+//            
+//            if (dbData.productList.length == 0) {
+//                valid = false;
+//                errorMsg = <p style={{"fontWeight": "bold"}}>You must choose at least 1 trading product.</p>
+//            }
             
 //            if (givenStartTS < earliestTS) {
 //                valid = false;
 //                errorMsg = <p style={{"fontWeight": "bold"}}>The start time must be more than 1 hour from now.</p>
 //            }
-            if (givenStartTS > latestTS) {
-                valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>The start time must be less than 30 days from now.</p>
-            }
-            if (givenEndTS > latestEndTS) {
-                valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>The end time must be less than 1 year from the start time.</p>
-            }
-            if (givenStartTS + (60*60*24*1000) > givenEndTS) {
-                valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>The end time must be more than 1 day from the start time.</p>
-            }
+//            if (givenStartTS > latestTS) {
+//                valid = false;
+//                errorMsg = <p style={{"fontWeight": "bold"}}>The start time must be less than 30 days from now.</p>
+//            }
+//
+//            if (dbData.duration < 1 || dbData.duration > 7) {
+//                valid = false;
+//                errorMsg = <p style={{"fontWeight": "bold"}}>The duration must be between 1 to 7 days.</p>
+//            }
             
         }
         
@@ -113,13 +107,13 @@ class CreateTournament extends Component {
 
         let dbData = {host: this.props.username,
             noEntrants: 1,
+            minEntrants: this.state.formData.minEntrants,
             maxEntrants: this.state.formData.maxEntrants,
             startDate: this.state.formData.startDate,
-            endDate: this.state.formData.endDate,
             startTime: this.state.formData.startTime,
-            endTime: this.state.formData.endTime,
             productList: this.props.productList,
-            tourneyId: null
+            tourneyId: null,
+            duration: this.state.formData.duration
         }
         
         if (this.checkValidity(dbData)) {
@@ -131,18 +125,26 @@ class CreateTournament extends Component {
             "minEntrants": this.state.formData.minEntrants,
             "noEntrants": 0,                 
             "startDate": this.state.formData.startDate,
-            "endDate": this.state.formData.endDate,
             "startTime": this.state.formData.startTime,
-            "endTime": this.state.formData.endTime,
-            "tourneyId": tourneyNumber
+            "tourneyId": tourneyNumber,
+            "duration": this.state.formData.duration,
+            "quoteCurrency": this.state.formData.quoteCurrency
             }
+            
+            console.log(newDbData);
             axios.post('/createTournament', newDbData).then(res => {
                 console.log(res.data);
-                
-                axios.post('/tourneyRegistration', {"tourneyId": tourneyNumber, "userId": this.props.userId, "username": this.props.username}).then(res => {
+                let balance;
+                if (this.state.formData.quoteCurrency == 'USD') {
+                    balance = 500;
+                } else if (this.state.formData.quoteCurrency == 'BTC') {
+                    balance = 1;
+                }
+                axios.post('/tourneyRegistration', {"tourneyId": tourneyNumber, "userId": this.props.userId, "username": this.props.username, "balance": balance}).then(res => {
                     console.log(res.data);
                     axios.post('/registerProducts', {"products": this.props.productList, "tourneyId": tourneyNumber}).then(res => {
-                         console.log(res.data);
+                        console.log(res.data);
+                        this.props.emptyProductList();
                     });
                 });
             });
@@ -154,6 +156,7 @@ class CreateTournament extends Component {
             this.setState(newState);
 
             //this.props.getMyTourneys(this.props.userId);
+            
         }
         
     }
@@ -170,16 +173,13 @@ class CreateTournament extends Component {
     
     showProductsHandler = (event, product) => {
         event.preventDefault();
-        this.setState({showProducts: product});
+        this.props.emptyProductList();
+        let oldFormData = {...this.state.formData};
+        oldFormData['quoteCurrency'] = product;
+        this.setState({formData: oldFormData, showProducts: product});
     }
     
     render() {
-        
-        let productData = {
-            Binance: ["BTCUSD", "ETHUSD", "EOSUSD", "ETHBTC", "LTCBTC"],
-            FTX: ["BTCUSD", "ETHUSD", "EOSUSD", "ETHBTC", "LTCBTC"],
-            Bitfinex: ["BTCUSD", "ETHUSD", "EOSUSD", "ETHBTC", "LTCBTC"]
-        }
         
         let redirect = null;
         if (this.state.redirect) {
@@ -211,9 +211,29 @@ class CreateTournament extends Component {
         let buttonsDiv = (
             <div>
                 <button onClick={(event, product)=>this.showProductsHandler(event, "BTC")}>BTC</button>
-                <button onClick={(event, product)=>this.showProductsHandler(event, "USD")}>USDT</button>
+                <button onClick={(event, product)=>this.showProductsHandler(event, "USD")}>USD</button>
             </div>
         );
+
+        let selectedProducts = null;
+        let selectedProductsTitle = null;
+        if (this.props.productList.FTX.spot.length > 0 || this.props.productList.FTX.future.length > 0)
+        {
+            let allProducts = [];
+            for (let i=0; i<this.props.productList.FTX.spot.length; i++) {
+                allProducts.push(this.props.productList.FTX.spot[i]);
+            }
+            for (let i=0; i<this.props.productList.FTX.future.length; i++) {
+                allProducts.push(this.props.productList.FTX.future[i]);
+            }
+            //console.log(allProducts);
+            selectedProductsTitle = <h4>Selected Products:</h4>
+            selectedProducts = allProducts.map(product => {
+                return (
+                    <p key={product} style={{"fontWeight": "normal", "fontSize": "0.9rem"}}>{product}</p>
+                );
+            });
+        }
         
         if (this.state.showProducts != false) {
             if (this.state.showProducts == 'BTC') {
@@ -233,7 +253,7 @@ class CreateTournament extends Component {
                             <CheckDropdown exchange="FTX" title="FTX: Spot" products={FTXSpotProductUSD} productType="spot" /> <br />
                             <CheckDropdown exchange="FTX" title="FTX: Futures" products={FTXFuturesProductsUSD} productType="future" /> <br />
                         </div>
-                        <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>Maximum 50 products per tournament</p>
+                        <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>Maximum 10 products per tournament</p>
                     </div>
                 );
             } else if (this.state.showProducts == 'USD') {
@@ -253,7 +273,7 @@ class CreateTournament extends Component {
                             <CheckDropdown exchange="FTX" title="FTX: Spot" products={FTXSpotProductUSD} productType="spot" /> <br />
                             <CheckDropdown exchange="FTX" title="FTX: Futures" products={FTXFuturesProductsUSD} productType="future" /> <br />
                         </div>
-                        <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>Maximum 50 products per tournament</p>
+                        <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>Maximum 10 products per tournament</p>
                     </div>
                 );
             } 
@@ -274,16 +294,17 @@ class CreateTournament extends Component {
                     
                     <p>Choose Trading Products:</p>
                     {productsDiv}
+                    {selectedProductsTitle}
+                    {selectedProducts}
             
                     <p>Start Date:</p>
                     <input type="date" onChange={(event, key) => this.hostInputHandler(event, 'startDate')}/>
                     <p>Start Time:</p>
                     <input type="time" step="3600000" min="00:00" onChange={(event, key) => this.hostInputHandler(event, 'startTime')}/>
                     
-                    <p>End Date:</p>
-                    <input type="date" onChange={(event, key) => this.hostInputHandler(event, 'endDate')}/> <br/>
-                    <p>End Time:</p>
-                    <input type="time" step="3600000" min="00:00" onChange={(event, key) => this.hostInputHandler(event, 'endTime')}/> <br/>
+                    <p>Duration:</p>
+                    <Input type="number" min="1" max="7" placeholder="Duration in days" changed={(event, key) => this.hostInputHandler(event, 'duration')} /> <br/>
+                    <p style={{"fontSize":"0.8rem", "fontWeight":"normal"}}>Maximum 7 days</p>
             
                     <button className="submitBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
                 </form>
@@ -297,7 +318,8 @@ class CreateTournament extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         updateProductList: (productList) => dispatch(actions.updateProductList(productList)),
-        getMyTourneys: (userId) => dispatch(actions.getMyTourneys(userId))
+        getMyTourneys: (userId) => dispatch(actions.getMyTourneys(userId)),
+        emptyProductList: () => dispatch(actions.emptyProductList())
     };
 };
 
