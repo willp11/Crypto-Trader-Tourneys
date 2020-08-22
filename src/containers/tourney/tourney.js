@@ -13,6 +13,7 @@ class Tourney extends Component {
         host: null,
         hostId: false,
         noEntrants: null, 
+        minEntrants: null,
         maxEntrants: null,
         startDate: null,
         endDate: null, 
@@ -22,13 +23,17 @@ class Tourney extends Component {
         entrantProfits: [],
         registered: false,
         products: null,
-        showConfirm: false,
+        showConfirmDelete: false,
         redirect: false,
         active: null,
         editingBalance: false,
         quoteCurrency: null,
         balance: null,
-        tourneyState: null
+        tourneyState: null,
+        visibility: null,
+        showVisibilityConfirm: false,
+        addUser: '',
+        addedUserMsg: null
     }
 
     componentDidMount() {
@@ -69,6 +74,7 @@ class Tourney extends Component {
                                     let balance = res.data.balance;
                                     this.setState({host: tourneyData.host,
                                                 noEntrants: tourneyData.noEntrants, 
+                                                minEntrants: tourneyData.minEntrants,
                                                 maxEntrants: tourneyData.maxEntrants,
                                                 startDate: tourneyData.startDate,
                                                 endDate: tourneyData.endDate,
@@ -79,7 +85,8 @@ class Tourney extends Component {
                                                 registered: isRegistered,
                                                 products: products,
                                                 balance: balance,
-                                                active: false
+                                                active: false,
+                                                visibility: tourneyData.visibility
                                     });
                                 })
                             });
@@ -116,7 +123,8 @@ class Tourney extends Component {
                                         axios.post('/getEntrantBalance', {"tourneyType": "active", "tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
                                             let balance = res.data.balance;
                                             this.setState({host: tourneyData.host,
-                                                        noEntrants: tourneyData.noEntrants, 
+                                                        noEntrants: tourneyData.noEntrants,
+                                                        minEntrants: tourneyData.minEntrants,
                                                         maxEntrants: tourneyData.maxEntrants,
                                                         startDate: tourneyData.startDate,
                                                         endDate: tourneyData.endDate,
@@ -127,13 +135,15 @@ class Tourney extends Component {
                                                         products: products,
                                                         registered: isRegistered,
                                                         active: true,
-                                                        balance: balance
+                                                        balance: balance,
+                                                        visibility: tourneyData.visibility
                                             });
                                         });
                                     } else {
                                         let balance = 0;
                                         this.setState({host: tourneyData.host,
-                                                    noEntrants: tourneyData.noEntrants, 
+                                                    noEntrants: tourneyData.noEntrants,
+                                                    minEntrants: tourneyData.minEntrants,
                                                     maxEntrants: tourneyData.maxEntrants,
                                                     startDate: tourneyData.startDate,
                                                     endDate: tourneyData.endDate,
@@ -143,7 +153,8 @@ class Tourney extends Component {
                                                     products: products,
                                                     registered: isRegistered,
                                                     active: true,
-                                                    balance: balance
+                                                    balance: balance,
+                                                    visibility: tourneyData.visibility
                                         });
                                     }
                                 })
@@ -197,7 +208,7 @@ class Tourney extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.state);
+        console.log(this.state.visibility);
     }
 
     submitHandler = () => {
@@ -252,24 +263,7 @@ class Tourney extends Component {
         
     }
     
-    deleteHandler = () => {
-        console.log("delete tourney");
-        this.setState({showConfirm: true});
-    }
-    
-    confirmHandler = () => {
-        axios.post("/deleteTournament", {"tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
-            console.log("tourney deleted");
-            this.setState({showConfirm: false, redirect: true});
-        });
-    }
-    
-    cancelHandler = () => {
-        console.log("cancelled");
-        this.setState({showConfirm: false});
-    }
-    
-        
+    // BALANCE HANDLERS
     showBalanceInput = () => {
         this.setState({editingBalance: !this.state.editingBalance})
     }
@@ -289,26 +283,115 @@ class Tourney extends Component {
         }
     }
     
+    // HOST CONTROL HANDLERS
+    inviteUserHandler = () => {
+        axios.post('/sendTourneyInvite', {"hostId": this.props.userId, "host": this.props.username, "tourneyId": this.state.tourneyId, "username": this.state.addUser}).then(res => {
+            console.log(res.data);
+            this.setState({addUser: '', addedUserMsg: res.data.response});
+        })
+    }
+    
+    addUserInputHandler = (event) => {
+        this.setState({addUser: event.target.value});
+    }
+    
+    changeVisibilityHandler = (event, visibility) => {
+        this.setState({showVisibilityConfirm: true, visibility: visibility});
+    }
+    
+    confirmVisibilityChange = () => {
+        // call api and change visibility in database
+        axios.post('/updateTourneyVisibility', {"tourneyId": this.state.tourneyId, "userId": this.props.userId, "visibility": this.state.visibility}).then(res => {
+            this.setState({showVisibilityConfirm: false});
+            console.log(res.data);
+        });
+    }
+    
+    cancelVisibilityChange = () => {
+        this.setState({showVisibilityConfirm: false, visibility: null});
+    }
+    
+    deleteHandler = () => {
+        this.setState({showConfirmDelete: true});
+    }
+    
+    confirmDeleteHandler = () => {
+        axios.post("/deleteTournament", {"tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
+            this.setState({showConfirmDelete: false, redirect: true});
+        });
+    }
+    
+    cancelDeleteHandler = () => {
+        this.setState({showConfirmDelete: false});
+    }
+    
     render() {
         
-        let deleteBtn = null;
-        if (this.state.hostId === true && this.state.active == false) {
-            deleteBtn = (
-                <button onClick={this.deleteHandler}>Delete Tournament</button>
-            );
-        }
-        
         let confirmationBox = null;
-        if (this.state.showConfirm)
+        if (this.state.showConfirmDelete)
         {
             confirmationBox = (
                 <div>
                     <p>Are you sure?</p>
-                    <button onClick={this.cancelHandler}>Cancel</button>
-                    <button onClick={this.confirmHandler}>Confirm</button>
+                    <button onClick={this.cancelDeleteHandler}>Cancel</button>
+                    <button onClick={this.confirmDeleteHandler}>Confirm</button>
                 </div>
             );
         }
+        
+        let visibilityConfirmationBox = null;
+        if (this.state.showVisibilityConfirm)
+        {
+            visibilityConfirmationBox = (
+                <div>
+                    <p>Are you sure?</p>
+                    <button onClick={this.cancelVisibilityChange}>Cancel</button>
+                    <button onClick={this.confirmVisibilityChange}>Confirm</button>
+                </div>
+            );
+        }
+        
+        let visibilityButtons = (
+                <div>
+                    <button onClick={(event, visibility) => this.changeVisibilityHandler(event, "public")}>Public</button>
+                    <button onClick={(event, visibility) => this.changeVisibilityHandler(event, "private")}>Private</button> <br/>
+                </div>
+            );
+        if (this.state.visibility == "public") {
+            visibilityButtons = (
+                <div>
+                    <button className="highlight" onClick={(event, visibility) => this.changeVisibilityHandler(event, "public")}>Public</button>
+                    <button onClick={(event, visibility) => this.changeVisibilityHandler(event, "private")}>Private</button> <br/>
+                </div>
+            );
+        } else if (this.state.visibility == "private") {
+            visibilityButtons = (
+                <div>
+                    <button onClick={(event, visibility) => this.changeVisibilityHandler(event, "public")}>Public</button>
+                    <button className="highlight" onClick={(event, visibility) => this.changeVisibilityHandler(event, "private")}>Private</button> <br/>
+                </div>
+            );
+        }
+        
+        let hostControls = null;
+        if (this.state.hostId === true && this.state.tourneyState == "registering") {
+            hostControls = (
+                <div className="hostControls">
+                    <h3>Host Controls</h3>
+                    <p>Add User:</p>
+                    <input value={this.state.addUser} placeholder="Enter username" onChange={(event)=>this.addUserInputHandler(event)}/>
+                    <button onClick={this.inviteUserHandler}>Submit</button> <br />
+                    {this.state.addedUserMsg}
+                    <p>Tournament Visiblity:</p>
+                    {visibilityButtons}
+                    {visibilityConfirmationBox}
+                    <p>Delete tournament:</p>
+                    <button onClick={this.deleteHandler}>Delete Tournament</button> <br />
+                    {confirmationBox}
+                </div>
+            );
+        }
+        
 
         let tourneyBody = (
             <h2>Loading</h2>
@@ -316,7 +399,6 @@ class Tourney extends Component {
         
         let entrants = null;
         if (this.state.entrants && this.state.entrantProfits) {
-            console.log(this.state.entrants);
             entrants = this.state.entrants.map((entrant, index) => {
                 return (
                     <li key={entrant}>{index+1}. {entrant}: {this.state.entrantProfits[index]}% </li>
@@ -329,7 +411,7 @@ class Tourney extends Component {
         );
         let balance = (
             <div>
-                <h2>Balance:</h2>
+                <h3>Balance:</h3>
                 <p>Enter tournament starting balance ({this.state.quoteCurrency}):</p>
                 <input className="balanceInput" type="text" placeholder="Starting Balance" onChange={(event) => this.editBalanceHandler(event)} />
             </div>
@@ -391,36 +473,26 @@ class Tourney extends Component {
         if (this.state.host != null) {
             tourneyBody = (
                 <div className="tourneyBody">
-                    <h2>Host</h2>
+                    <h3>Host</h3>
                     <p>{this.state.host}</p>
-                    <h2>Entrants</h2>
-                    <p>{this.state.noEntrants}/{this.state.maxEntrants}</p>
-                    <h2>Start Time</h2>
+                    <h3>Minimum Entrants</h3>
+                    <p>{this.state.minEntrants}</p>
+                    <h3>Maximum Entrants</h3>
+                    <p>{this.state.maxEntrants}</p>
+                    <h3>Start Time</h3>
                     {startTimePa}
-                    <h2>End Time</h2>
+                    <h3>End Time</h3>
                     {endTimePa}
                     {balance}
                     {registerBtn}<br/>
                     {editStartBalanceBtn}<br/>
-                    {deleteBtn}
-                    {confirmationBox}
                 </div>
             )
         }
-        
-        let binanceProducts = null;
+
         let FTXProducts = null;
-        let bitfinexProducts = null;
-        if (this.state.products) {
-            
-            if (this.state.products['Binance']) {
-                binanceProducts = Object.keys(this.state.products['Binance']).map(index => {
-                    return (
-                        <p key={index}>{this.state.products['Binance'][index]}</p>
-                    )
-                });
-            };
-            
+
+        if (this.state.products) { 
             if (this.state.products['FTX']) {
                 FTXProducts = Object.keys(this.state.products['FTX']).map(index => {
                     return (
@@ -428,14 +500,6 @@ class Tourney extends Component {
                     )
                 });
             };
-            
-            if (this.state.products['Bitfinex']) {
-                bitfinexProducts = Object.keys(this.state.products['Bitfinex']).map(index => {
-                    return (
-                        <p key={index}>{this.state.products['Bitfinex'][index]}</p>
-                    )
-                });
-            }
         }
         
         let redirect = null;
@@ -451,6 +515,7 @@ class Tourney extends Component {
             <div>
                 {redirect}
                 <h1>Tournament {this.state.tourneyId}</h1>
+                {hostControls}
                 <div className="tourneyWrapper">
                     {tourneyBody}
                     <div className="productList">

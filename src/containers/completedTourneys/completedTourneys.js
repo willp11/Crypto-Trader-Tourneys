@@ -58,8 +58,7 @@ class CompletedTourneys extends Component {
                                 tourneyId: '',
                                 host: '',
                                 product: '',
-                                maxEntrants: '',
-                                hoursUntilEnd: ''
+                                maxEntrants: ''
                             }
                       });
     }
@@ -107,20 +106,6 @@ class CompletedTourneys extends Component {
                     continue;
                 } 
             }
-            if (this.state.search.hoursUntilEnd) {
-                
-                let date = new Date(); 
-                let timezone = date.getTimezoneOffset() * 60 * 1000;
-                
-                let currentTS = date.getTime() + timezone;
-                let hours = this.state.search.hoursUntilEnd;
-                let endTS = tourneysFound[i].endTS * 1000;
-                if (currentTS < endTS - (hours * 60 * 60 * 1000) || currentTS > endTS) {
-                    tourneysFound.splice(i, 1);
-                    i--
-                    continue;
-                }
-            }
         }
         
         // copy all the found tournaments to the state search array
@@ -132,8 +117,7 @@ class CompletedTourneys extends Component {
                             tourneyId: '',
                             host: '',
                             product: '',
-                            maxEntrants: '',
-                            hoursUntilEnd: ''
+                            maxEntrants: ''
                         }, 
                        searchArray: [...this.state.tourneys]});
     }
@@ -194,7 +178,6 @@ class CompletedTourneys extends Component {
                             <input value={this.state.search.host} onChange={(event, key) => this.updateSearch(event, "host")} placeholder="Host" /> <br/>
                             <input value={this.state.search.product} onChange={(event, key) => this.updateSearch(event, "product")} placeholder="Product" /> <br/>
                             <input value={this.state.search.maxEntrants} onChange={(event, key) => this.updateSearch(event, "maxEntrants")} placeholder="Max Entrants" /> <br/>
-                            <input value={this.state.search.hoursUntilEnd} onChange={(event, key) => this.updateSearch(event, "hoursUntilEnd")} placeholder="Hours until end" /> <br/>
                             <button onClick={this.searchTourneys} className="searchTourneySubmitBtn">Submit</button> <br/>
                             <button onClick={this.resetTourneys} className="searchTourneyResetBtn">Reset</button>
                         </div>

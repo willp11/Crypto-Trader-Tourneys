@@ -20,7 +20,8 @@ class CreateTournament extends Component {
             startDate: null,
             startTime: null,
             duration: null,
-            quoteCurrency: null
+            quoteCurrency: null,
+            visibility: null
         },
         redirect: false,
         errorMsg: '',
@@ -37,7 +38,7 @@ class CreateTournament extends Component {
     }
 
     componentDidUpdate() {
-//        console.log(this.props.productList);
+        //console.log(this.state.formData.visibility);
     }
 
     componentWillUnmount() {
@@ -128,7 +129,8 @@ class CreateTournament extends Component {
             "startTime": this.state.formData.startTime,
             "tourneyId": tourneyNumber,
             "duration": this.state.formData.duration,
-            "quoteCurrency": this.state.formData.quoteCurrency
+            "quoteCurrency": this.state.formData.quoteCurrency,
+            "visibility": this.state.formData.visibility
             }
             
             console.log(newDbData);
@@ -177,6 +179,14 @@ class CreateTournament extends Component {
         let oldFormData = {...this.state.formData};
         oldFormData['quoteCurrency'] = product;
         this.setState({formData: oldFormData, showProducts: product});
+    }
+    
+    selectVisibilityHandler = (event) => {
+        event.preventDefault();
+        let visibility = event.target.name;
+        let newData = {...this.state.formData};
+        newData['visibility'] = visibility;
+        this.setState({formData: newData});
     }
     
     render() {
@@ -279,6 +289,29 @@ class CreateTournament extends Component {
             } 
         }
         
+        let visibilityBtns = (
+            <div>
+                <button name="public" onClick={(event) => this.selectVisibilityHandler(event)}>Public</button>
+                <button name="private" onClick={(event) => this.selectVisibilityHandler(event)}>Private</button>
+            </div>
+        );
+
+        if (this.state.formData.visibility == "public") {
+            visibilityBtns = (
+                <div>
+                    <button className="Selected" name="public" onClick={(event) => this.selectVisibilityHandler(event)}>Public</button>
+                    <button name="private" onClick={(event) => this.selectVisibilityHandler(event)}>Private</button>
+                </div>
+            );
+        } else if (this.state.formData.visibility == "private") {
+            visibilityBtns = (
+                <div>
+                    <button name="public" onClick={(event) => this.selectVisibilityHandler(event)}>Public</button>
+                    <button className="Selected" name="private" onClick={(event) => this.selectVisibilityHandler(event)}>Private</button>
+                </div>
+            );
+        }
+        
         return (
             <div>
                 {redirect}
@@ -305,6 +338,9 @@ class CreateTournament extends Component {
                     <p>Duration:</p>
                     <Input type="number" min="1" max="7" placeholder="Duration in days" changed={(event, key) => this.hostInputHandler(event, 'duration')} /> <br/>
                     <p style={{"fontSize":"0.8rem", "fontWeight":"normal"}}>Maximum 7 days</p>
+
+                    <p>Visibility:</p>
+                    {visibilityBtns}
             
                     <button className="submitBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
                 </form>

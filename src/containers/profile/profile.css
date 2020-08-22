@@ -1,3 +1,21 @@
 .Profile {
     
 }
+
+.invitesTable {
+    width: 500px;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+.invitesTable th {
+    border: thin solid #ccc;
+}
+
+.invitesTable td {
+    border: thin solid #ccc;
+}
+
+.invitesTable tr {
+    border: thin solid #ccc;
+}

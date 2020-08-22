@@ -59,6 +59,23 @@
     margin-bottom: 20px;
 }
 
+.hostControls {
+    border: 1px solid black;
+    margin: 0 auto;
+    width: 30vw;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+}
+
+.hostControls input {
+    text-align: center;
+}
+
+.highlight {
+    background-color: rgb(77, 134, 247);
+    color: white;
+}
+
 @media only screen and (max-width: 900px) {
     .productListDiv {
         flex-direction: column;

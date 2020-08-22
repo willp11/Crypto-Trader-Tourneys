@@ -2,7 +2,7 @@ import time
 from init import app, db
 from flask import request
 from sqlalchemy.orm import sessionmaker
-from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys
+from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys, TourneyInvites
 import datetime
 
 engine = db.engine
@@ -56,7 +56,8 @@ def getTourneyInfo():
                     'startTime': dbQuery[0].startTime,
                     'endDate': dbQuery[0].endDate,
                     'endTime': dbQuery[0].endTime,
-                    'quoteCurrency': dbQuery[0].quoteCurrency
+                    'quoteCurrency': dbQuery[0].quoteCurrency,
+                    'visibility': dbQuery[0].visibility
                    }
     else:
         tourneyInfo = {'tourneyId': "No match"}
@@ -76,6 +77,7 @@ def getActiveTourneyInfo():
     if len(dbQuery) > 0:
         tourneyInfo = {'tourneyId': dbQuery[0].tourneyId,
                     'host': dbQuery[0].host,
+                    'minEntrants': dbQuery[0].minEntrants,
                     'maxEntrants': dbQuery[0].maxEntrants,
                     'noEntrants': dbQuery[0].noEntrants,
                     'startDate': dbQuery[0].startDate,
@@ -83,7 +85,8 @@ def getActiveTourneyInfo():
                     'endDate': dbQuery[0].endDate,
                     'endTime': dbQuery[0].endTime,
                     'status': dbQuery[0].status,
-                    'quoteCurrency': dbQuery[0].quoteCurrency
+                    'quoteCurrency': dbQuery[0].quoteCurrency,
+                    'visibility': dbQuery[0].visibility
                    }
     else:
         tourneyInfo = {'tourneyId': "No match"}
@@ -103,6 +106,7 @@ def getCompletedTourneyInfo():
     if len(dbQuery) > 0:
         tourneyInfo = {'tourneyId': dbQuery[0].tourneyId,
                     'host': dbQuery[0].host,
+                    'minEntrants': dbQuery[0].minEntrants,
                     'maxEntrants': dbQuery[0].maxEntrants,
                     'noEntrants': dbQuery[0].noEntrants,
                     'startDate': dbQuery[0].startDate,
@@ -359,6 +363,44 @@ def getMyActiveTourneys():
     
     return {"response": tourneys}
 
+@app.route('/getMyCompletedTourneys', methods=["POST"])
+def getMyCompletedTourneys():
+    content = request.json
+    
+    tourneys = []
+    tourneyIds = []
+    session = Session()
+    
+    for dbQuery in session.query(CompletedEntrants).filter_by(userId=content["userId"]).all():
+        tourneyIds.append(dbQuery.tourneyId)
+        
+    for tourneyId in tourneyIds:
+        dbQuery = session.query(CompletedTourneys).filter_by(tourneyId=tourneyId).one()
+        tourney = {}
+        tourney = {'tourneyId': dbQuery.tourneyId,
+                'host': dbQuery.host,
+                'maxEntrants': dbQuery.maxEntrants,
+                'noEntrants': dbQuery.noEntrants,
+                'startDate': dbQuery.startDate,
+                'startTime': dbQuery.startTime,
+                'endDate': dbQuery.endDate,
+                'endTime': dbQuery.endTime,
+                'startTS': dbQuery.startTS,
+                'endTS': dbQuery.endTS
+        }
+        tourneys.append(tourney)
+        
+    for tourney in tourneys:
+        products = []
+        for dbQuery in session.query(CompletedProducts).filter_by(tourneyId = tourney['tourneyId']).all():
+            products.append(dbQuery.productName)
+        tourney['products'] = products
+        print(products)
+        
+    session.close()
+    
+    return {"response": tourneys}
+
 @app.route('/createUser', methods=['POST'])
 def createUser():
     content = request.json
@@ -405,7 +447,7 @@ def createTournament():
     print(endDate, endTime)
     
     session = Session()
-    dbEntry = RegistrationTourneys(hostId=content["hostId"] ,tourneyId = int(content["tourneyId"]), host=content["host"], maxEntrants=content["maxEntrants"],  minEntrants=content["minEntrants"],  noEntrants=0, startDate=content["startDate"], startTime=content["startTime"], endDate=endDate, endTime=endTime, startTS=startTS, endTS=endTS, quoteCurrency=content["quoteCurrency"])
+    dbEntry = RegistrationTourneys(hostId=content["hostId"] ,tourneyId = int(content["tourneyId"]), host=content["host"], maxEntrants=content["maxEntrants"],  minEntrants=content["minEntrants"],  noEntrants=0, startDate=content["startDate"], startTime=content["startTime"], endDate=endDate, endTime=endTime, startTS=startTS, endTS=endTS, quoteCurrency=content["quoteCurrency"], visibility=content["visibility"])
     dbEntry2 = AllTourneys(tourneyId = int(content["tourneyId"]), state = "registering")
     session.add(dbEntry)
     session.add(dbEntry2)
@@ -433,7 +475,21 @@ def deleteTournament():
     else:
         session.close()
         return {"response": "unauthorized"}
-        
+
+@app.route('/updateTourneyVisibility', methods=['POST'])
+def updateTourneyVisibility():
+    content = request.json
+    session = Session()
+    dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+    if dbQuery.hostId == content["userId"]:
+        dbQuery.visibility = content['visibility']
+        session.add(dbQuery)
+        session.commit()
+        session.close()
+        return {"response": "success"}
+    else:
+        session.close()
+        return {"response": "unauthorized"}
     
 @app.route('/tourneyRegistration', methods=['POST'])
 def registerTourneys():
@@ -698,17 +754,69 @@ def editStartBalance():
     
     return {"response": "success"}
     
+@app.route('/sendTourneyInvite', methods=['POST'])
+def sendTourneyInvite():
+    content = request.json
     
+    session = Session()
     
+    # check the host sent the request
+    dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+    if content["hostId"] == dbQuery.hostId:
     
+        # get the user Id of the invited user
+        dbQuery2 = session.query(Usernames).filter_by(username=content["username"]).all()
+        if len(dbQuery2) > 0:
+            userId = dbQuery2[0].userId
+            
+            # check the user is not already registered in the tournament
+            dbQuery3 = session.query(Entrants).filter_by(tourneyId=content["tourneyId"], userId=userId).all()
+            if len(dbQuery3) == 0:
+                
+                # check the user doesn't already have an invitation
+                dbQuery4 = session.query(TourneyInvites).filter_by(userId=userId, tourneyId=content["tourneyId"]).all()
+                if len(dbQuery4) == 0:
+
+                    # add the invite to the invite table
+                    dbEntry = TourneyInvites(userId=userId, tourneyId=content["tourneyId"], host=content["host"])
+                    session.add(dbEntry)
+                    session.commit()
+                    session.close()
+
+                    return {"response": "Invitation sent to " + content["username"]}
+                else:
+                    return {"response": "User already has an invitation"}
+            else:
+                return {"response": "User already registered"}
+        else:
+            return {"response": "User not found"}
+    else: 
+        return {"response": "Unauthorized"}
     
+@app.route('/getTourneyInvites', methods=['POST'])
+def getTourneyInvites():
+    content = request.json
     
+    invites = []
+    session = Session()
     
+    for query in session.query(TourneyInvites).filter_by(userId=content["userId"]).all():
+        invite = {"tourneyId": query.tourneyId, "host": query.host}
+        invites.append(invite)
+        
+    return {"response": invites}
     
+@app.route('/removeTourneyInvite', methods=['POST'])
+def declineTourneyInvite():
+    content = request.json
     
+    session = Session()
+    dbQuery = session.query(TourneyInvites).filter_by(userId=content["userId"], tourneyId=content["tourneyId"]).one()
+    session.delete(dbQuery)
+    session.commit()
+    session.close()
     
-    
-    
+    return {"response": "invitation removed"}
     
     
     

@@ -39,8 +39,10 @@ class RegistrationTourneys(db.Model):
     startTS = db.Column(db.Integer, nullable=False)
     endTS = db.Column(db.Integer, nullable=False)
     quoteCurrency = db.Column(db.String(16), nullable=False)
+    visibility = db.Column(db.String(16), nullable=False)
     entrants = relationship("Entrants", cascade="all, delete")
     products = relationship("RegisteringProducts", cascade="all, delete")
+    invitations = relationship("TourneyInvites", cascade="all, delete")
     
 class Entrants(db.Model):
     __tablename__ = "entrants"
@@ -70,6 +72,7 @@ class ActiveTourneys(db.Model):
     tourneyId = db.Column(db.Integer, primary_key=True)
     host = db.Column(db.String(100), nullable=False)
     hostId = db.Column(db.String(50), db.ForeignKey('usernames.userId'), nullable=False)
+    minEntrants = db.Column(db.Integer, nullable=False)
     maxEntrants = db.Column(db.Integer, nullable=False)
     noEntrants = db.Column(db.Integer, nullable=False)
     startDate = db.Column(db.String(16), nullable=False)
@@ -80,6 +83,7 @@ class ActiveTourneys(db.Model):
     endTS = db.Column(db.Integer, nullable=False)
     status = db.Column(db.String(16), nullable=False)
     quoteCurrency = db.Column(db.String(16), nullable=False)
+    visibility = db.Column(db.String(16), nullable=False)
     entrants = relationship("ActiveEntrants", cascade="all, delete")
     products = relationship("ActiveProducts", cascade="all, delete")
     
@@ -120,6 +124,7 @@ class CompletedTourneys(db.Model):
     tourneyId = db.Column(db.Integer, primary_key=True)
     host = db.Column(db.String(100), nullable=False)
     hostId = db.Column(db.String(50), db.ForeignKey('usernames.userId'), nullable=False)
+    minEntrants = db.Column(db.Integer, nullable=False)
     maxEntrants = db.Column(db.Integer, nullable=False)
     noEntrants = db.Column(db.Integer, nullable=False)
     startDate = db.Column(db.String(16), nullable=False)
@@ -150,3 +155,10 @@ class CompletedProducts(db.Model):
     productName = db.Column(db.String(20), nullable=False)
     exchange = db.Column(db.String(20), nullable=False)
     productType = db.Column(db.String(16), nullable=False)
+    
+class TourneyInvites(db.Model):
+    __tablename__ = "tourneyInvites"
+    inviteId = db.Column(db.Integer, primary_key=True)
+    userId = db.Column(db.String(50), nullable=False)
+    tourneyId = db.Column(db.Integer, db.ForeignKey('registrationTourneys.tourneyId'), nullable=False)
+    host = db.Column(db.String(100), nullable=False)

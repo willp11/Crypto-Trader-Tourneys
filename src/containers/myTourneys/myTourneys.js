@@ -12,6 +12,7 @@ class MyTourneys extends Component {
     state = {
         tourneys: [],
         activeTourneys: [],
+        completedTourneys: [],
         showProducts: false,
         productsToShow: [],
         indexToShow: null,
@@ -34,6 +35,14 @@ class MyTourneys extends Component {
                 activeTourneys: activeTourneys
             });
         });
+        
+        let completedTourneys = [];
+        axios.post('/getMyCompletedTourneys', {"userId": this.props.userId}).then(res => {
+            completedTourneys = res.data.response;
+            this.setState({
+                completedTourneys: completedTourneys
+            });
+        });
     }
 
     componentDidUpdate() {
@@ -51,6 +60,9 @@ class MyTourneys extends Component {
             } else if (table == "active") {
                 products = this.state.activeTourneys[index].products;
                 showProducts = true;
+            } else if (table == "completed") {
+                products = this.state.completedTourneys[index].products;
+                showProducts = true;
             }
             tableToShow = table;
         } else {
@@ -59,18 +71,6 @@ class MyTourneys extends Component {
             tableToShow = null;
         }
         this.setState({showProducts: showProducts, productsToShow: products, indexToShow: index, tableToShow: tableToShow});
-    }
-    
-    toggleFiltersHandler = (event) => {
-        this.setState({showFilters: !this.state.showFilters,
-                            search: {
-                                tourneyId: null,
-                                host: null,
-                                product: null,
-                                maxEntrants: null,
-                                hoursUntilStart: null
-                            }
-                      });
     }
     
     render (){
@@ -165,13 +165,55 @@ class MyTourneys extends Component {
             })
         }
         
+        let completedTourneys = null;
+        if (this.state.completedTourneys.length > 0) {
+            completedTourneys = this.state.completedTourneys.map((tourney, index) => {
+                let navPath = "/tourneys/" + tourney.tourneyId;
+                let showProdStr = "Show";
+                let products = null;
+                let productsDiv = null;
+
+                if (index == this.state.indexToShow && this.state.showProducts && this.state.tableToShow == "completed") {
+                    showProdStr = "Hide";
+                    products = this.state.productsToShow.map(product => {
+                        return (
+                            <li key={product}>{product}</li> 
+                        )
+                    });
+                    productsDiv = (
+                        <div className="showProducts">
+                            <ul>
+                                {products}
+                            </ul>
+                        </div>
+                    );
+                }
+                return (
+                    <tr key={tourney.tourneyId}>
+                        <td>{tourney.tourneyId}</td>
+                        <td>{tourney.host}</td>
+                        <td>
+                            <button onClick={(event, i, table) => this.showProductsHandler(event, index, "completed")}>{showProdStr}</button> <br/> 
+                            {productsDiv}
+                        </td>
+                        <td>{tourney.noEntrants}/{tourney.maxEntrants}</td>
+                        <td>{tourney.startDate} </td>
+                        <td>{tourney.startTime}</td>
+                        <td>{tourney.endDate}</td>
+                        <td>{tourney.endTime}</td>
+                        <td><NavLink to={navPath} style={{textDecoration: "none"}}><button>Go to Lobby</button></NavLink></td>
+                    </tr>
+                );
+            })
+        }
+        
         return (
             <div>
                 {redirect}
                 <h1>My Tournaments</h1>
                 <div className="AllTourneys">
                     <div className="NotActiveTourneys">
-                        <h2>Registered:</h2>
+                        <h2>Registered Tournaments:</h2>
                         <table className="NotActiveTable">
                             <thead>
                                 <tr>
@@ -209,6 +251,27 @@ class MyTourneys extends Component {
                             </thead>
                             <tbody>
                                 {activeTourneys}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="NotActiveTourneys">
+                        <h2>Completed Tournaments:</h2>
+                        <table className="NotActiveTable">
+                            <thead>
+                                <tr>
+                                    <th>Tournament id</th>
+                                    <th>Host</th>
+                                    <th>Products</th>
+                                    <th>Entrants</th>
+                                    <th>Start Date</th>
+                                    <th>Start Time</th>
+                                    <th>End Date</th>
+                                    <th>End Time</th>
+                                    <th>Register</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {completedTourneys}
                             </tbody>
                         </table>
                     </div>
