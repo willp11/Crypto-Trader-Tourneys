@@ -5,29 +5,49 @@
     flex-wrap: no-wrap;
     align-content: center;
     justify-content: space-between;
-    border-bottom: 1px solid black;
+    border: 2px solid #243B53;
     font-family: Quicksand;
     height: 80px;
     width: 100vw;
+    background-color: #243B53;
+    z-index: 100;
+    top: 0;
+    position: fixed;
 }
 
 .NavTop img {
     height: 80px;
-    width: 80px;
+    width: 100px;
 }
 
 .NavTop h2 {
     position: relative;
-    font-size: 1.8rem;
+    font-size: 2rem;
+    color: #D9E2EC;
 }
 
 /* Dropdown Button */
 .dropbtn {
-  background-color: rgb(77, 134, 247);
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
+    background-color: #486581;
+    color: white;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    width: 80px;
+    height: 60px;
+    position: relative;
+    bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.menuLine {
+    width: 50px;
+    height: 5px;
+    background: #D9E2EC;
+    margin: 0 auto;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -35,14 +55,14 @@
     position: relative;
     display: inline-block;
     top: 20px;
-    right: 20px;
+    right: 50px;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #486581;
     min-width: 240px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -51,36 +71,49 @@
 
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
+    color: #D9E2EC;
     padding: 6px 8px;
     text-decoration: none;
     display: block;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {background-color: #303F9F;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: rgb(87, 66, 245);}
+.dropdown:hover .dropbtn {background-color: #303F9F;}
 
 /* Small devices (landscape phones, 576px and below)*/
 @media (max-width: 576px) {  
-        
     .NavTop h2 {
-        font-size: 1.3rem;
-        top: 15px
+        font-size: 1.4rem;
+        left: -18px;
+        top: 10px;
     }
     
     .NavTop img {
-        height: 60px;
-        width: 60px;
+        height: 50px;
+        width: 62.5px;
         position: relative;
-        top: 10px;
+        top: 15px;
     }
-
+    
+    .dropbtn {
+        height: 42px;
+        width: 40px;
+        padding: 4px 5px;
+        left: 25px;
+        top: 0px;
+        justify-content: space-around;
+    }
+    
+    .menuLine {
+        width: 30px;
+        height: 4px;
+    }
 }
 
 /* medium devices (landscape phones, 576px to 768px)*/
@@ -99,4 +132,11 @@
 @media (max-width: 1200px) {  
 
 
+}
+
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-height: 768px) {  
+    .dropdown-content a {
+        padding: 2px 8px;
+    }
 }

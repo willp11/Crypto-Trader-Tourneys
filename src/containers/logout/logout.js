@@ -19,11 +19,13 @@ class Login extends Component {
         }
             
         return (
-            <div>  
-                {authRedirect}
-                <p>Are you sure you want to log out?</p>
-                <NavLink to="/profile" style={{textDecoration: "none"}}><button>Cancel</button></NavLink>
-                <button onClick={this.submitHandler}>Logout</button>
+            <div className="logoutDiv">  
+                <div className="logoutSubDiv">
+                    {authRedirect}
+                    <h3>Are you sure you want to log out?</h3>
+                    <NavLink to="/profile" style={{textDecoration: "none"}}><button>Cancel</button></NavLink>
+                    <button onClick={this.submitHandler}>Logout</button>
+                </div>
             </div>
         )
     }

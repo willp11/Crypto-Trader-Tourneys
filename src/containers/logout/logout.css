@@ -1,0 +1,74 @@
+.logoutDiv {
+    margin-top: 0;
+    background-color: #102A43;
+    height: auto;
+    min-height: 100vh;
+    width: 100vw;
+    padding-top: 80px;
+    box-sizing: border-box;
+}
+
+.logoutDiv h1 {
+    color: #D9E2EC;
+}
+
+.logoutDiv h3 {
+    color: #D9E2EC;
+}
+
+.logoutDiv button {
+    background-color: rgb(77, 134, 247);
+    color: #D9E2EC;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0.5px solid #102A43;
+    margin: 5px;
+    font-size: 1rem;
+}
+
+.logoutSubDiv {
+    background-color: #243B53;
+    height: 400px;
+    width: 500px;
+    margin: 0 auto;
+    padding-top: 20px;
+    box-sizing: border-box;
+    position: relative;
+    top: 50px;
+    border: 2px solid #102A43;
+    border-radius: 20px;
+    top: 40px;
+}
+
+
+/* large devices  desktops, 992px to 1200px)*/
+@media (max-width: 1200px) {  
+
+}
+
+/* Large devices (desktops, 768px to 992px )*/
+@media (max-width: 992px) {  
+    .logoutSubDiv {
+        width: 90vw;
+    }
+}
+
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-width: 768px) {  
+    .logoutSubDiv {
+        width: 100vw;
+    }
+}
+
+/* Small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
+    
+    .logoutSubDiv h1 {
+        font-size: 1.2rem;
+    }
+
+    .logoutSubDiv h3 {
+        font-size: 1rem;
+    }
+
+}

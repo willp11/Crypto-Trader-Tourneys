@@ -1,20 +1,64 @@
-.createTournForm {
-    border: 1px solid #bbb;
-    width: 500px;
+.createTournDiv {
+    margin-top: 0;
+    background-color: #102A43;
+    height: auto;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 120px 0 40px 0;
+    box-sizing: border-box;
+}
+
+.createTournDiv button {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.createTournDiv h1 {
+    color: #D9E2EC;
+}
+
+.createTournDiv h3 {
+    font-size: 1rem;
+    color: #D9E2EC;
+}
+
+.createTournDiv h4 {
+    font-size: 0.9rem;
+    color: #D9E2EC;
+}
+
+.createTournDiv p {
+    color: #D9E2EC;
+}
+
+.createTournSubDiv {
+    background-color: #243B53;
+    height: auto;
+    width: 750px;
     margin: 0 auto;
+    padding: 20px 20px 30px 20px;
+    position: relative;
+    border: 2px solid #102A43;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.createTournForm {
+    width: 600px;
+    margin: 0 auto;
+    background-color: #334E68;
+    padding: 20px 0;
 }
 
 label {
     margin-right: 10px;
 }
 
-.createTournForm p {
-    font-weight: bold;
-}
-
 .submitBtn {
     margin: 20px;
     font-size: 0.8rem;
+    background-color: rgb(77, 134, 247);
+    color: #D9E2EC;
 }
 
 .duration {
@@ -28,4 +72,36 @@ label {
 
 .No-display {
     display: none;
+}
+
+/* large devices  desktops, 992px to 1200px)*/
+@media (max-width: 1200px) {  
+
+}
+
+/* Large devices (desktops, 768px to 992px )*/
+@media (max-width: 992px) {  
+    .createTournSubDiv {
+        width: 100vw;
+    }
+    .createTournForm {
+        width: 80vw;
+    }
+}
+
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-width: 768px) {  
+    .createTournSubDiv h1 {
+        font-size: 1.4rem;
+    }
+    
+    .createTournSubDiv h3 {
+        font-size: 1rem;
+    }
+}
+
+/* Small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
+
+
 }

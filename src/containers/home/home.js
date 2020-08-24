@@ -11,9 +11,11 @@ class Home extends Component {
     
     render() {
         return (
-            <div>
-                <h1>The Crypto Trading Tournament App!</h1>
-                <h2>Prove your trading skills by entering our trading tournaments!</h2>
+            <div className="homeDiv">
+                <div className="homeSubDiv">
+                    <h1>The Crypto Trading Tournament App!</h1>
+                    <h3>Prove your trading skills by entering our trading tournaments!</h3>
+                </div>
             </div>
         )
     }

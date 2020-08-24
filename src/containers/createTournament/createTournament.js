@@ -6,6 +6,7 @@ import CheckDropdown from '../../components/UI/CheckDropDown/CheckDropDown';
 import * as actions from '../../store/actions/index';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
+import NavTop from '../../components/navigation/nav-top/nav-top';
 
 import { firebaseDB } from '../../firebase/firebase';
 
@@ -274,7 +275,7 @@ class CreateTournament extends Component {
                     </div>
                 );
                 productsDiv = ( 
-                    <div>
+                    <div >
                         <div className="No-display">
                             <CheckDropdown exchange="FTX" title="FTX: Spot" products={FTXSpotProductBTC} productType="spot" /> <br />
                             <CheckDropdown exchange="FTX" title="FTX: Futures" products={FTXFuturesProductsBTC} productType="future" /> <br />
@@ -313,38 +314,40 @@ class CreateTournament extends Component {
         }
         
         return (
-            <div>
+            <div className="createTournDiv">
                 {redirect}
-                <h1>Create New Tournament</h1>
-                <form className="createTournForm">
-                    <p>Minimum Number of Entrants:</p>
-                    <Input placeholder="Min no. entrants" changed={(event, key) => this.hostInputHandler(event, 'minEntrants')}/> <br />
-                    <p>Maximum Number of Entrants:</p>
-                    <Input placeholder="Max no. entrants" changed={(event, key) => this.hostInputHandler(event, 'maxEntrants')}/> <br />
-                    
-                    <p>Choose currency:</p>
-                    {buttonsDiv}
-                    
-                    <p>Choose Trading Products:</p>
-                    {productsDiv}
-                    {selectedProductsTitle}
-                    {selectedProducts}
-            
-                    <p>Start Date:</p>
-                    <input type="date" onChange={(event, key) => this.hostInputHandler(event, 'startDate')}/>
-                    <p>Start Time:</p>
-                    <input type="time" step="3600000" min="00:00" onChange={(event, key) => this.hostInputHandler(event, 'startTime')}/>
-                    
-                    <p>Duration:</p>
-                    <Input type="number" min="1" max="7" placeholder="Duration in days" changed={(event, key) => this.hostInputHandler(event, 'duration')} /> <br/>
-                    <p style={{"fontSize":"0.8rem", "fontWeight":"normal"}}>Maximum 7 days</p>
+                <div className="createTournSubDiv">
+                    <h1>Create New Tournament</h1>
+                    <form className="createTournForm">
+                        <h3>Minimum Number of Entrants:</h3>
+                        <Input placeholder="Min no. entrants" changed={(event, key) => this.hostInputHandler(event, 'minEntrants')}/> <br />
+                        <h3>Maximum Number of Entrants:</h3>
+                        <Input placeholder="Max no. entrants" changed={(event, key) => this.hostInputHandler(event, 'maxEntrants')}/> <br />
 
-                    <p>Visibility:</p>
-                    {visibilityBtns}
-            
-                    <button className="submitBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
-                </form>
-                {this.state.errorMsg}
+                        <h3>Choose currency:</h3>
+                        {buttonsDiv}
+
+                        <h3>Choose Trading Products:</h3>
+                        {productsDiv}
+                        {selectedProductsTitle}
+                        {selectedProducts}
+
+                        <h3>Start Date:</h3>
+                        <input type="date" onChange={(event, key) => this.hostInputHandler(event, 'startDate')}/>
+                        <h3>Start Time:</h3>
+                        <input type="time" step="3600000" min="00:00" onChange={(event, key) => this.hostInputHandler(event, 'startTime')}/>
+
+                        <h3>Duration:</h3>
+                        <Input type="number" min="1" max="7" placeholder="Duration in days" changed={(event, key) => this.hostInputHandler(event, 'duration')} /> <br/>
+                        <h3 style={{"fontSize":"0.8rem", "fontWeight":"normal"}}>Maximum 7 days</h3>
+
+                        <h3>Visibility:</h3>
+                        {visibilityBtns}
+
+                        <button className="submitBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
+                    </form>
+                    {this.state.errorMsg}
+                </div>
             </div>
         )
     }

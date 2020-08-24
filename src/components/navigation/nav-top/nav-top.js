@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './nav-top.css';
-import logo from "../../../assets/stock-trading-logo.jpg";
+import logo from "../../../assets/crown.png";
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 
@@ -28,17 +28,22 @@ class NavTop extends Component {
                     <NavLink to="/createTournament" style={{textDecoration: "none"}}><p>Create Tournament</p></NavLink>
                     <NavLink to="/myTournaments" style={{textDecoration: "none"}}><p>My Tournaments</p></NavLink>
                     <NavLink to="/profile" style={{textDecoration: "none"}}><p>My Account</p></NavLink>
+                    <NavLink to="/wallet" style={{textDecoration: "none"}}><p>Wallet</p></NavLink>
                     <NavLink to="/logout" style={{textDecoration: "none"}}><p>Logout</p></NavLink>
                   </div>
                  );
         }
         return (
             <div className="NavTop">
-                <img alt="Crypto Trade Wars Logo" src={logo}/>
+                <img alt="Crypto Tourneys Logo" src={logo}/>
 
-                <h2>Crypto Trader Tournaments</h2>
+                <h2>Crypto Tourneys</h2>
                 <div className="dropdown">
-                  <button className="dropbtn">Menu</button>
+                    <button className="dropbtn">
+                        <div className="menuLine"></div>
+                        <div className="menuLine"></div>
+                        <div className="menuLine"></div>
+                    </button>
                   {dropdownContent}
                 </div>
             </div>

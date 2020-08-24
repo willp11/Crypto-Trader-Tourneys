@@ -71,19 +71,23 @@ class Login extends Component {
         }
         
         return (
-            <div>
+            <div className="loginDiv">
                 {authRedirect}
-                <h1>Login</h1>
-                <form className="Login" onSubmit={this.submitHandler}>
-                    <Input  type={this.state.controls.email.elementConfig.type} placeholder={this.state.controls.email.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "email")}/> <br/>
-                    <Input type={this.state.controls.password.elementConfig.type} placeholder={this.state.controls.password.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "password")}/> <br />
-                    <button onClick={this.submitHandler}>Submit</button><br/>
-                    {this.state.errorMsg}
-                    {this.props.error}
-                </form>
-                <div style={{textAlign: "center"}}>  
-                    <p>Don't have an account yet?</p>
-                    <NavLink to="/register" style={{textDecoration: "none"}}><button>Go To Sign-up Page</button></NavLink>
+                <div className="loginSubDiv">
+                    <h1>Login</h1>
+                    <div className="loginFormDiv">
+                        <form className="Login" onSubmit={this.submitHandler}>
+                            <Input type={this.state.controls.email.elementConfig.type} placeholder={this.state.controls.email.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "email")}/> <br/>
+                            <Input type={this.state.controls.password.elementConfig.type} placeholder={this.state.controls.password.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "password")}/> <br />
+                            <button className="loginSubmitBtn" onClick={this.submitHandler}>Submit</button><br/>
+                            {this.state.errorMsg}
+                            {this.props.error}
+                        </form>
+                    </div>
+                    <div className="goToSignUpDiv" style={{textAlign: "center"}}>  
+                        <p>Don't have an account yet?</p>
+                        <NavLink to="/register" style={{textDecoration: "none"}}><button className="goToSignUpBtn">Go To Sign-up Page</button></NavLink>
+                    </div>
                 </div>
             </div>
         )

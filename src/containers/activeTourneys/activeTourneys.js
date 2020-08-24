@@ -195,8 +195,8 @@ class ActiveTourneys extends Component {
                             <input value={this.state.search.product} onChange={(event, key) => this.updateSearch(event, "product")} placeholder="Product" /> <br/>
                             <input value={this.state.search.maxEntrants} onChange={(event, key) => this.updateSearch(event, "maxEntrants")} placeholder="Max Entrants" /> <br/>
                             <input value={this.state.search.hoursUntilEnd} onChange={(event, key) => this.updateSearch(event, "hoursUntilEnd")} placeholder="Hours until end" /> <br/>
-                            <button onClick={this.searchTourneys} className="searchTourneySubmitBtn">Submit</button> <br/>
-                            <button onClick={this.resetTourneys} className="searchTourneyResetBtn">Reset</button>
+                            <button className="submitBtn" onClick={this.searchTourneys}>Submit</button> <br/>
+                            <button className="resetBtn" onClick={this.resetTourneys}>Reset</button>
                         </div>
                     </div>
                 </div>
@@ -204,16 +204,16 @@ class ActiveTourneys extends Component {
         }
         
         return (
-            <div>
-                <h1>Active Tournaments</h1>
+            <div className="AllTourneysDiv">
                 <div className="AllTourneys">
-                    <div className="NotActiveTourneys">
+                    <h1>Active Tournaments</h1>
+                    <div className="TourneyDiv">
                         <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Search</button>
                         {filtersDiv}
-                        <table className="NotActiveTable">
+                        <table className="TourneyTable">
                             <thead>
                                 <tr>
-                                    <th>Tournament id</th>
+                                    <th>id</th>
                                     <th>Host</th>
                                     <th>Products</th>
                                     <th>Entrants</th>

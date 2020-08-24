@@ -1,21 +1,159 @@
-.Profile {
-    
+.profileDiv {
+    margin-top: 0;
+    background-color: #102A43;
+    height: auto;
+    width: 100vw;
+    padding: 120px 0px 40px 0px;
+    border: 2px solid #102A43;
+}
+
+.profileDiv h1 {
+    color: #D9E2EC;
+}
+
+.profileDiv h2 {
+    color: #D9E2EC;
+}
+
+.profileDiv h3 {
+    color: #D9E2EC;
+}
+
+.profileDiv p {
+    color: white;
+}
+
+.profileSubDiv {
+    background-color: #243B53;
+    height: auto;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    border: 2px solid #102A43;
+    border-radius: 20px;
+}
+
+.profileSubDiv input {
+    padding: 5px;
+}
+
+.updateAPIbtn {
+    background-color: rgb(77, 134, 247);
+    color: #D9E2EC;
+    padding: 5px;
+}
+
+.yesBtn {
+    background-color: #00897B;
+    color: #D9E2EC;
+    padding: 5px;
+    margin: 0px 5px;
+    width: 65px;
+}
+
+.noBtn {
+    background-color: #C62828;
+    color: #D9E2EC;
+    padding: 5px;
+    margin: 0px 5px;
+    width: 65px;
+}
+
+.profilePanel {
+    background-color: #334E68;
+    width: 800px;
+    margin: 0 auto;
+    padding:  10px;
+    border: 2px solid #102A43;
+    border-radius: 20px;
+    position: relative;
 }
 
 .invitesTable {
     width: 500px;
     margin: 0 auto;
-    border: 1px solid black;
+    border: 2px solid #102A43;
+    border-collapse: collapse;
+    background-color: #D9E2EC;
+    color: #486581;
+}
+
+.invitesTable thead {
+    border-collapse: collapse;
+    background-color: #334E68;
+    color: #D9E2EC;
 }
 
 .invitesTable th {
-    border: thin solid #ccc;
+    border: thin solid #102A43;
 }
 
 .invitesTable td {
-    border: thin solid #ccc;
+    border: thin solid #102A43;
 }
 
 .invitesTable tr {
-    border: thin solid #ccc;
+    border: thin solid #102A43;
 }
+
+.apiInput {
+    text-align: center;
+}
+
+/* large devices  desktops, 992px to 1200px)*/
+@media (max-width: 1200px) {  
+    .profileSubDiv {
+        width: 90vw;
+    }
+    .profilePanel {
+        width: 80vw;
+    }
+}
+
+/* Large devices (desktops, 768px to 992px )*/
+@media (max-width: 992px) {  
+    .profileSubDiv {
+        width: 90vw;
+    }
+    .profilePanel {
+        width: 90vw;
+    }
+}
+
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-width: 768px) {  
+    .profileSubDiv {
+        width: 100vw;
+    }
+    .profilePanel {
+        width: 80vw;
+    }
+}
+
+/* Small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
+    
+    .invitesTable {
+        width: 80vw;
+    }
+    
+    .profileSubDiv h1 {
+        font-size: 1.2rem;
+    }
+
+    .profileSubDiv h2 {
+        font-size: 1rem;
+    }
+    
+    .invitesTable th {
+        font-size: 0.8rem;
+    }
+
+    .invitesTable td {
+        font-size: 0.8rem;
+    }
+
+}
+

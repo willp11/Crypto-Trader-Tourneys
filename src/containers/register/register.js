@@ -136,22 +136,24 @@ class Register extends Component {
         }
         
         return (
-            <div>
+            <div className="registerDiv">
                 {authRedirect}
-                <div>
+                <div className="registerSubDiv">
                     <h1>Sign Up</h1>
-                    <form className="SignUp" onSubmit={this.submitHandler}>
-                        <Input  type={this.state.controls.username.elementConfig.type} placeholder={this.state.controls.username.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "username")}/> <br/>
-                        <Input  type={this.state.controls.email.elementConfig.type} placeholder={this.state.controls.email.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "email")}/> <br/>
-                        <Input type={this.state.controls.password.elementConfig.type} placeholder={this.state.controls.password.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "password")}/> <br />
-                        <Input type={this.state.controls.repeatPassword.elementConfig.type} placeholder={this.state.controls.repeatPassword.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "repeatPassword")}/> <br />
-                        <button>Submit</button><br />
-                        {this.state.errorMsg}
-                        {this.props.error}
-                    </form>
-                    <div style={{textAlign: "center"}}>  
+                    <div className="registerFormDiv">
+                        <form className="SignUp" onSubmit={this.submitHandler}>
+                            <Input  type={this.state.controls.username.elementConfig.type} placeholder={this.state.controls.username.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "username")}/> <br/>
+                            <Input  type={this.state.controls.email.elementConfig.type} placeholder={this.state.controls.email.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "email")}/> <br/>
+                            <Input type={this.state.controls.password.elementConfig.type} placeholder={this.state.controls.password.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "password")}/> <br />
+                            <Input type={this.state.controls.repeatPassword.elementConfig.type} placeholder={this.state.controls.repeatPassword.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "repeatPassword")}/> <br />
+                            <button className='registerSubmitBtn'>Submit</button><br />
+                            {this.state.errorMsg}
+                            {this.props.error}
+                        </form>
+                    </div>
+                    <div className="goToLoginDiv" style={{textAlign: "center"}}>  
                         <p>Already have an account?</p>
-                        <NavLink to="/login" style={{textDecoration: "none"}}><button>Go To Login Page</button></NavLink>
+                        <NavLink to="/login" style={{textDecoration: "none"}}><button className="goToLoginBtn">Go To Login Page</button></NavLink>
                     </div>
                 </div>
             </div>

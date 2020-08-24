@@ -119,28 +119,30 @@ class Profile extends Component {
             );
         
         let acceptInvitation = (
-            <button onClick={this.acceptInvitationHandler}>Yes</button>
+            <button className="yesBtn" onClick={this.acceptInvitationHandler}>Yes</button>
         );
         
         let invites = null;
         if (this.state.invites) {
             invites = this.state.invites.map((invite, index) => {
                 let tourneyId=this.state.invites[index].tourneyId;
+                let declineInvitation = <button className="noBtn" onClick={(i) => this.declineInvitationHandler(index)}>No</button>
                 if (this.state.enterBalance == true) {
+                    declineInvitation = null;
                     acceptInvitation = (
                         <div>
-                            <button onClick={this.cancelAcceptInvitationHandler}>Cancel</button>
+                            <button className="noBtn" onClick={this.cancelAcceptInvitationHandler}>Cancel</button>
                             <input value={this.state.balance} onChange={(event) => this.inputBalanceHandler(event)} style={{"textAlign": "center"}} placeholder="Enter Balance" />
-                            <button onClick={(id) => this.submitAcceptInvitationHandler(tourneyId)}>Confirm</button>
+                            <button className="yesBtn" onClick={(id) => this.submitAcceptInvitationHandler(tourneyId)}>Confirm</button>
                         </div>
                     );
                 }
                 return (
                     <tr key="index">
-                        <td><NavLink to={"/tourneys/"+tourneyId}>{invite.tourneyId}</NavLink></td>
+                        <td><NavLink style={{"color": "rgb(77, 134, 247)", "fontWeight": "bold"}} to={"/tourneys/"+tourneyId}>{invite.tourneyId}</NavLink></td>
                         <td>{invite.host}</td>
                         <td>
-                            <button onClick={(i) => this.declineInvitationHandler(index)}>No</button>
+                            {declineInvitation}
                             {acceptInvitation}
                         </td>
                     </tr>
@@ -150,34 +152,38 @@ class Profile extends Component {
         
         if (this.props.userId) {
             content = (
-                <div>
-                    <h1>My Account</h1>
-                    <h2>Username:</h2>
-                    <p>{this.props.username}</p>
-                    <h2>Email:</h2>
-                    <p>{this.props.email}</p>
-                    <div>
-                        <h2>APIs</h2>
-                        <div>
-                            <h3>FTX:</h3>
-                            <input type="text" placeholder={this.state.API2 ? this.state.API2 : "FTX API Key"} onChange={(event, API) => this.inputChangeHandler(event, "API2")} />
-                            <button onClick={(API) => this.submitHandler("API2")}>Update API Key</button>
+                <div className="profileDiv">
+                    <div className="profileSubDiv">
+                        <h1>My Account</h1>
+                        <div className="profilePanel">
+                            <h2>Username:</h2>
+                            <p>{this.props.username}</p>
+                            <h2>Email:</h2>
+                            <p>{this.props.email}</p>
+                            <div>
+                                <h2>APIs</h2>
+                                <div>
+                                    <h3>FTX:</h3>
+                                    <input className="apiInput" type="text" placeholder={this.state.API2 ? this.state.API2 : "FTX API Key"} onChange={(event, API) => this.inputChangeHandler(event, "API2")} />
+                                    <button className="updateAPIbtn" onClick={(API) => this.submitHandler("API2")}>Update API Key</button>
+                                </div>
+                            </div>
+                            <div>
+                                <h2>Invitations</h2>
+                                <table className="invitesTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Tournament id</th>
+                                            <th>Host</th>
+                                            <th>Response</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {invites}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <h2>Invitations</h2>
-                        <table className="invitesTable">
-                            <thead>
-                                <tr>
-                                    <th>Tournament id</th>
-                                    <th>Host</th>
-                                    <th>Response</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {invites}
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             );

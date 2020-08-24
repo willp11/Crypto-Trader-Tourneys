@@ -162,3 +162,17 @@ class TourneyInvites(db.Model):
     userId = db.Column(db.String(50), nullable=False)
     tourneyId = db.Column(db.Integer, db.ForeignKey('registrationTourneys.tourneyId'), nullable=False)
     host = db.Column(db.String(100), nullable=False)
+    
+class AccountBalances(db.Model):
+    __tablename__ = "accountBalances"
+    userId = db.Column(db.String(50), db.ForeignKey('usernames.userId'), primary_key=True)
+    accountBalance = db.Column(db.Float, nullable=False)
+    
+class DepositWithdrawHistory(db.Model):
+    __tablename__ = "depositWithdrawHistory"
+    transactionId = db.Column(db.Integer, primary_key=True)
+    userId = db.Column(db.String(50), db.ForeignKey('usernames.userId'), nullable=False)
+    quantity = db.Column(db.Float, nullable=False)
+    txHash = db.Column(db.String(100), nullable=False)
+    status = db.Column(db.String(16), nullable=False)
+    noConfirmations = db.Column(db.Integer, nullable=False)

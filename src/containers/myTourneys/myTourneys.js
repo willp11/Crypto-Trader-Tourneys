@@ -208,13 +208,13 @@ class MyTourneys extends Component {
         }
         
         return (
-            <div>
+            <div className="AllTourneysDiv">
                 {redirect}
-                <h1>My Tournaments</h1>
                 <div className="AllTourneys">
-                    <div className="NotActiveTourneys">
+                    <h1>My Tournaments</h1>
+                    <div className="TourneyDiv">
                         <h2>Registered Tournaments:</h2>
-                        <table className="NotActiveTable">
+                        <table className="TourneyTable">
                             <thead>
                                 <tr>
                                     <th>Tournament id</th>
@@ -233,9 +233,9 @@ class MyTourneys extends Component {
                             </tbody>
                         </table>
                     </div>
-                    <div className="ActiveTourneys">
+                    <div className="TourneyDiv">
                         <h2>Active Tournaments:</h2>
-                        <table className="ActiveTable">
+                        <table className="TourneyTable">
                             <thead>
                                 <tr>
                                     <th>Tournament id</th>
@@ -254,12 +254,12 @@ class MyTourneys extends Component {
                             </tbody>
                         </table>
                     </div>
-                    <div className="NotActiveTourneys">
+                    <div className="TourneyDiv">
                         <h2>Completed Tournaments:</h2>
-                        <table className="NotActiveTable">
+                        <table className="TourneyTable">
                             <thead>
                                 <tr>
-                                    <th>Tournament id</th>
+                                    <th>id</th>
                                     <th>Host</th>
                                     <th>Products</th>
                                     <th>Entrants</th>

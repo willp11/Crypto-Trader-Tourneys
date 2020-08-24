@@ -1,5 +1,6 @@
 .dropdown-check-list {
     display: inline-block;
+    background-color: white;
 }
 .dropdown-check-list .anchor {
     position: relative;

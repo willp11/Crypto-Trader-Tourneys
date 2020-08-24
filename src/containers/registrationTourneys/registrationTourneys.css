@@ -1,49 +1,11 @@
-.AllTourneys {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    width: 90vw;
-    height: auto;
-    box-sizing: border-box;
-}
-
-.NotActiveTourneys {
-    width: 80%;
-    min-width: 500px;
-    box-sizing: border-box;
-    border: 1px solid black;
-    margin: 0 auto;
-    padding-bottom: 20px;
-    font-size: 0.9rem;
-}
-
-.NotActiveTable {
-    margin: 0 auto;
-    border: 1px solid #ccc;
-}
-
-.NotActiveTable th {
-    width: 120px;
-    outline: thin solid #ccc;
-}
-
-.NotActiveTable td {
-    width: 120px;
-    outline: thin solid #ccc;
-}
-
-.NotActiveTable tr {
-    outline: thin solid #ccc;
-}
 
 .showProducts {
     text-align: center;
     z-index: 0.9;
     position: absolute;
-    background-color: rgb(244, 244, 244);
+    background-color: #D9E2EC;
     padding: 20px;
-    border: 1px solid black;
+    border: 1px solid #102A43;
 }
 
 .showProducts ul {
@@ -54,17 +16,32 @@
 .toggleSearchBtn {
     margin-bottom: 20px;
     margin-top: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0.5px solid #102A43;
+    background-color: rgb(77, 134, 247);
+    color: #D9E2EC;
+}
+
+.submitBtn {
+    background-color: #00897B;
+    color: #D9E2EC;
+}
+
+.resetBtn {
+    background-color: #C62828;
+    color: #D9E2EC;
 }
 
 .modalDiv {
-    z-index: 1;
+    z-index: 10000000000;
     position: absolute;
     float: left;
     left: 50%;
     top: 38%;
     transform: translate(-50%, -50%);
     width: 500px;
-    background-color: rgb(244, 244, 244);
+    background-color: #334E68;
     padding-top: 20px;
     border: 1px solid black;
 }
@@ -75,6 +52,12 @@
 
 .searchForm input {
     text-align: center;
+    border-radius: 10px;
+}
+
+.searchForm input::placeholder {
+    text-align: center;
+    border-radius: 10px;
 }
 
 .searchTourneySubmitBtn {
@@ -83,29 +66,6 @@
 
 /* Small devices (landscape phones, 576px and below)*/
 @media (max-width: 576px) {  
-    .AllTourneys {
-        font-size: 0.8rem;
-    }
-    
-    button {
-        font-size: 0.6rem;
-    }
-    
-    .NotActiveTable {
-        width: 80vw;
-    }
-    
-    .NotActiveTourneys {
-        width: 90vw;
-    }
-    
-    .ActiveTable {
-        width: 80vw;
-    }
-    
-    .ActiveTourneys {
-        width: 90vw;
-    }
 
 }
 

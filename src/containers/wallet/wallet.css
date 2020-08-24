@@ -1,0 +1,173 @@
+.walletDiv {
+    margin-top: 0;
+    background-color: #102A43;
+    height: auto;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 120px 0 40px 0;
+    box-sizing: border-box;
+}
+
+.walletDiv h1 {
+    color: #D9E2EC;
+}
+
+.walletDiv h2 {
+    color: #D9E2EC;
+}
+
+.walletDiv h3 {
+    color: #D9E2EC;
+}
+
+.walletDiv h4 {
+    color: #D9E2EC;
+}
+
+.walletSubDiv {
+    background-color: #243B53;
+    height: auto;
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 20px;
+    position: relative;
+    border: 2px solid #102A43;
+    border-radius: 20px;
+    padding-bottom: 40px;
+}
+
+.walletPanel {
+    background-color: #334E68;
+    width: 800px;
+    margin: 0 auto;
+    padding:  10px;
+    border: 2px solid #102A43;
+    border-radius: 20px;
+    position: relative;
+}
+
+.walletPanel table {
+    margin: 0 auto;
+    border: 1px solid #102A43;
+    border-collapse: collapse;
+    background-color: #D9E2EC;
+    color: #102A43;
+}
+
+
+.walletPanel thead {
+    border-collapse: collapse;
+    background-color: #243B53;
+    color: #D9E2EC;
+}
+
+.walletPanel th {
+    width: 120px;
+    outline: thin solid #D9E2EC;
+    font-weight: bold;
+}
+
+.walletPanel td {
+    width: 120px;
+    outline: thin solid #102A43;
+}
+
+.walletPanel tr {
+    outline: thin solid #102A43;
+}
+
+.addressDiv {
+    width: 350px;
+    background-color: #D9E2EC;
+    color: #102A43;
+    margin: 0 auto;
+}
+
+.addressDiv p {
+    padding: 5px;
+    font-weight: bold;
+}
+
+.balanceDiv {
+    width: 350px;
+    background-color: #D9E2EC;
+    color: #102A43;
+    margin: 0 auto;
+}
+
+.balanceDiv p {
+    padding: 5px;
+    font-weight: bold;
+}
+
+.withdrawAddrInput {
+    width: 350px;
+    padding: 5px;
+    text-align: center;
+}
+
+.withdrawQtyInput {
+    width: 250px;
+    padding: 5px;
+    text-align: center;
+}
+
+.withdrawSubmitBtn {
+    background-color: #00897B;
+    color: #D9E2EC;
+    padding: 5px;
+}
+
+
+/* large devices  desktops, 992px to 1200px)*/
+@media (max-width: 1200px) {  
+
+}
+
+/* Large devices (desktops, 768px to 992px )*/
+@media (max-width: 992px) {  
+    .walletSubDiv {
+        width: 90vw;
+    }
+    .walletPanel {
+        width: 80vw;
+    }
+}
+
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-width: 768px) {  
+    .walletSubDiv {
+        width: 100vw;
+    }
+    .walletPanel {
+        width: 90vw;
+    }
+}
+
+/* Small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
+    .addressDiv {
+        width: 280px;
+    }
+    .balanceDiv {
+        width: 280px;
+    }
+    .withdrawAddrInput {
+        width: 280px;
+    }
+    .walletPanel th {
+        font-size: 0.8rem;
+    }
+
+    .walletPanel td {
+        font-size: 0.8rem;
+    }
+        
+    .walletSubDiv h1 {
+        font-size: 1.2rem;
+    }
+
+    .walletSubDiv h2 {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,97 @@
+.registerDiv {
+    margin-top: 0;
+    background-color: #102A43;
+    height: auto;
+    min-height: 100vh;
+    width: 100vw;
+    padding-top: 120px;
+    box-sizing: border-box;
+}
+
+.registerDiv h1 {
+    color: #D9E2EC;
+}
+
+.registerSubDiv {
+    background-color: #243B53;
+    height: 500px;
+    width: 500px;
+    margin: 0 auto;
+    padding-top: 20px;
+    box-sizing: border-box;
+    position: relative;
+    border: 2px solid #102A43;
+    border-radius: 20px;
+}
+
+.registerFormDiv {
+    background-color: #334E68;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px 0px 20px 0px;
+    border: 1px solid #102A43;
+    border-radius: 20px;
+}
+
+.registerSubDiv p {
+    color: #D9E2EC;
+    font-family: Helvetica;
+    font-size: 0.9rem;
+}
+
+.registerSubmitBtn {
+    background-color: #00897B;
+    color: #D9E2EC;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.goToLoginDiv {
+    background-color: #334E68;
+    width: 300px;
+    margin: 0 auto;
+    padding: 0px 0px 10px 0px;
+    margin-top: 40px;
+    border: 1px solid #102A43;
+    border-radius: 10px;
+}
+
+.goToLoginBtn {
+    background-color: rgb(77, 134, 247);
+    color: #D9E2EC;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* large devices  desktops, 992px to 1200px)*/
+@media (max-width: 1200px) {  
+
+}
+
+/* Large devices (desktops, 768px to 992px )*/
+@media (max-width: 992px) {  
+    .registerSubDiv {
+        width: 90vw;
+    }
+}
+
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-width: 768px) {  
+    .registerSubDiv {
+        width: 100vw;
+    }
+}
+
+/* Small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
+    
+    .registerSubDiv h1 {
+        font-size: 1.2rem;
+    }
+
+    .registerSubDiv h3 {
+        font-size: 1rem;
+    }
+
+}

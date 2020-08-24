@@ -325,6 +325,10 @@ class Tourney extends Component {
         this.setState({showConfirmDelete: false});
     }
     
+    cancelSubmitBalanceHandler = () => {
+        this.setState({editingBalance: false});
+    }
+    
     render() {
         
         let confirmationBox = null;
@@ -345,8 +349,8 @@ class Tourney extends Component {
             visibilityConfirmationBox = (
                 <div>
                     <p>Are you sure?</p>
-                    <button onClick={this.cancelVisibilityChange}>Cancel</button>
-                    <button onClick={this.confirmVisibilityChange}>Confirm</button>
+                    <button className="resetBtn" onClick={this.cancelVisibilityChange}>Cancel</button>
+                    <button className="submitBtn" onClick={this.confirmVisibilityChange}>Confirm</button>
                 </div>
             );
         }
@@ -378,15 +382,15 @@ class Tourney extends Component {
             hostControls = (
                 <div className="hostControls">
                     <h3>Host Controls</h3>
-                    <p>Add User:</p>
+                    <p>Invite User:</p>
                     <input value={this.state.addUser} placeholder="Enter username" onChange={(event)=>this.addUserInputHandler(event)}/>
-                    <button onClick={this.inviteUserHandler}>Submit</button> <br />
-                    {this.state.addedUserMsg}
+                    <button className="submitInviteBtn" onClick={this.inviteUserHandler}>Submit</button> <br />
+                    <p style={{"color": "rgb(77, 134, 247)"}}>{this.state.addedUserMsg}</p>
                     <p>Tournament Visiblity:</p>
                     {visibilityButtons}
                     {visibilityConfirmationBox}
                     <p>Delete tournament:</p>
-                    <button onClick={this.deleteHandler}>Delete Tournament</button> <br />
+                    <button className="deleteTournamentBtn" onClick={this.deleteHandler}>Delete Tournament</button> <br />
                     {confirmationBox}
                 </div>
             );
@@ -407,13 +411,13 @@ class Tourney extends Component {
         }
         
         let registerBtn = (
-            <button onClick={this.submitHandler}>Register</button>
+            <button className="submitBtn" onClick={this.submitHandler}>Register</button>
         );
         let balance = (
             <div>
                 <h3>Balance:</h3>
                 <p>Enter tournament starting balance ({this.state.quoteCurrency}):</p>
-                <input className="balanceInput" type="text" placeholder="Starting Balance" onChange={(event) => this.editBalanceHandler(event)} />
+                <input className="balanceInput" type="text" placeholder=" Enter Starting Balance" onChange={(event) => this.editBalanceHandler(event)} />
             </div>
         );
         let editStartBalanceBtn = null;
@@ -428,7 +432,7 @@ class Tourney extends Component {
                 </div>
             )
             registerBtn = (
-                <button onClick={this.submitHandler}>Unregister</button>
+                <button className="resetBtn" onClick={this.submitHandler}>Unregister</button>
             );
         }
         if (this.state.active) {
@@ -459,13 +463,14 @@ class Tourney extends Component {
             if (this.state.editingBalance) {
                 editStartBalanceBtn = (
                     <div>
+                        <button className="resetBtn" style={{"marginRight": "20px"}} onClick={this.cancelSubmitBalanceHandler}>Cancel</button>
                         <input className="editBalanceInput" type="text" placeholder={this.state.balance} onChange={(event) => this.editBalanceHandler(event)} />
-                        <button onClick={this.submitBalanceHandler}>Submit</button>
+                        <button className="submitBtn" onClick={this.submitBalanceHandler}>Submit</button>
                     </div>
                 );
             } else {
                 editStartBalanceBtn = (
-                    <button onClick={this.showBalanceInput}>Edit Starting Balance</button>
+                    <button className="editStartBalBtn" onClick={this.showBalanceInput}>Edit Starting Balance</button>
                 );
             }
         }
@@ -512,24 +517,28 @@ class Tourney extends Component {
         
 
         return (
-            <div>
+            <div className="tourneyDiv">
                 {redirect}
-                <h1>Tournament {this.state.tourneyId}</h1>
-                {hostControls}
-                <div className="tourneyWrapper">
-                    {tourneyBody}
-                    <div className="productList">
-                        <h2>Products:</h2>
-                        <div className="productListDiv">
-                            <div className="exchangeSublist">
-                                <h3>FTX:</h3>
-                                {FTXProducts}
+                <div className="tourneySubDiv">
+                    <h1>Tournament {this.state.tourneyId}</h1>
+                    {hostControls}
+                </div>
+                <div className="tourneySubDiv2">
+                    <div className="tourneyWrapper">
+                        {tourneyBody}
+                        <div className="productList">
+                            <h2>Products:</h2>
+                            <div className="productListDiv">
+                                <div className="exchangeSublist">
+                                    <h3>FTX:</h3>
+                                    {FTXProducts}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="entrantsList">
-                        <h2>List of Entrants:</h2>
-                        <ul>{entrants}</ul>
+                        <div className="entrantsList">
+                            <h2>List of Entrants:</h2>
+                            <ul>{entrants}</ul>
+                        </div>
                     </div>
                 </div>
             </div>

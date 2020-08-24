@@ -1,20 +1,122 @@
+.tourneyDiv {
+    margin-top: 0;
+    background-color: #102A43;
+    height: auto;
+    min-height: 100vh;
+    width: 100vw;
+    padding-top: 100px;
+    box-sizing: border-box;
+}
+
+.tourneyDiv h1 {
+    color: #D9E2EC;
+}
+
+.tourneyDiv h2 {
+    color: #D9E2EC;
+}
+
+.tourneyDiv h3 {
+    color: #D9E2EC;
+}
+
+.tourneyDiv p {
+    color: #D9E2EC;
+}
+
+.tourneyDiv li {
+    color: #D9E2EC;
+}
+
+.tourneySubDiv {
+    background-color: #243B53;
+    height: auto;
+    width: 800px;
+    margin: 20px auto;
+    box-sizing: border-box;
+    position: relative;
+    border: 2px solid #102A43;
+    border-radius: 20px;
+}
+
+.tourneySubDiv2 {
+    background-color: #243B53;
+    height: auto;
+    width: 95vw;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    border: 2px solid #102A43;
+    border-radius: 20px;
+}
+
+.hostControls {
+    border: 2px solid #102A43;
+    margin: 0 auto;
+    width: 500px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    background-color: #334E68;
+}
+
+.hostControls input {
+    text-align: center;
+}
+
+.submitInviteBtn {
+    background-color: #00897B;
+    color: #D9E2EC;
+}
+
+.deleteTournamentBtn {
+    background-color: #C62828;
+    color: #D9E2EC;
+    padding: 5px;
+    border-radius: 5px;
+}
+
 .tourneyWrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
-    
+    background-color: #334E68;
     flex-wrap: nowrap;
     width: 90vw;
     margin: 0 auto;
     height: 700px;
+    border: 2px solid #102A43;
+    border-radius: 10px;
+    position: relative;
 }
 
 .tourneyBody {
     height: 700px;
     width: 30vw;
     box-sizing: border-box;
-    border: 0.5px solid #ccc;
+    border: 1px solid #102A43;
+    background-color: #334E68;
+}
+
+.tourneyBody input {
+    padding: 5px;
+    width: 150px;
+}
+
+.tourneyBody button {
+    margin-bottom: 10px;
+}
+
+.editStartBalBtn {
+    background-color: rgb(77, 134, 247);
+    color: #D9E2EC;
+}
+
+.registerTourneyBtn {
+    background-color: #00897B;
+    color: #D9E2EC;
+    padding: 5px;
 }
 
 .entrantsList {
@@ -22,9 +124,8 @@
     width: 30vw;
     overflow: scroll;
     box-sizing: border-box;
-    border: 0.5px solid #ccc;
+    border: 1px solid #102A43;
 }
-
 
 .entrantsList ul {
     list-style-type: none;
@@ -36,7 +137,7 @@
     width: 30vw;
     overflow: scroll;
     box-sizing: border-box;
-    border: 0.5px solid #ccc;
+    border: 1px solid #102A43;
 }
 
 .productListDiv {
@@ -57,18 +158,6 @@
     width: 100px;
     text-align: center;
     margin-bottom: 20px;
-}
-
-.hostControls {
-    border: 1px solid black;
-    margin: 0 auto;
-    width: 30vw;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-}
-
-.hostControls input {
-    text-align: center;
 }
 
 .highlight {

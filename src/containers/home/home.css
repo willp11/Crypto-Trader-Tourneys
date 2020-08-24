@@ -1,1 +1,62 @@
+.homeDiv {
+    margin-top: 0;
+    background-color: #102A43;
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+    padding-top: 80px;
+}
+
+.homeDiv h1 {
+    color: #D9E2EC;
+}
+
+.homeDiv h3 {
+    color: #D9E2EC;
+}
+
+
+.homeSubDiv {
+    background-color: #243B53;
+    width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    border-radius: 20px;
+    top: 40px;
+    box-sizing: border-box;
+}
+
+
+/* large devices  desktops, 992px to 1200px)*/
+@media (max-width: 1200px) {  
+
+}
+
+/* Large devices (desktops, 768px to 992px )*/
+@media (max-width: 992px) {  
+    .homeSubDiv {
+        width: 90vw;
+    }
+}
+
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-width: 768px) {  
+    .homeSubDiv {
+        width: 100vw;
+    }
+}
+
+/* Small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
+    
+    .homeDiv h1 {
+        font-size: 1.2rem;
+    }
+
+    .homeDiv h3 {
+        font-size: 1rem;
+    }
+
+}
 
