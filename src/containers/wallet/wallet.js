@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import './wallet.css';
+import {connect} from 'react-redux';
+import axios from 'axios';
 
 class Wallet extends Component {
     
     state = {
-        balance: 1.25432100,
+        loading: true,
+        balance: null,
         withdraw: { withdrawQty: '',
                     withdrawAddr: ''},
         deposits: [],
@@ -13,6 +16,11 @@ class Wallet extends Component {
 
     componentDidMount() {
         // GET BALANCE AND UPDATE REDUX WALLET
+        axios.post('/getBalance', {"userId": this.props.userId}).then(res => {
+            let balance = res.data.balance;
+            console.log(balance)
+            this.setState({balance: balance, loading: false});
+        })
         // GET DEPOST AND WITHDRAW HISTORY
     }
 
@@ -34,6 +42,10 @@ class Wallet extends Component {
         
         let deposits = null;
         let withdrawals = null;
+        let balance = null;
+        if (this.state.balance) {
+            balance = this.state.balance;
+        }
         
         return (
             <div className="walletDiv">
@@ -42,7 +54,7 @@ class Wallet extends Component {
                     <div className="walletPanel">  
                         <h3>Balance</h3>
                         <div className="balanceDiv">
-                            <p>{this.state.balance} BTC</p>
+                            <p>{balance} BTC</p>
                         </div>
                     </div>
                     <div className="walletPanel">
@@ -101,7 +113,19 @@ class Wallet extends Component {
             </div>
         );
     }
-    
-}
+};
 
-export default Wallet;
+//const mapDispatchToProps = dispatch => {
+//    return {
+//
+//    };
+//};
+
+const mapStateToProps = state => {
+    return {
+        username: state.auth.username,
+        userId: state.auth.userId
+    };
+};
+
+export default connect(mapStateToProps)(Wallet);

@@ -54,10 +54,10 @@ label {
     margin-right: 10px;
 }
 
-.submitBtn {
-    margin: 20px;
+.submitTournBtn {
+    margin-top: 20px;
     font-size: 0.8rem;
-    background-color: rgb(77, 134, 247);
+    background-color: #00897B;
     color: #D9E2EC;
 }
 

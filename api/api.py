@@ -2,7 +2,7 @@ import time
 from init import app, db
 from flask import request
 from sqlalchemy.orm import sessionmaker
-from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys, TourneyInvites
+from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys, TourneyInvites, AccountBalances
 import datetime
 
 engine = db.engine
@@ -47,6 +47,8 @@ def getTourneyInfo():
     session = Session()
     dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).all()
     if len(dbQuery) > 0:
+        # calculate the duration in days, calculate time until start in days and hours
+        
         tourneyInfo = {'tourneyId': dbQuery[0].tourneyId,
                     'host': dbQuery[0].host,
                     'maxEntrants': dbQuery[0].maxEntrants,
@@ -57,7 +59,8 @@ def getTourneyInfo():
                     'endDate': dbQuery[0].endDate,
                     'endTime': dbQuery[0].endTime,
                     'quoteCurrency': dbQuery[0].quoteCurrency,
-                    'visibility': dbQuery[0].visibility
+                    'visibility': dbQuery[0].visibility,
+                    'entryFee': dbQuery[0].entryFee
                    }
     else:
         tourneyInfo = {'tourneyId': "No match"}
@@ -205,7 +208,8 @@ def getAllTourneys():
                 'endDate': dbQuery.endDate,
                 'endTime': dbQuery.endTime,
                 'startTS': dbQuery.startTS,
-                'endTS': dbQuery.endTS
+                'endTS': dbQuery.endTS,
+                'entryFee': dbQuery.entryFee
         }
         tourneys.append(tourney)
         
@@ -238,7 +242,8 @@ def getActiveTourneys():
                 'endTime': dbQuery.endTime,
                 'status': dbQuery.status,
                 'startTS': dbQuery.startTS,
-                'endTS': dbQuery.endTS
+                'endTS': dbQuery.endTS,
+                'entryFee': dbQuery.entryFee
         }
         tourneys.append(tourney)
         
@@ -253,24 +258,31 @@ def getActiveTourneys():
     
     return {"response": tourneys}
 
-@app.route('/getCompletedTourneys', methods=['GET'])
+@app.route('/getCompletedTourneys', methods=['POST'])
 def getCompletedTourneys():
     content = request.json
     
     tourneys = []
     session = Session()
-    for dbQuery in session.query(CompletedTourneys).all():
+
+    if content["fieldToSearch"] == "tourneyId":
+        dbQuery = session.query(CompletedTourneys).filter_by(tourneyId = content["tourneyId"]).all()
+    elif content["fieldToSearch"] == "host":
+        dbQuery = session.query(CompletedTourneys).filter_by(host = content["host"]).all()
+            
+    for query in dbQuery:
         tourney = {}
-        tourney = {'tourneyId': dbQuery.tourneyId,
-                'host': dbQuery.host,
-                'maxEntrants': dbQuery.maxEntrants,
-                'noEntrants': dbQuery.noEntrants,
-                'startDate': dbQuery.startDate,
-                'startTime': dbQuery.startTime,
-                'endDate': dbQuery.endDate,
-                'endTime': dbQuery.endTime,
-                'startTS': dbQuery.startTS,
-                'endTS': dbQuery.endTS
+        tourney = {'tourneyId': query.tourneyId,
+                'host': query.host,
+                'maxEntrants': query.maxEntrants,
+                'noEntrants': query.noEntrants,
+                'startDate': query.startDate,
+                'startTime': query.startTime,
+                'endDate': query.endDate,
+                'endTime': query.endTime,
+                'startTS': query.startTS,
+                'endTS': query.endTS,
+                'entryFee': query.entryFee
         }
         tourneys.append(tourney)
         
@@ -309,7 +321,8 @@ def getMyTourneys():
                 'endDate': dbQuery.endDate,
                 'endTime': dbQuery.endTime,
                 'startTS': dbQuery.startTS,
-                'endTS': dbQuery.endTS
+                'endTS': dbQuery.endTS,
+                'entryFee': dbQuery.entryFee
         }
         tourneys.append(tourney)
         
@@ -348,7 +361,8 @@ def getMyActiveTourneys():
                 'endTime': dbQuery.endTime,
                 'status': dbQuery.status,
                 'startTS': dbQuery.startTS,
-                'endTS': dbQuery.endTS
+                'endTS': dbQuery.endTS,
+                'entryFee': dbQuery.entryFee
         }
         tourneys.append(tourney)
         
@@ -386,7 +400,8 @@ def getMyCompletedTourneys():
                 'endDate': dbQuery.endDate,
                 'endTime': dbQuery.endTime,
                 'startTS': dbQuery.startTS,
-                'endTS': dbQuery.endTS
+                'endTS': dbQuery.endTS,
+                'entryFee': dbQuery.entryFee
         }
         tourneys.append(tourney)
         
@@ -401,15 +416,59 @@ def getMyCompletedTourneys():
     
     return {"response": tourneys}
 
+@app.route('/getMyHostedTourneys', methods=["POST"])
+def getMyHostedTourneys():
+    content = request.json
+    
+    tourneys = []
+    tourneyIds = []
+    session = Session()
+    
+    for dbQuery in session.query(AllTourneys).filter_by(hostId=content["userId"]).all():
+        tourneyIds.append(dbQuery.tourneyId)
+    
+    print (tourneyIds)
+    if len(tourneyIds) > 0:
+        for tourneyId in tourneyIds:
+            dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=tourneyId).all()
+            tourneyStatus = "registration"
+            if len(dbQuery) == 0:
+                dbQuery = session.query(ActiveTourneys).filter_by(tourneyId=tourneyId).all()
+                tourneyStatus = "active"
+            if len(dbQuery) == 0:
+                dbQuery = session.query(CompletedTourneys).filter_by(tourneyId=tourneyId).all()
+                tourneyStatus = "completed"
+            tourney = {}
+            tourney = {'tourneyId': dbQuery[0].tourneyId,
+                    'host': dbQuery[0].host,
+                    'maxEntrants': dbQuery[0].maxEntrants,
+                    'noEntrants': dbQuery[0].noEntrants,
+                    'startDate': dbQuery[0].startDate,
+                    'startTime': dbQuery[0].startTime,
+                    'endDate': dbQuery[0].endDate,
+                    'endTime': dbQuery[0].endTime,
+                    'startTS': dbQuery[0].startTS,
+                    'endTS': dbQuery[0].endTS,
+                    'status': tourneyStatus,
+                    'entryFee': dbQuery[0].entryFee
+            }
+            tourneys.append(tourney)
+        
+    session.close()
+
+    return {"response": tourneys}
+
 @app.route('/createUser', methods=['POST'])
 def createUser():
     content = request.json
     
     session = Session()
     dbEntry = Usernames(userId=content["userId"], username=content["username"])
+    dbEntry2 = AccountBalances(userId=content["userId"], balance=1)
     session.add(dbEntry)
+    session.add(dbEntry2)
     session.commit()
-    session.close
+    session.close()
     
     return {"response": "success"}
 
@@ -447,8 +506,8 @@ def createTournament():
     print(endDate, endTime)
     
     session = Session()
-    dbEntry = RegistrationTourneys(hostId=content["hostId"] ,tourneyId = int(content["tourneyId"]), host=content["host"], maxEntrants=content["maxEntrants"],  minEntrants=content["minEntrants"],  noEntrants=0, startDate=content["startDate"], startTime=content["startTime"], endDate=endDate, endTime=endTime, startTS=startTS, endTS=endTS, quoteCurrency=content["quoteCurrency"], visibility=content["visibility"])
-    dbEntry2 = AllTourneys(tourneyId = int(content["tourneyId"]), state = "registering")
+    dbEntry = RegistrationTourneys(hostId=content["hostId"] ,tourneyId = int(content["tourneyId"]), host=content["host"], maxEntrants=content["maxEntrants"],  minEntrants=content["minEntrants"],  noEntrants=0, startDate=content["startDate"], startTime=content["startTime"], endDate=endDate, endTime=endTime, startTS=startTS, endTS=endTS, quoteCurrency=content["quoteCurrency"], visibility=content["visibility"], entryFee=content["entryFee"])
+    dbEntry2 = AllTourneys(tourneyId = int(content["tourneyId"]), state = "registering", hostId=content["hostId"])
     session.add(dbEntry)
     session.add(dbEntry2)
     session.commit()
@@ -496,31 +555,62 @@ def registerTourneys():
     content = request.json
     
     session = Session()
-    dbEntry = Entrants(tourneyId=content["tourneyId"], userId=content["userId"], username=content["username"], balance=content["balance"])
-    session.add(dbEntry)
-    session.commit()
+    # check the user has large enough balance
+    balanceQuery = session.query(AccountBalances).filter_by(userId=content["userId"]).one()
+    userBalance = balanceQuery.balance
+    # get the entry fee from the tourney id
+    entryFeeQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+    entryFee = entryFeeQuery.entryFee
+    # check the user has enough money
+    if (userBalance >= entryFee):
+        #deduct the entry fee from the balance
+        balanceQuery.balance -= entryFee
+        session.add(balanceQuery)
+        
+        # add the user to entrants table
+        dbEntry = Entrants(tourneyId=content["tourneyId"], userId=content["userId"], username=content["username"], balance=content["balance"])
+        session.add(dbEntry)
+
+        # update the number of entrants in registration tourneys table
+        dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+        dbQuery.noEntrants += 1
+        session.add(dbQuery)
+
+        # check if the user has an invitation to this tournament, if they do then delete the invitation
+        dbQuery2 = session.query(TourneyInvites).filter_by(userId=content["userId"], tourneyId=content["tourneyId"]).all()
+        if len(dbQuery2) > 0:
+            session.delete(dbQuery2[0])
+            
+        session.commit()
     
-    dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
-    dbQuery.noEntrants += 1
-    session.add(dbQuery)
-    session.commit()
-    
-    session.close()
-    
-    return {"response": "success"}
+        session.close()
+
+        return {"response": "success"}
+    else:
+        session.close()
+        return {"response": "insufficient funds"}
 
 @app.route('/tourneyUnregister', methods=['POST'])
 def unregisterTourneys():
     content = request.json
     
+    # delete the user from the tournament
     session = Session()
-    dbQuery = session.query(Entrants).filter_by(tourneyId=content["tourneyId"], userId=content["userId"]).one()
-    session.delete(dbQuery)
-    session.commit()
+    dbQuery1 = session.query(Entrants).filter_by(tourneyId=content["tourneyId"], userId=content["userId"]).one()
+    session.delete(dbQuery1)
     
-    dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
-    dbQuery.noEntrants -= 1
-    session.add(dbQuery)
+    # reduce the no. entrants in the registration tourneys table
+    dbQuery2 = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+    dbQuery2.noEntrants -= 1
+    session.add(dbQuery2)
+    
+    # add the entry fee back to user's balance
+    entryFeeQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+    entryFee = entryFeeQuery.entryFee
+    balanceQuery = session.query(AccountBalances).filter_by(userId=content["userId"]).one()
+    balanceQuery.balance += entryFee
+    session.add(balanceQuery)
+    
     session.commit()
     
     session.close()
@@ -701,12 +791,10 @@ def updateAPI():
     session = Session()
     dbQuery = session.query(UserAPI).filter_by(userId=content["userId"]).one()
     
-    if content["API"] == "API1":
-        dbQuery.API1 = content["APIKey"]
-    elif content["API"] == "API2":
-        dbQuery.API2 = content["APIKey"]
-    elif content["API"] == "API3":
-        dbQuery.API3 = content["APIKey"]
+    if content["exchange"] == "FTX" and content["fieldToUpdate"] == "key":
+        dbQuery.FTXKey = content["APIKey"]
+    elif content["exchange"] == "FTX" and content["fieldToUpdate"] == "secret":
+        dbQuery.FTXSecret = content["APISecret"]
 
     session.commit()
     session.close()
@@ -733,13 +821,12 @@ def getAPIInfo():
     
     session = Session()
     dbQuery = session.query(UserAPI).filter_by(userId=content["userId"]).one()
-    API1 = dbQuery.API1
-    API2 = dbQuery.API2
-    API3 = dbQuery.API3
+    FTXKey = dbQuery.FTXKey
+    FTXSecret = dbQuery.FTXSecret
     
     session.close()
     
-    return {"API1": API1, "API2": API2, "API3": API3}
+    return {"FTX": {"key": FTXKey, "secret": FTXSecret}}
     
 @app.route('/editStartBalance', methods=['POST'])
 def editStartBalance():
@@ -818,10 +905,17 @@ def declineTourneyInvite():
     
     return {"response": "invitation removed"}
     
+@app.route('/getBalance', methods=['POST'])
+def getBalance():
+    content = request.json
     
+    session = Session()
+    dbQuery = session.query(AccountBalances).filter_by(userId=content["userId"]).one()
+    balance = dbQuery.balance
+    session.close()
     
+    return {"balance": balance}
     
-    
-    
+
     
     

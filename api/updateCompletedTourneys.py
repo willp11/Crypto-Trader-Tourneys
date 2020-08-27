@@ -38,7 +38,7 @@ for query in session.query(ActiveTourneys).all():
             session.add(dbEntry)
         
         # copy the tournament to CompletedTourneys
-        dbEntry = CompletedTourneys(tourneyId=query.tourneyId, host=query.host, hostId=query.hostId, minEntrants=query.minEntrants, maxEntrants=query.maxEntrants, noEntrants=query.noEntrants, startTime=query.startTime, startDate=query.startDate, endTime=query.endTime, endDate=query.endDate, startTS=query.startTS, endTS=query.endTS, quoteCurrency=query.quoteCurrency)
+        dbEntry = CompletedTourneys(tourneyId=query.tourneyId, host=query.host, hostId=query.hostId, minEntrants=query.minEntrants, maxEntrants=query.maxEntrants, noEntrants=query.noEntrants, startTime=query.startTime, startDate=query.startDate, endTime=query.endTime, endDate=query.endDate, startTS=query.startTS, endTS=query.endTS, quoteCurrency=query.quoteCurrency, entryFee=query.entryFee)
         session.add(dbEntry)
         
         # copy the entrants to CompletedEntrants

@@ -13,8 +13,8 @@ class Home extends Component {
         return (
             <div className="homeDiv">
                 <div className="homeSubDiv">
-                    <h1>The Crypto Trading Tournament App!</h1>
-                    <h3>Prove your trading skills by entering our trading tournaments!</h3>
+                    <h1>Crypto Trading Tournaments!</h1>
+                    <h3>Play and Win bitcoin in our cryptocurrency trading tournaments!</h3>
                 </div>
             </div>
         )

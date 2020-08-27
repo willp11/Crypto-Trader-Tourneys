@@ -19,7 +19,9 @@ class ActiveTourneys extends Component {
             host: '',
             product: '',
             maxEntrants: '',
-            hoursUntilEnd: ''
+            hoursUntilEnd: '',
+            minEntryFee: '',
+            maxEntryFee: ''
         },
         searchArray: []
     }
@@ -29,6 +31,42 @@ class ActiveTourneys extends Component {
         axios.get('/getActiveTourneys').then(res => {
             console.log(res.data);
             let tourneys = res.data.response;
+            
+            // get the time in days, hours, minutes until tournament starts
+            for (let i=0; i<tourneys.length; i++) {
+                let date = new Date(); 
+                let timezone = date.getTimezoneOffset() * 60 * 1000;
+                
+                let currentTS = date.getTime() + timezone;
+                let endTS = tourneys[i].endTS * 1000;
+                
+                let currentHrs = currentTS / 1000 / 60 / 60;
+                let endHrs = endTS / 1000 / 60 / 60;
+
+                let daysUntilEnd;
+                let hoursUntilEnd = endHrs - currentHrs;
+                let minutesUntilEnd;
+                if (hoursUntilEnd > 0) {
+                    daysUntilEnd = Math.floor(hoursUntilEnd/24);
+                    hoursUntilEnd = (hoursUntilEnd - (daysUntilEnd*24)).toFixed(2);
+                    minutesUntilEnd = (hoursUntilEnd % 1)*60;
+                    
+                    hoursUntilEnd = Math.floor(hoursUntilEnd);
+                    minutesUntilEnd = Math.ceil(minutesUntilEnd);
+                } else {
+                    daysUntilEnd = 0;
+                    hoursUntilEnd = 0;
+                    minutesUntilEnd = 0;
+                }
+                
+                let untilEnd = {days: daysUntilEnd, hours: hoursUntilEnd, minutes: minutesUntilEnd};
+                tourneys[i]['untilEnd'] = untilEnd;
+                
+                // duration
+                let duration = (tourneys[i].endTS - tourneys[i].startTS) / 60 / 60 / 24;
+                tourneys[i]['duration'] = duration;
+            }
+            
             this.setState({tourneys: tourneys, searchArray: tourneys});
         });
     }
@@ -59,7 +97,9 @@ class ActiveTourneys extends Component {
                                 host: '',
                                 product: '',
                                 maxEntrants: '',
-                                hoursUntilEnd: ''
+                                hoursUntilEnd: '',
+                                minEntryFee: '',
+                                maxEntryFee: ''
                             }
                       });
     }
@@ -121,6 +161,20 @@ class ActiveTourneys extends Component {
                     continue;
                 }
             }
+            if (this.state.search.minEntryFee) {
+                if (this.state.search.minEntryFee > tourneysFound[i].entryFee) {
+                    tourneysFound.splice(i, 1);
+                    i--
+                    continue;
+                } 
+            }
+            if (this.state.search.maxEntryFee) {
+                if (this.state.search.maxEntryFee < tourneysFound[i].entryFee) {
+                    tourneysFound.splice(i, 1);
+                    i--
+                    continue;
+                } 
+            }
         }
         
         // copy all the found tournaments to the state search array
@@ -133,7 +187,9 @@ class ActiveTourneys extends Component {
                             host: '',
                             product: '',
                             maxEntrants: '',
-                            hoursUntilEnd: ''
+                            hoursUntilEnd: '',
+                            minEntryFee: '',
+                            maxEntryFee: ''
                         }, 
                        searchArray: [...this.state.tourneys]});
     }
@@ -166,17 +222,16 @@ class ActiveTourneys extends Component {
             return (
                 <tr key={data.tourneyId}>
                     <td>{data.tourneyId}</td>
+                    <td><NavLink to={navPath}><button>Go to Lobby</button></NavLink></td>
                     <td>{data.host}</td>
+                    <td>{data.entryFee}</td>
                     <td>
                         <button onClick={(event, i) => this.showProductsHandler(event, index)}>{showProdStr}</button> <br/> 
                         {productsDiv}
                     </td>
                     <td>{data.noEntrants}/{data.maxEntrants}</td>
-                    <td>{data.startDate} </td>
-                    <td>{data.startTime}</td>
-                    <td>{data.endDate}</td>
-                    <td>{data.endTime}</td>
-                    <td><NavLink to={navPath}><button>Go to Lobby</button></NavLink></td>
+                    <td>{data.untilEnd.days}d {data.untilEnd.hours}h {data.untilEnd.minutes}m</td>
+                    <td>{data.duration}d</td>
                 </tr>
             )
         });
@@ -195,7 +250,9 @@ class ActiveTourneys extends Component {
                             <input value={this.state.search.product} onChange={(event, key) => this.updateSearch(event, "product")} placeholder="Product" /> <br/>
                             <input value={this.state.search.maxEntrants} onChange={(event, key) => this.updateSearch(event, "maxEntrants")} placeholder="Max Entrants" /> <br/>
                             <input value={this.state.search.hoursUntilEnd} onChange={(event, key) => this.updateSearch(event, "hoursUntilEnd")} placeholder="Hours until end" /> <br/>
-                            <button className="submitBtn" onClick={this.searchTourneys}>Submit</button> <br/>
+                            <input value={this.state.search.minEntryFee} onChange={(event, key) => this.updateSearch(event, "minEntryFee")} placeholder="Min Entry Fee" /> <br/>
+                            <input value={this.state.search.maxEntryFee} onChange={(event, key) => this.updateSearch(event, "maxEntryFee")} placeholder="Max Entry Fee" /> <br/>
+                            <button className="submitBtn searchTourneySubmitBtn" onClick={this.searchTourneys}>Submit</button> <br/>
                             <button className="resetBtn" onClick={this.resetTourneys}>Reset</button>
                         </div>
                     </div>
@@ -208,20 +265,21 @@ class ActiveTourneys extends Component {
                 <div className="AllTourneys">
                     <h1>Active Tournaments</h1>
                     <div className="TourneyDiv">
-                        <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Search</button>
+                        <p>The full list of all tournaments currently in progress.</p>
+                        <p>You can filter the tournaments by id, host, product, maximum number of entrants, hours until the tournament ends and entry fee.</p>
+                        <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Filter</button>
                         {filtersDiv}
                         <table className="TourneyTable">
                             <thead>
                                 <tr>
                                     <th>id</th>
+                                    <th>Lobby</th>
                                     <th>Host</th>
+                                    <th>Entry Fee</th>
                                     <th>Products</th>
                                     <th>Entrants</th>
-                                    <th>Start Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Date</th>
-                                    <th>End Time</th>
-                                    <th>Register</th>
+                                    <th>Until End</th>
+                                    <th>Duration</th>
                                 </tr>
                             </thead>
                             <tbody>

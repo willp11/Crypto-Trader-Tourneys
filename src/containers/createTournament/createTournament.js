@@ -22,7 +22,8 @@ class CreateTournament extends Component {
             startTime: null,
             duration: null,
             quoteCurrency: null,
-            visibility: null
+            visibility: null,
+            entryFee: null
         },
         redirect: false,
         errorMsg: '',
@@ -115,7 +116,8 @@ class CreateTournament extends Component {
             startTime: this.state.formData.startTime,
             productList: this.props.productList,
             tourneyId: null,
-            duration: this.state.formData.duration
+            duration: this.state.formData.duration,
+            entryFee: this.state.formData.entryFee
         }
         
         if (this.checkValidity(dbData)) {
@@ -131,7 +133,8 @@ class CreateTournament extends Component {
             "tourneyId": tourneyNumber,
             "duration": this.state.formData.duration,
             "quoteCurrency": this.state.formData.quoteCurrency,
-            "visibility": this.state.formData.visibility
+            "visibility": this.state.formData.visibility,
+            "entryFee": this.state.formData.entryFee
             }
             
             console.log(newDbData);
@@ -324,10 +327,13 @@ class CreateTournament extends Component {
                         <h3>Maximum Number of Entrants:</h3>
                         <Input placeholder="Max no. entrants" changed={(event, key) => this.hostInputHandler(event, 'maxEntrants')}/> <br />
 
-                        <h3>Choose currency:</h3>
+                        <h3>Entry Fee ($):</h3>
+                        <Input placeholder="Entry Fee ($)" changed={(event, key) => this.hostInputHandler(event, 'entryFee')}/> <br />
+                            
+                        <h3>Currency:</h3>
                         {buttonsDiv}
 
-                        <h3>Choose Trading Products:</h3>
+                        <h3>Trading Products:</h3>
                         {productsDiv}
                         {selectedProductsTitle}
                         {selectedProducts}
@@ -344,7 +350,7 @@ class CreateTournament extends Component {
                         <h3>Visibility:</h3>
                         {visibilityBtns}
 
-                        <button className="submitBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
+                        <button className="submitTournBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
                     </form>
                     {this.state.errorMsg}
                 </div>

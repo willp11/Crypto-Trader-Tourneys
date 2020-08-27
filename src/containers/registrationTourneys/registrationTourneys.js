@@ -15,11 +15,13 @@ class RegistrationTourneys extends Component {
         indexToShow: null,
         showFilters: false,
         search: {
-            tourneyId: null,
-            host: null,
-            product: null,
-            maxEntrants: null,
-            hoursUntilStart: null
+            tourneyId: '',
+            host: '',
+            product: '',
+            maxEntrants: '',
+            hoursUntilStart: '',
+            minEntryFee: '',
+            maxEntryFee: ''
         },
         searchArray: []
     }
@@ -29,6 +31,42 @@ class RegistrationTourneys extends Component {
         axios.get('/getAllTourneys').then(res => {
             console.log(res.data);
             let tourneys = res.data.response;
+            
+            // get the time in days, hours, minutes until tournament starts
+            for (let i=0; i<tourneys.length; i++) {
+                let date = new Date(); 
+                let timezone = date.getTimezoneOffset() * 60 * 1000;
+                
+                let currentTS = date.getTime() + timezone;
+                let startTS = tourneys[i].startTS * 1000;
+                
+                let currentHrs = currentTS / 1000 / 60 / 60;
+                let startHrs = startTS / 1000 / 60 / 60;
+
+                let daysUntilStart;
+                let hoursUntilStart = startHrs - currentHrs;
+                let minutesUntilStart;
+                if (hoursUntilStart > 0) {
+                    daysUntilStart = Math.floor(hoursUntilStart/24);
+                    hoursUntilStart = (hoursUntilStart - (daysUntilStart*24)).toFixed(2);
+                    minutesUntilStart = (hoursUntilStart % 1)*60;
+                    
+                    hoursUntilStart = Math.floor(hoursUntilStart);
+                    minutesUntilStart = Math.ceil(minutesUntilStart);
+                } else {
+                    daysUntilStart = 0;
+                    hoursUntilStart = 0;
+                    minutesUntilStart = 0;
+                }
+                
+                let untilStart = {days: daysUntilStart, hours: hoursUntilStart, minutes: minutesUntilStart};
+                tourneys[i]['untilStart'] = untilStart;
+                
+                // duration
+                let duration = (tourneys[i].endTS - tourneys[i].startTS) / 60 / 60 / 24;
+                tourneys[i]['duration'] = duration;
+            }
+            
             this.setState({tourneys: tourneys, searchArray: tourneys});
         });
     }
@@ -55,11 +93,13 @@ class RegistrationTourneys extends Component {
     toggleFiltersHandler = (event) => {
         this.setState({showFilters: !this.state.showFilters,
                             search: {
-                                tourneyId: null,
-                                host: null,
-                                product: null,
-                                maxEntrants: null,
-                                hoursUntilStart: null
+                                tourneyId: '',
+                                host: '',
+                                product: '',
+                                maxEntrants: '',
+                                hoursUntilStart: '',
+                                minEntryFee: '',
+                                maxEntryFee: ''
                             }
                       });
     }
@@ -121,6 +161,20 @@ class RegistrationTourneys extends Component {
                     continue;
                 }
             }
+            if (this.state.search.minEntryFee) {
+                if (this.state.search.minEntryFee > tourneysFound[i].entryFee) {
+                    tourneysFound.splice(i, 1);
+                    i--
+                    continue;
+                } 
+            }
+            if (this.state.search.maxEntryFee) {
+                if (this.state.search.maxEntryFee < tourneysFound[i].entryFee) {
+                    tourneysFound.splice(i, 1);
+                    i--
+                    continue;
+                } 
+            }
         }
         
         // copy all the found tournaments to the state search array
@@ -128,7 +182,17 @@ class RegistrationTourneys extends Component {
     }
     
     resetTourneys = () => {
-        this.setState({searchArray: [...this.state.tourneys]});
+        this.setState({searchArray: [...this.state.tourneys],
+                      search: {tourneyId: '',
+                                tourneyId: '',
+                                host: '',
+                                product: '',
+                                maxEntrants: '',
+                                hoursUntilStart: '',
+                                minEntryFee: '',
+                                maxEntryFee: ''
+                              }
+                      });
     }
     
     render (){
@@ -159,17 +223,16 @@ class RegistrationTourneys extends Component {
             return (
                 <tr key={data.tourneyId}>
                     <td>{data.tourneyId}</td>
+                    <td><NavLink to={navPath}><button>Go to Lobby</button></NavLink></td>
                     <td>{data.host}</td>
+                    <td>{data.entryFee} BTC</td>
                     <td>
                         <button onClick={(event, i) => this.showProductsHandler(event, index)}>{showProdStr}</button> <br/> 
                         {productsDiv}
                     </td>
                     <td>{data.noEntrants}/{data.maxEntrants}</td>
-                    <td>{data.startDate} </td>
-                    <td>{data.startTime}</td>
-                    <td>{data.endDate}</td>
-                    <td>{data.endTime}</td>
-                    <td><NavLink to={navPath}><button>Go to Lobby</button></NavLink></td>
+                    <td>{data.untilStart.days}d {data.untilStart.hours}h {data.untilStart.minutes}m</td>
+                    <td>{data.duration}d</td>
                 </tr>
             )
         });
@@ -183,12 +246,14 @@ class RegistrationTourneys extends Component {
                         <h3>Search Tournaments</h3>
                         <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Hide Search</button> <br/>
                         <div className="searchForm">
-                            <input onChange={(event, key) => this.updateSearch(event, "tourneyId")} placeholder="Tournament id" /> <br/>
-                            <input onChange={(event, key) => this.updateSearch(event, "host")} placeholder="Host" /> <br/>
-                            <input onChange={(event, key) => this.updateSearch(event, "product")} placeholder="Product" /> <br/>
-                            <input onChange={(event, key) => this.updateSearch(event, "maxEntrants")} placeholder="Max Entrants" /> <br/>
-                            <input onChange={(event, key) => this.updateSearch(event, "hoursUntilStart")} placeholder="Hours until start" /> <br/>
-                            <button className="submitBtn" onClick={this.searchTourneys}>Submit</button> <br/>
+                            <input value={this.state.search.tourneyId} onChange={(event, key) => this.updateSearch(event, "tourneyId")} placeholder="Tournament id" /> <br/>
+                            <input value={this.state.search.host} onChange={(event, key) => this.updateSearch(event, "host")} placeholder="Host" /> <br/>
+                            <input value={this.state.search.product} onChange={(event, key) => this.updateSearch(event, "product")} placeholder="Product" /> <br/>
+                            <input value={this.state.search.maxEntrants} onChange={(event, key) => this.updateSearch(event, "maxEntrants")} placeholder="Max Entrants" /> <br/>
+                            <input value={this.state.search.hoursUntilStart} onChange={(event, key) => this.updateSearch(event, "hoursUntilStart")} placeholder="Hours until start" /> <br/>
+                            <input value={this.state.search.minEntryFee} onChange={(event, key) => this.updateSearch(event, "minEntryFee")} placeholder="Min Entry Fee" /> <br/>
+                            <input value={this.state.search.maxEntryFee} onChange={(event, key) => this.updateSearch(event, "maxEntryFee")} placeholder="Max Entry Fee" /> <br/>
+                            <button className="submitBtn searchTourneySubmitBtn" onClick={this.searchTourneys}>Submit</button> <br/>
                             <button className="resetBtn" onClick={this.resetTourneys}>Reset</button>
                         </div>
                     </div>
@@ -201,20 +266,21 @@ class RegistrationTourneys extends Component {
                 <div className="AllTourneys">
                     <h1>Tournament Registration</h1>
                     <div className="TourneyDiv">
-                        <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Search</button>
+                        <p>The full list of all tournaments currently in registration.</p>
+                        <p>You can filter the tournaments by id, host, product, maximum number of entrants, hours until the tournament starts and entry fee.</p>
+                        <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Filter</button>
                         {filtersDiv}
                         <table className="TourneyTable">
                             <thead>
                                 <tr>
                                     <th>id</th>
+                                    <th>Register</th>
                                     <th>Host</th>
+                                    <th>Entry Fee</th>
                                     <th>Products</th>
                                     <th>Entrants</th>
-                                    <th>Start Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Date</th>
-                                    <th>End Time</th>
-                                    <th>Register</th>
+                                    <th>Until Start</th>
+                                    <th>Duration</th>
                                 </tr>
                             </thead>
                             <tbody>

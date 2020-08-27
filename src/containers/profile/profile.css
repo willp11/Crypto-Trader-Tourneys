@@ -2,6 +2,7 @@
     margin-top: 0;
     background-color: #102A43;
     height: auto;
+    min-height: 100vh;
     width: 100vw;
     padding: 120px 0px 40px 0px;
     border: 2px solid #102A43;
@@ -26,7 +27,7 @@
 .profileSubDiv {
     background-color: #243B53;
     height: auto;
-    width: 600px;
+    width: 800px;
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
@@ -43,6 +44,13 @@
     background-color: rgb(77, 134, 247);
     color: #D9E2EC;
     padding: 5px;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.apiInput {
+    text-align: center;
+    width: 200px;
 }
 
 .yesBtn {
@@ -63,9 +71,9 @@
 
 .profilePanel {
     background-color: #334E68;
-    width: 800px;
-    margin: 0 auto;
-    padding:  10px;
+    width: 600px;
+    margin: 0 auto 20px auto;
+    padding: 10px 10px 30px 10px;
     border: 2px solid #102A43;
     border-radius: 20px;
     position: relative;
@@ -96,10 +104,6 @@
 
 .invitesTable tr {
     border: thin solid #102A43;
-}
-
-.apiInput {
-    text-align: center;
 }
 
 /* large devices  desktops, 992px to 1200px)*/
@@ -137,6 +141,7 @@
     
     .invitesTable {
         width: 80vw;
+        overflow: scroll;
     }
     
     .profileSubDiv h1 {
@@ -147,6 +152,10 @@
         font-size: 1rem;
     }
     
+    .profileSubDiv h3 {
+        font-size: 0.9rem;
+    }
+    
     .invitesTable th {
         font-size: 0.8rem;
     }
@@ -154,6 +163,18 @@
     .invitesTable td {
         font-size: 0.8rem;
     }
+    
+    .yesBtn {
+        padding: 5px;
+        margin: 0px 5px;
+        width: 40px;
+    }
 
+    .noBtn {
+        padding: 5px;
+        margin: 0px 5px;
+        width: 40px;
+    }
+    
 }
 

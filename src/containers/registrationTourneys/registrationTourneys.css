@@ -6,6 +6,8 @@
     background-color: #D9E2EC;
     padding: 20px;
     border: 1px solid #102A43;
+    width: 120px;
+    box-sizing: border-box;
 }
 
 .showProducts ul {
@@ -15,7 +17,6 @@
 
 .toggleSearchBtn {
     margin-bottom: 20px;
-    margin-top: 20px;
     padding: 5px;
     border-radius: 5px;
     border: 0.5px solid #102A43;
@@ -38,7 +39,7 @@
     position: absolute;
     float: left;
     left: 50%;
-    top: 38%;
+    top: 70%;
     transform: translate(-50%, -50%);
     width: 500px;
     background-color: #334E68;
@@ -52,7 +53,8 @@
 
 .searchForm input {
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
+    padding: 3px;
 }
 
 .searchForm input::placeholder {
@@ -61,17 +63,13 @@
 }
 
 .searchTourneySubmitBtn {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
-/* Small devices (landscape phones, 576px and below)*/
-@media (max-width: 576px) {  
+/* large devices  desktops, 992px to 1200px)*/
+@media (max-width: 1200px) {  
 
-}
-
-/* medium devices (landscape phones, 576px to 768px)*/
-@media (max-width: 768px) {  
-    
 
 }
 
@@ -81,8 +79,15 @@
 
 }
 
-/* large devices  desktops, 992px to 1200px)*/
-@media (max-width: 1200px) {  
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-width: 768px) {  
+    .modalDiv {
+        width: 80vw;
+    }
+}
 
+
+/* Small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
 
 }

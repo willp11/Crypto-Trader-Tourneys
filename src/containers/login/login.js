@@ -70,6 +70,14 @@ class Login extends Component {
             authRedirect = <Redirect to={this.props.authRedirectPath} />
         }
         
+        let errorMsg = null;
+        if (this.state.errorMsg) {
+            errorMsg = <p>{this.state.errorMsg}</p>
+        }
+        if (this.props.error) {
+            errorMsg = <p>{this.props.error}</p>
+        }
+        
         return (
             <div className="loginDiv">
                 {authRedirect}
@@ -80,8 +88,7 @@ class Login extends Component {
                             <Input type={this.state.controls.email.elementConfig.type} placeholder={this.state.controls.email.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "email")}/> <br/>
                             <Input type={this.state.controls.password.elementConfig.type} placeholder={this.state.controls.password.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "password")}/> <br />
                             <button className="loginSubmitBtn" onClick={this.submitHandler}>Submit</button><br/>
-                            {this.state.errorMsg}
-                            {this.props.error}
+                            {errorMsg}
                         </form>
                     </div>
                     <div className="goToSignUpDiv" style={{textAlign: "center"}}>  

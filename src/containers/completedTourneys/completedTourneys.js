@@ -16,26 +16,16 @@ class CompletedTourneys extends Component {
         showFilters: false,
         search: {
             tourneyId: '',
-            host: '',
-            product: '',
-            maxEntrants: '',
-            hoursUntilEnd: ''
+            host: ''
         },
-        searchArray: []
+        notFoundMsg: null
     }
     
     componentDidMount() {
-        //this.props.getTourneys();
-        axios.get('/getCompletedTourneys').then(res => {
-            console.log(res.data);
-            let tourneys = res.data.response;
-            this.setState({tourneys: tourneys, searchArray: tourneys});
-        });
+        
     }
     
     componentDidUpdate() {
-        //console.log(this.props.tourneys);
-        //console.log(this.state.tourneys);
         //console.log(this.state.search);
     }
 
@@ -70,61 +60,33 @@ class CompletedTourneys extends Component {
         this.setState({search: newState})
     }
     
-    searchTourneys = () => {
-        // copy all the tournaments to an array
-        let tourneysFound = [...this.state.tourneys];
-        
-        // iterate over all the tournaments
-        for (let i=0; i<tourneysFound.length; i++) {
-            // check if we need to check that field, if we do and it passes the critera then leave it in the array and move onto the next field
-            if (this.state.search.tourneyId) {
-                // if it doesnt meet the search criteria, remove it from the array and move to next tournament 
-                if (this.state.search.tourneyId != tourneysFound[i].tourneyId) {
-                    tourneysFound.splice(i, 1);
-                    i--
-                    continue;
-                } 
+    searchByTourneyIdHandler = (tourneyId) => {
+        axios.post('/getCompletedTourneys', {"fieldToSearch": "tourneyId", "tourneyId": tourneyId}).then(res => {
+            console.log(res.data);
+            let tourneys = res.data.response;
+            let notFoundMsg = null;
+            if (tourneys.length == 0) {
+                notFoundMsg = <p style={{"fontWeight":"bold", "color":"#C62828"}}>No results found!</p>
             }
-            if (this.state.search.host) {
-                if (this.state.search.host != tourneysFound[i].host) {
-                    tourneysFound.splice(i, 1);
-                    i--
-                    continue;
-                } 
-            }
-            if (this.state.search.product) {
-                if (!tourneysFound[i].products.includes(this.state.search.product)) {
-                    tourneysFound.splice(i, 1);
-                    i--
-                    continue;
-                } 
-            }
-            if (this.state.search.maxEntrants) {
-                if (this.state.search.maxEntrants < tourneysFound[i].maxEntrants) {
-                    tourneysFound.splice(i, 1);
-                    i--
-                    continue;
-                } 
-            }
-        }
-        
-        // copy all the found tournaments to the state search array
-        this.setState({searchArray: [...tourneysFound]});
+            this.setState({tourneys: tourneys, notFoundMsg: notFoundMsg});
+        });
     }
     
-    resetTourneys = () => {
-        this.setState({search: {
-                            tourneyId: '',
-                            host: '',
-                            product: '',
-                            maxEntrants: ''
-                        }, 
-                       searchArray: [...this.state.tourneys]});
+    searchByHostHandler = (host) => {
+        axios.post('/getCompletedTourneys', {"fieldToSearch": "host", "host": host}).then(res => {
+            console.log(res.data);
+            let tourneys = res.data.response;
+            let notFoundMsg = null;
+            if (tourneys.length == 0) {
+                notFoundMsg = <p style={{"fontWeight":"bold", "color":"#C62828"}}>No results found!</p>
+            }
+            this.setState({tourneys: tourneys, notFoundMsg: notFoundMsg});
+        });
     }
     
     render (){
         
-        let tourneyData = this.state.searchArray.map((data, index) => {
+        let tourneyData = this.state.tourneys.map((data, index) => {
             let navPath = "/tourneys/" + data.tourneyId;
             
             let showProdStr = "Show";
@@ -150,67 +112,54 @@ class CompletedTourneys extends Component {
             return (
                 <tr key={data.tourneyId}>
                     <td>{data.tourneyId}</td>
+                    <td><NavLink to={navPath}><button>Go to Lobby</button></NavLink></td>
                     <td>{data.host}</td>
-                    <td>
-                        <button onClick={(event, i) => this.showProductsHandler(event, index)}>{showProdStr}</button> <br/> 
-                        {productsDiv}
-                    </td>
-                    <td>{data.noEntrants}/{data.maxEntrants}</td>
+                    <td>{data.entryFee}</td>
                     <td>{data.startDate} </td>
                     <td>{data.startTime}</td>
                     <td>{data.endDate}</td>
                     <td>{data.endTime}</td>
-                    <td><NavLink to={navPath}><button>Go to Lobby</button></NavLink></td>
                 </tr>
             )
         });
-
-        let filtersDiv = null;
-
-        if (this.state.showFilters) {
-            filtersDiv = (
-                <div className="showFiltersDiv">
-                    <div className="modalDiv">
-                        <h3>Search Tournaments</h3>
-                        <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Hide Search</button> <br/>
-                        <div className="searchForm">
-                            <input value={this.state.search.tourneyId} onChange={(event, key) => this.updateSearch(event, "tourneyId")} placeholder="Tournament id" /> <br/>
-                            <input value={this.state.search.host} onChange={(event, key) => this.updateSearch(event, "host")} placeholder="Host" /> <br/>
-                            <input value={this.state.search.product} onChange={(event, key) => this.updateSearch(event, "product")} placeholder="Product" /> <br/>
-                            <input value={this.state.search.maxEntrants} onChange={(event, key) => this.updateSearch(event, "maxEntrants")} placeholder="Max Entrants" /> <br/>
-                            <button className="submitBtn" onClick={this.searchTourneys}>Submit</button> <br/>
-                            <button className="resetBtn" onClick={this.resetTourneys}>Reset</button>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
+        
+        let tourneyTable = null;
+        let notFoundMsg = this.state.notFoundMsg;
+        if (this.state.tourneys.length > 0) {
+            tourneyTable = (
+                <table className="TourneyTable">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Lobby</th>
+                            <th>Host</th>
+                            <th>Entry Fee</th>
+                            <th>Start Date</th>
+                            <th>Start Time</th>
+                            <th>End Date</th>
+                            <th>End Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {tourneyData}
+                    </tbody>
+                </table>
+            )
+        } 
         
         return (
             <div className="AllTourneysDiv">
                 <div className="AllTourneys">
                     <h1 >Completed Tournaments</h1>
                     <div className="TourneyDiv">
-                        <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Search</button>
-                        {filtersDiv}
-                        <table className="TourneyTable">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Host</th>
-                                    <th>Products</th>
-                                    <th>Entrants</th>
-                                    <th>Start Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Date</th>
-                                    <th>End Time</th>
-                                    <th>Register</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                               {tourneyData}
-                            </tbody>
-                        </table>
+                        <h2>Search</h2>
+                        <p>You can find any tournament that has already been completed by searching for the tournament id or host name.</p>
+                        <input className="searchCompletedTourneysInput" placeholder="Tournament id" onChange={(event) => this.updateSearch(event, "tourneyId")} />
+                        <button className="submitBtn" onClick={() => this.searchByTourneyIdHandler(this.state.search.tourneyId)}>Search</button> <br/>
+                        <input className="searchCompletedTourneysInput" placeholder="Host" onChange={(event) => this.updateSearch(event, "host")} />
+                        <button className="submitBtn" onClick={() => this.searchByHostHandler(this.state.search.host)}>Search</button> <br/>
+                        {tourneyTable}
+                        {notFoundMsg}
                     </div>
                 </div>
             </div>

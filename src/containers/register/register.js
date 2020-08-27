@@ -134,6 +134,14 @@ class Register extends Component {
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />
         }
+            
+        let errorMsg = null;
+        if (this.state.errorMsg) {
+            errorMsg = this.state.errorMsg;
+        }
+        if (this.props.error) {
+            errorMsg = this.props.error;
+        }
         
         return (
             <div className="registerDiv">
@@ -147,8 +155,7 @@ class Register extends Component {
                             <Input type={this.state.controls.password.elementConfig.type} placeholder={this.state.controls.password.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "password")}/> <br />
                             <Input type={this.state.controls.repeatPassword.elementConfig.type} placeholder={this.state.controls.repeatPassword.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "repeatPassword")}/> <br />
                             <button className='registerSubmitBtn'>Submit</button><br />
-                            {this.state.errorMsg}
-                            {this.props.error}
+                            {errorMsg}
                         </form>
                     </div>
                     <div className="goToLoginDiv" style={{textAlign: "center"}}>  

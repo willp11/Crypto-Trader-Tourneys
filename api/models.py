@@ -9,6 +9,7 @@ class Usernames(db.Model):
     activeEntrants = relationship("ActiveEntrants", cascade="all, delete")
     apis = relationship("UserAPI", cascade="all, delete")
     registerTourney = relationship("RegistrationTourneys", cascade="all, delete")
+    balances = relationship("AccountBalances", cascade="all, delete")
     
 class ProductList(db.Model):
     __tablename__ = "productList"
@@ -23,6 +24,7 @@ class AllTourneys(db.Model):
     __tablename__ = "allTourneys"
     tourneyId = db.Column(db.Integer, primary_key=True)
     state = db.Column(db.String(16), nullable=False)
+    hostId = db.Column(db.String(50), nullable=False)
 
 class RegistrationTourneys(db.Model):
     __tablename__ = "registrationTourneys"
@@ -40,6 +42,7 @@ class RegistrationTourneys(db.Model):
     endTS = db.Column(db.Integer, nullable=False)
     quoteCurrency = db.Column(db.String(16), nullable=False)
     visibility = db.Column(db.String(16), nullable=False)
+    entryFee = db.Column(db.Float, nullable=False)
     entrants = relationship("Entrants", cascade="all, delete")
     products = relationship("RegisteringProducts", cascade="all, delete")
     invitations = relationship("TourneyInvites", cascade="all, delete")
@@ -63,9 +66,8 @@ class RegisteringProducts(db.Model):
 class UserAPI(db.Model):
     __tablename__ = "userAPI"
     userId = db.Column(db.String(50), db.ForeignKey('usernames.userId'), primary_key=True, nullable=False)
-    API1 = db.Column(db.String(50), nullable=True)
-    API2 = db.Column(db.String(50), nullable=True)
-    API3 = db.Column(db.String(50), nullable=True)
+    FTXKey = db.Column(db.String(50), nullable=True)
+    FTXSecret = db.Column(db.String(50), nullable=True)
     
 class ActiveTourneys(db.Model):
     __tablename__ = "activeTourneys"
@@ -84,6 +86,7 @@ class ActiveTourneys(db.Model):
     status = db.Column(db.String(16), nullable=False)
     quoteCurrency = db.Column(db.String(16), nullable=False)
     visibility = db.Column(db.String(16), nullable=False)
+    entryFee = db.Column(db.Float, nullable=False)
     entrants = relationship("ActiveEntrants", cascade="all, delete")
     products = relationship("ActiveProducts", cascade="all, delete")
     
@@ -134,6 +137,7 @@ class CompletedTourneys(db.Model):
     startTS = db.Column(db.Integer, nullable=False)
     endTS = db.Column(db.Integer, nullable=False)
     quoteCurrency = db.Column(db.String(16), nullable=False)
+    entryFee = db.Column(db.Float, nullable=False)
     products = relationship("CompletedProducts", cascade="all, delete")
     
 class CompletedEntrants(db.Model):
@@ -166,7 +170,7 @@ class TourneyInvites(db.Model):
 class AccountBalances(db.Model):
     __tablename__ = "accountBalances"
     userId = db.Column(db.String(50), db.ForeignKey('usernames.userId'), primary_key=True)
-    accountBalance = db.Column(db.Float, nullable=False)
+    balance = db.Column(db.Float, nullable=False)
     
 class DepositWithdrawHistory(db.Model):
     __tablename__ = "depositWithdrawHistory"

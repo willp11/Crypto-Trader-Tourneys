@@ -5,7 +5,8 @@
     min-height: 100vh;
     width: 100vw;
     padding-top: 100px;
-    box-sizing: border-box;
+    padding-bottom: 40px;
+    border: 2px solid #102A43;
 }
 
 .tourneyDiv h1 {
@@ -13,19 +14,23 @@
 }
 
 .tourneyDiv h2 {
-    color: #D9E2EC;
+    color: #BCCCDC;
 }
 
 .tourneyDiv h3 {
     color: #D9E2EC;
 }
 
-.tourneyDiv p {
+.tourneyDiv h4 {
     color: #D9E2EC;
 }
 
+.tourneyDiv p {
+    color: #F0F4F8;
+}
+
 .tourneyDiv li {
-    color: #D9E2EC;
+    color: #F0F4F8;
 }
 
 .tourneySubDiv {
@@ -44,7 +49,6 @@
     height: auto;
     width: 95vw;
     margin: 0 auto;
-    padding: 20px;
     box-sizing: border-box;
     position: relative;
     border: 2px solid #102A43;
@@ -85,14 +89,14 @@
     flex-wrap: nowrap;
     width: 90vw;
     margin: 0 auto;
-    height: 700px;
+    height: 800px;
     border: 2px solid #102A43;
     border-radius: 10px;
-    position: relative;
+    box-sizing: border-box;
 }
 
 .tourneyBody {
-    height: 700px;
+    height: auto;
     width: 30vw;
     box-sizing: border-box;
     border: 1px solid #102A43;
@@ -119,12 +123,45 @@
     padding: 5px;
 }
 
+.confirmRegistrationWrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #102A43;
+    opacity: 0.95;
+}
+
+.confirmRegistrationDiv {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000000000;
+    border: 1px solid #102A43;
+    background-color: #334E68;
+    padding: 20px;
+    height: auto;
+    width: 400px;
+}
+
 .entrantsList {
-    height: 700px;
+    height: 800px;
     width: 30vw;
     overflow: scroll;
     box-sizing: border-box;
     border: 1px solid #102A43;
+}
+
+.rankProfitDiv {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.rankProfitSubDiv {
+    padding: 10px;
 }
 
 .entrantsList ul {
@@ -133,7 +170,7 @@
 }
 
 .productList {
-    height: 700px;
+    height: 800px;
     width: 30vw;
     overflow: scroll;
     box-sizing: border-box;
@@ -142,11 +179,13 @@
 
 .productListDiv {
     width: 30vw;
-    height: 700px;
+    height: 800px;
     display: flex;
     flex-direction: row;
-    align-content: center;
-    justify-content: space-around;
+}
+
+.exchangeSublist {
+    margin: 0 auto;
 }
 
 .editBalanceInput {
@@ -165,9 +204,124 @@
     color: white;
 }
 
+.entrantsListTable {
+    margin: 0 auto;
+    border: 1px solid #102A43;
+    border-collapse: collapse;
+    background-color: #D9E2EC;
+    color: #102A43;
+}
+
+.entrantsListTable thead {
+    border-collapse: collapse;
+    background-color: #243B53;
+    color: #D9E2EC;
+}
+
+.entrantsListTable th {
+    width: 120px;
+    outline: thin solid #D9E2EC;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.entrantsListTable td {
+    width: 120px;
+    border-top: thin solid #102A43;
+    border-bottom: thin solid #102A43;
+    font-size: 0.9rem;
+    padding: 5px;
+    border-left: none;
+    border-right: none;
+}
+
+.entrantsListTable tr {
+    outline: thin solid #102A43;
+}
+
+
 @media only screen and (max-width: 900px) {
-    .productListDiv {
+    
+}
+
+/* large devices  desktops, 992px to 1200px)*/
+@media (max-width: 1200px) {  
+    .tourneySubDiv {
+        width: 95vw;
+    }
+    .hostControls {
+        width: 90vw;
+    }
+    
+    .tourneyWrapper {
+        width: 90vw;
+    }
+    
+    .tourneyDiv h1 {
+        font-size: 1.4rem;
+    }
+    
+    .tourneyDiv h2 {
+        font-size: 1.2rem;
+    }
+    
+    .tourneyDiv h3 {
+        font-size: 1rem;
+    }
+    
+    .entrantsListTable th {
+        font-size: 0.9rem;
+    }
+
+}
+
+/* Large devices (desktops, 768px to 992px )*/
+@media (max-width: 992px) {  
+
+}
+
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-width: 768px) {  
+    .tourneyDiv h1 {
+        font-size: 1.4rem;
+    }
+    
+    .tourneyDiv h2 {
+        font-size: 1.2rem;
+    }
+    
+    .tourneyDiv h3 {
+        font-size: 1rem;
+    }
+    
+    .tourneyWrapper {
         flex-direction: column;
+        height: auto;
+    }
+    
+    .productList {
+        width: 90vw;
+        height: auto;
+    }
+    
+    .productListDiv {
+        width: 90vw;
+        height: auto;
+    }
+    
+    .entrantsList {
+        width: 90vw;
+        height: auto;
+    }
+    
+    .tourneyBody {
+        width: 90vw;
+        height: auto;
     }
 }
 
+/* Small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
+
+
+}

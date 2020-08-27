@@ -8,15 +8,19 @@ class CheckDropDown extends Component {
     state = {
         checkList: null,
         productsSelected: [],
-        
+        visibleProducts: []
     }
 
     componentDidMount() {
         let newRef = createRef();
         this.setState({
-            checkList: newRef
-        })
-        console.log(this.props.productType);
+            checkList: newRef,
+            visibleProducts: this.props.products
+        });
+    }
+
+    componentDidUpdate() {
+        //console.log(this.props.productList);
     }
 
     selectHandler = () => {
@@ -28,10 +32,7 @@ class CheckDropDown extends Component {
         }
     };
 
-    checkboxHandler = (event, inputItem) => {
-//        let newProducts = {};
-//        console.log(this.state.productsSelected[this.props.exchange]);
-//        newProducts[this.props.exchange] = [...this.state.productsSelected[this.props.exchange]];
+    checkboxHandler = (event, inputItem, index) => {
         
         let newProducts = [...this.state.productsSelected];
 
@@ -48,21 +49,44 @@ class CheckDropDown extends Component {
         this.props.updateProductList(newProducts, this.props.exchange, this.props.productList, this.props.productType);
     }
     
+    searchProductsHandler = (event) => {
+        let searchTerm = event.target.value;
+        
+        if (searchTerm != '') {
+            // update the visible products array with any products that match the search term
+            if (this.props.products.includes(searchTerm)) {
+                this.setState({visibleProducts: [searchTerm]});
+            } else {
+                this.setState({visibleProducts: []});
+            }
+        } else {
+            this.setState({visibleProducts: this.props.products});
+        }
+
+    }
+    
     render() {
         let list = null;
-        if (this.props.products) {
-            list = this.props.products.map((inputItem, index) => {
+        let searchInput = null;
+        if (this.state.visibleProducts) {
+            list = this.state.visibleProducts.map((inputItem, index) => {
+                let checked = false;
+                if (this.props.productList[this.props.exchange][this.props.productType]) {
+                    if (this.props.productList[this.props.exchange][this.props.productType].includes(inputItem)) checked = true;
+                }
                 return (<li key={index}>
-                            <input type="checkbox" onClick={event => this.checkboxHandler(event, inputItem)}/>{inputItem}          
+                            <input type="checkbox" checked={checked} onChange={(event) => this.checkboxHandler(event, inputItem, index)}/>{inputItem}          
                         </li>
                         )
-            })
+            });
+            searchInput = <input style={{"textAlign": "center"}} type="text" placeholder="Search" onChange={(event) => this.searchProductsHandler(event)}/>
         }
             
         return (
             <div ref={this.state.checkList} className="dropdown-check-list" tabIndex="100">
                 <span className="anchor" onClick={this.selectHandler}>{this.props.title}</span>
                 <ul className="items">
+                    {searchInput}
                     {list}
                 </ul>
             </div>

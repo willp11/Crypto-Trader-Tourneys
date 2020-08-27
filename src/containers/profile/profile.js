@@ -8,15 +8,16 @@ import axios from 'axios';
 class Profile extends Component {
     
     state = {
-        API1: '',
-        API2: '',
-        API3: '',
+        APIs: {
+            FTX: {key: '', secret: ''}
+        },
         invites: [],
         inviteToShowKey: null,
         enterBalance: false,
         invitationBalance: null,
         balance: '',
-        inviteTourneyId: ''
+        inviteTourneyId: '',
+        APIUpdatedMsg: ''
     }
     
     componentDidMount() {
@@ -26,9 +27,7 @@ class Profile extends Component {
             axios.post('/getAPIInfo', {"userId": this.props.userId}).then(res => {
                 console.log(res.data);
                 this.setState({
-                    API1: res.data.API1,
-                    API2: res.data.API2,
-                    API3: res.data.API3
+                    APIs: {FTX: {key: res.data.FTX.key, secret: res.data.FTX.secret}}
                 });
             })
             axios.post('/getTourneyInvites',  {"userId": this.props.userId}).then(res => {
@@ -40,19 +39,29 @@ class Profile extends Component {
         } 
         
     }
+        
+    componentDidUpdate() {
+        //console.log(this.state.APIs);
+    }
     
-    inputChangeHandler = (event, API) => {
-        let APIKey = event.target.value;
-        let newState = {};
-        newState[API] = APIKey;
+    inputChangeHandler = (event, exchange, field) => {
+        let newState = {...this.state.APIs};
+        newState[exchange][field] = event.target.value;
         this.setState(newState);
     }
     
-    submitHandler = (API) => {
-        console.log(this.state);
+    submitHandler = (exchange, field) => {
         
-        axios.post('/updateAPI', {"userId": this.props.userId, "API": API, "APIKey": this.state[API]}).then(res => {
+        axios.post('/updateAPI', {"userId": this.props.userId, 
+                                    "exchange": exchange, 
+                                    "fieldToUpdate": field, 
+                                    "APIKey": this.state.APIs[exchange].key, 
+                                    "APISecret": this.state.APIs[exchange].secret}
+        ).then(res => {
             console.log(res.data);
+            if (res.data.response == "success") {
+                this.setState({APIUpdatedMsg: "API Updated Successfully"});
+            }
         })
     }
     
@@ -150,6 +159,11 @@ class Profile extends Component {
             })
         }
         
+        let APIUpdatedMsg = null;
+        if (this.state.APIUpdatedMsg) {
+            APIUpdatedMsg = <p style={{"color": "#00897B", "fontWeight": "bold"}}>{this.state.APIUpdatedMsg}</p>
+        }
+        
         if (this.props.userId) {
             content = (
                 <div className="profileDiv">
@@ -164,8 +178,11 @@ class Profile extends Component {
                                 <h2>APIs</h2>
                                 <div>
                                     <h3>FTX:</h3>
-                                    <input className="apiInput" type="text" placeholder={this.state.API2 ? this.state.API2 : "FTX API Key"} onChange={(event, API) => this.inputChangeHandler(event, "API2")} />
-                                    <button className="updateAPIbtn" onClick={(API) => this.submitHandler("API2")}>Update API Key</button>
+                                    <input className="apiInput" type="text" placeholder={this.state.APIs.FTX.key ? this.state.APIs.FTX.key : "FTX API Key"} onChange={(event, exchange, field) => this.inputChangeHandler(event, "FTX", "key")} />
+                                    <button className="updateAPIbtn" onClick={(exchange, field) => this.submitHandler("FTX", "key")}>Update API Key</button><br/>
+                                    <input className="apiInput" type="text" placeholder={this.state.APIs.FTX.secret ? this.state.APIs.FTX.secret : "FTX API Secret"} onChange={(event, exchange, field) => this.inputChangeHandler(event, "FTX", "secret")} />
+                                    <button className="updateAPIbtn" onClick={(exchange, field) => this.submitHandler("FTX", "secret")}>Update API Secret</button>
+                                    {APIUpdatedMsg}
                                 </div>
                             </div>
                             <div>

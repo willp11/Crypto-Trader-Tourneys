@@ -11,6 +11,10 @@
     color: #D9E2EC;
 }
 
+.AllTourneysDiv h2 {
+    color: #D9E2EC;
+}
+
 .AllTourneys {
     display: flex;
     flex-direction: column;
@@ -24,6 +28,22 @@
     background-color: #243B53;
     text-align: center;
     padding-bottom: 20px;
+}
+
+.selectTourneyTableDiv {
+    background-color: #334E68;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 500px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+}
+
+.selectTourneyTableDiv button {
+    color: #D9E2EC;
+    margin: 5px;
+    padding: 5px;
 }
 
 .TourneyDiv {
@@ -61,12 +81,17 @@
     width: 120px;
     outline: thin solid #D9E2EC;
     font-weight: bold;
+    padding: 5px;
 }
 
 .TourneyTable td {
     width: 120px;
-    outline: thin solid #102A43;
+    border-top: thin solid #102A43;
+    border-bottom: thin solid #102A43;
     font-size: 0.9rem;
+    padding: 5px;
+    border-left: none;
+    border-right: none;
 }
 
 .TourneyTable tr {
@@ -115,6 +140,10 @@
     
     .TourneyTable {
         width: 720px;
+    }
+    
+    .AllTourneys p {
+        font-size: 0.9rem;
     }
 }
 

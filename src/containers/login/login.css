@@ -12,9 +12,13 @@
     color: #D9E2EC;
 }
 
+.loginDiv p {
+    color: #D9E2EC;
+}
+
 .loginSubDiv {
     background-color: #243B53;
-    height: 400px;
+    height: 500px;
     width: 500px;
     margin: 0 auto;
     padding-top: 20px;
