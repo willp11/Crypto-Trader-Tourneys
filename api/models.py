@@ -43,6 +43,7 @@ class RegistrationTourneys(db.Model):
     quoteCurrency = db.Column(db.String(16), nullable=False)
     visibility = db.Column(db.String(16), nullable=False)
     entryFee = db.Column(db.Float, nullable=False)
+    payoutStruct = db.Column(db.String(32), nullable=False)
     entrants = relationship("Entrants", cascade="all, delete")
     products = relationship("RegisteringProducts", cascade="all, delete")
     invitations = relationship("TourneyInvites", cascade="all, delete")
@@ -87,6 +88,7 @@ class ActiveTourneys(db.Model):
     quoteCurrency = db.Column(db.String(16), nullable=False)
     visibility = db.Column(db.String(16), nullable=False)
     entryFee = db.Column(db.Float, nullable=False)
+    payoutStruct = db.Column(db.String(32), nullable=False)
     entrants = relationship("ActiveEntrants", cascade="all, delete")
     products = relationship("ActiveProducts", cascade="all, delete")
     
@@ -138,6 +140,7 @@ class CompletedTourneys(db.Model):
     endTS = db.Column(db.Integer, nullable=False)
     quoteCurrency = db.Column(db.String(16), nullable=False)
     entryFee = db.Column(db.Float, nullable=False)
+    payoutStruct = db.Column(db.String(32), nullable=False)
     products = relationship("CompletedProducts", cascade="all, delete")
     
 class CompletedEntrants(db.Model):

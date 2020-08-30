@@ -36,7 +36,10 @@ class Tourney extends Component {
         addedUserMsg: '',
         showRegistrationConfirm: false,
         showUnRegistrationConfirm: false,
-        balanceErrorMsg: null
+        balanceErrorMsg: null,
+        searchEntrants: '',
+        visibleEntrants: [],
+        payouts: []
     }
 
     componentDidMount() {
@@ -57,6 +60,10 @@ class Tourney extends Component {
                     let tourneyData = res.data;
 
                     console.log(res.data);
+                    
+                    // CALCULATE THE PAYOUTS
+                    let payouts = this.calculatePayouts(0.01, 100);
+                    
                     this.setState({quoteCurrency: res.data.quoteCurrency});
 
                     axios.post('/checkIfHost', {"tourneyId": this.state.tourneyId, "userId": this.props.userId, "tourneyType": "registering"}).then(res => {
@@ -72,6 +79,12 @@ class Tourney extends Component {
                                 let isRegistered = entrants.includes(this.props.username);
                                 let entrantProfits = res.data.response.profits;
                                 
+                                let entrantsObjs = [];
+                                for (let i=0; i<entrants.length; i++) {
+                                    let entrant = {username: entrants[i], rank: i+1, profit: entrantProfits[i]};
+                                    entrantsObjs.push(entrant);
+                                }
+                                
                                 if (isRegistered) {
                                     // if registered, get the entrant's balance
                                     axios.post('/getEntrantBalance', {"tourneyType": "registering", "tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
@@ -86,13 +99,16 @@ class Tourney extends Component {
                                                     startTime: tourneyData.startTime,
                                                     endTime: tourneyData.endTime,
                                                     entrants: entrants,
+                                                    entrantsObjs: entrantsObjs,
                                                     entrantProfits: entrantProfits,
                                                     registered: isRegistered,
                                                     products: products,
                                                     balance: balance,
                                                     active: false,
                                                     visibility: tourneyData.visibility,
-                                                    entryFee: tourneyData.entryFee
+                                                    entryFee: tourneyData.entryFee,
+                                                    visibleEntrants: entrantsObjs,
+                                                    payouts: payouts
                                         });
                                     })
                                 } else {
@@ -105,13 +121,16 @@ class Tourney extends Component {
                                                 startTime: tourneyData.startTime,
                                                 endTime: tourneyData.endTime,
                                                 entrants: entrants,
+                                                entrantsObjs: entrantsObjs,
                                                 entrantProfits: entrantProfits,
                                                 registered: isRegistered,
                                                 products: products,
                                                 balance: null,
                                                 active: false,
                                                 visibility: tourneyData.visibility,
-                                                entryFee: tourneyData.entryFee
+                                                entryFee: tourneyData.entryFee,
+                                                visibleEntrants: entrantsObjs,
+                                                payouts: payouts
                                     });
                                 }
                                 
@@ -126,6 +145,10 @@ class Tourney extends Component {
                     let tourneyData = res.data;
                     
                     console.log(res.data);
+                    
+                    // CALCULATE THE PAYOUTS
+                    let payouts = this.calculatePayouts(0.01, 100);
+                    
                     this.setState({quoteCurrency: res.data.quoteCurrency});
 
                     // check if the user is the host
@@ -141,6 +164,12 @@ class Tourney extends Component {
                                 let entrants = res.data.response.entrants;
                                 let entrantProfits = res.data.response.profits;
                                 let isRegistered = entrants.includes(this.props.username);
+                                
+                                let entrantsObjs = [];
+                                for (let i=0; i<entrants.length; i++) {
+                                    let entrant = {username: entrants[i], rank: i+1, profit: entrantProfits[i]};
+                                    entrantsObjs.push(entrant);
+                                }
 
                                 // get the liquidated entrants list
                                 axios.post('/getActiveEntrants', {"tourneyId": this.state.tourneyId, "entrantType": "liquidated"}).then(res => {
@@ -160,13 +189,16 @@ class Tourney extends Component {
                                                         startTime: tourneyData.startTime,
                                                         endTime: tourneyData.endTime,
                                                         entrants: entrants,
+                                                        entrantsObjs: entrantsObjs,
                                                         entrantProfits: entrantProfits,
                                                         products: products,
                                                         registered: isRegistered,
                                                         active: true,
                                                         balance: balance,
                                                         visibility: tourneyData.visibility,
-                                                        entryFee: tourneyData.entryFee
+                                                        entryFee: tourneyData.entryFee,
+                                                        visibleEntrants: entrantsObjs,
+                                                        payouts: payouts
                                             });
                                         });
                                     } else {
@@ -180,12 +212,15 @@ class Tourney extends Component {
                                                     startTime: tourneyData.startTime,
                                                     endTime: tourneyData.endTime,
                                                     entrants: entrants,
+                                                    entrantsObjs: entrantsObjs,
                                                     products: products,
                                                     registered: isRegistered,
                                                     active: true,
                                                     balance: balance,
                                                     visibility: tourneyData.visibility,
-                                                    entryFee: tourneyData.entryFee
+                                                    entryFee: tourneyData.entryFee,
+                                                    visibleEntrants: entrantsObjs,
+                                                    payouts: payouts
                                         });
                                     }
                                 })
@@ -199,6 +234,11 @@ class Tourney extends Component {
                     let tourneyData = res.data;
                     
                     console.log(res.data);
+                    
+                    // CALCULATE THE PAYOUTS
+                    
+                    let payouts = this.calculatePayouts(0.01, 100);
+                    
                     this.setState({quoteCurrency: res.data.quoteCurrency});
                     
                     // check if the user is the host
@@ -214,6 +254,12 @@ class Tourney extends Component {
                                 let entrants = res.data.response.entrants;
                                 let isRegistered = entrants.includes(this.props.username);
                                 let entrantProfits = res.data.response.profits;
+                                
+                                let entrantsObjs = [];
+                                for (let i=0; i<entrants.length; i++) {
+                                    let entrant = {username: entrants[i], rank: i+1, profit: entrantProfits[i]};
+                                    entrantsObjs.push(entrant);
+                                }
 
                                 // if registered, get the entrant's balance
                                 axios.post('/getEntrantBalance', {"tourneyType": "completed", "tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
@@ -227,12 +273,15 @@ class Tourney extends Component {
                                                 startTime: tourneyData.startTime,
                                                 endTime: tourneyData.endTime,
                                                 entrants: entrants,
+                                                entrantsObjs: entrantsObjs,
                                                 entrantProfits: entrantProfits,
                                                 registered: isRegistered,
                                                 products: products,
                                                 balance: balance,
                                                 completed: true,
-                                                entryFee: tourneyData.entryFee
+                                                entryFee: tourneyData.entryFee,
+                                                visibleEntrants: entrants,
+                                                payouts: payouts
                                     });
                                 })
                             });
@@ -245,6 +294,7 @@ class Tourney extends Component {
 
     componentDidUpdate() {
         //console.log(this.state.visibility);
+        //this.calculatePayouts(0.2, 100);
     }
     
     showRegistrationConfirmHandler = () => {
@@ -269,6 +319,69 @@ class Tourney extends Component {
         this.setState({showUnRegistrationConfirm: false});
     }
     
+    calculatePayouts = (entryFee, noEntrants) => {
+        let prizePool = entryFee*noEntrants;
+        let tiers = [];
+        
+        let paidEntrants = Math.ceil(noEntrants*0.1);
+
+        let noTiers = Math.floor(Math.log2(paidEntrants));
+        let tier = 0;
+
+        let noTier = paidEntrants - Math.pow(2, noTiers);
+        
+        let tierObj = {tier: tier, noEntrants: noTier, payout: entryFee};
+        tiers.push(tierObj);
+
+        paidEntrants -= noTier;
+
+        while (paidEntrants > 0) {
+            tier += 1;
+            let noTier = Math.ceil(paidEntrants/2);
+            let tierObj = {"tier": tier, "noEntrants": noTier};
+            tiers.push(tierObj);
+
+            paidEntrants -= noTier;
+        }
+        
+        let tierPayout = (prizePool - tiers[0].noEntrants * tiers[0].payout) / tiers.length;
+
+        for (let i = 1; i<tiers.length-1; i++) {
+            tiers[i].payout = +((tierPayout / tiers[i].noEntrants).toFixed(2));
+        }
+
+        tiers[tiers.length-1].payout = +((tierPayout*2).toFixed(2));
+
+        let sumPayout = 0;
+        for (let i=0; i<tiers.length; i++) {
+            sumPayout += tiers[i].noEntrants*tiers[i].payout;
+        }
+
+        tiers[tiers.length-1].payout += (entryFee*noEntrants) - sumPayout;
+
+        tiers[tiers.length-1].payout = +(tiers[tiers.length-1].payout.toFixed(2));
+
+        let payoutList = [];
+        
+        let rank = 1;
+
+        for (let i = tiers.length - 1; i >= 0; i--) {
+            
+            for (let j = 0; j<tiers[i].noEntrants; j++) {
+                
+                let entrant = {rank: rank, payout: tiers[i].payout}
+                payoutList.push(entrant);
+                rank += 1;
+            }
+        }
+
+        for (let i=0; i<payoutList.length; i++) {
+            console.log(payoutList[i]);
+        }
+        
+        return payoutList;
+    }
+    
     submitHandler = () => {
         let entrants = this.state.entrants;
         
@@ -283,13 +396,27 @@ class Tourney extends Component {
                 axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
                     let newEntrantsArr = res.data.response.entrants; 
                     let newProfitsArr = res.data.response.profits; 
+                    
+                    console.log(newEntrantsArr);
+                    
+                    let entrantsObjs = [];
+                    for (let i=0; i<newEntrantsArr.length; i++) {
+                        let entrant = {username: newEntrantsArr[i], rank: i+1, profit: newProfitsArr[i]};
+                        entrantsObjs.push(entrant);
+                    }
+                    
+                    // CALCULATE THE PAYOUTS
+                    let payouts = this.calculatePayouts(0.01, 100);
+
                     let currentState = {...this.state};
                     currentState['showUnRegistrationConfirm'] = false;
                     currentState['registered'] = false;
                     currentState['noEntrants'] -= 1;
-                    currentState['entrants'] = newEntrantsArr;
+                    currentState['entrants'] = entrantsObjs;
+                    currentState['visibleEntrants'] = entrantsObjs;
                     currentState['entrantProfits'] = newProfitsArr;
                     currentState['balance'] = null;
+                    currentState['payouts'] = payouts;
                     this.setState(currentState);
                 });
             })
@@ -307,15 +434,28 @@ class Tourney extends Component {
             axios.post("/tourneyRegistration", dbEntrantData).then(res => {
                 console.log(res);
                 axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
+                    
                     let newEntrantsArr = res.data.response.entrants; 
                     let newProfitsArr = res.data.response.profits; 
+                    
+                    let entrantsObjs = [];
+                    for (let i=0; i<newEntrantsArr.length; i++) {
+                        let entrant = {username: newEntrantsArr[i], rank: i+1, profit: newProfitsArr[i]};
+                        entrantsObjs.push(entrant);
+                    }
+                    
+                    // CALCULATE THE PAYOUTS
+                    let payouts = this.calculatePayouts(0.01, 100);
+                    
                     let currentState = {...this.state};
                     currentState['showRegistrationConfirm'] = false;
                     currentState['balanceErrorMsg'] = null;
                     currentState['registered'] = true;
                     currentState['noEntrants'] += 1;
-                    currentState['entrants'] = newEntrantsArr;
+                    currentState['entrants'] = entrantsObjs;
+                    currentState['visibleEntrants'] = entrantsObjs;
                     currentState['entrantProfits'] = newProfitsArr;
+                    currentState['payouts'] = payouts;
                     this.setState(currentState);
                 });
             })
@@ -393,6 +533,24 @@ class Tourney extends Component {
     
     cancelSubmitBalanceHandler = () => {
         this.setState({editingBalance: false});
+    }
+    
+    // SEARCH ENTRANTS HANDLER
+    
+    searchEntrantsInputHandler = (event) => {
+        
+        let visibleEntrants = [];
+        if (event.target.value == '') {
+            visibleEntrants = this.state.entrantsObjs;
+        } else {
+            for (let  i=0; i<this.state.entrantsObjs.length; i++) {
+                if (event.target.value == this.state.entrantsObjs[i].username) {
+                    let entrant = {username: this.state.entrantsObjs[i].username, rank: this.state.entrantsObjs[i].rank, profit: this.state.entrantsObjs[i].profit};
+                    visibleEntrants.push(entrant);
+                } 
+            }
+        }
+        this.setState({searchEntrants: event.target.value, visibleEntrants: visibleEntrants});
     }
     
     render() {
@@ -480,13 +638,13 @@ class Tourney extends Component {
         )
         
         let entrantsRows = null;
-        if (this.state.entrants && this.state.entrantProfits) {
-            entrantsRows = this.state.entrants.map((entrant, index) => {
+        if (this.state.entrants && this.state.visibleEntrants) {
+            entrantsRows = this.state.visibleEntrants.map((entrant, index) => {
                 return (
                     <tr key={entrant}>
                         <td>{index+1}</td>
-                        <td>{entrant}</td>
-                        <td>{this.state.entrantProfits[index]}</td>
+                        <td>{entrant.username}</td>
+                        <td>{entrant.profit}</td>
                     </tr>
                 );
             })
@@ -685,6 +843,18 @@ class Tourney extends Component {
             )
         }
         
+        // PAYOUTS
+        let payoutRows = null;
+        if (this.state.payouts.length > 0) {
+            payoutRows = this.state.payouts.map(payout => {
+                return (
+                    <tr key={payout.rank}>
+                        <td>{payout.rank}</td>
+                        <td>{payout.payout}</td>
+                    </tr>
+                );
+            })
+        }
 
         return (
             <div className="tourneyDiv">
@@ -704,9 +874,25 @@ class Tourney extends Component {
                                     {FTXProducts}
                                 </div>
                             </div>
+                            <div className="payoutStruct">
+                                <h3>Payouts</h3>
+                                <table className="payoutStructTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Payout (BTC)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {payoutRows}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div className="entrantsList">
                             <h2>List of Entrants:</h2>
+                            <h3>Search Entrants:</h3>
+                            <input value={this.state.searchEntrants} className="searchEntrantsInput" placeholder="Username" onChange={(event) => this.searchEntrantsInputHandler(event)}/>
                             <ul>{entrants}</ul>
                         </div>
                     </div>

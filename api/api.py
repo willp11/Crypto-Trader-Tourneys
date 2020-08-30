@@ -60,7 +60,8 @@ def getTourneyInfo():
                     'endTime': dbQuery[0].endTime,
                     'quoteCurrency': dbQuery[0].quoteCurrency,
                     'visibility': dbQuery[0].visibility,
-                    'entryFee': dbQuery[0].entryFee
+                    'entryFee': dbQuery[0].entryFee,
+                    'payoutStruct': dbQuery[0].payoutStruct
                    }
     else:
         tourneyInfo = {'tourneyId': "No match"}
@@ -89,7 +90,8 @@ def getActiveTourneyInfo():
                     'endTime': dbQuery[0].endTime,
                     'status': dbQuery[0].status,
                     'quoteCurrency': dbQuery[0].quoteCurrency,
-                    'visibility': dbQuery[0].visibility
+                    'visibility': dbQuery[0].visibility,
+                    'payoutStruct': dbQuery[0].payoutStruct
                    }
     else:
         tourneyInfo = {'tourneyId': "No match"}
@@ -116,7 +118,8 @@ def getCompletedTourneyInfo():
                     'startTime': dbQuery[0].startTime,
                     'endDate': dbQuery[0].endDate,
                     'endTime': dbQuery[0].endTime,
-                    'quoteCurrency': dbQuery[0].quoteCurrency
+                    'quoteCurrency': dbQuery[0].quoteCurrency,
+                    'payoutStruct': dbQuery[0].payoutStruct
                    }
     else:
         tourneyInfo = {'tourneyId': "No match"}
@@ -506,7 +509,7 @@ def createTournament():
     print(endDate, endTime)
     
     session = Session()
-    dbEntry = RegistrationTourneys(hostId=content["hostId"] ,tourneyId = int(content["tourneyId"]), host=content["host"], maxEntrants=content["maxEntrants"],  minEntrants=content["minEntrants"],  noEntrants=0, startDate=content["startDate"], startTime=content["startTime"], endDate=endDate, endTime=endTime, startTS=startTS, endTS=endTS, quoteCurrency=content["quoteCurrency"], visibility=content["visibility"], entryFee=content["entryFee"])
+    dbEntry = RegistrationTourneys(hostId=content["hostId"] ,tourneyId = int(content["tourneyId"]), host=content["host"], maxEntrants=content["maxEntrants"],  minEntrants=content["minEntrants"],  noEntrants=0, startDate=content["startDate"], startTime=content["startTime"], endDate=endDate, endTime=endTime, startTS=startTS, endTS=endTS, quoteCurrency=content["quoteCurrency"], visibility=content["visibility"], entryFee=content["entryFee"], payoutStruct=content["payoutStruct"])
     dbEntry2 = AllTourneys(tourneyId = int(content["tourneyId"]), state = "registering", hostId=content["hostId"])
     session.add(dbEntry)
     session.add(dbEntry2)

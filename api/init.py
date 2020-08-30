@@ -21,4 +21,5 @@ app.config.update(
     SESSION_COOKIE_SAMESITE='Lax'
 )
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+migrate = Migrate()
+migrate.init_app(app, db)

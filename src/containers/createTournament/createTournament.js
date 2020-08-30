@@ -23,7 +23,8 @@ class CreateTournament extends Component {
             duration: null,
             quoteCurrency: null,
             visibility: null,
-            entryFee: null
+            entryFee: null,
+            payoutStruct: null
         },
         redirect: false,
         errorMsg: '',
@@ -40,7 +41,7 @@ class CreateTournament extends Component {
     }
 
     componentDidUpdate() {
-        //console.log(this.state.formData.visibility);
+        console.log(this.state.formData.payoutStruct);
     }
 
     componentWillUnmount() {
@@ -117,7 +118,8 @@ class CreateTournament extends Component {
             productList: this.props.productList,
             tourneyId: null,
             duration: this.state.formData.duration,
-            entryFee: this.state.formData.entryFee
+            entryFee: this.state.formData.entryFee,
+            payoutStruct: this.state.formData.payoutStruct
         }
         
         if (this.checkValidity(dbData)) {
@@ -134,7 +136,8 @@ class CreateTournament extends Component {
             "duration": this.state.formData.duration,
             "quoteCurrency": this.state.formData.quoteCurrency,
             "visibility": this.state.formData.visibility,
-            "entryFee": this.state.formData.entryFee
+            "entryFee": this.state.formData.entryFee,
+            "payoutStruct": this.state.formData.payoutStruct
             }
             
             console.log(newDbData);
@@ -190,6 +193,14 @@ class CreateTournament extends Component {
         let visibility = event.target.name;
         let newData = {...this.state.formData};
         newData['visibility'] = visibility;
+        this.setState({formData: newData});
+    }
+    
+    selectPayoutHandler = (event) => {
+        event.preventDefault();
+        let payout = event.target.name;
+        let newData = {...this.state.formData};
+        newData['payoutStruct'] = payout;
         this.setState({formData: newData});
     }
     
@@ -287,7 +298,7 @@ class CreateTournament extends Component {
                             <CheckDropdown exchange="FTX" title="FTX: Spot" products={FTXSpotProductUSD} productType="spot" /> <br />
                             <CheckDropdown exchange="FTX" title="FTX: Futures" products={FTXFuturesProductsUSD} productType="future" /> <br />
                         </div>
-                        <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>Maximum 10 products per tournament</p>
+                        <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>Maximum 5 products per tournament</p>
                     </div>
                 );
             } 
@@ -316,6 +327,44 @@ class CreateTournament extends Component {
             );
         }
         
+        
+        // PAYOUT STRUCTURE BUTTONS
+        let payoutStructBtns = (
+            <div>
+                <button name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
+                <button name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
+                <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom Top 5</button>
+            </div>
+        );
+
+        let payoutStructDiv = null;
+
+        if (this.state.formData.payoutStruct == "standard") {
+            payoutStructBtns = (
+                <div>
+                    <button className="Selected" name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
+                    <button name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
+                    <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom Top 5</button>
+                </div>
+            );
+        } else if (this.state.formData.payoutStruct == "winnerTakesAll") {
+            payoutStructBtns = (
+                <div>
+                    <button name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
+                    <button className="Selected" name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
+                    <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom Top 5</button>
+                </div>
+            );
+        } else if (this.state.formData.payoutStruct == "custom") {
+            payoutStructBtns = (
+                <div>
+                    <button name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
+                    <button name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
+                    <button className="Selected" name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom Top 5</button>
+                </div>
+            );
+        }
+        
         return (
             <div className="createTournDiv">
                 {redirect}
@@ -327,8 +376,8 @@ class CreateTournament extends Component {
                         <h3>Maximum Number of Entrants:</h3>
                         <Input placeholder="Max no. entrants" changed={(event, key) => this.hostInputHandler(event, 'maxEntrants')}/> <br />
 
-                        <h3>Entry Fee ($):</h3>
-                        <Input placeholder="Entry Fee ($)" changed={(event, key) => this.hostInputHandler(event, 'entryFee')}/> <br />
+                        <h3>Entry Fee (BTC):</h3>
+                        <Input placeholder="Entry Fee (BTC)" changed={(event, key) => this.hostInputHandler(event, 'entryFee')}/> <br />
                             
                         <h3>Currency:</h3>
                         {buttonsDiv}
@@ -349,6 +398,9 @@ class CreateTournament extends Component {
 
                         <h3>Visibility:</h3>
                         {visibilityBtns}
+
+                        <h3>Payout Structure:</h3>
+                        {payoutStructBtns}
 
                         <button className="submitTournBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
                     </form>
