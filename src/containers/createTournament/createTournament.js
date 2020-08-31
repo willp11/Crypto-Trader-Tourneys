@@ -29,7 +29,9 @@ class CreateTournament extends Component {
         redirect: false,
         errorMsg: '',
         productList: null,
-        showProducts: false
+        showProducts: false,
+        numPayoutInputs: 0,
+        payoutInputs: []
     }
     
     componentDidMount() {
@@ -41,7 +43,7 @@ class CreateTournament extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.state.formData.payoutStruct);
+        //console.log(this.state.payoutInputs);
     }
 
     componentWillUnmount() {
@@ -98,7 +100,25 @@ class CreateTournament extends Component {
 //                valid = false;
 //                errorMsg = <p style={{"fontWeight": "bold"}}>The duration must be between 1 to 7 days.</p>
 //            }
-            
+            if (dbData.payoutStruct == "custom") {
+                if (this.state.payoutInputs.length == 0) {
+                    valid = false;
+                    errorMsg = <p style={{"fontWeight": "bold", "color": "#C62828"}}>You have not completed the payout structure.</p>
+                }
+                let sumPayouts = 0;
+                for (let i=0; i<this.state.payoutInputs.length; i++) {
+                    if (this.state.payoutInputs[i].payout == null) {
+                        valid = false;
+                        errorMsg = <p style={{"fontWeight": "bold", "color": "#C62828"}}>You have not filled out all the payouts.</p>
+                    } else {
+                        sumPayouts += parseFloat(this.state.payoutInputs[i].payout);
+                    }
+                }
+                if (sumPayouts != 100) {
+                    valid = false;
+                    errorMsg = <p style={{"fontWeight": "bold", "color": "#C62828"}}>The payouts must sum to 100.</p>
+                }
+            }
         }
         
         this.setState({errorMsg: errorMsg});
@@ -126,18 +146,18 @@ class CreateTournament extends Component {
             let tourneyNumber = Math.floor(Math.random()*1000000000);
             
             let newDbData = {"host": this.props.username,
-            "hostId": this.props.userId,
-            "maxEntrants": this.state.formData.maxEntrants,
-            "minEntrants": this.state.formData.minEntrants,
-            "noEntrants": 0,                 
-            "startDate": this.state.formData.startDate,
-            "startTime": this.state.formData.startTime,
-            "tourneyId": tourneyNumber,
-            "duration": this.state.formData.duration,
-            "quoteCurrency": this.state.formData.quoteCurrency,
-            "visibility": this.state.formData.visibility,
-            "entryFee": this.state.formData.entryFee,
-            "payoutStruct": this.state.formData.payoutStruct
+                "hostId": this.props.userId,
+                "maxEntrants": this.state.formData.maxEntrants,
+                "minEntrants": this.state.formData.minEntrants,
+                "noEntrants": 0,                 
+                "startDate": this.state.formData.startDate,
+                "startTime": this.state.formData.startTime,
+                "tourneyId": tourneyNumber,
+                "duration": this.state.formData.duration,
+                "quoteCurrency": this.state.formData.quoteCurrency,
+                "visibility": this.state.formData.visibility,
+                "entryFee": this.state.formData.entryFee,
+                "payoutStruct": this.state.formData.payoutStruct,
             }
             
             console.log(newDbData);
@@ -149,14 +169,27 @@ class CreateTournament extends Component {
                 } else if (this.state.formData.quoteCurrency == 'BTC') {
                     balance = 1;
                 }
+                
                 axios.post('/tourneyRegistration', {"tourneyId": tourneyNumber, "userId": this.props.userId, "username": this.props.username, "balance": balance}).then(res => {
                     console.log(res.data);
                     axios.post('/registerProducts', {"products": this.props.productList, "tourneyId": tourneyNumber}).then(res => {
                         console.log(res.data);
+                        
+                        if (this.state.formData.payoutStruct == "custom") {
+                            axios.post('/createCustomPayout', {"payoutValues": this.state.payoutInputs, "tourneyId": tourneyNumber}).then(res => {
+                                console.log(res.data);
+                            })
+                        }
+                        
                         this.props.emptyProductList();
                     });
                 });
             });
+            
+            if (this.state.formData.payoutStruct == "custom") {
+                // get all the inputs
+                // POST to API endpoint to add to provisional custom payouts table
+            }
 
             let newState = {
                 ...this.state
@@ -202,6 +235,21 @@ class CreateTournament extends Component {
         let newData = {...this.state.formData};
         newData['payoutStruct'] = payout;
         this.setState({formData: newData});
+    }
+    
+    customPayoutCreateInputs = (event) => {
+        event.preventDefault();
+        let payoutInputs = [];
+        for (let i = 0; i<event.target.value; i++) {
+            payoutInputs[i] = {rank: i+1, payout: null};
+        }
+        this.setState({numPayoutInputs: event.target.value, payoutInputs: payoutInputs});
+    }
+    
+    customPayoutInputHandler = (event, index) => {
+        let payoutInputs = [...this.state.payoutInputs];
+        payoutInputs[index] = {rank: index+1, payout: event.target.value};
+        this.setState({payoutInputs: payoutInputs});
     }
     
     render() {
@@ -337,8 +385,6 @@ class CreateTournament extends Component {
             </div>
         );
 
-        let payoutStructDiv = null;
-
         if (this.state.formData.payoutStruct == "standard") {
             payoutStructBtns = (
                 <div>
@@ -360,9 +406,50 @@ class CreateTournament extends Component {
                 <div>
                     <button name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
                     <button name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
-                    <button className="Selected" name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom Top 5</button>
+                    <button className="Selected" name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom</button>
                 </div>
             );
+        }
+        
+        // PAYOUT STRUCTURE DIV
+        let payoutStructDiv = null;
+        if (this.state.formData.payoutStruct) {
+            if (this.state.formData.payoutStruct == "standard") {
+                payoutStructDiv = (
+                    <div>
+                        <p  style={{"fontSize": "0.8rem"}}>The top 10% of entrants are paid.</p>
+                        <p  style={{"fontSize": "0.8rem"}}>For more information on how the payouts are calculated using the standard structure please read the FAQ.</p>
+                    </div>
+                );
+            } else if (this.state.formData.payoutStruct == "winnerTakesAll") {
+                payoutStructDiv = (
+                    <div>  
+                        <p  style={{"fontSize": "0.8rem"}}>100% of the prize pool goes to the winner.</p>
+                    </div>
+                );
+            } else if (this.state.formData.payoutStruct == "custom") {
+                let payoutInputsArr = [];
+                for (let i=0; i<this.state.numPayoutInputs; i++) {
+                    payoutInputsArr.push(i);
+                }
+                    
+                let payoutInputs = payoutInputsArr.map((payout, index) => {
+                    return (
+                        <div key={index}>
+                            <label htmlFor={"input"+index}>Rank {index+1}</label>
+                            <input type="number" name={"input"+index} style={{"textAlign": "center", "width":"100px"}} placeholder="% of payouts" onChange={(event) => this.customPayoutInputHandler(event, index)}/>
+                        </div>
+                    );
+                })
+                payoutStructDiv = (
+                    <div>
+                        <p style={{"fontSize": "0.8rem"}}>How many paid places do you want?</p>
+                        <p style={{"fontSize": "0.8rem"}}>The payouts must sum to 100% and be increasing in size the higher the rank.</p>
+                        <input value={this.state.numPayoutInputs} style={{"textAlign": "center"}} type="number" placeholder="No. Paid Places" onChange={event => this.customPayoutCreateInputs(event)} /> <br/>
+                        {payoutInputs}
+                    </div>
+                );
+            }
         }
         
         return (
@@ -401,10 +488,12 @@ class CreateTournament extends Component {
 
                         <h3>Payout Structure:</h3>
                         {payoutStructBtns}
+                        {payoutStructDiv}
 
                         <button className="submitTournBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
+                        {this.state.errorMsg}
                     </form>
-                    {this.state.errorMsg}
+                    
                 </div>
             </div>
         )

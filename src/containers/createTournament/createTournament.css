@@ -31,6 +31,10 @@
     color: #D9E2EC;
 }
 
+.createTournDiv label {
+    color: #D9E2EC;
+}
+
 .createTournSubDiv {
     background-color: #243B53;
     height: auto;

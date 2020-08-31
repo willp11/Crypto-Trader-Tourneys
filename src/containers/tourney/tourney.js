@@ -62,7 +62,21 @@ class Tourney extends Component {
                     console.log(res.data);
                     
                     // CALCULATE THE PAYOUTS
-                    let payouts = this.calculatePayouts(0.01, 100);
+                    let payoutStruct = res.data.payoutStruct;
+                    let payouts;
+                    let prizePool = res.data.entryFee * res.data.noEntrants;
+                    if (payoutStruct == "standard") {
+                        payouts = this.calculatePayouts(res.data.entryFee, res.data.noEntrants);
+                    } else if (payoutStruct == "winnerTakesAll") {
+                        payouts = [{rank: 1, payoutPercent: 100, payout: prizePool}];
+                    } else if (payoutStruct == "custom") {
+                        axios.post('/getCustomPayout', {"tourneyId": this.state.tourneyId}).then(res => {
+                            payouts = res.data.response;
+                            for (let i=0 ; i<payouts.length; i++) {
+                                payouts[i]['payout'] = (payouts[i].payoutPercent / 100) * prizePool;
+                            }
+                        })
+                    }
                     
                     this.setState({quoteCurrency: res.data.quoteCurrency});
 
@@ -108,6 +122,7 @@ class Tourney extends Component {
                                                     visibility: tourneyData.visibility,
                                                     entryFee: tourneyData.entryFee,
                                                     visibleEntrants: entrantsObjs,
+                                                    payoutStruct: payoutStruct,
                                                     payouts: payouts
                                         });
                                     })
@@ -130,6 +145,7 @@ class Tourney extends Component {
                                                 visibility: tourneyData.visibility,
                                                 entryFee: tourneyData.entryFee,
                                                 visibleEntrants: entrantsObjs,
+                                                payoutStruct: payoutStruct,
                                                 payouts: payouts
                                     });
                                 }
@@ -147,7 +163,21 @@ class Tourney extends Component {
                     console.log(res.data);
                     
                     // CALCULATE THE PAYOUTS
-                    let payouts = this.calculatePayouts(0.01, 100);
+                    let payoutStruct = res.data.payoutStruct;
+                    let payouts;
+                    let prizePool = res.data.entryFee * res.data.noEntrants;
+                    if (payoutStruct == "standard") {
+                        payouts = this.calculatePayouts(res.data.entryFee, res.data.noEntrants);
+                    } else if (payoutStruct == "winnerTakesAll") {
+                        payouts = [{rank: 1, payoutPercent: 100, payout: prizePool}];
+                    } else if (payoutStruct == "custom") {
+                        axios.post('/getCustomPayout', {"tourneyId": this.state.tourneyId}).then(res => {
+                            payouts = res.data.response;
+                            for (let i=0 ; i<payouts.length; i++) {
+                                payouts[i]['payout'] = (payouts[i].payoutPercent / 100) * prizePool;
+                            }
+                        })
+                    }
                     
                     this.setState({quoteCurrency: res.data.quoteCurrency});
 
@@ -198,6 +228,7 @@ class Tourney extends Component {
                                                         visibility: tourneyData.visibility,
                                                         entryFee: tourneyData.entryFee,
                                                         visibleEntrants: entrantsObjs,
+                                                        payoutStruct: payoutStruct,
                                                         payouts: payouts
                                             });
                                         });
@@ -220,6 +251,7 @@ class Tourney extends Component {
                                                     visibility: tourneyData.visibility,
                                                     entryFee: tourneyData.entryFee,
                                                     visibleEntrants: entrantsObjs,
+                                                    payoutStruct: payoutStruct,
                                                     payouts: payouts
                                         });
                                     }
@@ -236,8 +268,21 @@ class Tourney extends Component {
                     console.log(res.data);
                     
                     // CALCULATE THE PAYOUTS
-                    
-                    let payouts = this.calculatePayouts(0.01, 100);
+                    let payoutStruct = res.data.payoutStruct;
+                    let payouts;
+                    let prizePool = res.data.entryFee * res.data.noEntrants;
+                    if (payoutStruct == "standard") {
+                        payouts = this.calculatePayouts(res.data.entryFee, res.data.noEntrants);
+                    } else if (payoutStruct == "winnerTakesAll") {
+                        payouts = [{rank: 1, payoutPercent: 100, payout: prizePool}];
+                    } else if (payoutStruct == "custom") {
+                        axios.post('/getCustomPayout', {"tourneyId": this.state.tourneyId}).then(res => {
+                            payouts = res.data.response;
+                            for (let i=0 ; i<payouts.length; i++) {
+                                payouts[i]['payout'] = (payouts[i].payoutPercent / 100) * prizePool;
+                            }
+                        })
+                    }
                     
                     this.setState({quoteCurrency: res.data.quoteCurrency});
                     
@@ -281,6 +326,7 @@ class Tourney extends Component {
                                                 completed: true,
                                                 entryFee: tourneyData.entryFee,
                                                 visibleEntrants: entrants,
+                                                payoutStruct: payoutStruct,
                                                 payouts: payouts
                                     });
                                 })
@@ -374,8 +420,9 @@ class Tourney extends Component {
                 rank += 1;
             }
         }
-
+        
         for (let i=0; i<payoutList.length; i++) {
+            payoutList[i]['payoutPercent'] = +(((payoutList[i].payout / prizePool)*100).toFixed(2));
             console.log(payoutList[i]);
         }
         
@@ -384,7 +431,7 @@ class Tourney extends Component {
     
     submitHandler = () => {
         let entrants = this.state.entrants;
-        
+
         if (entrants.includes(this.props.username)) {
             
             // remove from SQL entrants list
@@ -396,7 +443,7 @@ class Tourney extends Component {
                 axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
                     let newEntrantsArr = res.data.response.entrants; 
                     let newProfitsArr = res.data.response.profits; 
-                    
+    
                     console.log(newEntrantsArr);
                     
                     let entrantsObjs = [];
@@ -406,14 +453,33 @@ class Tourney extends Component {
                     }
                     
                     // CALCULATE THE PAYOUTS
-                    let payouts = this.calculatePayouts(0.01, 100);
+                    let payouts;
+                    let prizePool = this.state.entryFee * (this.state.noEntrants-1);
+                    let payoutStruct = this.state.payoutStruct;
+
+                    if (payoutStruct == "standard") {
+                        payouts = this.calculatePayouts(this.state.entryFee, this.state.noEntrants-1);
+                    } else if (payoutStruct == "winnerTakesAll") {
+                        payouts = [{rank: 1, payoutPercent: 100, payout: prizePool}];
+                    } else if (payoutStruct == "custom") {
+                        axios.post('/getCustomPayout', {"tourneyId": this.state.tourneyId}).then(res => {
+                            payouts = res.data.response;
+                            for (let i=0 ; i<payouts.length; i++) {
+                                payouts[i]['payout'] = (payouts[i].payoutPercent / 100) * prizePool;
+                            }
+                            let currentState = {...this.state};
+                            currentState['payouts'] = payouts;
+                            this.setState(currentState);
+                        })
+                    }
 
                     let currentState = {...this.state};
                     currentState['showUnRegistrationConfirm'] = false;
                     currentState['registered'] = false;
                     currentState['noEntrants'] -= 1;
-                    currentState['entrants'] = entrantsObjs;
-                    currentState['visibleEntrants'] = entrantsObjs;
+                    currentState['entrants'] = newEntrantsArr;
+                    currentState['entrantsObjs'] = entrantsObjs;
+                    currentState['visibleEntrants'] = entrantsObjs;;
                     currentState['entrantProfits'] = newProfitsArr;
                     currentState['balance'] = null;
                     currentState['payouts'] = payouts;
@@ -445,14 +511,32 @@ class Tourney extends Component {
                     }
                     
                     // CALCULATE THE PAYOUTS
-                    let payouts = this.calculatePayouts(0.01, 100);
+                    let payouts;
+                    let prizePool = this.state.entryFee * (this.state.noEntrants+1);
+                    let payoutStruct = this.state.payoutStruct;
+                    if (payoutStruct == "standard") {
+                        payouts = this.calculatePayouts(this.state.entryFee, this.state.noEntrants+1);
+                    } else if (payoutStruct == "winnerTakesAll") {
+                        payouts = [{rank: 1, payoutPercent: 100, payout: prizePool}];
+                    } else if (payoutStruct == "custom") {
+                        axios.post('/getCustomPayout', {"tourneyId": this.state.tourneyId}).then(res => {
+                            payouts = res.data.response;
+                            for (let i=0 ; i<payouts.length; i++) {
+                                payouts[i]['payout'] = (payouts[i].payoutPercent / 100) * prizePool;
+                            }
+                            let currentState = {...this.state};
+                            currentState['payouts'] = payouts;
+                            this.setState(currentState);
+                        })
+                    }
                     
                     let currentState = {...this.state};
                     currentState['showRegistrationConfirm'] = false;
                     currentState['balanceErrorMsg'] = null;
                     currentState['registered'] = true;
                     currentState['noEntrants'] += 1;
-                    currentState['entrants'] = entrantsObjs;
+                    currentState['entrants'] = newEntrantsArr;
+                    currentState['entrantsObjs'] = entrantsObjs;
                     currentState['visibleEntrants'] = entrantsObjs;
                     currentState['entrantProfits'] = newProfitsArr;
                     currentState['payouts'] = payouts;
@@ -694,7 +778,7 @@ class Tourney extends Component {
         if (!this.state.registered && this.state.tourneyState == "active") {
             balance = (
                 <div>
-                    <h3>Balance:</h3>
+                    <h3>Balance</h3>
                     <p>You are not registered</p>
                 </div>
             )
@@ -811,6 +895,8 @@ class Tourney extends Component {
                     {endTimePa}
                     <h3>Entry Fee</h3>
                     <p>{this.state.entryFee}</p>
+                    <h3>Payout Structure</h3>
+                    <p>{this.state.payoutStruct}</p>
                     {balance}
                     {registerBtn}<br/>
                     {balanceErrorMsg}
@@ -845,16 +931,20 @@ class Tourney extends Component {
         
         // PAYOUTS
         let payoutRows = null;
-        if (this.state.payouts.length > 0) {
-            payoutRows = this.state.payouts.map(payout => {
-                return (
-                    <tr key={payout.rank}>
-                        <td>{payout.rank}</td>
-                        <td>{payout.payout}</td>
-                    </tr>
-                );
-            })
+        if (this.state.payouts) {
+            if (this.state.payouts.length > 0) {
+                payoutRows = this.state.payouts.map(payout => {
+                    return (
+                        <tr key={payout.rank}>
+                            <td>{payout.rank}</td>
+                            <td>{payout.payout}</td>
+                            <td>{payout.payoutPercent}</td>
+                        </tr>
+                    );
+                })
+            }
         }
+            
 
         return (
             <div className="tourneyDiv">
@@ -880,7 +970,8 @@ class Tourney extends Component {
                                     <thead>
                                         <tr>
                                             <th>Rank</th>
-                                            <th>Payout (BTC)</th>
+                                            <th>BTC</th>
+                                            <th>% Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>

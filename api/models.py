@@ -183,3 +183,17 @@ class DepositWithdrawHistory(db.Model):
     txHash = db.Column(db.String(100), nullable=False)
     status = db.Column(db.String(16), nullable=False)
     noConfirmations = db.Column(db.Integer, nullable=False)
+    
+class PayoutsCustomProvisional(db.Model):
+    __tablename__ = "payoutsCustomProvisional"
+    payoutId = db.Column(db.Integer, primary_key=True)
+    tourneyId = db.Column(db.Integer, nullable=False)
+    rank = db.Column(db.Integer, nullable=False)
+    payoutPercent = db.Column(db.Float, nullable=False)
+    
+    
+    
+    
+    
+    
+    

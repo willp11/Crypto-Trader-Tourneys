@@ -89,7 +89,7 @@
     flex-wrap: nowrap;
     width: 90vw;
     margin: 0 auto;
-    height: 800px;
+    height: 870px;
     border: 2px solid #102A43;
     border-radius: 10px;
     box-sizing: border-box;
@@ -147,7 +147,7 @@
 }
 
 .entrantsList {
-    height: 800px;
+    height: 870px;
     width: 30vw;
     overflow: scroll;
     box-sizing: border-box;
@@ -170,7 +170,7 @@
 }
 
 .productList {
-    height: 800px;
+    height: 870px;
     width: 30vw;
     overflow: scroll;
     box-sizing: border-box;
@@ -259,7 +259,7 @@
 }
 
 .payoutStructTable th {
-    width: 140px;
+    width: 100px;
     outline: thin solid #D9E2EC;
     font-weight: bold;
     padding: 5px;
@@ -267,7 +267,7 @@
 }
 
 .payoutStructTable td {
-    width: 140px;
+    width: 100px;
     border-top: thin solid #102A43;
     border-bottom: thin solid #102A43;
     font-size: 0.9rem;

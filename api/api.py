@@ -2,7 +2,7 @@ import time
 from init import app, db
 from flask import request
 from sqlalchemy.orm import sessionmaker
-from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys, TourneyInvites, AccountBalances
+from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys, TourneyInvites, AccountBalances, PayoutsCustomProvisional
 import datetime
 
 engine = db.engine
@@ -919,6 +919,37 @@ def getBalance():
     
     return {"balance": balance}
     
+@app.route('/createCustomPayout', methods=['POST'])
+def createCustomPayout():
+    content = request.json
+    
+    session = Session()
+    
+    for payout in content["payoutValues"]:
+        dbEntry = PayoutsCustomProvisional(tourneyId=content["tourneyId"], rank=payout["rank"], payoutPercent=payout["payout"])
+        session.add(dbEntry)
+        
+    session.commit()
+    session.close()
+    
+    return {"response": "success"}
+    
+@app.route('/getCustomPayout', methods=['POST'])
+def getCustomPayout():
+    content = request.json
+    
+    session = Session()
+    
+    payouts = []
+    
+    for query in session.query(PayoutsCustomProvisional).filter_by(tourneyId=content["tourneyId"]):
+        payout = {"rank": query.rank, "payoutPercent": query.payoutPercent}
+        payouts.append(payout)
 
+    session.close()
+    
+    return {"response": payouts} 
+    
+    
     
     
