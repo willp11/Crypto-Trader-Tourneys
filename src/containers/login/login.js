@@ -3,6 +3,7 @@ import Input from '../../components/UI/Input/Input';
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import './login.css';
+import {firebaseAuth} from "../../firebase/firebase";
 
 import * as actions from '../../store/actions/index';
 
@@ -39,7 +40,10 @@ class Login extends Component {
                 touched: false
             }
         },
-        errorMsg: null
+        errorMsg: null,
+        resetPassword: false,
+        resetEmailAddress: '',
+        
     };
 
     componentDidMount() {
@@ -62,6 +66,30 @@ class Login extends Component {
         event.preventDefault();
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, false);
     }
+    
+    resetPassEmailInput = (event) => {
+        let email = event.target.value;
+        this.setState({resetEmailAddress: email});
+    }
+    
+    resetPassHandler = () => {
+        this.setState({resetPassword: true});
+    }
+    
+    cancelResetPassword = () => {
+        this.setState({resetPassword: false});
+    }
+    
+    onResetPassword = (email) => {
+        console.log(email);
+        console.log(firebaseAuth);
+        firebaseAuth.sendPasswordResetEmail(email).then(() => {
+            console.log('Password Reset Email Sent Successfully!');
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
 
     render () {
         
@@ -76,6 +104,20 @@ class Login extends Component {
         }
         if (this.props.error) {
             errorMsg = <p>{this.props.error}</p>
+        }
+            
+        let resetPasswordModal = null;
+        if (this.state.resetPassword) {
+            resetPasswordModal = (
+                <div className="darkBg">
+                    <div className="resetPasswordDiv">
+                        <p>Enter your email address to send reset password email.</p>
+                        <input value={this.state.resetEmailAddress} placeholder="Email Address" onChange={(event) => this.resetPassEmailInput(event)}/>< br/>
+                        <button onClick={this.cancelResetPassword}>Cancel</button>
+                        <button onClick={(email) => this.onResetPassword(this.state.resetEmailAddress)}>Confirm</button>
+                    </div>
+                </div>
+            );
         }
         
         return (
@@ -92,10 +134,13 @@ class Login extends Component {
                         </form>
                     </div>
                     <div className="goToSignUpDiv" style={{textAlign: "center"}}>  
+                        <p>Forgot your password?</p>
+                        <button onClick={this.resetPassHandler}>Reset Password</button>
                         <p>Don't have an account yet?</p>
                         <NavLink to="/register" style={{textDecoration: "none"}}><button className="goToSignUpBtn">Go To Sign-up Page</button></NavLink>
                     </div>
                 </div>
+                {resetPasswordModal}
             </div>
         )
     }

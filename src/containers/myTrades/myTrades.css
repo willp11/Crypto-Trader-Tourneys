@@ -1,0 +1,76 @@
+.MyTradesDiv {
+    margin-top: 0;
+    background-color: #102A43;
+    height: auto;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 80px 0px 80px 0px;
+}
+
+.MyTradesDiv h1 {
+    color: #D9E2EC;
+}
+
+.MyTradesDiv h2 {
+    color: #D9E2EC;
+}
+
+.TradesTable {
+    margin: 0 auto;
+    border: 1px solid #102A43;
+    border-collapse: collapse;
+    background-color: #D9E2EC;
+    color: #102A43;
+}
+
+.TradesTable thead {
+    border-collapse: collapse;
+    background-color: #243B53;
+    color: #D9E2EC;
+}
+
+.TradesTable tbody button {
+    background-color: rgb(77, 134, 247);
+    color: #D9E2EC;
+}
+
+.TradesTable th {
+    width: 120px;
+    outline: thin solid #D9E2EC;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.TradesTable td {
+    width: 120px;
+    border-top: thin solid #102A43;
+    border-bottom: thin solid #102A43;
+    font-size: 0.9rem;
+    padding: 5px;
+    border-left: none;
+    border-right: none;
+}
+
+.TradesTable tr {
+    outline: thin solid #102A43;
+}
+
+/* large devices  desktops, 992px to 1200px)*/
+@media (max-width: 1200px) {  
+
+}
+
+/* Large devices (desktops, 768px to 992px )*/
+@media (max-width: 992px) {  
+
+}
+
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-width: 768px) {  
+
+}
+
+/* Small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
+
+}

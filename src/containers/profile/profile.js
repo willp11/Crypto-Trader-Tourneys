@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import { NavLink, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import {firebaseAuth} from "../../firebase/firebase";
 
 class Profile extends Component {
     
@@ -21,6 +22,19 @@ class Profile extends Component {
     }
     
     componentDidMount() {
+        
+        firebaseAuth.onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+            console.log("hello logged in");
+            // ...
+          } else {
+            // User is signed out.
+            // ...
+            console.log("goodbye not logged in");
+          }
+        });
+        
         if (this.props.userId) {
             this.props.getUsernameEmail(this.props.userId);
             this.props.getMyTourneys(this.props.userId);

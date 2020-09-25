@@ -48,7 +48,7 @@ for tournament in activeTournaments:
         # get the user Id and starting balance
         userId = query.userId
         username =query.username
-        startingBalance = -100
+        startingBalance = 1000
         # startingbalance = query.startingBalance
         
         print("User: " + userId)
@@ -62,7 +62,7 @@ for tournament in activeTournaments:
         for product in products:
             
             productName=product['name']
-            #print(product)
+            print(product)
             
             string = "https://ftx.com/api/fills?market=" + productName
 
@@ -90,6 +90,8 @@ for tournament in activeTournaments:
             res = s.send(prepared)
 
             trades = res.json()['result']
+            
+            print(trades)
             
             # Create a position object for each product
             if len(trades) > 0:
@@ -155,64 +157,64 @@ for tournament in activeTournaments:
         print("Profit: " + str(totalProfit))
         
         # change the user's profit value in active entrants table
-        dbQuery = session.query(ActiveEntrants).filter_by(userId=userId).one()
+        dbQuery = session.query(ActiveEntrants).filter_by(userId=userId, tourneyId=tournament).one()
         dbQuery.profit = totalProfit
         session.add(dbQuery)
         
-        if totalProfit + startingBalance <= 0:
-            print("User is liquidated!")
-            
-            # if the user has been liquidated, then add all their trades to the trades list, add them to completed entrants table and remove from active entrants table
-            for product in products:
-                
-                currentTimestamp = datetime.datetime.utcnow().timestamp()
-                
-                # add to completed entrants
-                dbEntry = CompletedEntrants(tourneyId=tournament, userId=userId, username=username, totalInvested=totalInvested, totalValue=totalVal, profit=totalProfit, timestamp=currentTimestamp)
-                session.add(dbEntry)
-                
-                # delete from active entrants
-                session.delete(query)
-                        
-                # get all trades to add to trades list
-                productName=product['name']
-
-                string = "https://ftx.com/api/fills?market=" + productName
-
-                ts = int(time.time() * 1000)
-
-                payload = {"start_time": startTS}
-
-                # call the FTX API
-                request = Request('GET', string, params=payload)
-                prepared = request.prepare()
-
-                signature_payload = f'{ts}{prepared.method}{prepared.path_url}'.encode()
-                if prepared.body:
-                    signature_payload += prepared.body
-
-                signature = hmac.new(API_secret.encode(), signature_payload, 'sha256').hexdigest()
-
-                prepared.headers['FTX-KEY'] = API_key
-                prepared.headers['FTX-SIGN'] = signature
-                prepared.headers['FTX-TS'] = str(ts)
-
-                s = requests.Session()
-                res = s.send(prepared)
-
-                trades = res.json()['result']
-                
-                for trade in trades:
-                    side = trade['side']
-                    price = trade['price']
-                    qty = trade['size']
-
-                    tradeTime = trade['time'][0:len(trade['time'])-13]
-
-                    timestamp = datetime.datetime.strptime(tradeTime, "%Y-%m-%dT%H:%M:%S").timestamp()
-                    
-                    dbEntry = Trades(userId=userId, tourneyId=tournament, productName=productName,  exchange=product['exchange'], side=side, quantity=qty, price=price, timestamp=timestamp)
-                    session.add(dbEntry)
+#        if totalProfit + startingBalance <= 0:
+#            print("User is liquidated!")
+#            
+#            # if the user has been liquidated, then add all their trades to the trades list, add them to completed entrants table and remove from active entrants table
+#            for product in products:
+#                
+#                currentTimestamp = datetime.datetime.utcnow().timestamp()
+#                
+#                # add to completed entrants
+#                dbEntry = CompletedEntrants(tourneyId=tournament, userId=userId, username=username, totalInvested=totalInvested, totalValue=totalVal, profit=totalProfit, timestamp=currentTimestamp)
+#                session.add(dbEntry)
+#                
+#                # delete from active entrants
+#                session.delete(query)
+#                        
+#                # get all trades to add to trades list
+#                productName=product['name']
+#
+#                string = "https://ftx.com/api/fills?market=" + productName
+#
+#                ts = int(time.time() * 1000)
+#
+#                payload = {"start_time": startTS}
+#
+#                # call the FTX API
+#                request = Request('GET', string, params=payload)
+#                prepared = request.prepare()
+#
+#                signature_payload = f'{ts}{prepared.method}{prepared.path_url}'.encode()
+#                if prepared.body:
+#                    signature_payload += prepared.body
+#
+#                signature = hmac.new(API_secret.encode(), signature_payload, 'sha256').hexdigest()
+#
+#                prepared.headers['FTX-KEY'] = API_key
+#                prepared.headers['FTX-SIGN'] = signature
+#                prepared.headers['FTX-TS'] = str(ts)
+#
+#                s = requests.Session()
+#                res = s.send(prepared)
+#
+#                trades = res.json()['result']
+#                
+#                for trade in trades:
+#                    side = trade['side']
+#                    price = trade['price']
+#                    qty = trade['size']
+#
+#                    tradeTime = trade['time'][0:len(trade['time'])-13]
+#
+#                    timestamp = datetime.datetime.strptime(tradeTime, "%Y-%m-%dT%H:%M:%S").timestamp()
+#                    
+#                    dbEntry = Trades(userId=userId, tourneyId=tournament, productName=productName,  exchange=product['exchange'], side=side, quantity=qty, price=price, timestamp=timestamp)
+#                    session.add(dbEntry)
                 
         #commit the changes for that user
         session.commit()

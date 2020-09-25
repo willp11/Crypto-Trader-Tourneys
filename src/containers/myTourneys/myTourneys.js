@@ -102,7 +102,7 @@ class MyTourneys extends Component {
                     activeTourneys[i]['untilEnd'] = untilEnd;
 
                     // duration
-                    let duration = (tourneys[i].endTS - tourneys[i].startTS) / 60 / 60 / 24;
+                    let duration = (activeTourneys[i].endTS - activeTourneys[i].startTS) / 60 / 60 / 24;
                     activeTourneys[i]['duration'] = duration;
                 }
 

@@ -2,7 +2,7 @@ import time
 from init import app, db
 from flask import request
 from sqlalchemy.orm import sessionmaker
-from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys, TourneyInvites, AccountBalances, PayoutsCustomProvisional
+from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys, TourneyInvites, AccountBalances, PayoutsCustomProvisional, Trades
 import datetime
 
 engine = db.engine
@@ -88,9 +88,9 @@ def getActiveTourneyInfo():
                     'startTime': dbQuery[0].startTime,
                     'endDate': dbQuery[0].endDate,
                     'endTime': dbQuery[0].endTime,
-                    'status': dbQuery[0].status,
                     'quoteCurrency': dbQuery[0].quoteCurrency,
                     'visibility': dbQuery[0].visibility,
+                    'entryFee': dbQuery[0].entryFee,
                     'payoutStruct': dbQuery[0].payoutStruct
                    }
     else:
@@ -119,6 +119,8 @@ def getCompletedTourneyInfo():
                     'endDate': dbQuery[0].endDate,
                     'endTime': dbQuery[0].endTime,
                     'quoteCurrency': dbQuery[0].quoteCurrency,
+                    'visibility': dbQuery[0].visibility,
+                    'entryFee': dbQuery[0].entryFee,
                     'payoutStruct': dbQuery[0].payoutStruct
                    }
     else:
@@ -243,7 +245,6 @@ def getActiveTourneys():
                 'startTime': dbQuery.startTime,
                 'endDate': dbQuery.endDate,
                 'endTime': dbQuery.endTime,
-                'status': dbQuery.status,
                 'startTS': dbQuery.startTS,
                 'endTS': dbQuery.endTS,
                 'entryFee': dbQuery.entryFee
@@ -362,7 +363,6 @@ def getMyActiveTourneys():
                 'startTime': dbQuery.startTime,
                 'endDate': dbQuery.endDate,
                 'endTime': dbQuery.endTime,
-                'status': dbQuery.status,
                 'startTS': dbQuery.startTS,
                 'endTS': dbQuery.endTS,
                 'entryFee': dbQuery.entryFee
@@ -424,38 +424,53 @@ def getMyHostedTourneys():
     content = request.json
     
     tourneys = []
-    tourneyIds = []
+
     session = Session()
     
-    for dbQuery in session.query(AllTourneys).filter_by(hostId=content["userId"]).all():
-        tourneyIds.append(dbQuery.tourneyId)
+    for tourney in session.query(AllTourneys).filter_by(hostId=content["userId"]).all():
+        tourneys.append({'tourneyId': tourney.tourneyId, 'status': tourney.state});
+    print(tourneys);
     
-    print (tourneyIds)
-    if len(tourneyIds) > 0:
-        for tourneyId in tourneyIds:
-            dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=tourneyId).all()
-            tourneyStatus = "registration"
-            if len(dbQuery) == 0:
-                dbQuery = session.query(ActiveTourneys).filter_by(tourneyId=tourneyId).all()
-                tourneyStatus = "active"
-            if len(dbQuery) == 0:
-                dbQuery = session.query(CompletedTourneys).filter_by(tourneyId=tourneyId).all()
-                tourneyStatus = "completed"
-            tourney = {}
-            tourney = {'tourneyId': dbQuery[0].tourneyId,
-                    'host': dbQuery[0].host,
-                    'maxEntrants': dbQuery[0].maxEntrants,
-                    'noEntrants': dbQuery[0].noEntrants,
-                    'startDate': dbQuery[0].startDate,
-                    'startTime': dbQuery[0].startTime,
-                    'endDate': dbQuery[0].endDate,
-                    'endTime': dbQuery[0].endTime,
-                    'startTS': dbQuery[0].startTS,
-                    'endTS': dbQuery[0].endTS,
-                    'status': tourneyStatus,
-                    'entryFee': dbQuery[0].entryFee
-            }
-            tourneys.append(tourney)
+    if len(tourneys) > 0:
+        for tourney in tourneys:
+            
+            if tourney['status'] == "registering":
+                tourneyObj = session.query(RegistrationTourneys).filter_by(tourneyId=tourney["tourneyId"]).one()
+                tourney['host'] = tourneyObj.host
+                tourney['maxEntrants'] = tourneyObj.maxEntrants
+                tourney['noEntrants'] = tourneyObj.noEntrants
+                tourney['startDate'] = tourneyObj.startDate
+                tourney['startTime'] = tourneyObj.startTime
+                tourney['endDate'] = tourneyObj.endDate
+                tourney['endTime'] = tourneyObj.endTime
+                tourney['startTS'] = tourneyObj.startTS
+                tourney['endTS'] = tourneyObj.endTS
+                tourney['entryFee'] = tourneyObj.entryFee
+            elif tourney['status'] == "active":
+                tourneyObj = session.query(ActiveTourneys).filter_by(tourneyId=tourney["tourneyId"]).one()
+                tourney['host'] = tourneyObj.host
+                tourney['maxEntrants'] = tourneyObj.maxEntrants
+                tourney['noEntrants'] = tourneyObj.noEntrants
+                tourney['startDate'] = tourneyObj.startDate
+                tourney['startTime'] = tourneyObj.startTime
+                tourney['endDate'] = tourneyObj.endDate
+                tourney['endTime'] = tourneyObj.endTime
+                tourney['startTS'] = tourneyObj.startTS
+                tourney['endTS'] = tourneyObj.endTS
+                tourney['entryFee'] = tourneyObj.entryFee
+            elif tourney['status'] == "active":
+                tourneyObj = session.query(ActiveTourneys).filter_by(tourneyId=tourney["tourneyId"]).one()
+                tourney['host'] = tourneyObj.host
+                tourney['maxEntrants'] = tourneyObj.maxEntrants
+                tourney['noEntrants'] = tourneyObj.noEntrants
+                tourney['startDate'] = tourneyObj.startDate
+                tourney['startTime'] = tourneyObj.startTime
+                tourney['endDate'] = tourneyObj.endDate
+                tourney['endTime'] = tourneyObj.endTime
+                tourney['startTS'] = tourneyObj.startTS
+                tourney['endTS'] = tourneyObj.endTS
+                tourney['entryFee'] = tourneyObj.entryFee
+
         
     session.close()
 
@@ -740,7 +755,7 @@ def getActiveEntrants():
     entrantObjs = []
     
     for query in dbQuery:
-        entrant = (query.username, query.profit)
+        entrant = (query.username, query.profitPercent)
         entrantObjs.append(entrant)
     
     session.commit()
@@ -949,6 +964,38 @@ def getCustomPayout():
     session.close()
     
     return {"response": payouts} 
+    
+@app.route('/getMyTrades', methods=['POST'])
+def getMyTrades():
+    content = request.json
+    
+    session = Session()
+    
+    trades = []
+    
+    for query in session.query(Trades).filter_by(userId=content["userId"]).all():
+        trade = {}
+        trade["tourneyId"] = query.tourneyId
+        trade["productName"] = query.productName
+        trade["exchange"] = query.exchange
+        trade["side"] = query.side
+        trade["quantity"] = query.quantity
+        trade["price"] = query.price
+        trade["date"] = query.date
+        trade["time"] = query.time
+        trades.append(trade)
+        
+    session.close()
+    
+    return {"response": trades}
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

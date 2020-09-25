@@ -38,12 +38,12 @@ for query in session.query(ActiveTourneys).all():
             session.add(dbEntry)
         
         # copy the tournament to CompletedTourneys
-        dbEntry = CompletedTourneys(tourneyId=query.tourneyId, host=query.host, hostId=query.hostId, minEntrants=query.minEntrants, maxEntrants=query.maxEntrants, noEntrants=query.noEntrants, startTime=query.startTime, startDate=query.startDate, endTime=query.endTime, endDate=query.endDate, startTS=query.startTS, endTS=query.endTS, quoteCurrency=query.quoteCurrency, entryFee=query.entryFee)
+        dbEntry = CompletedTourneys(tourneyId=query.tourneyId, host=query.host, hostId=query.hostId, minEntrants=query.minEntrants, maxEntrants=query.maxEntrants, noEntrants=query.noEntrants, startTime=query.startTime, startDate=query.startDate, endTime=query.endTime, endDate=query.endDate, startTS=query.startTS, endTS=query.endTS, quoteCurrency=query.quoteCurrency, visibility=query.visibility, entryFee=query.entryFee, payoutStruct=query.payoutStruct)
         session.add(dbEntry)
         
         # copy the entrants to CompletedEntrants
         for entrant in session.query(ActiveEntrants).filter_by(tourneyId=query.tourneyId).all():
-            dbEntry = CompletedEntrants(tourneyId=query.tourneyId, userId=entrant.userId, username=entrant.username, totalInvested=entrant.totalInvested, totalValue=entrant.totalValue, profit=entrant.profit, timestamp=endTimestamp, balance=entrant.balance)
+            dbEntry = CompletedEntrants(tourneyId=query.tourneyId, userId=entrant.userId, username=entrant.username, profit=entrant.profit, profitPercent=entrant.profitPercent, balance=entrant.balance)
             session.add(dbEntry)
         
             # Get each entrants's list of trades and store in the trades table
@@ -78,7 +78,7 @@ for query in session.query(ActiveTourneys).all():
 
                     timestamp = datetime.datetime.strptime(tradeTime, "%Y-%m-%dT%H:%M:%S").timestamp()
                     
-                    dbEntry = Trades(userId=userId, tourneyId=tournament, productName=productName, exchange=product['exchange'], side=side, quantity=qty, price=price, timestamp=timestamp)
+                    dbEntry = Trades(userId=entrant.userId, tourneyId=query.tourneyId, productName=productName, exchange=product['exchange'], side=side, quantity=qty, price=price, timestamp=timestamp)
                     session.add(dbEntry)
                     
         # update the all tourneys table

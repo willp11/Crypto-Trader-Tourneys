@@ -114,7 +114,14 @@ export const auth = (email, password, isSignup, username) => {
                     });
         
                     axios.post('/createUser', {userId: response.user.uid, username: username}).then(res => {
-                       axios.post('/createAPI', {userId: response.user.uid, API1: '', API2: '', API3: ''}).then(res => console.log(res.data));
+                        axios.post('/createAPI', {userId: response.user.uid, API1: '', API2: '', API3: ''}).then(res => {
+                            console.log(res.data);
+                            firebaseAuth.currentUser.sendEmailVerification().then(() => {
+                                console.log("email sent");
+                            }).catch(error => {
+                                console.error(error);
+                            })
+                       })                                                                           
                     });
                     
                 })
@@ -175,7 +182,6 @@ export const authCheckState = () => {
     }
 }
 
-
 export const updatePassword = (newPassword) => {
     
     return dispatch => {
@@ -197,3 +203,19 @@ export const updatePassword = (newPassword) => {
     }
 
 };
+
+export const resetPassword = (email) => {
+    
+    firebaseAuth.sendPasswordReset(email).then(() => {
+        console.log('Password Reset Email Sent Successfully!');
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    
+}
+
+
+
+
+

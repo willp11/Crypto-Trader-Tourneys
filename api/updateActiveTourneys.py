@@ -37,12 +37,12 @@ for query in session.query(RegistrationTourneys).all():
         print("active tourney: " + str(tourneyId))
         
         # copy the tournament to ActiveTourneys
-        dbEntry = ActiveTourneys(tourneyId=query.tourneyId, host=query.host, hostId=query.hostId, minEntrants=query.minEntrants, maxEntrants=query.maxEntrants, noEntrants=query.noEntrants, startTime=query.startTime, startDate=query.startDate, endTime=query.endTime, endDate=query.endDate, startTS=query.startTS, endTS=query.endTS, quoteCurrency=query.quoteCurrency, status="active", visibility=query.visibility, entryFee=query.entryFee)
+        dbEntry = ActiveTourneys(tourneyId=query.tourneyId, host=query.host, hostId=query.hostId, minEntrants=query.minEntrants, maxEntrants=query.maxEntrants, noEntrants=query.noEntrants, startTime=query.startTime, startDate=query.startDate, endTime=query.endTime, endDate=query.endDate, startTS=query.startTS, endTS=query.endTS, quoteCurrency=query.quoteCurrency, visibility=query.visibility, entryFee=query.entryFee, payoutStruct=query.payoutStruct, lastUpdated=query.startTS)
         session.add(dbEntry)
         
         # copy the entrants to ActiveEntrants
         for entrant in session.query(Entrants).filter_by(tourneyId=query.tourneyId).all():
-            dbEntry = ActiveEntrants(tourneyId=query.tourneyId, userId=entrant.userId, username=entrant.username, totalInvested=0.0, totalValue=0.0, profit=0.0, timestamp=startTimestamp, balance=entrant.balance)
+            dbEntry = ActiveEntrants(tourneyId=query.tourneyId, userId=entrant.userId, username=entrant.username, profit=0.0, profitPercent=0.0, balance=entrant.balance, liquidated=False)
             session.add(dbEntry)
         
         # copy the products to ActiveProducts

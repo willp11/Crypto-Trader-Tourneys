@@ -5,13 +5,15 @@
     width: 100vw;
     z-index: 0;
     padding-top: 80px;
+    background-size: 100vw 100vh;
+    box-sizing: border-box;
 }
 
 .homeDiv h1 {
     color: #D9E2EC;
 }
 
-.homeDiv h3 {
+.homeDiv h2 {
     color: #D9E2EC;
 }
 
@@ -20,13 +22,20 @@
     background-color: #243B53;
     width: 800px;
     margin: 0 auto;
-    padding: 20px;
-    position: relative;
     border-radius: 20px;
-    top: 40px;
     box-sizing: border-box;
+    background-color: rgb(36, 59, 83, 0.5);
 }
 
+.homeMainHead {
+    position: relative;
+    font-size: 4.8rem;
+}
+
+.homeMainSubHead {
+    position: relative;
+    font-size: 3.2rem;
+}
 
 /* large devices  desktops, 992px to 1200px)*/
 @media (max-width: 1200px) {  
@@ -34,7 +43,11 @@
 }
 
 /* Large devices (desktops, 768px to 992px )*/
-@media (max-width: 992px) {  
+@media (max-width: 992px) {
+    .homeDiv {
+        background-size: 1000px 800px;
+    }
+    
     .homeSubDiv {
         width: 90vw;
     }
@@ -51,11 +64,11 @@
 @media (max-width: 576px) {  
     
     .homeDiv h1 {
-        font-size: 1.2rem;
+        font-size: 3.6rem;
     }
 
-    .homeDiv h3 {
-        font-size: 1rem;
+    .homeDiv h2 {
+        font-size: 2.8rem;
     }
 
 }
