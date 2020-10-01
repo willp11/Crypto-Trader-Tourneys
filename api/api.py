@@ -29,6 +29,17 @@ def getAllProducts():
         
     return response
 
+@app.route('/getUsernameEmail', methods=['POST'])
+def getUsernameEmail():
+    
+    content = request.json
+    session = Session()
+    dbQuery = session.query(Usernames).filter_by(userId=content["userId"]).one()
+    username = dbQuery.username
+    email = dbQuery.email
+    
+    return {"response": {"username": username, "email": email}}
+
 @app.route('/getTourneyState', methods=['POST'])
 def getTourneyState():
     content = request.json
@@ -481,7 +492,7 @@ def createUser():
     content = request.json
     
     session = Session()
-    dbEntry = Usernames(userId=content["userId"], username=content["username"])
+    dbEntry = Usernames(userId=content["userId"], username=content["username"], email=content["email"])
     dbEntry2 = AccountBalances(userId=content["userId"], balance=1)
     session.add(dbEntry)
     session.add(dbEntry2)
@@ -838,13 +849,16 @@ def getAPIInfo():
     content = request.json
     
     session = Session()
-    dbQuery = session.query(UserAPI).filter_by(userId=content["userId"]).one()
-    FTXKey = dbQuery.FTXKey
-    FTXSecret = dbQuery.FTXSecret
+    dbQuery = session.query(UserAPI).filter_by(userId=content["userId"]).all()
+    if len(dbQuery) > 0:
+        FTXKey = dbQuery[0].FTXKey
+        FTXSecret = dbQuery[0].FTXSecret
     
-    session.close()
+        session.close()
     
-    return {"FTX": {"key": FTXKey, "secret": FTXSecret}}
+        return {"FTX": {"key": FTXKey, "secret": FTXSecret}}
+    else:
+        return {"FTX": {"key": '', "secret": ''}}
     
 @app.route('/editStartBalance', methods=['POST'])
 def editStartBalance():

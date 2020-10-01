@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import './login.css';
 import {firebaseAuth} from "../../firebase/firebase";
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 import * as actions from '../../store/actions/index';
 
@@ -43,13 +44,24 @@ class Login extends Component {
         errorMsg: null,
         resetPassword: false,
         resetEmailAddress: '',
-        
+        resetErrorMsg: null
     };
 
     componentDidMount() {
+        
+        // set the redirect to profile page
         this.props.onSetAuthRedirectPath();
+        // check if the user is already logged in
+        firebaseAuth.onAuthStateChanged((user) => {
+          if (user) {
+            // User is signed in, redirect to profile page
+            console.log("hello logged in");
+              this.props.onSignedIn(firebaseAuth.currentUser.xa, firebaseAuth.currentUser.uid);
+          } 
+        });
     }
     
+    // handler for input fields
     changeInputHandler = (event, controlName) => {
         const updatedControls = {
             ...this.state.controls,
@@ -62,32 +74,34 @@ class Login extends Component {
         this.setState({controls: updatedControls});    
     };
 
+    // submit button
     submitHandler = (event) => {
         event.preventDefault();
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, false);
     }
     
+    // handler for reset password input field
     resetPassEmailInput = (event) => {
         let email = event.target.value;
         this.setState({resetEmailAddress: email});
     }
-    
+    // show the reset pass div
     resetPassHandler = () => {
         this.setState({resetPassword: true});
     }
-    
+    // hide the reset pass div
     cancelResetPassword = () => {
         this.setState({resetPassword: false});
     }
-    
+    // reset the password
     onResetPassword = (email) => {
-        console.log(email);
-        console.log(firebaseAuth);
         firebaseAuth.sendPasswordResetEmail(email).then(() => {
-            console.log('Password Reset Email Sent Successfully!');
+            // pass reset successfully
+            this.setState({resetPassword: false});
         })
         .catch(error => {
             console.error(error);
+            this.setState({resetErrorMsg: error.message});
         });
     }
 
@@ -106,15 +120,21 @@ class Login extends Component {
             errorMsg = <p>{this.props.error}</p>
         }
             
+        let spinner = null;
+        if (this.props.loading) {
+            spinner = <Spinner />
+        }
+            
         let resetPasswordModal = null;
         if (this.state.resetPassword) {
             resetPasswordModal = (
                 <div className="darkBg">
                     <div className="resetPasswordDiv">
                         <p>Enter your email address to send reset password email.</p>
-                        <input value={this.state.resetEmailAddress} placeholder="Email Address" onChange={(event) => this.resetPassEmailInput(event)}/>< br/>
-                        <button onClick={this.cancelResetPassword}>Cancel</button>
-                        <button onClick={(email) => this.onResetPassword(this.state.resetEmailAddress)}>Confirm</button>
+                        <input className="resetPassInput" value={this.state.resetEmailAddress} placeholder="Email Address" onChange={(event) => this.resetPassEmailInput(event)}/>< br/>
+                        <button className="resetBtn" onClick={this.cancelResetPassword}>Cancel</button>
+                        <button className="submitBtn" onClick={(email) => this.onResetPassword(this.state.resetEmailAddress)}>Confirm</button>
+                        <p>{this.state.resetErrorMsg}</p>
                     </div>
                 </div>
             );
@@ -132,10 +152,11 @@ class Login extends Component {
                             <button className="loginSubmitBtn" onClick={this.submitHandler}>Submit</button><br/>
                             {errorMsg}
                         </form>
+                        {spinner}
                     </div>
                     <div className="goToSignUpDiv" style={{textAlign: "center"}}>  
                         <p>Forgot your password?</p>
-                        <button onClick={this.resetPassHandler}>Reset Password</button>
+                        <button className="resetPassBtn" onClick={this.resetPassHandler}>Reset Password</button>
                         <p>Don't have an account yet?</p>
                         <NavLink to="/register" style={{textDecoration: "none"}}><button className="goToSignUpBtn">Go To Sign-up Page</button></NavLink>
                     </div>
@@ -149,7 +170,8 @@ class Login extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup)),
-        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/profile'))
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/profile')),
+        onSignedIn: (token, userId) => dispatch(actions.authSuccess(token, userId))
     };
 };
 

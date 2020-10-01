@@ -1,6 +1,6 @@
 .registerDiv {
     margin-top: 0;
-    background-color: #102A43;
+    background-color: #161616;
     height: auto;
     min-height: 100vh;
     width: 100vw;
@@ -17,23 +17,21 @@
 }
 
 .registerSubDiv {
-    background-color: #243B53;
-    height: 500px;
+    background-color: #212121;
+    height: auto;
     width: 500px;
     margin: 0 auto;
-    padding-top: 20px;
+    padding: 20px 0 40px 0;
     box-sizing: border-box;
     position: relative;
-    border: 2px solid #102A43;
     border-radius: 20px;
 }
 
 .registerFormDiv {
-    background-color: #334E68;
+    background-color: #323232;
     width: 300px;
     margin: 0 auto;
     padding: 20px 0px 20px 0px;
-    border: 1px solid #102A43;
     border-radius: 20px;
 }
 
@@ -52,17 +50,16 @@
 }
 
 .goToLoginDiv {
-    background-color: #334E68;
+    background-color: #323232;
     width: 300px;
     margin: 0 auto;
-    padding: 0px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
     margin-top: 40px;
-    border: 1px solid #102A43;
     border-radius: 10px;
 }
 
 .goToLoginBtn {
-    background-color: rgb(77, 134, 247);
+    background-color: #303f9f;
     color: #D9E2EC;
     padding: 5px;
     border-radius: 5px;
@@ -83,19 +80,30 @@
 /* medium devices (landscape phones, 576px to 768px)*/
 @media (max-width: 768px) {  
     .registerSubDiv {
-        width: 100vw;
+        width: 90vw;
     }
 }
 
 /* Small devices (landscape phones, 576px and below)*/
 @media (max-width: 576px) {  
-    
     .registerSubDiv h1 {
-        font-size: 1.2rem;
+        font-size: 1.8rem;
     }
 
     .registerSubDiv h3 {
         font-size: 1rem;
+    }
+    .goToLoginDiv {
+        width: 80vw;
+    }
+    .registerFormDiv {
+        width: 80vw;
+    }
+}
+
+@media (max-height: 576px) and (min-width: 576px) {
+    .registerDiv {
+        height: 100vw;
     }
 
 }

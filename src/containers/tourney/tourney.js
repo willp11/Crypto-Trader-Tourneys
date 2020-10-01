@@ -778,7 +778,7 @@ class Tourney extends Component {
         if (!this.state.registered && this.state.tourneyState == "active") {
             balance = (
                 <div>
-                    <h3>Balance</h3>
+                    <h3>Starting Balance</h3>
                     <p>You are not registered</p>
                 </div>
             )
@@ -796,7 +796,7 @@ class Tourney extends Component {
             
             balance = (
                 <div>
-                    <h3>Balance:</h3>
+                    <h3>Starting Balance:</h3>
                     <p>{this.state.balance} {this.state.quoteCurrency}</p>
                 </div>
             )

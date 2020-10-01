@@ -1,6 +1,6 @@
 .loginDiv {
     margin-top: 0;
-    background-color: #102A43;
+    background-color: #161616;
     height: auto;
     min-height: 100vh;
     width: 100vw;
@@ -9,32 +9,30 @@
 }
 
 .loginDiv h1 {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .loginDiv p {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .loginSubDiv {
-    background-color: #243B53;
-    height: 500px;
+    background-color: #212121;
+    height: auto;
     width: 500px;
     margin: 0 auto;
-    padding-top: 20px;
+    padding: 20px 0 40px 0;
     box-sizing: border-box;
     position: relative;
-    border: 2px solid #102A43;
     border-radius: 20px;
     top: 40px;
 }
 
 .loginFormDiv {
-    background-color: #334E68;
+    background-color: #323232;
     width: 300px;
     margin: 0 auto;
     padding: 20px 0px 20px 0px;
-    border: 1px solid #102A43;
     border-radius: 20px;
     position: relative;
 }
@@ -54,17 +52,16 @@
 }
 
 .goToSignUpDiv {
-    background-color: #334E68;
+    background-color: #323232;
     width: 300px;
     margin: 0 auto;
-    padding: 0px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
     margin-top: 40px;
-    border: 1px solid #102A43;
     border-radius: 10px;
 }
 
 .goToSignUpBtn {
-    background-color: rgb(77, 134, 247);
+    background-color: #303f9f;
     color: #D9E2EC;
     padding: 5px;
     border-radius: 5px;
@@ -77,6 +74,7 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0,0,0,0.4);
+    z-index: 100000000000000;
 }
 
 .resetPasswordDiv {
@@ -85,11 +83,25 @@
     top: 35%;
     transform: translate(-50%, -50%);
     z-index: 10000000000;
-    border: 1px solid #102A43;
-    background-color: #334E68;
+    border: 0.5px solid rgb(166, 17, 17);
+    background-color: #323232;
     padding: 20px;
     height: auto;
     width: 400px;
+    box-sizing: border-box;
+}
+
+.resetPassBtn {
+    background-color: #303f9f;
+    color: #D9E2EC;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.resetPassInput {
+    text-align: center;
+    width: 180px;
+    margin-bottom: 10px;
 }
 
 /* large devices  desktops, 992px to 1200px)*/
@@ -107,19 +119,35 @@
 /* medium devices (landscape phones, 576px to 768px)*/
 @media (max-width: 768px) {  
     .loginSubDiv {
-        width: 100vw;
+        width: 90vw;
     }
 }
 
 /* Small devices (landscape phones, 576px and below)*/
 @media (max-width: 576px) {  
-    
-    .loginSubDiv h1 {
-        font-size: 1.2rem;
+    .loginDiv {
+        padding-bottom: 40px;
     }
+    .loginSubDiv {
+        padding: 10px 0 40px 0;
+    }
+    .loginSubDiv h1 {
+        font-size: 2rem;
+    }
+    .resetPasswordDiv {
+        width: 90vw;
+    }
+    .goToSignUpDiv {
+        width: 80vw;
+    }
+    .loginFormDiv {
+        width: 80vw;
+    }
+}
 
-    .loginSubDiv h3 {
-        font-size: 1rem;
+@media (max-height: 576px) and (min-width: 576px) {
+    .loginDiv {
+        height: 100vw;
     }
 
 }

@@ -241,9 +241,9 @@ class RegistrationTourneys extends Component {
 
         if (this.state.showFilters) {
             filtersDiv = (
-                <div className="showFiltersDiv">
+                <div className="darkBg">
                     <div className="modalDiv">
-                        <h3>Search Tournaments</h3>
+                        <h3>Filter Tournaments</h3>
                         <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Hide Search</button> <br/>
                         <div className="searchForm">
                             <input value={this.state.search.tourneyId} onChange={(event, key) => this.updateSearch(event, "tourneyId")} placeholder="Tournament id" /> <br/>

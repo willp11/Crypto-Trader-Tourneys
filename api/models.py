@@ -5,6 +5,7 @@ class Usernames(db.Model):
     __tablename__ = "usernames"
     userId = db.Column(db.String(50), primary_key=True)
     username = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
     entrants = relationship("Entrants", cascade="all, delete")
     activeEntrants = relationship("ActiveEntrants", cascade="all, delete")
     apis = relationship("UserAPI", cascade="all, delete")
@@ -152,6 +153,7 @@ class CompletedEntrants(db.Model):
     userId = db.Column(db.String(50), db.ForeignKey('usernames.userId'), nullable=False)
     username = db.Column(db.String(100), nullable=False)
     profit = db.Column(db.Float, nullable=False)
+    profitPercent = db.Column(db.Float, nullable=False)
     balance = db.Column(db.Float, nullable=False)
     
 class CompletedProducts(db.Model):

@@ -1,11 +1,12 @@
 .createTournDiv {
     margin-top: 0;
-    background-color: #102A43;
+    background-color: #161616;
     height: auto;
     min-height: 100vh;
     width: 100vw;
     padding: 120px 0 40px 0;
     box-sizing: border-box;
+    -webkit-transform: translateZ(0)
 }
 
 .createTournDiv button {
@@ -14,35 +15,34 @@
 }
 
 .createTournDiv h1 {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .createTournDiv h3 {
     font-size: 1rem;
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .createTournDiv h4 {
     font-size: 0.9rem;
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .createTournDiv p {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .createTournDiv label {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .createTournSubDiv {
-    background-color: #243B53;
+    background-color: #282828;
     height: auto;
     width: 750px;
     margin: 0 auto;
     padding: 20px 20px 30px 20px;
     position: relative;
-    border: 2px solid #102A43;
     border-radius: 20px;
     box-sizing: border-box;
 }
@@ -50,19 +50,20 @@
 .createTournForm {
     width: 600px;
     margin: 0 auto;
-    background-color: #334E68;
+    background-color: #363636;
     padding: 20px 0;
 }
 
 label {
     margin-right: 10px;
+    font-size: 0.8rem;
 }
 
 .submitTournBtn {
     margin-top: 20px;
     font-size: 0.8rem;
     background-color: #00897B;
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .duration {
@@ -70,7 +71,7 @@ label {
 }
 
 .Selected {
-    background-color: rgb(77, 134, 247);
+    background-color: #303f9f;
     color: white;
 }
 

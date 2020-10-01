@@ -5,33 +5,28 @@
     flex-wrap: no-wrap;
     align-content: center;
     justify-content: space-between;
-    border: 2px solid #243B53;
-    font-family: Quicksand;
+/*    border: 2px solid #243B53;*/
+    font-family: Arial;
     height: 80px;
     width: 100vw;
-    background-color: #243B53;
+    background-color: #121212;
     z-index: 100;
     top: 0;
     position: fixed;
+    border-bottom: 2px solid rgb(166, 17, 17);
 }
 
 .NavTop img {
     height: 80px;
-    width: 100px;
-}
-
-.NavTop h2 {
-    position: relative;
-    font-size: 2rem;
-    color: #D9E2EC;
+    width: 340px;
+    margin-left: 5px;
 }
 
 /* Dropdown Button */
 .dropbtn {
-    background-color: #486581;
+    background-color: rgb(166, 17, 17);
     color: white;
     padding: 14px;
-    font-size: 16px;
     border: none;
     width: 80px;
     height: 60px;
@@ -62,56 +57,45 @@
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #486581;
+    background-color: #3b3b3b;
     min-width: 240px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     right: 0;
+    font-size: 1rem;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
     color: #D9E2EC;
-    padding: 6px 8px;
+    padding: 2px 8px;
     text-decoration: none;
     display: block;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #303F9F;}
+.dropdown-content a:hover {background-color: rgb(219, 30, 24);}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #303F9F;}
+.dropdown:hover .dropbtn {background-color: rgb(219, 30, 24);}
 
 /* Small devices (landscape phones, 576px and below)*/
 @media (max-width: 576px) {  
-    .NavTop h2 {
-        font-size: 1.4rem;
-        left: -18px;
-        top: 10px;
-    }
-    
-    .NavTop img {
-        height: 50px;
-        width: 62.5px;
-        position: relative;
-        top: 15px;
-    }
     
     .dropbtn {
         height: 42px;
-        width: 40px;
+        width: 50px;
         padding: 4px 5px;
-        left: 25px;
+        left: 30px;
         top: 0px;
         justify-content: space-around;
     }
     
     .menuLine {
-        width: 30px;
+        width: 40px;
         height: 4px;
     }
 }
@@ -135,8 +119,36 @@
 }
 
 /* medium devices (landscape phones, 576px to 768px)*/
-@media (max-height: 768px) {  
+@media (max-width: 768px) {  
+    
+    .NavTop img {
+        position: relative;
+        top: 15px;
+        height: 55px;
+        width: 237.5px;
+        margin-left: 5px;
+    }
+    
     .dropdown-content a {
         padding: 2px 8px;
+        font-size: 1rem;
     }
 }
+
+/* small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
+    
+    .NavTop img {
+        position: relative;
+        top: 15px;
+        height: 55px;
+        width: 237.5px;
+        margin-left: 5px;
+    }
+    
+    .dropdown-content a {
+        padding: 2px 8px;
+        font-size: 1rem;
+    }
+}
+

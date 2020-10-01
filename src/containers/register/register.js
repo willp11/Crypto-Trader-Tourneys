@@ -4,6 +4,8 @@ import './register.css';
 import { NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
+import {firebaseAuth} from "../../firebase/firebase";
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Register extends Component {
     
@@ -70,31 +72,83 @@ class Register extends Component {
         errorMsg: null
     };
 
+    componentDidMount() {
+        
+        this.props.clearErrorMsg();
+        
+        this.props.onSetAuthRedirectPath();
+        firebaseAuth.onAuthStateChanged((user) => {
+          if (user) {
+            // User is signed in.
+            console.log("hello logged in");
+              console.log(firebaseAuth.currentUser);
+              this.props.onSignedIn(firebaseAuth.currentUser.xa, firebaseAuth.currentUser.uid);
+            // ...
+          } else {
+            // User is signed out.
+            // ...
+            console.log("goodbye not logged in");
+          }
+        });
+    }
+
     checkValidity = (event, controlName) => {
         let errorMessage = null;
         
         if (event.target.value.length < this.state.controls[controlName].validation.minLength && event.target.value.length>0) {
             errorMessage = <p className="errorMsg">{this.state.controls[controlName].elementConfig.placeholder} must be at least {this.state.controls[controlName].validation.minLength} characters!</p>;
+            this.setState({errorMsg: errorMessage});
         };
         
         if (controlName == "username") {
             if (event.target.value.length > this.state.controls[controlName].validation.maxLength) {
-                errorMessage = <p className="errorMsg">Usernames must be less than {this.state.controls[controlName].validation.maxLength} characters!</p>;
+                errorMessage = <p className="errorMsg">Usernames must be {this.state.controls[controlName].validation.maxLength} characters or less!</p>;
             }
+            this.setState({errorMsg: errorMessage});
         }
         
         if (controlName == "repeatPassword") {
             if (event.target.value != this.state.controls["password"].value) {
                 errorMessage = <p className="errorMsg">Passwords don't match!</p>;
             }
+            this.setState({errorMsg: errorMessage});
+        }
+    };
+
+    checkValidityAll = () => {
+        let errorMessage = null;
+        
+        // check username is between 3 and 25 characters
+        if (this.state.controls.username.value.length < this.state.controls.username.validation.minLength )
+        {
+            errorMessage = <p className="errorMsg">Usernames must be at least {this.state.controls.username.validation.minLength} characters!</p>;
+        } else if (this.state.controls.username.value.length > this.state.controls.username.validation.maxLength )
+        {
+            errorMessage = <p className="errorMsg">Usernames must be {this.state.controls.username.validation.maxLength} characters or less!</p>;
+        }
+        
+        // check password is more than 6 characters
+        if (this.state.controls.password.value.length < this.state.controls.password.validation.minLength )
+        {
+            errorMessage = <p className="errorMsg">Password must be at least {this.state.controls.password.validation.minLength} characters!</p>;
+        }
+        
+        // check the repeat password is the same as the password field
+        if (this.state.controls.password.value != this.state.controls.repeatPassword.value )
+        {
+            errorMessage = <p className="errorMsg">Passwords don't match!</p>;
         }
         
         this.setState({errorMsg: errorMessage});
-    };
+        
+        if (errorMessage == null) {
+            this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, true, this.state.controls.username.value);
+        }
+    }
 
     checkFormBlanks = () => {
         let errorMessage = null;
-        if (this.state.controls.email.value == '' || this.state.controls.password.value == '' || this.state.controls.repeatPassword.value == '' || this.state.controls.username.value == '') {
+        if (this.state.controls.emailvalue == '' || this.state.controls.password.value == '' || this.state.controls.repeatPassword.value == '' || this.state.controls.username.value == '') {
             errorMessage = <p className="errorMsg">Not all required information has been completed!</p>
             this.setState({errorMsg: errorMessage})
             return false;
@@ -121,11 +175,8 @@ class Register extends Component {
         event.preventDefault();
         let noBlanks = this.checkFormBlanks();
         if (noBlanks) {
-             if (this.state.errorMsg === null) {
-                this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, true, this.state.controls.username.value);
-            }
+            this.checkValidityAll();
         }
-        
     };
     
     render() {
@@ -137,17 +188,23 @@ class Register extends Component {
             
         let errorMsg = null;
         if (this.state.errorMsg) {
-            errorMsg = this.state.errorMsg;
+            errorMsg = <p>{this.state.errorMsg}</p>;
         }
         if (this.props.error) {
-            errorMsg = this.props.error;
+            errorMsg = <p>{this.props.error}</p>;
+        }
+            
+                
+        let spinner = null;
+        if (this.props.loading) {
+            spinner = <Spinner />
         }
         
         return (
             <div className="registerDiv">
                 {authRedirect}
                 <div className="registerSubDiv">
-                    <h1>Sign Up</h1>
+                    <h1>Create Account</h1>
                     <div className="registerFormDiv">
                         <form className="SignUp" onSubmit={this.submitHandler}>
                             <Input  type={this.state.controls.username.elementConfig.type} placeholder={this.state.controls.username.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "username")}/> <br/>
@@ -157,6 +214,7 @@ class Register extends Component {
                             <button className='registerSubmitBtn'>Submit</button><br />
                             {errorMsg}
                         </form>
+                        {spinner}
                     </div>
                     <div className="goToLoginDiv" style={{textAlign: "center"}}>  
                         <p>Already have an account?</p>
@@ -171,7 +229,9 @@ class Register extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup, username) => dispatch(actions.auth(email, password, isSignup, username)),
-        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/profile')),
+        onSignedIn: (token, userId) => dispatch(actions.authSuccess(token, userId)),
+        clearErrorMsg: () => dispatch(actions.clearError())
     };
 };
 

@@ -1,40 +1,128 @@
 .homeDiv {
     margin-top: 0;
-    background-color: #102A43;
-    height: 100vh;
+    background-color: black;
+    min-height: 100vh;
+    height: auto;
     width: 100vw;
-    z-index: 0;
-    padding-top: 80px;
-    background-size: 100vw 100vh;
+    z-index: 10;
+    padding: 80px 0;
+    background-image: url(../../assets/home-bg-lowres2.jpg);
+    background-size: cover;
     box-sizing: border-box;
+    -webkit-transform: translateZ(0)
+}
+
+.homeDiv2{
+    height: auto;
+    width: 100vw;
+    background-color: rgb(240,240,240);
+    padding-bottom: 40px;
+    z-index: 10;
+    -webkit-transform: translateZ(0)
 }
 
 .homeDiv h1 {
-    color: #D9E2EC;
+    color: rgb(219, 30, 24);
+    font-size: 2.4rem;
+    font-family: 'Catamaran', sans-serif;
 }
 
 .homeDiv h2 {
-    color: #D9E2EC;
+    color: rgb(66, 245, 102);
+    font-size: 2rem;
+    font-family: 'Catamaran', sans-serif;
 }
 
+.homeDiv h3 {
+    color: rgb(255, 187, 0);
+    font-size: 1.6rem;
+    font-family: 'Catamaran', sans-serif;
+}
+
+.homeDiv button {
+    width: 200px;
+    height: 50px;
+    font-size: 1.2rem;
+    background-color: rgb(220,220,220);
+    border-radius: 10px;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+.homeSubDiv p {
+    font-weight: bold;
+}
 
 .homeSubDiv {
-    background-color: #243B53;
+/*    background-color: #243B53;*/
     width: 800px;
     margin: 0 auto;
+    padding: 10px 10px 30px 10px;
+    position: relative;
     border-radius: 20px;
+    top: 20px;
     box-sizing: border-box;
-    background-color: rgb(36, 59, 83, 0.5);
+    background: rgb(20,20,20, 0.8);
 }
 
-.homeMainHead {
-    position: relative;
-    font-size: 4.8rem;
+.infoDiv {
+/*    width: 400px;*/
+    width: 600px;
+    height: auto;
+    border: 1px solid #3B3B3B;
+    border-radius: 15px;
+    margin: 0 auto;
+    padding: 5px;
+    box-sizing: border-box;
+    background: rgb(20,20,20, 0.8);
 }
 
-.homeMainSubHead {
+.infoDiv p {
+    font-size: 1rem;
+    color: #CFCFCF;
+}
+
+.homeLowerSubDivWrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+}
+
+.homeLowerSubDiv {
+    width: 45vw;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 0 auto;
     position: relative;
-    font-size: 3.2rem;
+    top: 20px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.homeLowerSubDiv h2 {
+    font-size: 1.8rem;
+    color: rgb(50,50,50);
+}
+
+.winMoneyImg {
+    width: 30vw;
+    height: 30vw;
+    max-height: 350px;
+    max-width: 350px;
+}
+
+.hostTourneyImg {
+    width: 40vw;
+    height: 26.5vw;
+    max-height: 350px;
+    max-width: 525px;
+}
+
+.homeLowerSubDiv p {
+    font-size: 1rem;
+    color: rgb(20,20,20);
+    font-weight: bold;
 }
 
 /* large devices  desktops, 992px to 1200px)*/
@@ -43,11 +131,7 @@
 }
 
 /* Large devices (desktops, 768px to 992px )*/
-@media (max-width: 992px) {
-    .homeDiv {
-        background-size: 1000px 800px;
-    }
-    
+@media (max-width: 992px) { 
     .homeSubDiv {
         width: 90vw;
     }
@@ -56,20 +140,47 @@
 /* medium devices (landscape phones, 576px to 768px)*/
 @media (max-width: 768px) {  
     .homeSubDiv {
+        top: 0px;
         width: 100vw;
+        margin-top: 40px;
     }
+
+    .infoDiv {
+        width: 90vw;
+    }
+
 }
 
 /* Small devices (landscape phones, 576px and below)*/
 @media (max-width: 576px) {  
-    
+    .homeSubDiv {
+        margin-top: 10px;
+    }
     .homeDiv h1 {
-        font-size: 3.6rem;
+        font-size: 2rem;
+    }
+    
+    .homeDiv h3 {
+        font-size: 1.5rem;
     }
 
     .homeDiv h2 {
-        font-size: 2.8rem;
+        font-size: 1.8rem;
     }
-
+    .homeLowerSubDivWrapper {
+        flex-direction: column;
+    }
+    .homeLowerSubDiv {
+        width: 90vw;
+    }
+    
+    .winMoneyImg {
+        width: 70vw;
+        height: 70vw;
+    }
+    
+    .hostTourneyImg {
+        width: 80vw;
+        height: 52.5vw;
+    }
 }
-

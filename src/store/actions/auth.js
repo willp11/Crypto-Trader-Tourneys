@@ -29,6 +29,12 @@ export const logoutFinal = () => {
     };
 }
 
+export const clearError = () => {
+    return {
+        type: actionTypes.CLEAR_ERROR
+    };
+}
+
 export const logout = () => {
     
     return dispatch => {
@@ -99,7 +105,7 @@ export const auth = (email, password, isSignup, username) => {
                     localStorage.setItem('expirationDate', expirationDate);
                     localStorage.setItem('token', response.user.xa);
                 
-                    // store user in realtime database
+/*                    // store user in realtime database
                     let dbData = {username: username,
                         userId: response.user.uid,
                         email: email
@@ -111,11 +117,13 @@ export const auth = (email, password, isSignup, username) => {
                         
                         dispatch(authSuccess(response.user.xa, response.user.uid));
                         dispatch(checkAuthTimeout(3600));
-                    });
+                    });*/
         
-                    axios.post('/createUser', {userId: response.user.uid, username: username}).then(res => {
+                    axios.post('/createUser', {userId: response.user.uid, username: username, email: email}).then(res => {
                         axios.post('/createAPI', {userId: response.user.uid, API1: '', API2: '', API3: ''}).then(res => {
                             console.log(res.data);
+                            dispatch(authSuccess(response.user.xa, response.user.uid));
+                            dispatch(checkAuthTimeout(3600));
                             firebaseAuth.currentUser.sendEmailVerification().then(() => {
                                 console.log("email sent");
                             }).catch(error => {
@@ -148,12 +156,13 @@ export const setUsernameEmail = (username, email) => {
 export const getUsernameEmail = (userId) => {
     return dispatch => {
         
-        let newRef = "users/" + userId + "/";
-        firebaseDB.ref(newRef).once('value').then((snapshot) => {
-            let username = snapshot.val().username;
-            let email = snapshot.val().email;
+        // call API to get username and email
+        axios.post('/getUsernameEmail', {userId: userId}).then(res => {
+            let username = res.data.response.username;
+            let email = res.data.response.email;
             dispatch(setUsernameEmail(username, email));
-        });
+        })
+        
     }
 }
 

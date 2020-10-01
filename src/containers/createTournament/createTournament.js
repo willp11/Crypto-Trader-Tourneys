@@ -7,8 +7,9 @@ import * as actions from '../../store/actions/index';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 import NavTop from '../../components/navigation/nav-top/nav-top';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
-import { firebaseDB } from '../../firebase/firebase';
+import { firebaseAuth } from '../../firebase/firebase';
 
 class CreateTournament extends Component {
     
@@ -31,10 +32,19 @@ class CreateTournament extends Component {
         productList: null,
         showProducts: false,
         numPayoutInputs: 0,
-        payoutInputs: []
+        payoutInputs: [],
+        loggedIn: true,
+        newTourneyId: null,
+        loading: false
     }
     
     componentDidMount() {
+        
+        let user = firebaseAuth.currentUser;
+        if (!user) {
+            this.setState({loggedIn: false});
+        }
+        
         let productList;
         axios.get('/getAllProducts').then(res => {
             productList=res.data;
@@ -58,7 +68,7 @@ class CreateTournament extends Component {
         let now = new Date();
         let utcNow = new Date(now.getTime() + now.getTimezoneOffset() * 60000).getTime();
         let earliestTS = utcNow + (60*60*1000);
-        let latestTS = utcNow + (60*60*24*1000*30);
+        let latestTS = utcNow + (60*60*24*1000*7);
         
         let givenStart = dbData.startDate + ' ' + dbData.startTime;
         let givenStartTS = new Date(givenStart).getTime();
@@ -67,39 +77,44 @@ class CreateTournament extends Component {
             valid = false;
             errorMsg = <p style={{"fontWeight": "bold"}}>Not all required information has been entered.</p>
         } else {
-//            if (dbData.maxEntrants < 2 || dbData.maxEntrants > 1000) {
-//                valid = false;
-//                errorMsg = <p style={{"fontWeight": "bold"}}>You must have between 2 and 1000 maximum entrants.</p>
-//            }
-//
-//            if (dbData.minEntrants < 2 || dbData.minEntrants > 1000) {
-//                valid = false;
-//                errorMsg = <p style={{"fontWeight": "bold"}}>You must have between 2 and 1000 minimum entrants.</p>
-//            }
-//
-//            if (dbData.startTime[3] != 0 || dbData.startTime[4] != 0 ) {
-//                valid = false;
-//                errorMsg = <p style={{"fontWeight": "bold"}}>You must enter a start time in minutes 00.</p>
-//            }
-//            
-//            if (dbData.productList.length == 0) {
-//                valid = false;
-//                errorMsg = <p style={{"fontWeight": "bold"}}>You must choose at least 1 trading product.</p>
-//            }
+            if (parseInt(dbData.maxEntrants) < 2 || parseInt(dbData.maxEntrants) > 200) {
+                valid = false;
+                errorMsg = <p style={{"fontWeight": "bold"}}>YThe maximum number of entrants must be between 2 and 200.</p>
+            }
+
+            if (parseInt(dbData.minEntrants) < 2 || parseInt(dbData.minEntrants) > 200) {
+                valid = false;
+                errorMsg = <p style={{"fontWeight": "bold"}}>The minimum number of entrants must be between 2 and 200.</p>
+            }
             
-//            if (givenStartTS < earliestTS) {
-//                valid = false;
-//                errorMsg = <p style={{"fontWeight": "bold"}}>The start time must be more than 1 hour from now.</p>
-//            }
-//            if (givenStartTS > latestTS) {
-//                valid = false;
-//                errorMsg = <p style={{"fontWeight": "bold"}}>The start time must be less than 30 days from now.</p>
-//            }
-//
-//            if (dbData.duration < 1 || dbData.duration > 7) {
-//                valid = false;
-//                errorMsg = <p style={{"fontWeight": "bold"}}>The duration must be between 1 to 7 days.</p>
-//            }
+            if (parseInt(dbData.maxEntrants) < parseInt(dbData.minEntrants)) {
+                valid = false;
+                errorMsg = <p style={{"fontWeight": "bold"}}>The minimum number of entrants must be less than the maximum number of entrants.</p>       
+            }
+
+            if (dbData.startTime[3] != 0 || dbData.startTime[4] != 0 ) {
+                valid = false;
+                errorMsg = <p style={{"fontWeight": "bold"}}>Tournaments must start on the hour. E.g. 12:00</p>
+            }
+            
+            if (dbData.productList.length < 1 || dbData.productList.length > 5) {
+                valid = false;
+                errorMsg = <p style={{"fontWeight": "bold"}}>You must choose between 1 and 5 trading products.</p>
+            }
+            
+            if (givenStartTS < earliestTS) {
+                valid = false;
+                errorMsg = <p style={{"fontWeight": "bold"}}>The start time must be more than 1 hour from now.</p>
+            }
+            if (givenStartTS > latestTS) {
+                valid = false;
+                errorMsg = <p style={{"fontWeight": "bold"}}>The start time must be less than 7 days from now.</p>
+            }
+
+            if (parseInt(dbData.duration) < 1 || parseInt(dbData.duration) > 7) {
+                valid = false;
+                errorMsg = <p style={{"fontWeight": "bold"}}>The duration must be between 1 to 7 days.</p>
+            }
             if (dbData.payoutStruct == "custom") {
                 if (this.state.payoutInputs.length == 0) {
                     valid = false;
@@ -112,7 +127,13 @@ class CreateTournament extends Component {
                         errorMsg = <p style={{"fontWeight": "bold", "color": "#C62828"}}>You have not filled out all the payouts.</p>
                     } else {
                         sumPayouts += parseFloat(this.state.payoutInputs[i].payout);
-                    }
+                    }   
+                    if (i > 0) {
+                        if (this.state.payoutInputs[i-1].payout < this.state.payoutInputs[i].payout) {
+                            valid = false;
+                            errorMsg = <p style={{"fontWeight": "bold", "color": "#C62828"}}>The payouts be increasing in size the higher the rank.</p>
+                        }
+                    }   
                 }
                 if (sumPayouts != 100) {
                     valid = false;
@@ -144,7 +165,7 @@ class CreateTournament extends Component {
         
         if (this.checkValidity(dbData)) {
             let tourneyNumber = Math.floor(Math.random()*1000000000);
-            
+    
             let newDbData = {"host": this.props.username,
                 "hostId": this.props.userId,
                 "maxEntrants": this.state.formData.maxEntrants,
@@ -161,7 +182,9 @@ class CreateTournament extends Component {
             }
             
             console.log(newDbData);
+            this.setState({loading: true});
             axios.post('/createTournament', newDbData).then(res => {
+            
                 console.log(res.data);
                 let balance;
                 if (this.state.formData.quoteCurrency == 'USD') {
@@ -170,32 +193,24 @@ class CreateTournament extends Component {
                     balance = 1;
                 }
                 
-                axios.post('/tourneyRegistration', {"tourneyId": tourneyNumber, "userId": this.props.userId, "username": this.props.username, "balance": balance}).then(res => {
+//                axios.post('/tourneyRegistration', {"tourneyId": tourneyNumber, "userId": this.props.userId, "username": this.props.username, "balance": balance}).then(res => {
+//                    console.log(res.data);
+//                });
+                axios.post('/registerProducts', {"products": this.props.productList, "tourneyId": tourneyNumber}).then(res => {
                     console.log(res.data);
-                    axios.post('/registerProducts', {"products": this.props.productList, "tourneyId": tourneyNumber}).then(res => {
-                        console.log(res.data);
-                        
-                        if (this.state.formData.payoutStruct == "custom") {
-                            axios.post('/createCustomPayout', {"payoutValues": this.state.payoutInputs, "tourneyId": tourneyNumber}).then(res => {
-                                console.log(res.data);
-                            })
-                        }
-                        
-                        this.props.emptyProductList();
-                    });
+                    
+                    if (this.state.formData.payoutStruct == "custom") {
+                        axios.post('/createCustomPayout', {"payoutValues": this.state.payoutInputs, "tourneyId": tourneyNumber}).then(res => {
+                            console.log(res.data);
+                            this.setState({newTourneyId: tourneyNumber, loading: false, redirect: true});
+                        })
+                    } else {
+                        this.setState({newTourneyId: tourneyNumber, loading: false, redirect: true});
+                    }
+
+                    this.props.emptyProductList();
                 });
             });
-            
-            if (this.state.formData.payoutStruct == "custom") {
-                // get all the inputs
-                // POST to API endpoint to add to provisional custom payouts table
-            }
-
-            let newState = {
-                ...this.state
-            };
-            newState["redirect"] = true;
-            this.setState(newState);
 
             //this.props.getMyTourneys(this.props.userId);
             
@@ -240,10 +255,16 @@ class CreateTournament extends Component {
     customPayoutCreateInputs = (event) => {
         event.preventDefault();
         let payoutInputs = [];
-        for (let i = 0; i<event.target.value; i++) {
+        let numInputs;
+        if (event.target.value <= 10) {
+            numInputs = event.target.value;
+        } else {
+            numInputs = 10;
+        }
+        for (let i = 0; i<numInputs; i++) {
             payoutInputs[i] = {rank: i+1, payout: null};
         }
-        this.setState({numPayoutInputs: event.target.value, payoutInputs: payoutInputs});
+        this.setState({numPayoutInputs: numInputs, payoutInputs: payoutInputs});
     }
     
     customPayoutInputHandler = (event, index) => {
@@ -254,14 +275,19 @@ class CreateTournament extends Component {
     
     render() {
         
+        let spinner = null;
+        if (this.state.loading) {
+            spinner = <Spinner />
+        }
+        
         let redirect = null;
-        if (this.state.redirect) {
+        if (this.state.redirect && !this.state.loading) {
             redirect = (
-                <Redirect to="/allTournaments" />
+                <Redirect to={"/tourneys/"+this.state.newTourneyId} />
             );
         }
         
-        if (!this.props.userId) {
+        if (!this.state.loggedIn) {
             redirect = (
                 <Redirect to="/login" />
             )
@@ -326,7 +352,7 @@ class CreateTournament extends Component {
                             <CheckDropdown exchange="FTX" title="FTX: Spot" products={FTXSpotProductUSD} productType="spot" /> <br />
                             <CheckDropdown exchange="FTX" title="FTX: Futures" products={FTXFuturesProductsUSD} productType="future" /> <br />
                         </div>
-                        <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>Maximum 10 products per tournament</p>
+                        <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>Maximum 5 products per tournament</p>
                     </div>
                 );
             } else if (this.state.showProducts == 'USD') {
@@ -381,7 +407,7 @@ class CreateTournament extends Component {
             <div>
                 <button name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
                 <button name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
-                <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom Top 5</button>
+                <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom</button>
             </div>
         );
 
@@ -390,7 +416,7 @@ class CreateTournament extends Component {
                 <div>
                     <button className="Selected" name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
                     <button name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
-                    <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom Top 5</button>
+                    <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom</button>
                 </div>
             );
         } else if (this.state.formData.payoutStruct == "winnerTakesAll") {
@@ -398,7 +424,7 @@ class CreateTournament extends Component {
                 <div>
                     <button name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
                     <button className="Selected" name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
-                    <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom Top 5</button>
+                    <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom</button>
                 </div>
             );
         } else if (this.state.formData.payoutStruct == "custom") {
@@ -437,15 +463,15 @@ class CreateTournament extends Component {
                     return (
                         <div key={index}>
                             <label htmlFor={"input"+index}>Rank {index+1}</label>
-                            <input type="number" name={"input"+index} style={{"textAlign": "center", "width":"100px"}} placeholder="% of payouts" onChange={(event) => this.customPayoutInputHandler(event, index)}/>
+                            <input type="number" name={"input"+index} style={{"textAlign": "center", "width":"100px", "fontSize": "0.8rem"}} placeholder="% of payout" onChange={(event) => this.customPayoutInputHandler(event, index)}/>
                         </div>
                     );
                 })
                 payoutStructDiv = (
                     <div>
-                        <p style={{"fontSize": "0.8rem"}}>How many paid places do you want?</p>
+                        <p style={{"fontSize": "0.8rem"}}>How many paid places do you want? (maximum of 10)</p>
                         <p style={{"fontSize": "0.8rem"}}>The payouts must sum to 100% and be increasing in size the higher the rank.</p>
-                        <input value={this.state.numPayoutInputs} style={{"textAlign": "center"}} type="number" placeholder="No. Paid Places" onChange={event => this.customPayoutCreateInputs(event)} /> <br/>
+                        <input value={this.state.numPayoutInputs} style={{"textAlign": "center"}} type="number" max="10" placeholder="No. Paid Places" onChange={event => this.customPayoutCreateInputs(event)} /> <br/>
                         {payoutInputs}
                     </div>
                 );
@@ -459,9 +485,9 @@ class CreateTournament extends Component {
                     <h1>Create New Tournament</h1>
                     <form className="createTournForm">
                         <h3>Minimum Number of Entrants:</h3>
-                        <Input placeholder="Min no. entrants" changed={(event, key) => this.hostInputHandler(event, 'minEntrants')}/> <br />
+                        <input type="number" min="2" max="200" placeholder="Min no. entrants" style={{"width": "180px", "textAlign": "center"}} onChange={(event, key) => this.hostInputHandler(event, 'minEntrants')}/> <br />
                         <h3>Maximum Number of Entrants:</h3>
-                        <Input placeholder="Max no. entrants" changed={(event, key) => this.hostInputHandler(event, 'maxEntrants')}/> <br />
+                        <input type="number" min="2" max="200" placeholder="Max no. entrants" style={{"width": "180px", "textAlign": "center"}} onChange={(event, key) => this.hostInputHandler(event, 'maxEntrants')}/> <br />
 
                         <h3>Entry Fee (BTC):</h3>
                         <Input placeholder="Entry Fee (BTC)" changed={(event, key) => this.hostInputHandler(event, 'entryFee')}/> <br />
@@ -492,6 +518,7 @@ class CreateTournament extends Component {
 
                         <button className="submitTournBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
                         {this.state.errorMsg}
+                        {spinner}
                     </form>
                     
                 </div>

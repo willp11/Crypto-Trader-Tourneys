@@ -43,7 +43,6 @@ class App extends Component {
             <div className="App">
                 <NavTop />
                 {routes}
-                <NavBottom />
             </div>
         )   
     }

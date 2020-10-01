@@ -36,10 +36,10 @@
 
 .modalDiv {
     z-index: 10000000000;
-    position: absolute;
+    position: fixed;
     float: left;
     left: 50%;
-    top: 70%;
+    top: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
     background-color: #334E68;

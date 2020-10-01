@@ -24,7 +24,7 @@ class CheckDropDown extends Component {
     }
 
     selectHandler = () => {
-
+        
         if (this.state.checkList.current.classList.contains('visible')) {
             this.state.checkList.current.classList.remove('visible'); 
         } else {
@@ -32,14 +32,15 @@ class CheckDropDown extends Component {
         }
     };
 
-    checkboxHandler = (event, inputItem, index) => {
+    checkboxHandler = (event, inputItem, index, exchange, productType) => {
         
-        let newProducts = [...this.state.productsSelected];
+        let newProducts = [...this.props.productList[exchange][productType]];
 
         if (event.target.checked) {
             newProducts.push(inputItem);
         } else {
-            newProducts.pop(inputItem);
+            let indexToRemove = newProducts.indexOf(inputItem);
+            newProducts.splice(indexToRemove, 1);
         }
         
         this.setState({
@@ -71,11 +72,13 @@ class CheckDropDown extends Component {
         if (this.state.visibleProducts) {
             list = this.state.visibleProducts.map((inputItem, index) => {
                 let checked = false;
+                let exchange = this.props.exchange;
+                let productType = this.props.productType;
                 if (this.props.productList[this.props.exchange][this.props.productType]) {
                     if (this.props.productList[this.props.exchange][this.props.productType].includes(inputItem)) checked = true;
                 }
                 return (<li key={index}>
-                            <input type="checkbox" checked={checked} onChange={(event) => this.checkboxHandler(event, inputItem, index)}/>{inputItem}          
+                            <input type="checkbox" checked={checked} onChange={(event) => this.checkboxHandler(event, inputItem, index, exchange, productType)}/>{inputItem}          
                         </li>
                         )
             });
