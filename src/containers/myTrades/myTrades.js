@@ -40,23 +40,25 @@ class MyTrades extends Component {
         
         return (
             <div className="MyTradesDiv">
-                <h1>My Trades</h1>
-                <table className="TradesTable">
-                    <thead>
-                        <tr>
-                            <th>Tourney id</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Product</th>
-                            <th>Side</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tableBody}
-                    </tbody>
-                </table>
+                <div className="MyTradesSubSiv">
+                    <h1>My Trades</h1>
+                    <table className="TradesTable">
+                        <thead>
+                            <tr>
+                                <th>Tourney id</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Product</th>
+                                <th>Side</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {tableBody}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     }

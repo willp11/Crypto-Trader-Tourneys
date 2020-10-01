@@ -14,7 +14,6 @@ import Register from './containers/register/register';
 import Profile from './containers/profile/profile';
 import Logout from './containers/logout/logout';
 import Tourney from './containers/tourney/tourney';
-import Wallet from './containers/wallet/wallet';
 import MyTrades from './containers/myTrades/myTrades';
 
 class App extends Component {
@@ -31,7 +30,6 @@ class App extends Component {
                 <Route path="/completedTourneys" component={CompletedTourneys} />
                 <Route path="/myTournaments" component={MyTourneys} />
                 <Route path="/profile" component={Profile} />
-                <Route path="/wallet" component={Wallet} />
                 <Route path="/logout" component={Logout} />
                 <Route path="/tourneys/:tourneyId" component={Tourney} />
                 <Route path="/myTrades" component={MyTrades} />

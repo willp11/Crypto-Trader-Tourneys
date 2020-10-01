@@ -3,10 +3,31 @@ import Input from '../../components/UI/Input/Input';
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import './logout.css';
+import {firebaseAuth} from "../../firebase/firebase";
 
 import * as actions from '../../store/actions/index';
 
-class Login extends Component {
+class Logout extends Component {
+    
+    state = {
+        isAuthenticated: null
+    }
+    
+    componentDidMount() {
+        
+        // set the redirect to profile page
+        this.props.onSetAuthRedirectPath();
+        // check if the user is already logged in
+        firebaseAuth.onAuthStateChanged((user) => {
+          if (user) {
+            // User is signed in
+            this.setState({isAuthenticated: true});
+          } else {
+              // User is signed out
+            this.setState({isAuthenticated: false});
+          }
+        });
+    }
     
     submitHandler = (event) => {
         this.props.onLogout();
@@ -14,7 +35,7 @@ class Login extends Component {
 
     render () {
         let authRedirect = null;
-        if (!this.props.isAuthenticated) {
+        if (this.state.isAuthenticated == false) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />
         }
             
@@ -23,8 +44,8 @@ class Login extends Component {
                 <div className="logoutSubDiv">
                     {authRedirect}
                     <h3>Are you sure you want to log out?</h3>
-                    <NavLink to="/profile" style={{textDecoration: "none"}}><button>Cancel</button></NavLink>
-                    <button onClick={this.submitHandler}>Logout</button>
+                    <NavLink to="/profile" style={{textDecoration: "none"}}><button className="logoutCancelBtn">Cancel</button></NavLink>
+                    <button className="logoutConfirmBtn" onClick={this.submitHandler}>Logout</button>
                 </div>
             </div>
         )
@@ -47,4 +68,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Logout);

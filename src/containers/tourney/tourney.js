@@ -883,6 +883,10 @@ class Tourney extends Component {
             tourneyBody = (
                 <div className="tourneyBody">
                     <h2>Overview:</h2>
+                    {balance}
+                    {registerBtn}<br/>
+                    {balanceErrorMsg}
+                    {editStartBalanceBtn}<br/>
                     <h3>Host</h3>
                     <p>{this.state.host}</p>
                     <h3>Entrants</h3>
@@ -897,12 +901,6 @@ class Tourney extends Component {
                     <p>{this.state.entryFee}</p>
                     <h3>Payout Structure</h3>
                     <p>{this.state.payoutStruct}</p>
-                    {balance}
-                    {registerBtn}<br/>
-                    {balanceErrorMsg}
-                    {confirmRegistration}
-                    {confirmUnRegistration}
-                    {editStartBalanceBtn}<br/>
                 </div>
             )
         }
@@ -965,7 +963,7 @@ class Tourney extends Component {
                                 </div>
                             </div>
                             <div className="payoutStruct">
-                                <h3>Payouts</h3>
+                                <h2>Payouts:</h2>
                                 <table className="payoutStructTable">
                                     <thead>
                                         <tr>
@@ -988,6 +986,8 @@ class Tourney extends Component {
                         </div>
                     </div>
                 </div>
+                {confirmRegistration}
+                {confirmUnRegistration}
             </div>
         )
     }

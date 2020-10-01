@@ -1,6 +1,6 @@
 .logoutDiv {
     margin-top: 0;
-    background-color: #102A43;
+    background-color: #161616;
     height: auto;
     min-height: 100vh;
     width: 100vw;
@@ -9,33 +9,41 @@
 }
 
 .logoutDiv h1 {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .logoutDiv h3 {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
-.logoutDiv button {
-    background-color: rgb(77, 134, 247);
-    color: #D9E2EC;
+.logoutCancelBtn  {
+    background-color: #C62828;
+    color: #E1E1E1;
     padding: 10px;
     border-radius: 5px;
-    border: 0.5px solid #102A43;
+    border: 0.5px solid #C62828;
+    margin: 5px;
+    font-size: 1rem;
+}
+
+.logoutConfirmBtn {
+    background-color: #00897B;
+    color: #E1E1E1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0.5px solid #00897B;
     margin: 5px;
     font-size: 1rem;
 }
 
 .logoutSubDiv {
-    background-color: #243B53;
+    background-color: #212121;
     height: 400px;
     width: 500px;
     margin: 0 auto;
     padding-top: 20px;
     box-sizing: border-box;
     position: relative;
-    top: 50px;
-    border: 2px solid #102A43;
     border-radius: 20px;
     top: 40px;
 }

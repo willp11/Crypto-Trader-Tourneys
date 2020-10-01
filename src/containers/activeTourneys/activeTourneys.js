@@ -241,19 +241,21 @@ class ActiveTourneys extends Component {
         if (this.state.showFilters) {
             filtersDiv = (
                 <div className="showFiltersDiv">
-                    <div className="modalDiv">
-                        <h3>Search Tournaments</h3>
-                        <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Hide Search</button> <br/>
-                        <div className="searchForm">
-                            <input value={this.state.search.tourneyId} onChange={(event, key) => this.updateSearch(event, "tourneyId")} placeholder="Tournament id" /> <br/>
-                            <input value={this.state.search.host} onChange={(event, key) => this.updateSearch(event, "host")} placeholder="Host" /> <br/>
-                            <input value={this.state.search.product} onChange={(event, key) => this.updateSearch(event, "product")} placeholder="Product" /> <br/>
-                            <input value={this.state.search.maxEntrants} onChange={(event, key) => this.updateSearch(event, "maxEntrants")} placeholder="Max Entrants" /> <br/>
-                            <input value={this.state.search.hoursUntilEnd} onChange={(event, key) => this.updateSearch(event, "hoursUntilEnd")} placeholder="Hours until end" /> <br/>
-                            <input value={this.state.search.minEntryFee} onChange={(event, key) => this.updateSearch(event, "minEntryFee")} placeholder="Min Entry Fee" /> <br/>
-                            <input value={this.state.search.maxEntryFee} onChange={(event, key) => this.updateSearch(event, "maxEntryFee")} placeholder="Max Entry Fee" /> <br/>
-                            <button className="submitBtn searchTourneySubmitBtn" onClick={this.searchTourneys}>Submit</button> <br/>
-                            <button className="resetBtn" onClick={this.resetTourneys}>Reset</button>
+                    <div className="darkBg">
+                        <div className="modalDiv">
+                            <h3>Search Tournaments</h3>
+                            <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Hide Search</button> <br/>
+                            <div className="searchForm">
+                                <input value={this.state.search.tourneyId} onChange={(event, key) => this.updateSearch(event, "tourneyId")} placeholder="Tournament id" /> <br/>
+                                <input value={this.state.search.host} onChange={(event, key) => this.updateSearch(event, "host")} placeholder="Host" /> <br/>
+                                <input value={this.state.search.product} onChange={(event, key) => this.updateSearch(event, "product")} placeholder="Product" /> <br/>
+                                <input value={this.state.search.maxEntrants} onChange={(event, key) => this.updateSearch(event, "maxEntrants")} placeholder="Max Entrants" /> <br/>
+                                <input value={this.state.search.hoursUntilEnd} onChange={(event, key) => this.updateSearch(event, "hoursUntilEnd")} placeholder="Hours until end" /> <br/>
+                                <input value={this.state.search.minEntryFee} onChange={(event, key) => this.updateSearch(event, "minEntryFee")} placeholder="Min Entry Fee" /> <br/>
+                                <input value={this.state.search.maxEntryFee} onChange={(event, key) => this.updateSearch(event, "maxEntryFee")} placeholder="Max Entry Fee" /> <br/>
+                                <button className="submitBtn searchTourneySubmitBtn" onClick={this.searchTourneys}>Submit</button> <br/>
+                                <button className="resetBtn" onClick={this.resetTourneys}>Reset</button>
+                            </div>
                         </div>
                     </div>
                 </div>

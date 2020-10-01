@@ -195,10 +195,14 @@ class Profile extends Component {
     
     showVerifyModal = () => {
         this.setState({showVerifyModal: true});
+        let user = firebaseAuth.currentUser;
+        user.reload();
     }
     
     hideVerifyModal = () => {
         this.setState({showVerifyModal: false});
+        let user = firebaseAuth.currentUser;
+        user.reload();
     }
     
     sendVerificationEmail = () => {

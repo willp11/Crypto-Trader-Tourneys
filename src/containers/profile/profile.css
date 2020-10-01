@@ -43,7 +43,7 @@
     background-color: #303f9f;
     color: #D9E2EC;
     padding: 5px;
-    width: 150px;
+    width: 120px;
     margin-bottom: 10px;
     font-size: 0.8rem;
 }
@@ -128,7 +128,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 10000000000;
-    border: 0.5px solid rgb(166, 17, 17);
+    border: 0.5px solid #121212;
     background-color: #323232;
     padding: 20px;
     height: auto;
@@ -162,8 +162,8 @@
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 10000000000;
-    border: 1px solid #102A43;
-    background-color: #334E68;
+    border: 1px solid #121212;
+    background-color: #323232;
     padding: 20px;
     height: auto;
     width: 400px;

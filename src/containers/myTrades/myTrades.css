@@ -1,6 +1,6 @@
 .MyTradesDiv {
     margin-top: 0;
-    background-color: #102A43;
+    background-color: #161616;
     height: auto;
     min-height: 100vh;
     width: 100vw;
@@ -15,9 +15,22 @@
     color: #D9E2EC;
 }
 
+.MyTradesSubSiv {
+    background-color: #212121;
+    height: auto;
+    min-height: 75vh;
+    width: 90vw;
+    margin: 0 auto;
+    padding: 20px 0 40px 0;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 5px;
+    top: 40px;
+}
+
 .TradesTable {
     margin: 0 auto;
-    border: 1px solid #102A43;
+    border: 1px solid #121212;
     border-collapse: collapse;
     background-color: #D9E2EC;
     color: #102A43;
@@ -25,12 +38,12 @@
 
 .TradesTable thead {
     border-collapse: collapse;
-    background-color: #243B53;
+    background-color: #161616;
     color: #D9E2EC;
 }
 
 .TradesTable tbody button {
-    background-color: rgb(77, 134, 247);
+    background-color: #303F9F;
     color: #D9E2EC;
 }
 
@@ -55,6 +68,10 @@
     outline: thin solid #102A43;
 }
 
+.TradesTable tr {
+    outline: thin solid #102A43;
+}
+
 /* large devices  desktops, 992px to 1200px)*/
 @media (max-width: 1200px) {  
 
@@ -62,12 +79,42 @@
 
 /* Large devices (desktops, 768px to 992px )*/
 @media (max-width: 992px) {  
-
+    .MyTradesSubSiv {
+        width: 100vw;
+    }
 }
 
 /* medium devices (landscape phones, 576px to 768px)*/
 @media (max-width: 768px) {  
-
+    .MyTradesSubSiv {
+        overflow: scroll;
+    }
+    
+    .TradesTable th {
+        font-size: 0.8rem;
+        width: 60px;
+    }
+    
+    .TradesTable td {
+        font-size: 0.8rem;
+        width: 60px;
+    }
+    
+    .MyTradesDiv h1 {
+        font-size: 1.4rem;
+    }
+    
+    .MyTradesDiv h2 {
+        font-size: 1.2rem;
+    }
+    
+    .TradesTable {
+        width: 540px;
+    }
+    
+    .MyTradesDiv p {
+        font-size: 0.9rem;
+    }
 }
 
 /* Small devices (landscape phones, 576px and below)*/

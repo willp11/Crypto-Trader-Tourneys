@@ -20,18 +20,18 @@
     padding: 5px;
     border-radius: 5px;
     border: 0.5px solid #102A43;
-    background-color: rgb(77, 134, 247);
-    color: #D9E2EC;
+    background-color: #303F9F;
+    color: #E1E1E1;
 }
 
 .submitBtn {
     background-color: #00897B;
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .resetBtn {
     background-color: #C62828;
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .modalDiv {
@@ -42,7 +42,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
-    background-color: #334E68;
+    background-color: #323232;
     padding-top: 20px;
     border: 1px solid black;
 }

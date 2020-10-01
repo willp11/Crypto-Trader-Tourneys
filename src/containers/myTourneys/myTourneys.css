@@ -1,6 +1,6 @@
 .AllTourneysDiv {
     margin-top: 0;
-    background-color: #102A43;
+    background-color: #161616;
     height: auto;
     min-height: 100vh;
     width: 100vw;
@@ -8,11 +8,11 @@
 }
 
 .AllTourneysDiv h1 {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .AllTourneysDiv h2 {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .AllTourneys {
@@ -25,13 +25,13 @@
     box-sizing: border-box;
     position: relative;
     top: 40px;
-    background-color: #243B53;
+    background-color: #282828;
     text-align: center;
     padding-bottom: 20px;
 }
 
 .selectTourneyTableDiv {
-    background-color: #334E68;
+    background-color: #363636;
     box-sizing: border-box;
     margin: 0 auto;
     width: 500px;
@@ -49,31 +49,30 @@
 .TourneyDiv {
     width: 85vw;
     margin: 0 auto;
-    min-width: 500px;
     box-sizing: border-box;
     border: 1px solid black;
     margin: 0 auto;
     padding-bottom: 20px;
     color: #D9E2EC;
-    background-color: #334E68;
+    background-color: #363636;
 }
 
 .TourneyTable {
     margin: 0 auto;
-    border: 1px solid #102A43;
+    border: 1px solid #121212;
     border-collapse: collapse;
     background-color: #D9E2EC;
-    color: #102A43;
+    color: #121212;
 }
 
 .TourneyTable thead {
     border-collapse: collapse;
-    background-color: #243B53;
+    background-color: #161616;
     color: #D9E2EC;
 }
 
 .TourneyTable tbody button {
-    background-color: rgb(77, 134, 247);
+    background-color: #303F9F;
     color: #D9E2EC;
 }
 
@@ -116,7 +115,6 @@
 /* medium devices (landscape phones, 576px to 768px)*/
 @media (max-width: 768px) {  
     .TourneyDiv {
-        min-width: 0;
         overflow: scroll;
     }
     
@@ -144,6 +142,18 @@
     
     .AllTourneys p {
         font-size: 0.9rem;
+    }
+    
+    .selectTourneyTableDiv {
+        width: 100vw;
+        position: relative;
+        left: 0;
+    }
+
+    .selectTourneyTableDiv button {
+        color: #D9E2EC;
+        margin: 5px;
+        padding: 5px;
     }
 }
 

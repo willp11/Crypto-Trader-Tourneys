@@ -317,35 +317,35 @@ class MyTourneys extends Component {
             tourneySelectButtons = (
                 <div>
                     <button style={{"backgroundColor": "#303F9F"}} onClick={(event) => this.selectTourneyTable(event)}>Registered</button>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Active</button>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Completed</button>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Hosted</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Active</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Completed</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Hosted</button>
                 </div>
             )
         } else if (this.state.tableToShow == "Active") {
             tourneySelectButtons = (
                 <div>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Registered</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Registered</button>
                     <button style={{"backgroundColor": "#303F9F"}} onClick={(event) => this.selectTourneyTable(event)}>Active</button>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Completed</button>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Hosted</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Completed</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Hosted</button>
                 </div>
             )
         } else if (this.state.tableToShow == "Completed") {
             tourneySelectButtons = (
                 <div>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Registered</button>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Active</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Registered</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Active</button>
                     <button style={{"backgroundColor": "#303F9F"}} onClick={(event) => this.selectTourneyTable(event)}>Completed</button>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Hosted</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Hosted</button>
                 </div>
             )
         } else if (this.state.tableToShow == "Hosted") {
             tourneySelectButtons = (
                 <div>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Registered</button>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Active</button>
-                    <button style={{"backgroundColor": "rgb(77, 134, 247)"}} onClick={(event) => this.selectTourneyTable(event)}>Completed</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Registered</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Active</button>
+                    <button style={{"backgroundColor": "#E1E1E1", "color": "#121212"}} onClick={(event) => this.selectTourneyTable(event)}>Completed</button>
                     <button style={{"backgroundColor": "#303F9F"}} onClick={(event) => this.selectTourneyTable(event)}>Hosted</button>
                 </div>
             )
