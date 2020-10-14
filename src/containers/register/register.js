@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import {firebaseAuth} from "../../firebase/firebase";
 import Spinner from '../../components/UI/Spinner/Spinner';
+import axios from 'axios';
 
 class Register extends Component {
     
@@ -96,20 +97,20 @@ class Register extends Component {
         let errorMessage = null;
         
         if (event.target.value.length < this.state.controls[controlName].validation.minLength && event.target.value.length>0) {
-            errorMessage = <p className="errorMsg">{this.state.controls[controlName].elementConfig.placeholder} must be at least {this.state.controls[controlName].validation.minLength} characters!</p>;
+            errorMessage = <p style={{"color": "#f7716d"}} className="errorMsg">{this.state.controls[controlName].elementConfig.placeholder} must be at least {this.state.controls[controlName].validation.minLength} characters!</p>;
             this.setState({errorMsg: errorMessage});
         };
         
         if (controlName == "username") {
             if (event.target.value.length > this.state.controls[controlName].validation.maxLength) {
-                errorMessage = <p className="errorMsg">Usernames must be {this.state.controls[controlName].validation.maxLength} characters or less!</p>;
+                errorMessage = <p style={{"color": "#f7716d"}} className="errorMsg">Usernames must be {this.state.controls[controlName].validation.maxLength} characters or less!</p>;
             }
             this.setState({errorMsg: errorMessage});
         }
         
         if (controlName == "repeatPassword") {
             if (event.target.value != this.state.controls["password"].value) {
-                errorMessage = <p className="errorMsg">Passwords don't match!</p>;
+                errorMessage = <p style={{"color": "#f7716d"}} className="errorMsg">Passwords don't match!</p>;
             }
             this.setState({errorMsg: errorMessage});
         }
@@ -121,27 +122,34 @@ class Register extends Component {
         // check username is between 3 and 25 characters
         if (this.state.controls.username.value.length < this.state.controls.username.validation.minLength )
         {
-            errorMessage = <p className="errorMsg">Usernames must be at least {this.state.controls.username.validation.minLength} characters!</p>;
+            errorMessage = <p style={{"color": "#f7716d"}} className="errorMsg">Usernames must be at least {this.state.controls.username.validation.minLength} characters!</p>;
         } else if (this.state.controls.username.value.length > this.state.controls.username.validation.maxLength )
         {
-            errorMessage = <p className="errorMsg">Usernames must be {this.state.controls.username.validation.maxLength} characters or less!</p>;
+            errorMessage = <p style={{"color": "#f7716d"}} className="errorMsg">Usernames must be {this.state.controls.username.validation.maxLength} characters or less!</p>;
         }
         
         // check password is more than 6 characters
         if (this.state.controls.password.value.length < this.state.controls.password.validation.minLength )
         {
-            errorMessage = <p className="errorMsg">Password must be at least {this.state.controls.password.validation.minLength} characters!</p>;
+            errorMessage = <p style={{"color": "#f7716d"}} className="errorMsg">Password must be at least {this.state.controls.password.validation.minLength} characters!</p>;
         }
         
         // check the repeat password is the same as the password field
         if (this.state.controls.password.value != this.state.controls.repeatPassword.value )
         {
-            errorMessage = <p className="errorMsg">Passwords don't match!</p>;
+            errorMessage = <p style={{"color": "#f7716d"}} className="errorMsg">Passwords don't match!</p>;
         }
         
         this.setState({errorMsg: errorMessage});
         
         if (errorMessage == null) {
+            axios.post('/checkUsername', {username: this.state.controls.username.value}).then(res => {
+                if (res.data.response == "username available") {
+                    this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, true, this.state.controls.username.value);
+                } else {
+                    errorMessage = <p style={{"color": "#f7716d"}} className="errorMsg">Username is not available</p>;
+                }
+            }) 
             this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, true, this.state.controls.username.value);
         }
     }
@@ -149,7 +157,7 @@ class Register extends Component {
     checkFormBlanks = () => {
         let errorMessage = null;
         if (this.state.controls.emailvalue == '' || this.state.controls.password.value == '' || this.state.controls.repeatPassword.value == '' || this.state.controls.username.value == '') {
-            errorMessage = <p className="errorMsg">Not all required information has been completed!</p>
+            errorMessage = <p style={{"color": "#f7716d"}} className="errorMsg">Not all required information has been completed!</p>
             this.setState({errorMsg: errorMessage})
             return false;
         } else {

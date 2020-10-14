@@ -43,7 +43,7 @@ class NavTop extends Component {
                     <NavLink to="/myTournaments" style={{textDecoration: "none"}}><p>My Tournaments</p></NavLink>
                     <NavLink to="myTrades" style={{textDecoration: "none"}}><p>My Trades</p></NavLink>
                     <NavLink to="/profile" style={{textDecoration: "none"}}><p>Account</p></NavLink>
-                    <NavLink to="/logout" style={{textDecoration: "none"}}><p>Logout</p></NavLink>
+                    <NavLink to="/logout" style={{textDecoration: "none"}}><p>Logout</p></NavLink>  
                   </div>
                  );
         }

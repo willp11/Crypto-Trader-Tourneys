@@ -8,15 +8,20 @@
 }
 
 .MyTradesDiv h1 {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .MyTradesDiv h2 {
-    color: #D9E2EC;
+    color: #E1E1E1;
+}
+
+
+.MyTradesDiv P {
+    color: #E1E1E1;
 }
 
 .MyTradesSubSiv {
-    background-color: #212121;
+    background-color: #282828;
     height: auto;
     min-height: 75vh;
     width: 90vw;
@@ -24,8 +29,21 @@
     padding: 20px 0 40px 0;
     box-sizing: border-box;
     position: relative;
-    border-radius: 5px;
+    border-radius: 20px;
     top: 40px;
+    border: 1px solid black;
+}
+
+.MyTradesSubSiv2 {
+    width: 85vw;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: 1px solid black;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    color: #D9E2EC;
+    background-color: #363636;
+    border-radius: 10px;
 }
 
 .TradesTable {

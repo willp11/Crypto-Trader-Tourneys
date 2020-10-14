@@ -21,6 +21,7 @@
     flex-wrap: wrap;
     margin: 0 auto;
     width: 90vw;
+    min-height: 75vh;
     height: auto;
     box-sizing: border-box;
     position: relative;
@@ -28,6 +29,7 @@
     background-color: #282828;
     text-align: center;
     padding-bottom: 20px;
+    border-radius: 20px;
 }
 
 .selectTourneyTableDiv {
@@ -38,6 +40,7 @@
     padding-bottom: 20px;
     margin-bottom: 20px;
     border: 1px solid black;
+    border-radius: 10px;
 }
 
 .selectTourneyTableDiv button {
@@ -55,6 +58,7 @@
     padding-bottom: 20px;
     color: #D9E2EC;
     background-color: #363636;
+    border-radius: 10px;
 }
 
 .TourneyTable {

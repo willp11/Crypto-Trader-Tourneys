@@ -9,15 +9,15 @@
 }
 
 .registerDiv h1 {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .registerDiv p {
-    color: #D9E2EC;
+    color: #E1E1E1;
 }
 
 .registerSubDiv {
-    background-color: #212121;
+    background-color: #282828;
     height: auto;
     width: 500px;
     margin: 0 auto;
@@ -28,11 +28,11 @@
 }
 
 .registerFormDiv {
-    background-color: #323232;
+    background-color: #363636;
     width: 300px;
     margin: 0 auto;
     padding: 20px 0px 20px 0px;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .registerSubDiv p {
@@ -50,7 +50,7 @@
 }
 
 .goToLoginDiv {
-    background-color: #323232;
+    background-color: #363636;
     width: 300px;
     margin: 0 auto;
     padding: 10px 0px 10px 0px;

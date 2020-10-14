@@ -114,10 +114,10 @@ class Login extends Component {
         
         let errorMsg = null;
         if (this.state.errorMsg) {
-            errorMsg = <p>{this.state.errorMsg}</p>
+            errorMsg = <p style={{"color": "#f7716d"}}>{this.state.errorMsg}</p>
         }
         if (this.props.error) {
-            errorMsg = <p>{this.props.error}</p>
+            errorMsg = <p style={{"color": "#f7716d"}}>{this.props.error}</p>
         }
             
         let spinner = null;

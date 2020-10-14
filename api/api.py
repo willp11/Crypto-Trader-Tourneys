@@ -1,4 +1,7 @@
 import time
+import hmac
+import requests
+from requests import Request, Session
 from init import app, db
 from flask import request
 from sqlalchemy.orm import sessionmaker
@@ -45,22 +48,50 @@ def getTourneyState():
     content = request.json
     session = Session()
     dbQuery = session.query(AllTourneys).filter_by(tourneyId=content["tourneyId"]).one()
-    state = dbQuery.state
+    data = {}
+    data["state"] = dbQuery.state
+    data["hostId"] = dbQuery.hostId
+    if dbQuery.state == "registering":
+        dbQuery2 = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+        data["visibility"] = dbQuery2.visibility
+    elif dbQuery.state == "active":
+        dbQuery2 = session.query(ActiveTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+        data["visibility"] = dbQuery2.visibility
+    elif dbQuery.state == "completed":
+        dbQuery2 = session.query(CompletedTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+        data["visibility"] = dbQuery2.visibility
+        
     session.close()
     
-    return {'tourneyState': state}
+    return {'response': data}
     
 
 @app.route('/getTourneyInfo', methods=['POST'])
 def getTourneyInfo():
     content = request.json
-    print(content["tourneyId"])
+    tourneyId = content["tourneyId"]
     session = Session()
-    dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).all()
+    dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=tourneyId).all()
+    
+    
     if len(dbQuery) > 0:
-        # calculate the duration in days, calculate time until start in days and hours
+        FTXProducts = []
+        for query in session.query(RegisteringProducts).filter_by(tourneyId=tourneyId):
+            if query.exchange == "FTX":
+                FTXProducts.append(query.productName)
         
-        tourneyInfo = {'tourneyId': dbQuery[0].tourneyId,
+        entrantsQuery = session.query(Entrants).filter_by(tourneyId=tourneyId).all()
+
+        entrantsList = []
+        profits = []
+
+        for query in entrantsQuery:
+            entrantsList.append(query.username)
+            profits.append(0)
+            
+        entrants = {"entrants": entrantsList, "profits": profits}
+        
+        tourneyInfo = {'tourneyId': tourneyId,
                     'host': dbQuery[0].host,
                     'maxEntrants': dbQuery[0].maxEntrants,
                     'minEntrants': dbQuery[0].minEntrants,
@@ -71,9 +102,10 @@ def getTourneyInfo():
                     'endTime': dbQuery[0].endTime,
                     'quoteCurrency': dbQuery[0].quoteCurrency,
                     'visibility': dbQuery[0].visibility,
-                    'entryFee': dbQuery[0].entryFee,
-                    'payoutStruct': dbQuery[0].payoutStruct
-                   }
+                    'products': {'FTX': FTXProducts},
+                    'entrants': entrants
+        }
+
     else:
         tourneyInfo = {'tourneyId': "No match"}
 
@@ -85,15 +117,50 @@ def getTourneyInfo():
 @app.route('/getActiveTourneyInfo', methods=['POST'])
 def getActiveTourneyInfo():
     content = request.json
-    
+    tourneyId = content["tourneyId"]
     session = Session()
-    dbQuery = session.query(ActiveTourneys).filter_by(tourneyId=content["tourneyId"]).all()
+    dbQuery = session.query(ActiveTourneys).filter_by(tourneyId=tourneyId).all()
+    
     
     if len(dbQuery) > 0:
-        tourneyInfo = {'tourneyId': dbQuery[0].tourneyId,
+        FTXProducts = []
+        for query in session.query(ActiveProducts).filter_by(tourneyId=tourneyId):
+            if query.exchange == "FTX":
+                FTXProducts.append(query.productName)
+                
+        #####################################################################################################
+        dbQueryActive = session.query(ActiveEntrants).filter_by(tourneyId=content["tourneyId"]).all()
+        
+        # Active Entrants
+        profits = []
+        entrants = []
+        entrantObjs = []
+        
+        # Liquidated Entrants
+        liqEntrants = []
+
+        for query in dbQueryActive:
+            if query.liquidated == False:
+                entrant = (query.username, query.profitPercent)
+                entrantObjs.append(entrant)
+            else:
+                liqEntrants.append(query.username)
+
+        # sort entrants based on profit
+        entrantObjs = sorted(entrantObjs, key=lambda entrant: entrant[1], reverse=True)
+
+        for entrant in entrantObjs:
+            entrants.append(entrant[0])
+            profits.append(entrant[1])
+            
+        activeEntrants = {"entrants": entrants, "profits": profits}
+    
+        #####################################################################################################
+        
+        tourneyInfo = {'tourneyId': tourneyId,
                     'host': dbQuery[0].host,
-                    'minEntrants': dbQuery[0].minEntrants,
                     'maxEntrants': dbQuery[0].maxEntrants,
+                    'minEntrants': dbQuery[0].minEntrants,
                     'noEntrants': dbQuery[0].noEntrants,
                     'startDate': dbQuery[0].startDate,
                     'startTime': dbQuery[0].startTime,
@@ -101,9 +168,11 @@ def getActiveTourneyInfo():
                     'endTime': dbQuery[0].endTime,
                     'quoteCurrency': dbQuery[0].quoteCurrency,
                     'visibility': dbQuery[0].visibility,
-                    'entryFee': dbQuery[0].entryFee,
-                    'payoutStruct': dbQuery[0].payoutStruct
-                   }
+                    'products': {'FTX': FTXProducts},
+                    'activeEntrants': activeEntrants,
+                    'liqEntrants': liqEntrants
+        }
+
     else:
         tourneyInfo = {'tourneyId': "No match"}
 
@@ -115,15 +184,32 @@ def getActiveTourneyInfo():
 @app.route('/getCompletedTourneyInfo', methods=['POST'])
 def getCompletedTourneyInfo():
     content = request.json
-    
+    tourneyId = content["tourneyId"]
     session = Session()
-    dbQuery = session.query(CompletedTourneys).filter_by(tourneyId=content["tourneyId"]).all()
+    dbQuery = session.query(CompletedTourneys).filter_by(tourneyId=tourneyId).all()
+    
     
     if len(dbQuery) > 0:
-        tourneyInfo = {'tourneyId': dbQuery[0].tourneyId,
+        FTXProducts = []
+        for query in session.query(CompletedProducts).filter_by(tourneyId=tourneyId):
+            if query.exchange == "FTX":
+                FTXProducts.append(query.productName)
+        
+        entrantsQuery = session.query(CompletedEntrants).filter_by(tourneyId=tourneyId).all()
+
+        entrantsList = []
+        profits = []
+
+        for query in entrantsQuery:
+            entrantsList.append(query.username)
+            profits.append(0)
+            
+        entrants = {"entrants": entrantsList, "profits": profits}
+        
+        tourneyInfo = {'tourneyId': tourneyId,
                     'host': dbQuery[0].host,
-                    'minEntrants': dbQuery[0].minEntrants,
                     'maxEntrants': dbQuery[0].maxEntrants,
+                    'minEntrants': dbQuery[0].minEntrants,
                     'noEntrants': dbQuery[0].noEntrants,
                     'startDate': dbQuery[0].startDate,
                     'startTime': dbQuery[0].startTime,
@@ -131,9 +217,10 @@ def getCompletedTourneyInfo():
                     'endTime': dbQuery[0].endTime,
                     'quoteCurrency': dbQuery[0].quoteCurrency,
                     'visibility': dbQuery[0].visibility,
-                    'entryFee': dbQuery[0].entryFee,
-                    'payoutStruct': dbQuery[0].payoutStruct
-                   }
+                    'products': {'FTX': FTXProducts},
+                    'entrants': entrants
+        }
+
     else:
         tourneyInfo = {'tourneyId': "No match"}
 
@@ -213,21 +300,21 @@ def getAllTourneys():
     tourneys = []
     session = Session()
     for dbQuery in session.query(RegistrationTourneys).all():
-        tourney = {}
-        tourney = {'tourneyId': dbQuery.tourneyId,
-                'host': dbQuery.host,
-                'maxEntrants': dbQuery.maxEntrants,
-                'minEntrants': dbQuery.minEntrants,
-                'noEntrants': dbQuery.noEntrants,
-                'startDate': dbQuery.startDate,
-                'startTime': dbQuery.startTime,
-                'endDate': dbQuery.endDate,
-                'endTime': dbQuery.endTime,
-                'startTS': dbQuery.startTS,
-                'endTS': dbQuery.endTS,
-                'entryFee': dbQuery.entryFee
-        }
-        tourneys.append(tourney)
+        if dbQuery.visibility == "public":
+            tourney = {}
+            tourney = {'tourneyId': dbQuery.tourneyId,
+                    'host': dbQuery.host,
+                    'maxEntrants': dbQuery.maxEntrants,
+                    'minEntrants': dbQuery.minEntrants,
+                    'noEntrants': dbQuery.noEntrants,
+                    'startDate': dbQuery.startDate,
+                    'startTime': dbQuery.startTime,
+                    'endDate': dbQuery.endDate,
+                    'endTime': dbQuery.endTime,
+                    'startTS': dbQuery.startTS,
+                    'endTS': dbQuery.endTS
+            }
+            tourneys.append(tourney)
         
     for tourney in tourneys:
         products = []
@@ -257,8 +344,7 @@ def getActiveTourneys():
                 'endDate': dbQuery.endDate,
                 'endTime': dbQuery.endTime,
                 'startTS': dbQuery.startTS,
-                'endTS': dbQuery.endTS,
-                'entryFee': dbQuery.entryFee
+                'endTS': dbQuery.endTS
         }
         tourneys.append(tourney)
         
@@ -296,8 +382,7 @@ def getCompletedTourneys():
                 'endDate': query.endDate,
                 'endTime': query.endTime,
                 'startTS': query.startTS,
-                'endTS': query.endTS,
-                'entryFee': query.entryFee
+                'endTS': query.endTS
         }
         tourneys.append(tourney)
         
@@ -336,8 +421,7 @@ def getMyTourneys():
                 'endDate': dbQuery.endDate,
                 'endTime': dbQuery.endTime,
                 'startTS': dbQuery.startTS,
-                'endTS': dbQuery.endTS,
-                'entryFee': dbQuery.entryFee
+                'endTS': dbQuery.endTS
         }
         tourneys.append(tourney)
         
@@ -375,8 +459,7 @@ def getMyActiveTourneys():
                 'endDate': dbQuery.endDate,
                 'endTime': dbQuery.endTime,
                 'startTS': dbQuery.startTS,
-                'endTS': dbQuery.endTS,
-                'entryFee': dbQuery.entryFee
+                'endTS': dbQuery.endTS
         }
         tourneys.append(tourney)
         
@@ -414,8 +497,7 @@ def getMyCompletedTourneys():
                 'endDate': dbQuery.endDate,
                 'endTime': dbQuery.endTime,
                 'startTS': dbQuery.startTS,
-                'endTS': dbQuery.endTS,
-                'entryFee': dbQuery.entryFee
+                'endTS': dbQuery.endTS
         }
         tourneys.append(tourney)
         
@@ -444,7 +526,9 @@ def getMyHostedTourneys():
     
     if len(tourneys) > 0:
         for tourney in tourneys:
-            
+
+            products = []
+        
             if tourney['status'] == "registering":
                 tourneyObj = session.query(RegistrationTourneys).filter_by(tourneyId=tourney["tourneyId"]).one()
                 tourney['host'] = tourneyObj.host
@@ -456,7 +540,11 @@ def getMyHostedTourneys():
                 tourney['endTime'] = tourneyObj.endTime
                 tourney['startTS'] = tourneyObj.startTS
                 tourney['endTS'] = tourneyObj.endTS
-                tourney['entryFee'] = tourneyObj.entryFee
+                
+                for product in session.query(RegisteringProducts).filter_by(tourneyId = tourney['tourneyId']).all():
+                    products.append(product.productName)
+                tourney['products'] = products
+                
             elif tourney['status'] == "active":
                 tourneyObj = session.query(ActiveTourneys).filter_by(tourneyId=tourney["tourneyId"]).one()
                 tourney['host'] = tourneyObj.host
@@ -468,9 +556,13 @@ def getMyHostedTourneys():
                 tourney['endTime'] = tourneyObj.endTime
                 tourney['startTS'] = tourneyObj.startTS
                 tourney['endTS'] = tourneyObj.endTS
-                tourney['entryFee'] = tourneyObj.entryFee
-            elif tourney['status'] == "active":
-                tourneyObj = session.query(ActiveTourneys).filter_by(tourneyId=tourney["tourneyId"]).one()
+                
+                for product in session.query(ActiveProducts).filter_by(tourneyId = tourney['tourneyId']).all():
+                    products.append(product.productName)
+                tourney['products'] = products
+                
+            elif tourney['status'] == "completed":
+                tourneyObj = session.query(CompletedTourneys).filter_by(tourneyId=tourney["tourneyId"]).one()
                 tourney['host'] = tourneyObj.host
                 tourney['maxEntrants'] = tourneyObj.maxEntrants
                 tourney['noEntrants'] = tourneyObj.noEntrants
@@ -480,26 +572,66 @@ def getMyHostedTourneys():
                 tourney['endTime'] = tourneyObj.endTime
                 tourney['startTS'] = tourneyObj.startTS
                 tourney['endTS'] = tourneyObj.endTS
-                tourney['entryFee'] = tourneyObj.entryFee
+                
+                for product in session.query(CompletedProducts).filter_by(tourneyId = tourney['tourneyId']).all():
+                    products.append(product.productName)
+                tourney['products'] = products
 
-        
     session.close()
 
     return {"response": tourneys}
+
+@app.route('/checkUsername', methods=['POST'])
+def checkUsername():
+    content = request.json
+    username = content["username"]
+    
+    session = Session()
+    # check the username is not already taken
+    usernameSearch = session.query(Usernames).filter_by(username=content["username"]).all()
+    if len(usernameSearch) != 0:
+        session.close()
+        return {"response": "username not available"}
+    else:
+        session.close()
+        return {"response": "username available"}
 
 @app.route('/createUser', methods=['POST'])
 def createUser():
     content = request.json
     
-    session = Session()
-    dbEntry = Usernames(userId=content["userId"], username=content["username"], email=content["email"])
-    dbEntry2 = AccountBalances(userId=content["userId"], balance=1)
-    session.add(dbEntry)
-    session.add(dbEntry2)
-    session.commit()
-    session.close()
-    
-    return {"response": "success"}
+    # check username is between 3 and 25 characters
+    if (len(content["username"]) >= 3 and len(content["username"]) <= 25):
+        session = Session()
+
+        # check the username is not already taken
+        usernameSearch = session.query(Usernames).filter_by(username=content["username"]).all()
+        if len(usernameSearch) != 0:
+            return {"response": "username not available"}
+        else:
+            # check if user is already registered
+            userIdSearch = session.query(Usernames).filter_by(userId=content["userId"]).all()
+            if len(userIdSearch) == 0:
+                # add the user to the usernames and API tables
+                dbEntry = Usernames(userId=content["userId"], username=content["username"], email=content["email"])
+                dbEntry2 = UserAPI(userId=content["userId"])
+                session.add(dbEntry)
+                session.add(dbEntry2)
+            elif len(userIdSearch) == 1:
+                # update the username
+                userSearch = session.query(Usernames).filter_by(userId=content["userId"]).one()
+                userSearch.username = content["username"]
+                session.add(userSearch)
+
+            session.commit()
+            session.close()
+
+            return {"response": "success"}
+    else:
+        return {"response": "invalid username"}
+
+@app.route('/updateUsername', methods=['POST'])
+
 
 @app.route('/createTournament', methods=['POST'])
 def createTournament():
@@ -535,10 +667,17 @@ def createTournament():
     print(endDate, endTime)
     
     session = Session()
-    dbEntry = RegistrationTourneys(hostId=content["hostId"] ,tourneyId = int(content["tourneyId"]), host=content["host"], maxEntrants=content["maxEntrants"],  minEntrants=content["minEntrants"],  noEntrants=0, startDate=content["startDate"], startTime=content["startTime"], endDate=endDate, endTime=endTime, startTS=startTS, endTS=endTS, quoteCurrency=content["quoteCurrency"], visibility=content["visibility"], entryFee=content["entryFee"], payoutStruct=content["payoutStruct"])
+    dbEntry = RegistrationTourneys(hostId=content["hostId"] ,tourneyId = int(content["tourneyId"]), host=content["host"], maxEntrants=content["maxEntrants"],  minEntrants=content["minEntrants"],  noEntrants=0, startDate=content["startDate"], startTime=content["startTime"], endDate=endDate, endTime=endTime, startTS=startTS, endTS=endTS, quoteCurrency=content["quoteCurrency"], visibility=content["visibility"])
     dbEntry2 = AllTourneys(tourneyId = int(content["tourneyId"]), state = "registering", hostId=content["hostId"])
     session.add(dbEntry)
     session.add(dbEntry2)
+    
+    for exchange in content['products']:
+        for productType in content['products'][exchange]:
+            for product in content['products'][exchange][productType]:
+                dbEntry = RegisteringProducts(exchange=exchange, productName=product, tourneyId=content['tourneyId'], productType=productType)
+                session.add(dbEntry)
+    
     session.commit()
     session.close()
     
@@ -584,40 +723,59 @@ def registerTourneys():
     content = request.json
     
     session = Session()
-    # check the user has large enough balance
-    balanceQuery = session.query(AccountBalances).filter_by(userId=content["userId"]).one()
-    userBalance = balanceQuery.balance
-    # get the entry fee from the tourney id
-    entryFeeQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
-    entryFee = entryFeeQuery.entryFee
-    # check the user has enough money
-    if (userBalance >= entryFee):
-        #deduct the entry fee from the balance
-        balanceQuery.balance -= entryFee
-        session.add(balanceQuery)
-        
-        # add the user to entrants table
-        dbEntry = Entrants(tourneyId=content["tourneyId"], userId=content["userId"], username=content["username"], balance=content["balance"])
-        session.add(dbEntry)
-
-        # update the number of entrants in registration tourneys table
-        dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
-        dbQuery.noEntrants += 1
-        session.add(dbQuery)
-
-        # check if the user has an invitation to this tournament, if they do then delete the invitation
-        dbQuery2 = session.query(TourneyInvites).filter_by(userId=content["userId"], tourneyId=content["tourneyId"]).all()
-        if len(dbQuery2) > 0:
-            session.delete(dbQuery2[0])
-            
-        session.commit()
+#    # check the user has large enough balance
+#    balanceQuery = session.query(AccountBalances).filter_by(userId=content["userId"]).one()
+#    userBalance = balanceQuery.balance
+#    # get the entry fee from the tourney id
+#    entryFeeQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+#    entryFee = entryFeeQuery.entryFee
+#    # check the user has enough money
+#    if (userBalance >= entryFee):
+#        #deduct the entry fee from the balance
+#        balanceQuery.balance -= entryFee
+#        session.add(balanceQuery)
+#        
+#        # add the user to entrants table
+#        dbEntry = Entrants(tourneyId=content["tourneyId"], userId=content["userId"], username=content["username"], balance=content["balance"])
+#        session.add(dbEntry)
+#
+#        # update the number of entrants in registration tourneys table
+#        dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+#        dbQuery.noEntrants += 1
+#        session.add(dbQuery)
+#
+#        # check if the user has an invitation to this tournament, if they do then delete the invitation
+#        dbQuery2 = session.query(TourneyInvites).filter_by(userId=content["userId"], tourneyId=content["tourneyId"]).all()
+#        if len(dbQuery2) > 0:
+#            session.delete(dbQuery2[0])
+#            
+#        session.commit()
+#    
+#        session.close()
+#
+#        return {"response": "success"}
+#    else:
+#        session.close()
+#        return {"response": "insufficient funds"}
     
-        session.close()
+    # add the user to entrants table
+    dbEntry = Entrants(tourneyId=content["tourneyId"], userId=content["userId"], username=content["username"], balance=content["balance"])
+    session.add(dbEntry)
 
-        return {"response": "success"}
-    else:
-        session.close()
-        return {"response": "insufficient funds"}
+    # update the number of entrants in registration tourneys table
+    dbQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+    dbQuery.noEntrants += 1
+    session.add(dbQuery)
+
+    # check if the user has an invitation to this tournament, if they do then delete the invitation
+    dbQuery2 = session.query(TourneyInvites).filter_by(userId=content["userId"], tourneyId=content["tourneyId"]).all()
+    if len(dbQuery2) > 0:
+        session.delete(dbQuery2[0])
+    
+    session.commit()
+    session.close()
+        
+    return {"response": "success"}
 
 @app.route('/tourneyUnregister', methods=['POST'])
 def unregisterTourneys():
@@ -634,11 +792,11 @@ def unregisterTourneys():
     session.add(dbQuery2)
     
     # add the entry fee back to user's balance
-    entryFeeQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
-    entryFee = entryFeeQuery.entryFee
-    balanceQuery = session.query(AccountBalances).filter_by(userId=content["userId"]).one()
-    balanceQuery.balance += entryFee
-    session.add(balanceQuery)
+#    entryFeeQuery = session.query(RegistrationTourneys).filter_by(tourneyId=content["tourneyId"]).one()
+#    entryFee = entryFeeQuery.entryFee
+#    balanceQuery = session.query(AccountBalances).filter_by(userId=content["userId"]).one()
+#    balanceQuery.balance += entryFee
+#    session.add(balanceQuery)
     
     session.commit()
     
@@ -646,44 +804,19 @@ def unregisterTourneys():
     
     return content
 
-@app.route('/registerProducts', methods=['POST'])
-def registerProducts():
-    content = request.json
-    
-    print(content)
-    
-    session = Session()
-    
-    for exchange in content['products']:
-        for productType in content['products'][exchange]:
-            for product in content['products'][exchange][productType]:
-                dbEntry = RegisteringProducts(exchange=exchange, productName=product, tourneyId=content['tourneyId'], productType=productType)
-                session.add(dbEntry)
-    
-    session.commit()
-    session.close()
-    
-    return {"response": "success"}
-
 @app.route('/getProducts', methods=['POST'])
 def getProducts():
     tourneyId = request.json["tourneyId"]
     
-    binanceProducts = []
     FTXProducts = []
-    bitfinexProducts = []
     
     session = Session()
     for query in session.query(RegisteringProducts).filter_by(tourneyId=tourneyId):
-        if query.exchange == "Binance":
-            binanceProducts.append(query.productName)
         if query.exchange == "FTX":
             FTXProducts.append(query.productName)
-        if query.exchange == "Bitfinex":
-            bitfinexProducts.append(query.productName)
     session.close()
     
-    return ({"Binance": binanceProducts, "FTX": FTXProducts, "Bitfinex": bitfinexProducts})
+    return ({"FTX": FTXProducts})
 
 @app.route('/getActiveProducts', methods=['POST'])
 def getActiveProducts():
@@ -815,15 +948,37 @@ def getCompletedEntrants():
 def updateAPI():
     content = request.json
     
-    print(content)
+    # get the API key and secret
+    API_key = content['APIKey']
+    API_secret = content['APISecret']
+
+    # check if the key and secret are valid
+    string = "https://ftx.com/api/fills?market=ETC-PERP"
+    ts = int(time.time() * 1000)
+    HTTPrequest = Request('GET', string)
+    prepared = HTTPrequest.prepare()
+    signature_payload = f'{ts}{prepared.method}{prepared.path_url}'.encode()
+    if prepared.body:
+        signature_payload += prepared.body
+    signature = hmac.new(API_secret.encode(), signature_payload, 'sha256').hexdigest()
+    prepared.headers['FTX-KEY'] = API_key
+    prepared.headers['FTX-SIGN'] = signature
+    prepared.headers['FTX-TS'] = str(ts)
+    s = requests.Session()
+    res = s.send(prepared)
     
+    # if not valid, return invalid
+    if 'result' in res.json():
+        valid = True
+    else:
+        return {"response": "invalid"}
+    
+    # update the database
     session = Session()
     dbQuery = session.query(UserAPI).filter_by(userId=content["userId"]).one()
     
-    if content["exchange"] == "FTX" and content["fieldToUpdate"] == "key":
-        dbQuery.FTXKey = content["APIKey"]
-    elif content["exchange"] == "FTX" and content["fieldToUpdate"] == "secret":
-        dbQuery.FTXSecret = content["APISecret"]
+    dbQuery.FTXKey = API_key
+    dbQuery.FTXSecret = API_secret
 
     session.commit()
     session.close()
@@ -851,14 +1006,62 @@ def getAPIInfo():
     session = Session()
     dbQuery = session.query(UserAPI).filter_by(userId=content["userId"]).all()
     if len(dbQuery) > 0:
-        FTXKey = dbQuery[0].FTXKey
-        FTXSecret = dbQuery[0].FTXSecret
-    
+        # get the API key and secret
+        API_key = dbQuery[0].FTXKey
+        API_secret = dbQuery[0].FTXSecret
+        
+        # check the key and secret are not none
+        if API_key != None and API_secret != None:
+            validity = "valid"
+
+            # make encrypted key and secret to give to user
+            FTXKeyEncrypt = API_key[0:5]
+            FTXSecretEncrypt = API_secret[0:5]
+
+            for i in range(5, len(API_key)):
+                FTXKeyEncrypt += '*'
+            for i in range(5, len(API_secret)):
+                FTXSecretEncrypt += '*'
+        else:
+            validity = "invalid"
+            FTXKeyEncrypt = ''
+            FTXSecretEncrypt = ''
+        
         session.close()
-    
-        return {"FTX": {"key": FTXKey, "secret": FTXSecret}}
+        return {"FTX": {"key": FTXKeyEncrypt, "secret": FTXSecretEncrypt}, "validity": validity}
     else:
-        return {"FTX": {"key": '', "secret": ''}}
+        session.close()
+        return {"FTX": {"key": '', "secret": ''}, "validity": "no API info found"}
+    
+@app.route('/checkAPIValid', methods=['POST'])
+def checkAPIValid():
+    content = request.json
+
+    # get the API key and secret
+    API_key = content['APIKey']
+    API_secret = content['APISecret']
+
+    # check if the key and secret are valid
+    string = "https://ftx.com/api/fills?market=ETC-PERP"
+    ts = int(time.time() * 1000)
+    HTTPrequest = Request('GET', string)
+    prepared = HTTPrequest.prepare()
+    signature_payload = f'{ts}{prepared.method}{prepared.path_url}'.encode()
+    if prepared.body:
+        signature_payload += prepared.body
+    signature = hmac.new(API_secret.encode(), signature_payload, 'sha256').hexdigest()
+    prepared.headers['FTX-KEY'] = API_key
+    prepared.headers['FTX-SIGN'] = signature
+    prepared.headers['FTX-TS'] = str(ts)
+    s = requests.Session()
+    res = s.send(prepared)
+
+    session.close()
+
+    if 'result' in res.json():
+        return {"response": "valid"}
+    else:
+        return {"response": "invalid"}
     
 @app.route('/editStartBalance', methods=['POST'])
 def editStartBalance():

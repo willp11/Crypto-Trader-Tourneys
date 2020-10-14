@@ -23,37 +23,40 @@ class CreateTournament extends Component {
             startTime: null,
             duration: null,
             quoteCurrency: null,
-            visibility: null,
-            entryFee: null,
-            payoutStruct: null
+            visibility: null
         },
         redirect: false,
         errorMsg: '',
         productList: null,
         showProducts: false,
-        numPayoutInputs: 0,
-        payoutInputs: [],
-        loggedIn: true,
         newTourneyId: null,
-        loading: false
+        loading: false,
+        authFail: false,
+        error: false
     }
     
     componentDidMount() {
         
-        let user = firebaseAuth.currentUser;
-        if (!user) {
-            this.setState({loggedIn: false});
-        }
-        
-        let productList;
-        axios.get('/getAllProducts').then(res => {
-            productList=res.data;
-            this.setState({productList: productList});
+        firebaseAuth.onAuthStateChanged((user) => {
+            if (user) {
+                if (user.emailVerified == false) {
+                    this.setState({authFail: true});
+                } else {
+                    this.props.updateUserIdToken(user.uid, user.xa);
+                    this.props.getUsernameEmail(user.uid);
+                    let productList;
+                    axios.get('/getAllProducts').then(res => {
+                        productList=res.data;
+                        this.setState({productList: productList});
+                    }).catch(err => {
+                        this.setState({error: true});
+                    });
+                }
+            } else {
+                this.setState({authFail: true});
+            }
         });
-    }
-
-    componentDidUpdate() {
-        //console.log(this.state.payoutInputs);
+        
     }
 
     componentWillUnmount() {
@@ -75,70 +78,45 @@ class CreateTournament extends Component {
         
         if (dbData.maxEntrants === null || dbData.minEntrants === null || dbData.startDate === null ||  dbData.startTime === null || dbData.duration === null) {
             valid = false;
-            errorMsg = <p style={{"fontWeight": "bold"}}>Not all required information has been entered.</p>
+            errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>Not all required information has been entered.</p>
         } else {
             if (parseInt(dbData.maxEntrants) < 2 || parseInt(dbData.maxEntrants) > 200) {
                 valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>YThe maximum number of entrants must be between 2 and 200.</p>
+                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>YThe maximum number of entrants must be between 2 and 200.</p>
             }
 
             if (parseInt(dbData.minEntrants) < 2 || parseInt(dbData.minEntrants) > 200) {
                 valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>The minimum number of entrants must be between 2 and 200.</p>
+                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The minimum number of entrants must be between 2 and 200.</p>
             }
             
             if (parseInt(dbData.maxEntrants) < parseInt(dbData.minEntrants)) {
                 valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>The minimum number of entrants must be less than the maximum number of entrants.</p>       
+                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The minimum number of entrants must be less than the maximum number of entrants.</p>       
             }
 
             if (dbData.startTime[3] != 0 || dbData.startTime[4] != 0 ) {
                 valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>Tournaments must start on the hour. E.g. 12:00</p>
+                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>Tournaments must start on the hour. E.g. 12:00</p>
             }
             
             if (dbData.productList.length < 1 || dbData.productList.length > 5) {
                 valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>You must choose between 1 and 5 trading products.</p>
+                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>You must choose between 1 and 5 trading products.</p>
             }
             
-            if (givenStartTS < earliestTS) {
-                valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>The start time must be more than 1 hour from now.</p>
-            }
+//            if (givenStartTS < earliestTS) {
+//                valid = false;
+//                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The start time must be more than 1 hour from now.</p>
+//            }
             if (givenStartTS > latestTS) {
                 valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>The start time must be less than 7 days from now.</p>
+                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The start time must be less than 7 days from now.</p>
             }
 
             if (parseInt(dbData.duration) < 1 || parseInt(dbData.duration) > 7) {
                 valid = false;
-                errorMsg = <p style={{"fontWeight": "bold"}}>The duration must be between 1 to 7 days.</p>
-            }
-            if (dbData.payoutStruct == "custom") {
-                if (this.state.payoutInputs.length == 0) {
-                    valid = false;
-                    errorMsg = <p style={{"fontWeight": "bold", "color": "#C62828"}}>You have not completed the payout structure.</p>
-                }
-                let sumPayouts = 0;
-                for (let i=0; i<this.state.payoutInputs.length; i++) {
-                    if (this.state.payoutInputs[i].payout == null) {
-                        valid = false;
-                        errorMsg = <p style={{"fontWeight": "bold", "color": "#C62828"}}>You have not filled out all the payouts.</p>
-                    } else {
-                        sumPayouts += parseFloat(this.state.payoutInputs[i].payout);
-                    }   
-                    if (i > 0) {
-                        if (this.state.payoutInputs[i-1].payout < this.state.payoutInputs[i].payout) {
-                            valid = false;
-                            errorMsg = <p style={{"fontWeight": "bold", "color": "#C62828"}}>The payouts be increasing in size the higher the rank.</p>
-                        }
-                    }   
-                }
-                if (sumPayouts != 100) {
-                    valid = false;
-                    errorMsg = <p style={{"fontWeight": "bold", "color": "#C62828"}}>The payouts must sum to 100.</p>
-                }
+                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The duration must be between 1 to 7 days.</p>
             }
         }
         
@@ -158,9 +136,7 @@ class CreateTournament extends Component {
             startTime: this.state.formData.startTime,
             productList: this.props.productList,
             tourneyId: null,
-            duration: this.state.formData.duration,
-            entryFee: this.state.formData.entryFee,
-            payoutStruct: this.state.formData.payoutStruct
+            duration: this.state.formData.duration
         }
         
         if (this.checkValidity(dbData)) {
@@ -177,43 +153,19 @@ class CreateTournament extends Component {
                 "duration": this.state.formData.duration,
                 "quoteCurrency": this.state.formData.quoteCurrency,
                 "visibility": this.state.formData.visibility,
-                "entryFee": this.state.formData.entryFee,
-                "payoutStruct": this.state.formData.payoutStruct,
+                "products": this.props.productList
             }
             
             console.log(newDbData);
             this.setState({loading: true});
             axios.post('/createTournament', newDbData).then(res => {
-            
+                console.log("tournament created");
                 console.log(res.data);
-                let balance;
-                if (this.state.formData.quoteCurrency == 'USD') {
-                    balance = 500;
-                } else if (this.state.formData.quoteCurrency == 'BTC') {
-                    balance = 1;
-                }
-                
-//                axios.post('/tourneyRegistration', {"tourneyId": tourneyNumber, "userId": this.props.userId, "username": this.props.username, "balance": balance}).then(res => {
-//                    console.log(res.data);
-//                });
-                axios.post('/registerProducts', {"products": this.props.productList, "tourneyId": tourneyNumber}).then(res => {
-                    console.log(res.data);
-                    
-                    if (this.state.formData.payoutStruct == "custom") {
-                        axios.post('/createCustomPayout', {"payoutValues": this.state.payoutInputs, "tourneyId": tourneyNumber}).then(res => {
-                            console.log(res.data);
-                            this.setState({newTourneyId: tourneyNumber, loading: false, redirect: true});
-                        })
-                    } else {
-                        this.setState({newTourneyId: tourneyNumber, loading: false, redirect: true});
-                    }
-
-                    this.props.emptyProductList();
-                });
+                this.props.emptyProductList();
+                this.setState({loading: false, redirect: true, newTourneyId: tourneyNumber});
+            }).catch(err => {
+                this.setState({error: true});
             });
-
-            //this.props.getMyTourneys(this.props.userId);
-            
         }
         
     }
@@ -244,34 +196,6 @@ class CreateTournament extends Component {
         this.setState({formData: newData});
     }
     
-    selectPayoutHandler = (event) => {
-        event.preventDefault();
-        let payout = event.target.name;
-        let newData = {...this.state.formData};
-        newData['payoutStruct'] = payout;
-        this.setState({formData: newData});
-    }
-    
-    customPayoutCreateInputs = (event) => {
-        event.preventDefault();
-        let payoutInputs = [];
-        let numInputs;
-        if (event.target.value <= 10) {
-            numInputs = event.target.value;
-        } else {
-            numInputs = 10;
-        }
-        for (let i = 0; i<numInputs; i++) {
-            payoutInputs[i] = {rank: i+1, payout: null};
-        }
-        this.setState({numPayoutInputs: numInputs, payoutInputs: payoutInputs});
-    }
-    
-    customPayoutInputHandler = (event, index) => {
-        let payoutInputs = [...this.state.payoutInputs];
-        payoutInputs[index] = {rank: index+1, payout: event.target.value};
-        this.setState({payoutInputs: payoutInputs});
-    }
     
     render() {
         
@@ -287,9 +211,15 @@ class CreateTournament extends Component {
             );
         }
         
-        if (!this.state.loggedIn) {
+        if (this.state.authFail) {
             redirect = (
                 <Redirect to="/login" />
+            )
+        }
+            
+        if (this.state.error) {
+            redirect = (
+                <Redirect to="/error" />
             )
         }
  
@@ -400,83 +330,7 @@ class CreateTournament extends Component {
                 </div>
             );
         }
-        
-        
-        // PAYOUT STRUCTURE BUTTONS
-        let payoutStructBtns = (
-            <div>
-                <button name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
-                <button name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
-                <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom</button>
-            </div>
-        );
 
-        if (this.state.formData.payoutStruct == "standard") {
-            payoutStructBtns = (
-                <div>
-                    <button className="Selected" name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
-                    <button name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
-                    <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom</button>
-                </div>
-            );
-        } else if (this.state.formData.payoutStruct == "winnerTakesAll") {
-            payoutStructBtns = (
-                <div>
-                    <button name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
-                    <button className="Selected" name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
-                    <button name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom</button>
-                </div>
-            );
-        } else if (this.state.formData.payoutStruct == "custom") {
-            payoutStructBtns = (
-                <div>
-                    <button name="standard" onClick={(event) => this.selectPayoutHandler(event)}>Standard</button>
-                    <button name="winnerTakesAll" onClick={(event) => this.selectPayoutHandler(event)}>Winner takes all</button>
-                    <button className="Selected" name="custom" onClick={(event) => this.selectPayoutHandler(event)}>Custom</button>
-                </div>
-            );
-        }
-        
-        // PAYOUT STRUCTURE DIV
-        let payoutStructDiv = null;
-        if (this.state.formData.payoutStruct) {
-            if (this.state.formData.payoutStruct == "standard") {
-                payoutStructDiv = (
-                    <div>
-                        <p  style={{"fontSize": "0.8rem"}}>The top 10% of entrants are paid.</p>
-                        <p  style={{"fontSize": "0.8rem"}}>For more information on how the payouts are calculated using the standard structure please read the FAQ.</p>
-                    </div>
-                );
-            } else if (this.state.formData.payoutStruct == "winnerTakesAll") {
-                payoutStructDiv = (
-                    <div>  
-                        <p  style={{"fontSize": "0.8rem"}}>100% of the prize pool goes to the winner.</p>
-                    </div>
-                );
-            } else if (this.state.formData.payoutStruct == "custom") {
-                let payoutInputsArr = [];
-                for (let i=0; i<this.state.numPayoutInputs; i++) {
-                    payoutInputsArr.push(i);
-                }
-                    
-                let payoutInputs = payoutInputsArr.map((payout, index) => {
-                    return (
-                        <div key={index}>
-                            <label htmlFor={"input"+index}>Rank {index+1}</label>
-                            <input type="number" name={"input"+index} style={{"textAlign": "center", "width":"100px", "fontSize": "0.8rem"}} placeholder="% of payout" onChange={(event) => this.customPayoutInputHandler(event, index)}/>
-                        </div>
-                    );
-                })
-                payoutStructDiv = (
-                    <div>
-                        <p style={{"fontSize": "0.8rem"}}>How many paid places do you want? (maximum of 10)</p>
-                        <p style={{"fontSize": "0.8rem"}}>The payouts must sum to 100% and be increasing in size the higher the rank.</p>
-                        <input value={this.state.numPayoutInputs} style={{"textAlign": "center"}} type="number" max="10" placeholder="No. Paid Places" onChange={event => this.customPayoutCreateInputs(event)} /> <br/>
-                        {payoutInputs}
-                    </div>
-                );
-            }
-        }
         
         return (
             <div className="createTournDiv">
@@ -488,9 +342,6 @@ class CreateTournament extends Component {
                         <input type="number" min="2" max="200" placeholder="Min no. entrants" style={{"width": "180px", "textAlign": "center"}} onChange={(event, key) => this.hostInputHandler(event, 'minEntrants')}/> <br />
                         <h3>Maximum Number of Entrants:</h3>
                         <input type="number" min="2" max="200" placeholder="Max no. entrants" style={{"width": "180px", "textAlign": "center"}} onChange={(event, key) => this.hostInputHandler(event, 'maxEntrants')}/> <br />
-
-                        <h3>Entry Fee (BTC):</h3>
-                        <Input placeholder="Entry Fee (BTC)" changed={(event, key) => this.hostInputHandler(event, 'entryFee')}/> <br />
                             
                         <h3>Currency:</h3>
                         {buttonsDiv}
@@ -512,10 +363,6 @@ class CreateTournament extends Component {
                         <h3>Visibility:</h3>
                         {visibilityBtns}
 
-                        <h3>Payout Structure:</h3>
-                        {payoutStructBtns}
-                        {payoutStructDiv}
-
                         <button className="submitTournBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
                         {this.state.errorMsg}
                         {spinner}
@@ -531,8 +378,9 @@ class CreateTournament extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         updateProductList: (productList) => dispatch(actions.updateProductList(productList)),
-        getMyTourneys: (userId) => dispatch(actions.getMyTourneys(userId)),
-        emptyProductList: () => dispatch(actions.emptyProductList())
+        emptyProductList: () => dispatch(actions.emptyProductList()),
+        updateUserIdToken: (userId, token) => dispatch(actions.updateUserIdToken(userId, token)),
+        getUsernameEmail: (userId) => dispatch(actions.getUsernameEmail(userId))
     };
 };
 

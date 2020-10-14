@@ -11,10 +11,11 @@ engine = db.engine
 Session = sessionmaker(bind=engine)
 
 API_key = 'mW4bIM9k5Fz-EnSotKhr-3WdXXbPaF6h_WKveN6z'
+#API_key = 'aaa'
 API_secret = 'ExCgCNok6eaQwCXMwfiohq5Yt580O3ef21ldyljI'
 
-#string = "https://ftx.com/api/fills?market=MTA-PERP"
-string = "https://ftx.com/api/markets"
+string = "https://ftx.com/api/fills?market=ETC-PERP"
+#string = "https://ftx.com/api/markets"
 
 ts = int(time.time() * 1000)
 
@@ -34,18 +35,25 @@ prepared.headers['FTX-TS'] = str(ts)
 s = requests.Session()
 res = s.send(prepared)
 
-results = res.json()['result']
 
-session = Session()
+#results = res.json()['result']
 
-for result in results:
-    if result['type'] == "future":
-        if result['name'][len(result['name'])-4:len(result['name'])] == "PERP": 
-            dbEntry = ProductList(name=result['name'], exchange='FTX', productType=result['type'], baseCurrency=result['baseCurrency'],  quoteCurrency=result['quoteCurrency'])
-            session.add(dbEntry)
-    if result['type'] == "spot":
-        dbEntry = ProductList(name=result['name'], exchange='FTX', productType=result['type'], baseCurrency=result['baseCurrency'],  quoteCurrency=result['quoteCurrency'])
-        session.add(dbEntry)
-        
-session.commit()
-session.close()
+if 'result' in res.json():
+    results = res.json().get('result')
+    print(results)
+else:
+    print("API key not valid")
+
+#session = Session()
+#
+#for result in results:
+#    if result['type'] == "future":
+#        if result['name'][len(result['name'])-4:len(result['name'])] == "PERP": 
+#            dbEntry = ProductList(name=result['name'], exchange='FTX', productType=result['type'], baseCurrency=result['baseCurrency'],  quoteCurrency=result['quoteCurrency'])
+#            session.add(dbEntry)
+#    if result['type'] == "spot":
+#        dbEntry = ProductList(name=result['name'], exchange='FTX', productType=result['type'], baseCurrency=result['baseCurrency'],  quoteCurrency=result['quoteCurrency'])
+#        session.add(dbEntry)
+#        
+#session.commit()
+#session.close()

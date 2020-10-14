@@ -37,7 +37,7 @@ for query in session.query(RegistrationTourneys).all():
         print("active tourney: " + str(tourneyId))
         
         # copy the tournament to ActiveTourneys
-        dbEntry = ActiveTourneys(tourneyId=query.tourneyId, host=query.host, hostId=query.hostId, minEntrants=query.minEntrants, maxEntrants=query.maxEntrants, noEntrants=query.noEntrants, startTime=query.startTime, startDate=query.startDate, endTime=query.endTime, endDate=query.endDate, startTS=query.startTS, endTS=query.endTS, quoteCurrency=query.quoteCurrency, visibility=query.visibility, entryFee=query.entryFee, payoutStruct=query.payoutStruct, lastUpdated=query.startTS)
+        dbEntry = ActiveTourneys(tourneyId=query.tourneyId, host=query.host, hostId=query.hostId, minEntrants=query.minEntrants, maxEntrants=query.maxEntrants, noEntrants=query.noEntrants, startTime=query.startTime, startDate=query.startDate, endTime=query.endTime, endDate=query.endDate, startTS=query.startTS, endTS=query.endTS, quoteCurrency=query.quoteCurrency, visibility=query.visibility, lastUpdated=query.startTS)
         session.add(dbEntry)
         
         # copy the entrants to ActiveEntrants

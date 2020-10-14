@@ -3,8 +3,10 @@ import './activeTourneys.css';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import Tourney from '../tourney/tourney';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import axios from 'axios';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import {firebaseAuth} from "../../firebase/firebase";
 
 class ActiveTourneys extends Component {
     
@@ -19,15 +21,33 @@ class ActiveTourneys extends Component {
             host: '',
             product: '',
             maxEntrants: '',
-            hoursUntilEnd: '',
-            minEntryFee: '',
-            maxEntryFee: ''
+            hoursUntilEnd: ''
         },
-        searchArray: []
+        searchArray: [],
+        sortDirections: {tourneyId: null, 
+                        duration: null,
+                        startTS: null,
+                        endTS: null,
+                        maxEntrants: null},
+        loading: true,
+        authFail: false,
+        error: false
     }
     
     componentDidMount() {
-        //this.props.getTourneys();
+        
+        firebaseAuth.onAuthStateChanged((user) => {
+            if (user) {
+                if (user.emailVerified == false) {
+                    this.setState({authFail: true});
+                } else {
+                    this.props.updateUserIdToken(user.uid, user.xa);
+                }
+            } else {
+                this.setState({authFail: true});
+            }
+        });
+        
         axios.get('/getActiveTourneys').then(res => {
             console.log(res.data);
             let tourneys = res.data.response;
@@ -67,7 +87,9 @@ class ActiveTourneys extends Component {
                 tourneys[i]['duration'] = duration;
             }
             
-            this.setState({tourneys: tourneys, searchArray: tourneys});
+            this.setState({tourneys: tourneys, searchArray: tourneys, loading: false});
+        }).catch(err => {
+            this.setState({error: true});
         });
     }
     
@@ -81,7 +103,7 @@ class ActiveTourneys extends Component {
         let products;
         let showProducts;
         if (!this.state.showProducts) {
-            products = this.state.tourneys[index].products;
+            products = this.state.searchArray[index].products;
             showProducts = true;
         } else {
             products = [];
@@ -97,9 +119,7 @@ class ActiveTourneys extends Component {
                                 host: '',
                                 product: '',
                                 maxEntrants: '',
-                                hoursUntilEnd: '',
-                                minEntryFee: '',
-                                maxEntryFee: ''
+                                hoursUntilEnd: ''
                             }
                       });
     }
@@ -161,20 +181,6 @@ class ActiveTourneys extends Component {
                     continue;
                 }
             }
-            if (this.state.search.minEntryFee) {
-                if (this.state.search.minEntryFee > tourneysFound[i].entryFee) {
-                    tourneysFound.splice(i, 1);
-                    i--
-                    continue;
-                } 
-            }
-            if (this.state.search.maxEntryFee) {
-                if (this.state.search.maxEntryFee < tourneysFound[i].entryFee) {
-                    tourneysFound.splice(i, 1);
-                    i--
-                    continue;
-                } 
-            }
         }
         
         // copy all the found tournaments to the state search array
@@ -187,15 +193,96 @@ class ActiveTourneys extends Component {
                             host: '',
                             product: '',
                             maxEntrants: '',
-                            hoursUntilEnd: '',
-                            minEntryFee: '',
-                            maxEntryFee: ''
+                            hoursUntilEnd: ''
                         }, 
                        searchArray: [...this.state.tourneys]});
     }
     
+    sortColumn = (field) => {
+        
+        // check the current sorted direction of the field
+        let direction = this.state.sortDirections[field]
+
+        if (direction == null || direction == "descending") {
+            direction = "ascending";
+        } else if (direction == "ascending") {
+            direction = "descending";
+        }
+        
+        // sort all the tournaments
+        let tourneysArr = this.state.tourneys;
+        let len = tourneysArr.length;
+        for (let i = len-1; i>=0; i--) {
+            for (let j = 1; j<=i; j++) {
+                if (direction == "ascending") {
+                    // sort into ascending order
+                    if (tourneysArr[j-1][field] > tourneysArr[j][field]) {
+                        let temp = tourneysArr[j-1];
+                        tourneysArr[j-1] = tourneysArr[j];
+                        tourneysArr[j] = temp;
+                    }
+                } else if (direction == "descending") {
+                    // sort into descending order
+                    if (tourneysArr[j-1][field] < tourneysArr[j][field]) {
+                        let temp = tourneysArr[j-1];
+                        tourneysArr[j-1] = tourneysArr[j];
+                        tourneysArr[j] = temp;
+                    }
+                }
+                    
+            }
+        }
+        
+        // sort the filtered search array
+        let searchArr = this.state.tourneys;
+        len = searchArr.length;
+        for (let i = len-1; i>=0; i--) {
+            for (let j = 1; j<=i; j++) {
+                if (direction == "ascending") {
+                    // sort into ascending order
+                    if (searchArr[j-1][field] > searchArr[j][field]) {
+                        let temp = searchArr[j-1];
+                        searchArr[j-1] = searchArr[j];
+                        searchArr[j] = temp;
+                    }
+                } else if (direction == "descending") {
+                    // sort into descending order
+                    if (searchArr[j-1][field] < searchArr[j][field]) {
+                        let temp = searchArr[j-1];
+                        searchArr[j-1] = searchArr[j];
+                        searchArr[j] = temp;
+                    }
+                }
+            }
+        }
+        
+        let sortDirections = {...this.state.sortDirections};
+        sortDirections[field] = direction;
+        
+        this.setState({tourneys: tourneysArr, searchArr: searchArr, sortDirections: sortDirections})
+    }
+    
     render (){
         
+        // REDIRECT IF NOT LOGGED IN
+        let redirect = null;
+        if (this.state.authFail) {
+            redirect = (
+                <Redirect to="/login" />
+            )
+        }
+        
+        if (this.state.error) {
+            redirect = (
+                <Redirect to="/error" />
+            )
+        }
+        
+        // LOADING SPINNER
+        let spinner = null;
+        if (this.state.loading) spinner = <Spinner/>
+        
+        // tournament table data
         let tourneyData = this.state.searchArray.map((data, index) => {
             let navPath = "/tourneys/" + data.tourneyId;
             
@@ -224,7 +311,6 @@ class ActiveTourneys extends Component {
                     <td>{data.tourneyId}</td>
                     <td><NavLink to={navPath}><button>Go to Lobby</button></NavLink></td>
                     <td>{data.host}</td>
-                    <td>{data.entryFee}</td>
                     <td>
                         <button onClick={(event, i) => this.showProductsHandler(event, index)}>{showProdStr}</button> <br/> 
                         {productsDiv}
@@ -251,8 +337,6 @@ class ActiveTourneys extends Component {
                                 <input value={this.state.search.product} onChange={(event, key) => this.updateSearch(event, "product")} placeholder="Product" /> <br/>
                                 <input value={this.state.search.maxEntrants} onChange={(event, key) => this.updateSearch(event, "maxEntrants")} placeholder="Max Entrants" /> <br/>
                                 <input value={this.state.search.hoursUntilEnd} onChange={(event, key) => this.updateSearch(event, "hoursUntilEnd")} placeholder="Hours until end" /> <br/>
-                                <input value={this.state.search.minEntryFee} onChange={(event, key) => this.updateSearch(event, "minEntryFee")} placeholder="Min Entry Fee" /> <br/>
-                                <input value={this.state.search.maxEntryFee} onChange={(event, key) => this.updateSearch(event, "maxEntryFee")} placeholder="Max Entry Fee" /> <br/>
                                 <button className="submitBtn searchTourneySubmitBtn" onClick={this.searchTourneys}>Submit</button> <br/>
                                 <button className="resetBtn" onClick={this.resetTourneys}>Reset</button>
                             </div>
@@ -264,24 +348,25 @@ class ActiveTourneys extends Component {
         
         return (
             <div className="AllTourneysDiv">
+                {redirect}
                 <div className="AllTourneys">
                     <h1>Active Tournaments</h1>
+                    {spinner}
                     <div className="TourneyDiv">
                         <p>The full list of all tournaments currently in progress.</p>
-                        <p>You can filter the tournaments by id, host, product, maximum number of entrants, hours until the tournament ends and entry fee.</p>
+                        <p>You can filter the tournaments by id, host, product, maximum number of entrants and hours until the tournament ends.</p>
                         <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Filter</button>
                         {filtersDiv}
                         <table className="TourneyTable">
                             <thead>
                                 <tr>
-                                    <th>id</th>
+                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("tourneyId")}>id</th>
                                     <th>Lobby</th>
                                     <th>Host</th>
-                                    <th>Entry Fee</th>
                                     <th>Products</th>
-                                    <th>Entrants</th>
-                                    <th>Until End</th>
-                                    <th>Duration</th>
+                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("maxEntrants")}>Entrants</th>
+                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("endTS")}>Until End</th>
+                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("duration")}>Duration</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -298,7 +383,7 @@ class ActiveTourneys extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getTourneys: () => dispatch(actions.getTourneys())
+        updateUserIdToken: (userId, token) => dispatch(actions.updateUserIdToken(userId, token))
     };
 };
 

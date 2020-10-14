@@ -3,8 +3,10 @@ import './completedTourneys.css';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import Tourney from '../tourney/tourney';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import axios from 'axios';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import {firebaseAuth} from "../../firebase/firebase";
 
 class CompletedTourneys extends Component {
     
@@ -18,15 +20,25 @@ class CompletedTourneys extends Component {
             tourneyId: '',
             host: ''
         },
-        notFoundMsg: null
+        notFoundMsg: null,
+        authFail: false,
+        loading: true,
+        error: false
     }
     
     componentDidMount() {
-        
-    }
-    
-    componentDidUpdate() {
-        //console.log(this.state.search);
+        firebaseAuth.onAuthStateChanged((user) => {
+            if (user) {
+                if (user.emailVerified == false) {
+                    this.setState({authFail: true});
+                } else {
+                    this.props.updateUserIdToken(user.uid, user.xa);
+                    this.setState({loading: false})
+                }
+            } else {
+                this.setState({authFail: true});
+            }
+        });
     }
 
     showProductsHandler = (event, index) => {
@@ -61,30 +73,59 @@ class CompletedTourneys extends Component {
     }
     
     searchByTourneyIdHandler = (tourneyId) => {
+        this.setState({loading: true});
         axios.post('/getCompletedTourneys', {"fieldToSearch": "tourneyId", "tourneyId": tourneyId}).then(res => {
             console.log(res.data);
             let tourneys = res.data.response;
             let notFoundMsg = null;
             if (tourneys.length == 0) {
                 notFoundMsg = <p style={{"fontWeight":"bold", "color":"#C62828"}}>No results found!</p>
+            } else {
+                for (let i=0; i<tourneys.length; i++) {
+                    // duration
+                    let duration = (tourneys[i].endTS - tourneys[i].startTS) / 60 / 60 / 24;
+                    tourneys[i]['duration'] = duration;
+                }
             }
-            this.setState({tourneys: tourneys, notFoundMsg: notFoundMsg});
-        });
+            this.setState({tourneys: tourneys, notFoundMsg: notFoundMsg, loading: false});
+        }).catch(err => {
+            this.setState({error: true});
+        });;
     }
     
     searchByHostHandler = (host) => {
+        this.setState({loading: true});
         axios.post('/getCompletedTourneys', {"fieldToSearch": "host", "host": host}).then(res => {
             console.log(res.data);
             let tourneys = res.data.response;
             let notFoundMsg = null;
             if (tourneys.length == 0) {
                 notFoundMsg = <p style={{"fontWeight":"bold", "color":"#C62828"}}>No results found!</p>
+            } else {
+                for (let i=0; i<tourneys.length; i++) {
+                    // duration
+                    let duration = (tourneys[i].endTS - tourneys[i].startTS) / 60 / 60 / 24;
+                    tourneys[i]['duration'] = duration;
+                }
             }
-            this.setState({tourneys: tourneys, notFoundMsg: notFoundMsg});
+                                                                                          
+            this.setState({tourneys: tourneys, notFoundMsg: notFoundMsg, loading: false});
+        }).catch(err => {
+            this.setState({error: true});
         });
     }
     
     render (){
+        
+        // REDIRECT
+        let redirect = null;
+        if (this.state.authFail) redirect = <Redirect to="/login" />
+            
+        if (this.state.error) redirect = <Redirect to="/error" />
+            
+        // LOADING SPINNER
+        let spinner = null;
+        if (this.state.loading) spinner= <Spinner/>
         
         let tourneyData = this.state.tourneys.map((data, index) => {
             let navPath = "/tourneys/" + data.tourneyId;
@@ -114,11 +155,13 @@ class CompletedTourneys extends Component {
                     <td>{data.tourneyId}</td>
                     <td><NavLink to={navPath}><button>Go to Lobby</button></NavLink></td>
                     <td>{data.host}</td>
-                    <td>{data.entryFee}</td>
+                    <td>
+                        <button onClick={(event, i) => this.showProductsHandler(event, index)}>{showProdStr}</button> <br/> 
+                        {productsDiv}
+                    </td>
                     <td>{data.startDate} </td>
                     <td>{data.startTime}</td>
-                    <td>{data.endDate}</td>
-                    <td>{data.endTime}</td>
+                    <td>{data.duration}d</td>
                 </tr>
             )
         });
@@ -133,11 +176,10 @@ class CompletedTourneys extends Component {
                             <th>id</th>
                             <th>Lobby</th>
                             <th>Host</th>
-                            <th>Entry Fee</th>
+                            <th>Products</th>
                             <th>Start Date</th>
                             <th>Start Time</th>
-                            <th>End Date</th>
-                            <th>End Time</th>
+                            <th>Duration</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,6 +191,7 @@ class CompletedTourneys extends Component {
         
         return (
             <div className="AllTourneysDiv">
+                {redirect}
                 <div className="AllTourneys">
                     <h1 >Completed Tournaments</h1>
                     <div className="TourneyDiv">
@@ -158,6 +201,7 @@ class CompletedTourneys extends Component {
                         <button className="submitBtn" onClick={() => this.searchByTourneyIdHandler(this.state.search.tourneyId)}>Search</button> <br/>
                         <input className="searchCompletedTourneysInput" placeholder="Host" onChange={(event) => this.updateSearch(event, "host")} />
                         <button className="submitBtn" onClick={() => this.searchByHostHandler(this.state.search.host)}>Search</button> <br/>
+                        {spinner}
                         {tourneyTable}
                         {notFoundMsg}
                     </div>
@@ -170,7 +214,7 @@ class CompletedTourneys extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getTourneys: () => dispatch(actions.getTourneys())
+        updateUserIdToken: (userId, token) => dispatch(actions.updateUserIdToken(userId, token))
     };
 };
 

@@ -1,0 +1,59 @@
+.errorDiv {
+    margin-top: 0;
+    background-color: #161616;
+    height: auto;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 80px 0px 80px 0px;
+}
+
+.errorSubDiv {
+    background-color: #282828;
+    height: auto;
+    min-height: 75vh;
+    width: 70vw;
+    margin: 0 auto;
+    padding: 20px 0 40px 0;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 20px;
+    top: 40px;
+    border: 1px solid black;
+}
+
+.errorDiv h1 {
+    color: #E1E1E1;
+}
+
+.errorDiv h2 {
+    color: #E1E1E1;
+}
+
+
+.errorDiv P {
+    color: #E1E1E1;
+}
+
+/* large devices  desktops, 992px to 1200px)*/
+@media (max-width: 1200px) {  
+
+}
+
+/* Large devices (desktops, 768px to 992px )*/
+@media (max-width: 992px) {  
+    .errorSubDiv {
+        width: 80vw;
+    }
+}
+
+/* medium devices (landscape phones, 576px to 768px)*/
+@media (max-width: 768px) {  
+    .errorSubDiv {
+        width: 90vw;
+    }
+}
+
+/* Small devices (landscape phones, 576px and below)*/
+@media (max-width: 576px) {  
+
+}

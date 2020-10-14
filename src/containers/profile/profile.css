@@ -25,7 +25,7 @@
 }
 
 .profileSubDiv {
-    background-color: #212121;
+    background-color: #282828;
     height: auto;
     width: 800px;
     margin: 0 auto;
@@ -33,6 +33,7 @@
     box-sizing: border-box;
     position: relative;
     border-radius: 20px;
+    border: 1px solid black;
 }
 
 .profileSubDiv input {
@@ -44,8 +45,38 @@
     color: #D9E2EC;
     padding: 5px;
     width: 120px;
-    margin-bottom: 10px;
+    margin: 20px 0;
     font-size: 0.8rem;
+}
+
+.updateUsernameBtn {
+    background-color: #303f9f;
+    color: #D9E2EC;
+    padding: 5px;
+    width: 120px;
+    margin: 20px 0;
+    font-size: 0.8rem;
+}
+
+.updateUsernameModal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000000000;
+    border: 0.5px solid #121212;
+    background-color: #323232;
+    padding: 20px;
+    height: auto;
+    width: 400px;
+}
+
+.updateUsernameModal h2 {
+    color: #E1E1E1;
+}
+    
+.updateUsernameModal p {
+    color: #E1E1E1;
 }
 
 .apiInput {
@@ -70,12 +101,14 @@
 }
 
 .profilePanel {
-    background-color: #323232;
-    width: 600px;
+    background-color: #363636;
+    width: 700px;
     margin: 0 auto 20px auto;
-    padding: 10px 10px 30px 10px;
-    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 10px;
     position: relative;
+    border: 1px solid black;
 }
 
 .updatePassBtn {
@@ -83,6 +116,20 @@
     color: #D9E2EC;
     padding: 5px;
     border-radius: 5px;
+}
+
+.apiDiv {
+    width: 500px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #404040;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.apiKeySecret {
+    margin: 0 auto;
 }
 
 .invitesTable {
@@ -143,11 +190,11 @@
 }
 
 .updatePassModal h2 {
-    color: white;
+    color: #E1E1E1;
 }
 
 .updatePassModal p {
-    color: white;
+    color: #E1E1E1;
 }
 
 .updatePassInput {
@@ -170,11 +217,11 @@
 }
 
 .verifyEmailModal p{
-    color: white;
+    color: #E1E1E1;
 }
 
 .verifyEmailModal h2{
-    color: white;
+    color: #E1E1E1;
 }
 
 /* large devices  desktops, 992px to 1200px)*/

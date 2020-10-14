@@ -15,6 +15,7 @@ import Profile from './containers/profile/profile';
 import Logout from './containers/logout/logout';
 import Tourney from './containers/tourney/tourney';
 import MyTrades from './containers/myTrades/myTrades';
+import Error from './containers/error/error';
 
 class App extends Component {
     render() {
@@ -33,6 +34,7 @@ class App extends Component {
                 <Route path="/logout" component={Logout} />
                 <Route path="/tourneys/:tourneyId" component={Tourney} />
                 <Route path="/myTrades" component={MyTrades} />
+                <Route path="/error" component={Error} />
                 <Redirect to="/" />
             </Switch>
         )

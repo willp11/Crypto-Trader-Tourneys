@@ -47,6 +47,10 @@ const clearError = (state, action) => {
     return updateObject(state, {error: null});
 }
 
+const updateUserIdToken = (state, action) => {
+    return updateObject(state, {userId: action.userId, token: action.token});
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.AUTH_START: return authStart(state, action);
@@ -58,6 +62,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.SET_USERNAME_EMAIL: return setUsernameEmail(state, action);
         case actionTypes.GET_USERNAME_EMAIL: return getUsernameEmail(state, action);
         case actionTypes.CLEAR_ERROR: return clearError(state, action);
+        case actionTypes.UPDATE_USERID_NAME: return updateUserIdToken(state, action);
         default:
             return state;
     }

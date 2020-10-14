@@ -37,7 +37,7 @@
 }
 
 .logoutSubDiv {
-    background-color: #212121;
+    background-color: #282828;
     height: 400px;
     width: 500px;
     margin: 0 auto;
@@ -46,6 +46,7 @@
     position: relative;
     border-radius: 20px;
     top: 40px;
+    border: 1px solid black;
 }
 
 

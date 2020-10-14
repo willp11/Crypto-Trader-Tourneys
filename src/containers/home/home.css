@@ -97,7 +97,11 @@
     position: relative;
     top: 20px;
     box-sizing: border-box;
-    padding: 5px;
+    padding: 20px;
+}
+
+.homeLowerSubDiv p {
+    text-align: left;
 }
 
 .homeLowerSubDiv h2 {

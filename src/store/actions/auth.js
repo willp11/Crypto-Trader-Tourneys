@@ -105,31 +105,18 @@ export const auth = (email, password, isSignup, username) => {
                     localStorage.setItem('expirationDate', expirationDate);
                     localStorage.setItem('token', response.user.xa);
                 
-/*                    // store user in realtime database
-                    let dbData = {username: username,
-                        userId: response.user.uid,
-                        email: email
-                    }
-
-                    let newRef = "users/" +  response.user.uid + '/';
-                    firebaseDB.ref(newRef).set(dbData).then(()=> {
-                        console.log("finished writing to db");
-                        
-                        dispatch(authSuccess(response.user.xa, response.user.uid));
-                        dispatch(checkAuthTimeout(3600));
-                    });*/
-        
+                    dispatch(authSuccess(response.user.xa, response.user.uid));
+                    dispatch(checkAuthTimeout(3600));
+                    firebaseAuth.currentUser.sendEmailVerification().then(() => {
+                        console.log("email sent");
+                    }).catch(error => {
+                        console.error(error);
+                    });
+                
                     axios.post('/createUser', {userId: response.user.uid, username: username, email: email}).then(res => {
-                        axios.post('/createAPI', {userId: response.user.uid, API1: '', API2: '', API3: ''}).then(res => {
-                            console.log(res.data);
-                            dispatch(authSuccess(response.user.xa, response.user.uid));
-                            dispatch(checkAuthTimeout(3600));
-                            firebaseAuth.currentUser.sendEmailVerification().then(() => {
-                                console.log("email sent");
-                            }).catch(error => {
-                                console.error(error);
-                            })
-                       })                                                                           
+                        console.log(res.data);                                                              
+                    }).catch(error => {
+                        console.error(error);
                     });
                     
                 })
@@ -153,16 +140,13 @@ export const setUsernameEmail = (username, email) => {
     };
 };
 
-export const getUsernameEmail = (userId) => {
+export const getUsernameEmail = (userId, email) => {
     return dispatch => {
-        
         // call API to get username and email
         axios.post('/getUsernameEmail', {userId: userId}).then(res => {
             let username = res.data.response.username;
-            let email = res.data.response.email;
             dispatch(setUsernameEmail(username, email));
         })
-        
     }
 }
 
@@ -224,6 +208,13 @@ export const resetPassword = (email) => {
     
 }
 
+export const updateUserIdToken = (userId, token) => {
+    return {
+        type: actionTypes.UPDATE_USERID_NAME,
+        userId: userId,
+        token: token
+    };
+}
 
 
 

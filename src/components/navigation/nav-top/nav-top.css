@@ -5,7 +5,6 @@
     flex-wrap: no-wrap;
     align-content: center;
     justify-content: space-between;
-/*    border: 2px solid #243B53;*/
     font-family: Arial;
     height: 80px;
     width: 100vw;
@@ -17,8 +16,10 @@
 }
 
 .NavTop img {
-    height: 80px;
-    width: 340px;
+    position: relative;
+    top: 10px;
+    height: 60px;
+    width: 255px;
     margin-left: 5px;
 }
 
@@ -63,6 +64,9 @@
     z-index: 1;
     right: 0;
     font-size: 1rem;
+    overflow: auto;
+    height: auto;
+    max-height: 100vh;
 }
 
 /* Links inside the dropdown */

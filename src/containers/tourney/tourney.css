@@ -39,8 +39,9 @@
     margin: 20px auto;
     box-sizing: border-box;
     position: relative;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 20px 0;
+    border: 1px solid black;
 }
 
 .tourneySubDiv2 {
@@ -50,7 +51,8 @@
     margin: 0 auto;
     box-sizing: border-box;
     position: relative;
-    border-radius: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
 }
 
 .hostControls {
@@ -60,6 +62,7 @@
     margin-bottom: 40px;
     padding-bottom: 20px;
     background-color: #363636;
+    border-radius: 10px;
 }
 
 .hostControls input {
@@ -85,17 +88,19 @@
     align-content: center;
     background-color: #363636;
     flex-wrap: nowrap;
-    width: 90vw;
+    width: 80vw;
     margin: 0 auto;
-    height: 870px;
+    height: 750px;
     border-radius: 10px;
     box-sizing: border-box;
 }
 
 .tourneyBody {
-    height: auto;
-    width: 30vw;
+    height: 750px;
+    width: 40vw;
+    overflow: scroll;
     box-sizing: border-box;
+    padding: 20px;
     background-color: #363636;
 }
 
@@ -109,8 +114,13 @@
 }
 
 .editStartBalBtn {
-    background-color: rgb(77, 134, 247);
+    background-color: #303f9f;
     color: #D9E2EC;
+    margin-top: 10px;
+}
+
+.editStartBalBtnDiv {
+    margin-top: 10px;
 }
 
 .registerTourneyBtn {
@@ -144,8 +154,9 @@
 }
 
 .entrantsList {
-    height: 870px;
-    width: 30vw;
+    height: 750px;
+    width: 40vw;
+    padding: 20px;
     overflow: scroll;
     box-sizing: border-box;
     border: 1px solid #121212;
@@ -166,39 +177,24 @@
     padding: 0;
 }
 
-.productList {
-    height: 870px;
-    width: 30vw;
-    overflow: scroll;
-    box-sizing: border-box;
-    border: 1px solid #121212;
-}
-
-.productListDiv {
-    width: 30vw;
-    height: 300px;
-    display: flex;
-    flex-direction: row;
-}
-
 .exchangeSublist {
     margin: 0 auto;
 }
 
 .editBalanceInput {
-    width: 50px;
+    width: 140px;
     text-align: center;
     margin-right: 20px;
 }
 
 .balanceInput {
-    width: 100px;
+    width: 140px;
     text-align: center;
     margin-bottom: 20px;
 }
 
 .highlight {
-    background-color: rgb(77, 134, 247);
+    background-color: #303f9f;
     color: white;
 }
 
