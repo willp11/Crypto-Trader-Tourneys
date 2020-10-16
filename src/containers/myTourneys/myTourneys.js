@@ -54,12 +54,12 @@ class MyTourneys extends Component {
                 if (user.emailVerified == false) {
                     this.setState({authFail: true});
                 } else {
-                    console.log(user.uid);
                     this.props.updateUserIdToken(user.uid, user.xa);
-                    let tourneys = [];
-                    axios.post('/getMyTourneys', {"userId": user.uid}).then(res => {
-                        tourneys = res.data.response;
-                        console.log(tourneys);
+                    
+                    axios.post('/getAllMyTourneys', {"userId": user.uid}).then(res => {
+                        
+                        // REGISTRATION TOURNEYS
+                        let tourneys = res.data.response.registrationTourneys;
                         // get the time in days, hours, minutes until tournament starts
                         for (let i=0; i<tourneys.length; i++) {
                             let date = new Date(); 
@@ -94,89 +94,66 @@ class MyTourneys extends Component {
                             let duration = (tourneys[i].endTS - tourneys[i].startTS) / 60 / 60 / 24;
                             tourneys[i]['duration'] = duration;
                         }
+                        
+                        // ACTIVE TOURNEYS
+                        let activeTourneys = res.data.response.activeTourneys;
+                        // get the time in days, hours, minutes until tournament starts
+                        for (let i=0; i<activeTourneys.length; i++) {
+                            let date = new Date(); 
+                            let timezone = date.getTimezoneOffset() * 60 * 1000;
 
-                        this.setState({
-                            tourneys: tourneys
-                        });
+                            let currentTS = date.getTime() + timezone;
+                            let endTS = activeTourneys[i].endTS * 1000;
 
-                        let activeTourneys = [];
-                        axios.post('/getMyActiveTourneys', {"userId": user.uid}).then(res => {
-                            activeTourneys = res.data.response;
+                            let currentHrs = currentTS / 1000 / 60 / 60;
+                            let endHrs = endTS / 1000 / 60 / 60;
 
-                            // get the time in days, hours, minutes until tournament starts
-                            for (let i=0; i<activeTourneys.length; i++) {
-                                let date = new Date(); 
-                                let timezone = date.getTimezoneOffset() * 60 * 1000;
+                            let daysUntilEnd;
+                            let hoursUntilEnd = endHrs - currentHrs;
+                            let minutesUntilEnd;
+                            if (hoursUntilEnd > 0) {
+                                daysUntilEnd = Math.floor(hoursUntilEnd/24);
+                                hoursUntilEnd = (hoursUntilEnd - (daysUntilEnd*24)).toFixed(2);
+                                minutesUntilEnd = (hoursUntilEnd % 1)*60;
 
-                                let currentTS = date.getTime() + timezone;
-                                let endTS = activeTourneys[i].endTS * 1000;
-
-                                let currentHrs = currentTS / 1000 / 60 / 60;
-                                let endHrs = endTS / 1000 / 60 / 60;
-
-                                let daysUntilEnd;
-                                let hoursUntilEnd = endHrs - currentHrs;
-                                let minutesUntilEnd;
-                                if (hoursUntilEnd > 0) {
-                                    daysUntilEnd = Math.floor(hoursUntilEnd/24);
-                                    hoursUntilEnd = (hoursUntilEnd - (daysUntilEnd*24)).toFixed(2);
-                                    minutesUntilEnd = (hoursUntilEnd % 1)*60;
-
-                                    hoursUntilEnd = Math.floor(hoursUntilEnd);
-                                    minutesUntilEnd = Math.ceil(minutesUntilEnd);
-                                } else {
-                                    daysUntilEnd = 0;
-                                    hoursUntilEnd = 0;
-                                    minutesUntilEnd = 0;
-                                }
-
-                                let untilEnd = {days: daysUntilEnd, hours: hoursUntilEnd, minutes: minutesUntilEnd};
-                                activeTourneys[i]['untilEnd'] = untilEnd;
-
-                                // duration
-                                let duration = (activeTourneys[i].endTS - activeTourneys[i].startTS) / 60 / 60 / 24;
-                                activeTourneys[i]['duration'] = duration;
+                                hoursUntilEnd = Math.floor(hoursUntilEnd);
+                                minutesUntilEnd = Math.ceil(minutesUntilEnd);
+                            } else {
+                                daysUntilEnd = 0;
+                                hoursUntilEnd = 0;
+                                minutesUntilEnd = 0;
                             }
 
-                            this.setState({
-                                activeTourneys: activeTourneys
-                            });
-                            let completedTourneys = [];
-                            axios.post('/getMyCompletedTourneys', {"userId": user.uid}).then(res => {
-                                completedTourneys = res.data.response;
-                                
-                                // duration
-                                for (let i=0; i<completedTourneys.length; i++) {
-                                    let duration = (completedTourneys[i].endTS - completedTourneys[i].startTS) / 60 / 60 / 24;
-                                    completedTourneys[i]['duration'] = duration;
-                                }
-                                this.setState({
-                                    completedTourneys: completedTourneys
-                                });
+                            let untilEnd = {days: daysUntilEnd, hours: hoursUntilEnd, minutes: minutesUntilEnd};
+                            activeTourneys[i]['untilEnd'] = untilEnd;
 
-                                let hostedTourneys = [];
-                                axios.post('/getMyHostedTourneys', {"userId": user.uid}).then(res => {
-                                    hostedTourneys = res.data.response;
-                                    console.log(hostedTourneys);
-                                    
-                                    // duration
-                                    for (let i=0; i<hostedTourneys.length; i++) {
-                                        let duration = (hostedTourneys[i].endTS - hostedTourneys[i].startTS) / 60 / 60 / 24;
-                                        hostedTourneys[i]['duration'] = duration;
-                                    }
-                                    
-                                    this.setState({
-                                        hostedTourneys: hostedTourneys,
-                                        loading: false
-                                    })
-                                }).catch(err => {
-                                    this.setState({error: true});
-                                });
-                            }).catch(err => {
-                                this.setState({error: true});
-                            });
-                        }).catch(err => {
-                            this.setState({error: true});
+                            // duration
+                            let duration = (activeTourneys[i].endTS - activeTourneys[i].startTS) / 60 / 60 / 24;
+                            activeTourneys[i]['duration'] = duration;
+                        }
+                        
+                        // COMPLETED TOURNEYS
+                        let completedTourneys = res.data.response.completedTourneys;
+                        // duration
+                        for (let i=0; i<completedTourneys.length; i++) {
+                            let duration = (completedTourneys[i].endTS - completedTourneys[i].startTS) / 60 / 60 / 24;
+                            completedTourneys[i]['duration'] = duration;
+                        }
+                        
+                        // HOSTED TOURNEYS
+                        let hostedTourneys = res.data.response.hostedTourneys;
+                        // duration
+                        for (let i=0; i<hostedTourneys.length; i++) {
+                            let duration = (hostedTourneys[i].endTS - hostedTourneys[i].startTS) / 60 / 60 / 24;
+                            hostedTourneys[i]['duration'] = duration;
+                        }
+
+                        this.setState({
+                            tourneys: tourneys,
+                            activeTourneys: activeTourneys,
+                            completedTourneys: completedTourneys,
+                            hostedTourneys: hostedTourneys,
+                            loading: false
                         });
                     }).catch(err => {
                         this.setState({error: true});
@@ -186,8 +163,6 @@ class MyTourneys extends Component {
                 this.setState({authFail: true});
             }
         });
-
-            
     }
 
     showProductsHandler = (event, index, table) => {

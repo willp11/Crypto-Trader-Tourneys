@@ -31,18 +31,18 @@ class Home extends Component {
                             <h2>Compete in Trading Tournaments</h2>
                             <img className="winMoneyImg" src={winMoneyImg} />
                             <p>Choose from all the publicly listed trading tournaments created by our members from all around the world completely free!</p>
-                            <p>Currently all tournaments are hosted on FTX Exchange as we believe they have the best selection of trading products in the cryptocurrency space. We will look to add support for more exchanges in the future.</p>
-                            <p>To start entering trading tournaments just simply create an account with us and an account with FTX exchange. Then link your FTX account to CryptoTourneys using your API key.</p>
                             <p>To find the tournament that suits you; filter by trading products, host, number of entrants and more!</p>
-                            <p>In the future we will add paid entry tournaments where users will win BTC prizes!</p>
+                            <p>Create an account with <a href="https://www.ftx.com">FTX Exchange.</a> </p>
+                            <p>Then link your exchange API key and secret found in your FTX account to your <b>CryptoTourneys</b> and start entering tournaments.</p>
                         </div>
                         <div className="homeLowerSubDiv">
                             <h2>Host Your Own Tournaments</h2>
                             <img className="hostTourneyImg" src={hostTourneyImg} />
                             <p>Host your own trading tournaments in seconds!</p>
-                            <p>Select the trading products allowed for the tournament (e.g. BTCUSD), entry fee, start time, duration, maximum number of entrants and more!</p>
-                            <p>Make the tournament private and invite your friends only or make it public for anyone in the world to enter!</p>
-                            <p>When we release paid entry tournaments, hosts will receive up to 50% of the fees generated for tournaments that they host!</p>
+                            <p>Customise your tournament to fit your needs!</p>
+                            <p>Choose the trading products, number of entrants, start time and duration of the tournament.</p>
+                            <p>Make the tournament public for anyone in the world to enter!</p>
+                            <p>Make the tournament private and invite your friends!</p>
                         </div>
                     </div>
                 </div>

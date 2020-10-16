@@ -55,8 +55,7 @@ class Login extends Component {
         firebaseAuth.onAuthStateChanged((user) => {
           if (user) {
             // User is signed in, redirect to profile page
-            console.log("hello logged in");
-              this.props.onSignedIn(firebaseAuth.currentUser.xa, firebaseAuth.currentUser.uid);
+            this.props.onSignedIn(firebaseAuth.currentUser.xa, firebaseAuth.currentUser.uid);
           } 
         });
     }
@@ -100,7 +99,6 @@ class Login extends Component {
             this.setState({resetPassword: false});
         })
         .catch(error => {
-            console.error(error);
             this.setState({resetErrorMsg: error.message});
         });
     }

@@ -52,20 +52,22 @@ class Profile extends Component {
                 this.setState({showVerifyModal: false, emailVerified: true});
             }
             
-            // call API to get username and email
-            axios.post('/getUsernameEmail', {userId: user.uid}).then(res => {
-                this.setState({loadingUsername: false});
-                let username = res.data.response.username;
-                if (username) {
-                    this.props.setUsernameEmail(username, user.email);
-                    this.props.updateUserIdToken(user.uid, user.xa);
-                } else {
-                    this.setState({validUsername: false});
-                }
-         
-            }).catch(error => {
-                this.setState({error: error});
-            })
+            if (!this.props.username) {
+                // call API to get username and email
+                axios.post('/getUsernameEmail', {userId: user.uid}).then(res => {
+                    this.setState({loadingUsername: false});
+                    let username = res.data.response.username;
+                    if (username) {
+                        this.props.setUsernameEmail(username, user.email);
+                        this.props.updateUserIdToken(user.uid, user.xa);
+                    } else {
+                        this.setState({validUsername: false});
+                    }
+
+                }).catch(error => {
+                    this.setState({error: error});
+                })
+            }
             
             // get users API info
             axios.post('/getAPIInfo', {"userId": this.props.userId}).then(res => {
@@ -87,10 +89,6 @@ class Profile extends Component {
         }
     }
     
-//    componentDidUpdate() {
-//        console.log(this.state.APIs.FTX);
-//    }
-    
     inputChangeHandler = (event, exchange, field) => {
         let newState = {...this.state.updateAPIs};
         newState[exchange][field] = event.target.value;
@@ -108,7 +106,6 @@ class Profile extends Component {
                         "APISecret": this.state.updateAPIs[exchange].secret};
         this.setState({updatingAPI: true});
         axios.post('/updateAPI', APIData).then(res => {
-            console.log(res.data);
             if (res.data.response == "success") {
                 this.setState({APIUpdatedMsg: "API Updated Successfully", APIs: {FTX: {key: APIKey, secret: APISecret}}, updatingAPI: false, APIValidErr: null });
             } else if (res.data.response == "invalid") {
@@ -127,9 +124,7 @@ class Profile extends Component {
     
     declineInvitationHandler = (index) => {
         axios.post('/removeTourneyInvite', {"userId": this.props.userId, "tourneyId": this.state.invites[index].tourneyId}).then(res => {
-            console.log(res.data);
             axios.post('/getTourneyInvites',  {"userId": this.props.userId}).then(res => {
-                console.log(res.data);
                 this.setState({
                     invites: res.data.response
                 });
@@ -154,19 +149,15 @@ class Profile extends Component {
         let data = {
             "tourneyId": tourneyId,
             "userId": this.props.userId,
-            "username": this.props.username,
             "balance": this.state.balance
         }
         
         let invites = [...this.state.invites];
         let newInvites = [];
         
-        console.log(invites);
-        
         for (let i=0; i<invites.length; i++) {
 
             if (invites[i].tourneyId == tourneyId) {
-                console.log("match");
                 newInvites = invites.splice[i, 1];
             }
         }
@@ -174,9 +165,8 @@ class Profile extends Component {
         this.setState({invites: newInvites, enterBalance: false});
         
         axios.post('/tourneyRegistration', data).then(res => {
-            console.log(res.data);
             axios.post('/removeTourneyInvite', {"userId": this.props.userId, "tourneyId": tourneyId}).then(res => {
-                console.log(res.data);
+
             });
         });   
     }
@@ -207,11 +197,9 @@ class Profile extends Component {
 
             user.updatePassword(this.state.newPassword.password).then((res)=>{
                 // update successful
-                console.log("Password changed");
                 this.setState({updatePassSuccess: true})
             }).catch((error)=> {
                 // An error happened.
-                console.log(error);
                 if (error.code == "auth/requires-recent-login") {
                     // update the modal to show the error message with a link to the login page
                     this.setState({updatePassError: error.message});
@@ -241,10 +229,9 @@ class Profile extends Component {
     
     sendVerificationEmail = () => {
         firebaseAuth.currentUser.sendEmailVerification().then(() => {
-            console.log("email sent");
             this.setState({emailSent: true});
         }).catch(error => {
-            console.error(error);
+            
         })
     }
     
@@ -275,7 +262,6 @@ class Profile extends Component {
             let email = user.email;
             axios.post('/createUser', {userId: this.props.userId, username: this.state.newUsername, email: email}).then(res => {
                 let response = res.data.response;
-                console.log(response);
                 if (response == "success") {
                     this.props.setUsernameEmail(this.state.newUsername, email);
                     this.setState({validUsername: true, loadingUpdateUsername: false, newUsername: ""});
@@ -286,7 +272,7 @@ class Profile extends Component {
                 }
 
             }).catch(error => {
-                console.error(error);
+
             });
         }
     }
@@ -495,8 +481,6 @@ class Profile extends Component {
                             <h2>Email:</h2>
                             <p>{this.props.email}</p>
                             {verifyEmailBtn}
-                            <h2>VIP level</h2>
-                            <p>Gold (level 3)</p>
                             <h2>Update Password</h2>
                             <button className="updatePassBtn" onClick={this.showPassModalHandler}>Update Password</button>
                             <div>

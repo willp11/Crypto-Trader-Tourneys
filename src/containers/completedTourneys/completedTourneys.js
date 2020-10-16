@@ -75,7 +75,6 @@ class CompletedTourneys extends Component {
     searchByTourneyIdHandler = (tourneyId) => {
         this.setState({loading: true});
         axios.post('/getCompletedTourneys', {"fieldToSearch": "tourneyId", "tourneyId": tourneyId}).then(res => {
-            console.log(res.data);
             let tourneys = res.data.response;
             let notFoundMsg = null;
             if (tourneys.length == 0) {
@@ -96,7 +95,7 @@ class CompletedTourneys extends Component {
     searchByHostHandler = (host) => {
         this.setState({loading: true});
         axios.post('/getCompletedTourneys', {"fieldToSearch": "host", "host": host}).then(res => {
-            console.log(res.data);
+
             let tourneys = res.data.response;
             let notFoundMsg = null;
             if (tourneys.length == 0) {

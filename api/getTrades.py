@@ -4,7 +4,7 @@ from datetime import timezone
 from binance.client import Client
 from init import db
 from sqlalchemy.orm import sessionmaker
-from models import ActiveTourneys, ActiveEntrants, ActiveProducts, Trades, CompletedEntrants
+from models import ActiveTourneys, ActiveEntrants, ActiveProducts, Trades, CompletedEntrants, UserAPI
 import math
 import time
 import hmac
@@ -14,8 +14,8 @@ from requests import Request, Session
 engine = db.engine
 Session = sessionmaker(bind=engine)
 
-API_key = 'mW4bIM9k5Fz-EnSotKhr-3WdXXbPaF6h_WKveN6z'
-API_secret = 'ExCgCNok6eaQwCXMwfiohq5Yt580O3ef21ldyljI'
+#API_key = 'mW4bIM9k5Fz-EnSotKhr-3WdXXbPaF6h_WKveN6z'
+#API_secret = 'ExCgCNok6eaQwCXMwfiohq5Yt580O3ef21ldyljI'
 
 # GET ALL ACTIVE TOURNAMENTS
 session = Session()
@@ -43,6 +43,11 @@ for tournament in session.query(ActiveTourneys).all():
         # get the user Id and starting balance
         userId = entrant.userId
         username = entrant.username
+        
+        # get the user's API key and secret
+        apiQuery = session.query(UserAPI).filter_by(userId=userId).one()
+        API_key = apiQuery.FTXKey
+        API_secret = apiQuery.FTXSecret
         
         print("User: " + userId)
         

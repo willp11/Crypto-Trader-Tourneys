@@ -81,15 +81,8 @@ class Register extends Component {
         firebaseAuth.onAuthStateChanged((user) => {
           if (user) {
             // User is signed in.
-            console.log("hello logged in");
-              console.log(firebaseAuth.currentUser);
-              this.props.onSignedIn(firebaseAuth.currentUser.xa, firebaseAuth.currentUser.uid);
-            // ...
-          } else {
-            // User is signed out.
-            // ...
-            console.log("goodbye not logged in");
-          }
+            this.props.onSignedIn(firebaseAuth.currentUser.xa, firebaseAuth.currentUser.uid);
+          } 
         });
     }
 
@@ -139,9 +132,7 @@ class Register extends Component {
         {
             errorMessage = <p style={{"color": "#f7716d"}} className="errorMsg">Passwords don't match!</p>;
         }
-        
         this.setState({errorMsg: errorMessage});
-        
         if (errorMessage == null) {
             axios.post('/checkUsername', {username: this.state.controls.username.value}).then(res => {
                 if (res.data.response == "username available") {
@@ -149,9 +140,10 @@ class Register extends Component {
                 } else {
                     errorMessage = <p style={{"color": "#f7716d"}} className="errorMsg">Username is not available</p>;
                 }
+                this.setState({errorMsg: errorMessage});                                                                           
             }) 
-            this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, true, this.state.controls.username.value);
         }
+        
     }
 
     checkFormBlanks = () => {
@@ -196,7 +188,7 @@ class Register extends Component {
             
         let errorMsg = null;
         if (this.state.errorMsg) {
-            errorMsg = <p>{this.state.errorMsg}</p>;
+            errorMsg = this.state.errorMsg;
         }
         if (this.props.error) {
             errorMsg = <p>{this.props.error}</p>;

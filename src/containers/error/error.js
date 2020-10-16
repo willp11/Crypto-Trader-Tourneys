@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './error.css';
 
-class Home extends Component {
+class Error extends Component {
     
     render () {
         
@@ -17,4 +17,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default Error;

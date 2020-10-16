@@ -43,7 +43,7 @@ class CreateTournament extends Component {
                     this.setState({authFail: true});
                 } else {
                     this.props.updateUserIdToken(user.uid, user.xa);
-                    this.props.getUsernameEmail(user.uid);
+                    if (!this.props.username) this.props.getUsernameEmail(user.uid);
                     let productList;
                     axios.get('/getAllProducts').then(res => {
                         productList=res.data;
@@ -100,23 +100,24 @@ class CreateTournament extends Component {
                 errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>Tournaments must start on the hour. E.g. 12:00</p>
             }
             
-            if (dbData.productList.length < 1 || dbData.productList.length > 5) {
+            if (dbData.productList.FTX.future.length + dbData.productList.FTX.spot.length < 1 || dbData.productList.FTX.future.length + dbData.productList.FTX.spot.length > 5) {
                 valid = false;
                 errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>You must choose between 1 and 5 trading products.</p>
             }
             
-//            if (givenStartTS < earliestTS) {
-//                valid = false;
-//                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The start time must be more than 1 hour from now.</p>
-//            }
+            if (givenStartTS < earliestTS) {
+                valid = false;
+                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The start time must be more than 1 hour from now.</p>
+            }
+            
             if (givenStartTS > latestTS) {
                 valid = false;
                 errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The start time must be less than 7 days from now.</p>
             }
 
-            if (parseInt(dbData.duration) < 1 || parseInt(dbData.duration) > 7) {
+            if (parseInt(dbData.duration) < 1 || parseInt(dbData.duration) > 30) {
                 valid = false;
-                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The duration must be between 1 to 7 days.</p>
+                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The duration must be between 1 to 30 days.</p>
             }
         }
         
@@ -140,7 +141,8 @@ class CreateTournament extends Component {
         }
         
         if (this.checkValidity(dbData)) {
-            let tourneyNumber = Math.floor(Math.random()*1000000000);
+            let tourneyNumber = Math.floor(100000000 + Math.random()*900000000);
+            let inviteCode = Math.floor(1000000 + Math.random() * 9000000)
     
             let newDbData = {"host": this.props.username,
                 "hostId": this.props.userId,
@@ -149,20 +151,19 @@ class CreateTournament extends Component {
                 "noEntrants": 0,                 
                 "startDate": this.state.formData.startDate,
                 "startTime": this.state.formData.startTime,
-                "tourneyId": tourneyNumber,
                 "duration": this.state.formData.duration,
                 "quoteCurrency": this.state.formData.quoteCurrency,
                 "visibility": this.state.formData.visibility,
                 "products": this.props.productList
             }
-            
-            console.log(newDbData);
+
             this.setState({loading: true});
             axios.post('/createTournament', newDbData).then(res => {
-                console.log("tournament created");
-                console.log(res.data);
+                console.log(res.data.response);
+                let tourneyId = res.data.response.tourneyId;
+                
                 this.props.emptyProductList();
-                this.setState({loading: false, redirect: true, newTourneyId: tourneyNumber});
+                this.setState({loading: false, redirect: true, newTourneyId: tourneyId});
             }).catch(err => {
                 this.setState({error: true});
             });
@@ -255,7 +256,6 @@ class CreateTournament extends Component {
             for (let i=0; i<this.props.productList.FTX.future.length; i++) {
                 allProducts.push(this.props.productList.FTX.future[i]);
             }
-            //console.log(allProducts);
             selectedProductsTitle = <h4>Selected Products:</h4>
             selectedProducts = allProducts.map(product => {
                 return (
@@ -344,6 +344,7 @@ class CreateTournament extends Component {
                         <input type="number" min="2" max="200" placeholder="Max no. entrants" style={{"width": "180px", "textAlign": "center"}} onChange={(event, key) => this.hostInputHandler(event, 'maxEntrants')}/> <br />
                             
                         <h3>Currency:</h3>
+                        <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>All trading products will use this currency as the quote currency.</p>
                         {buttonsDiv}
 
                         <h3>Trading Products:</h3>
@@ -358,7 +359,7 @@ class CreateTournament extends Component {
 
                         <h3>Duration:</h3>
                         <Input type="number" min="1" max="7" placeholder="Duration in days" changed={(event, key) => this.hostInputHandler(event, 'duration')} /> <br/>
-                        <h3 style={{"fontSize":"0.8rem", "fontWeight":"normal"}}>Maximum 7 days</h3>
+                        <h3 style={{"fontSize":"0.8rem", "fontWeight":"normal"}}>Maximum 30 days</h3>
 
                         <h3>Visibility:</h3>
                         {visibilityBtns}

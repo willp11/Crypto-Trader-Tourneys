@@ -50,6 +50,7 @@
 }
 
 .TourneyDiv {
+    min-height: 50vh;
     width: 85vw;
     margin: 0 auto;
     box-sizing: border-box;

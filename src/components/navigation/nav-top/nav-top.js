@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import './nav-top.css';
 import logo from "../../../assets/logoNew1.PNG";
-import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
-
-import * as actions from '../../../store/actions/index';
 import {firebaseAuth} from "../../../firebase/firebase";
 
 class NavTop extends Component {
@@ -63,20 +60,5 @@ class NavTop extends Component {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup)),
-        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
-    };
-};
 
-const mapStateToProps = state => {
-    return {
-        loading: state.auth.loading,
-        error: state.auth.error,
-        isAuthenticated: state.auth.token !== null,
-        authRedirectPath: state.auth.authRedirectPath
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavTop);
+export default NavTop;

@@ -179,6 +179,12 @@
 
 .exchangeSublist {
     margin: 0 auto;
+    width: 50vw;
+}
+
+.inviteCodeInput {
+    width: 140px;
+    text-align: center;
 }
 
 .editBalanceInput {
@@ -238,6 +244,7 @@
     outline: thin solid #121212;
 }
 
+/*
 .payoutStructTable {
     margin: 0 auto;
     border: 1px solid #121212;
@@ -273,6 +280,7 @@
 .payoutStructTable tr {
     outline: thin solid #121212;
 }
+*/
 
 @media only screen and (max-width: 900px) {
     
@@ -300,7 +308,7 @@
     }
     
     .tourneyDiv h3 {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     
     .entrantsListTable th {
@@ -325,21 +333,11 @@
     }
     
     .tourneyDiv h3 {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     
     .tourneyWrapper {
         flex-direction: column;
-        height: auto;
-    }
-    
-    .productList {
-        width: 90vw;
-        height: auto;
-    }
-    
-    .productListDiv {
-        width: 90vw;
         height: auto;
     }
     

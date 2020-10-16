@@ -30,6 +30,8 @@ class Tourney extends Component {
         editingBalance: false,
         quoteCurrency: null,
         balance: null,
+        profit: null,
+        inviteCodeInput: null,
         tourneyState: null,
         visibility: null,
         showVisibilityConfirm: false,
@@ -48,29 +50,35 @@ class Tourney extends Component {
         deleteTourneyLoading: false,
         error: false,
         usernameErr: null,
-        loadingUsername: false
+        loadingUsername: false,
+        APIErr: false,
+        noInviteErr: null,
+        inviteCode: null,
+        tourneyCancelled: false
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.tourneyId);
-        console.log(this.props.username);
         firebaseAuth.onAuthStateChanged((user) => {
             if (user) {
                 if (user.emailVerified == false) {
                     this.setState({authFail: true});
                 } else {
-                    // call API to get username and email
-                    axios.post('/getUsernameEmail', {userId: user.uid}).then(res => {
-                        let username = res.data.response.username;
-                        this.props.setUsernameEmail(username, user.email);
-                        this.props.updateUserIdToken(user.uid, user.xa);
-                        if (!username) {
-                            this.setState({usernameErr: true});
-                        }
-                    }).catch(error => {
-                        this.setState({error: error});
-                    })
                     
+                    // check if we have the username in props - if not call API to get it
+                    if (!this.props.username) {
+                        // call API to get username 
+                        axios.post('/getUsernameEmail', {userId: user.uid}).then(res => {
+                            let username = res.data.response.username;
+                            this.props.setUsernameEmail(username, user.email);
+                            this.props.updateUserIdToken(user.uid, user.xa);
+                            if (!username) {
+                                this.setState({usernameErr: true});
+                            }
+                        }).catch(error => {
+                            this.setState({error: error});
+                        })
+                    }
+                        
                     // find which state the tournament is, registering/active/completed
                     // call the API and check which state the tourney is
                     axios.post('/getTourneyState', {"tourneyId": this.props.match.params.tourneyId} ).then(res => {
@@ -79,10 +87,10 @@ class Tourney extends Component {
                         let visibility = res.data.response.visibility;
                         
                         if (user.uid == hostId) {
-                            this.setState({isHost: true})
+                            this.setState({isHost: true, tourneyState: tourneyState})
+                        } else {
+                            this.setState({isHost: false, tourneyState: tourneyState});
                         }
-                        
-                        this.setState({tourneyState: tourneyState});
 
                         // registering tournaments
                         if (tourneyState == "registering") {
@@ -124,6 +132,7 @@ class Tourney extends Component {
                                             active: false,
                                             visibility: tourneyData.visibility,
                                             visibleEntrants: entrantsObjs,
+                                            inviteCode: tourneyData.inviteCode,
                                             loading: false
                                         });
                                     }).catch(err => {
@@ -148,6 +157,7 @@ class Tourney extends Component {
                                         active: false,
                                         visibility: tourneyData.visibility,
                                         visibleEntrants: entrantsObjs,
+                                        inviteCode: tourneyData.inviteCode,
                                         loading: false
                                     });
                                 }
@@ -172,35 +182,10 @@ class Tourney extends Component {
                                     entrantsObjs.push(entrant);
                                 }
 
-                                // if user is registered and not liquidated get the entrant's balance else set balance to 0.
-                                if (!isLiq) {
-                                    axios.post('/getEntrantBalance', {"tourneyType": "active", "tourneyId": this.state.tourneyId, "userId": user.uid}).then(res => {
-                                        let balance = res.data.balance;
-                                        this.setState({host: tourneyData.host,
-                                                    noEntrants: tourneyData.noEntrants,
-                                                    minEntrants: tourneyData.minEntrants,
-                                                    maxEntrants: tourneyData.maxEntrants,
-                                                    startDate: tourneyData.startDate,
-                                                    endDate: tourneyData.endDate,
-                                                    startTime: tourneyData.startTime,
-                                                    endTime: tourneyData.endTime,
-                                                    quoteCurrency: tourneyData.quoteCurrency,
-                                                    entrants: entrants,
-                                                    entrantsObjs: entrantsObjs,
-                                                    entrantProfits: entrantProfits,
-                                                    products: products,
-                                                    registered: isRegistered,
-                                                    active: true,
-                                                    balance: balance,
-                                                    visibility: tourneyData.visibility,
-                                                    visibleEntrants: entrantsObjs,
-                                                    loading: false
-                                        });
-                                    }).catch(err => {
-                                        this.setState({error: true});
-                                    });
-                                } else {
-                                    let balance = 0;
+                                // if user is registered gets the entrants balance and profit
+                                axios.post('/getEntrantBalance', {"tourneyType": "active", "tourneyId": this.state.tourneyId, "userId": user.uid}).then(res => {
+                                    let balance = res.data.balance;
+                                    let profit = res.data.profit;
                                     this.setState({host: tourneyData.host,
                                                 noEntrants: tourneyData.noEntrants,
                                                 minEntrants: tourneyData.minEntrants,
@@ -212,15 +197,20 @@ class Tourney extends Component {
                                                 quoteCurrency: tourneyData.quoteCurrency,
                                                 entrants: entrants,
                                                 entrantsObjs: entrantsObjs,
+                                                entrantProfits: entrantProfits,
                                                 products: products,
                                                 registered: isRegistered,
                                                 active: true,
                                                 balance: balance,
                                                 visibility: tourneyData.visibility,
                                                 visibleEntrants: entrantsObjs,
-                                                loading: false
+                                                loading: false,
+                                                profit: profit
                                     });
-                                }
+                                }).catch(err => {
+                                    this.setState({error: true});
+                                });
+                                 
                             }).catch(err => {
                                 this.setState({error: true});
                             });
@@ -293,6 +283,8 @@ class Tourney extends Component {
                             }).catch(err => {
                                 this.setState({error: true});
                             });
+                        } else if (tourneyState == "cancelled") {
+                            this.setState({tourneyCancelled: true});
                         }
                     }).catch(err => {
                         this.setState({error: true});
@@ -327,13 +319,16 @@ class Tourney extends Component {
         this.setState({showUnRegistrationConfirm: false});
     }
     
+    inviteCodeInputHandler = (event) => {
+        this.setState({inviteCodeInput: event.target.value});
+    }
+    
     submitHandler = () => {
         if (this.props.username) {
             let entrants = this.state.entrants;
             this.setState({editBalanceLoading: true});
             if (entrants.includes(this.props.username)) {
-
-                // remove from SQL entrants list
+                // remove user from db
                 let dbEntrantData = {};
                 dbEntrantData["tourneyId"] = this.state.tourneyId;
                 dbEntrantData["userId"] = this.props.userId;
@@ -362,43 +357,69 @@ class Tourney extends Component {
                     });
                 })
 
-                this.props.getMyTourneys(this.props.userId);
-
             } else {
-
-                // write to SQL entrants list
+                // add user to db
                 let dbEntrantData = {};
                 dbEntrantData["tourneyId"] = this.state.tourneyId;
                 dbEntrantData["userId"] = this.props.userId;
-                dbEntrantData["username"] = this.props.username;
                 dbEntrantData["balance"] = this.state.balance;
+                dbEntrantData["inviteCode"] = this.state.inviteCodeInput;
                 axios.post("/tourneyRegistration", dbEntrantData).then(res => {
-                    axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
+                    // if successful, get the new entrants and update the state
+                    if (res.data.response == "success") {
+                        axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
 
-                        let newEntrantsArr = res.data.response.entrants; 
-                        let newProfitsArr = res.data.response.profits; 
+                            let newEntrantsArr = res.data.response.entrants; 
+                            let newProfitsArr = res.data.response.profits; 
 
-                        let entrantsObjs = [];
-                        for (let i=0; i<newEntrantsArr.length; i++) {
-                            let entrant = {username: newEntrantsArr[i], rank: i+1, profit: newProfitsArr[i]};
-                            entrantsObjs.push(entrant);
-                        }
+                            let entrantsObjs = [];
+                            for (let i=0; i<newEntrantsArr.length; i++) {
+                                let entrant = {username: newEntrantsArr[i], rank: i+1, profit: newProfitsArr[i]};
+                                entrantsObjs.push(entrant);
+                            }
 
+                            let currentState = {...this.state};
+                            currentState['showRegistrationConfirm'] = false;
+                            currentState['balanceErrorMsg'] = null;
+                            currentState['registered'] = true;
+                            currentState['noEntrants'] += 1;
+                            currentState['entrants'] = newEntrantsArr;
+                            currentState['entrantsObjs'] = entrantsObjs;
+                            currentState['visibleEntrants'] = entrantsObjs;
+                            currentState['entrantProfits'] = newProfitsArr;
+                            currentState['editBalanceLoading'] = false;
+                            this.setState(currentState);
+                        });
+                    } else if (res.data.response == "API not valid") {
                         let currentState = {...this.state};
                         currentState['showRegistrationConfirm'] = false;
                         currentState['balanceErrorMsg'] = null;
-                        currentState['registered'] = true;
-                        currentState['noEntrants'] += 1;
-                        currentState['entrants'] = newEntrantsArr;
-                        currentState['entrantsObjs'] = entrantsObjs;
-                        currentState['visibleEntrants'] = entrantsObjs;
-                        currentState['entrantProfits'] = newProfitsArr;
+                        currentState['registered'] = false;
                         currentState['editBalanceLoading'] = false;
+                        currentState['APIErr'] = true;
                         this.setState(currentState);
-                    });
+                        
+                    } else if (res.data.response == "No invitation") {
+                        let currentState = {...this.state};
+                        currentState['showRegistrationConfirm'] = false;
+                        currentState['balanceErrorMsg'] = null;
+                        currentState['registered'] = false;
+                        currentState['editBalanceLoading'] = false;
+                        currentState['noInviteErr'] = "You are not invited to this tournament.";
+                        this.setState(currentState);
+                        
+                    } else if (res.data.response == "Invalid invite code") {
+                        let currentState = {...this.state};
+                        currentState['showRegistrationConfirm'] = false;
+                        currentState['balanceErrorMsg'] = null;
+                        currentState['registered'] = false;
+                        currentState['editBalanceLoading'] = false;
+                        currentState['noInviteErr'] = "Invalid invite code.";
+                        this.setState(currentState);
+                    }
+                }).catch(error => {
+                    this.setState({error: error});
                 })
-
-                this.props.getMyTourneys(this.props.userId);
             }
         } else {
             this.setState({usernameErr: true});
@@ -574,15 +595,17 @@ class Tourney extends Component {
             hostControls = (
                 <div className="hostControls">
                     <h3>Host Controls</h3>
-                    <p>Invite User:</p>
+                    <h4>Invite Code</h4>
+                    <p>{this.state.inviteCode}</p>
+                    <h4>Invite User:</h4>
                     <input value={this.state.addUser} placeholder="Enter username" onChange={(event)=>this.addUserInputHandler(event)}/>
                     <button className="submitInviteBtn" onClick={this.inviteUserHandler}>Submit</button> <br />
                     {inviteUserSpinner}
                     {addedUserMsg}
-                    <p>Tournament Visibility:</p>
+                    <h4>Tournament Visibility:</h4>
                     {visibilityButtons}
                     {visibilityConfirmationBox}
-                    <p>Delete tournament:</p>
+                    <h4>Delete tournament:</h4>
                     <button className="deleteTournamentBtn" onClick={this.deleteHandler}>Delete Tournament</button> <br />
                     {confirmationBox}
                 </div>
@@ -628,12 +651,26 @@ class Tourney extends Component {
 
         // REGISTER BUTTON
         let registerBtn = null;
-
+        
         // IF NOT REGISTERED AND TOURNAMENT IN REGISTRATION
         let balance;
         if (!this.state.registered && this.state.tourneyState == "registering") {
+            
+            // IF THE TOURNAMENT IS PRIVATE - INPUT FOR THE INVITE CODE
+            let inviteCodeInput = null; 
+            if (this.state.visibility == "private" && !this.state.isHost) {
+                inviteCodeInput = 
+                    <div>
+                        <p style={{"fontSize": "0.9rem"}}>The tournament is <b>private</b> - if you do not have an invitation please enter the invite code to register for the tournament.</p>
+                        <input className="inviteCodeInput" type="text" placeholder="Invite Code" onChange={(event) => this.inviteCodeInputHandler(event)} />
+                    </div>
+            }
+                
             registerBtn = (
-                <button className="submitBtn" onClick={this.showRegistrationConfirmHandler}>Register</button>
+                <div>
+                    <button className="submitBtn" onClick={this.showRegistrationConfirmHandler}>Register</button>
+                    <p style={{"fontWeight": "bold", "color": "#f7716d"}}>{this.state.noInviteErr}</p>
+                </div>
             );
             balance = (
                 <div>
@@ -641,8 +678,9 @@ class Tourney extends Component {
                     <p>The tournament is in registration.</p>
                     <h3>Starting Balance:</h3>
                     <p>Enter tournament starting balance <b>({this.state.quoteCurrency})</b> to register:</p>
-                    <p style={{"fontSize": "0.9rem"}}>Your starting balance should reflect the balance in your trading account so that profit can be calculated as a percentage. If your tournament balance drops below zero at any point, you are liquidated from the tournament.</p>
-                    <p style={{"fontSize": "0.9rem"}}>For example, if you enter a starting balance of $1000 and trade with a $10,000 position then you are effectively using 10x leverage.</p>
+                    <p style={{"fontSize": "0.9rem"}}>Your tournament starting balance should reflect the size of the positions you trade in your exchange account.</p>
+                    <p style={{"fontSize": "0.9rem"}}>For example, with a starting balance of $1000. If you make $500 trading the products listed in this tournament your profit will be 50%. If at any point your trades for the given products are at a $1000 loss, you are liquidated out of the tournament.</p>
+                    {inviteCodeInput} <br/>
                     <input className="balanceInput" type="text" placeholder=" Enter Starting Balance" onChange={(event) => this.editBalanceHandler(event)} />
                 </div>
             );
@@ -656,6 +694,8 @@ class Tourney extends Component {
                     <p>The tournament is already active.</p>
                     <h3>Starting Balance:</h3>
                     <p>{this.state.balance} {this.state.quoteCurrency}</p>
+                    <h3>Your Profit:</h3>
+                    <p>{this.state.profit} %</p>
                 </div>
             );
         }
@@ -817,10 +857,16 @@ class Tourney extends Component {
                 <Redirect to="/error" />
             )
         }
-
-        if (this.state.usernameErr) {
+        
+        if (this.state.usernameErr || this.state.APIErr) {
             redirect = (
                 <Redirect to="/profile" />
+            )
+        }
+
+        if (this.state.tourneyCancelled) {
+            redirect = (
+                <Redirect to="/tourneyNotFound" />
             )
         }
          
@@ -840,11 +886,7 @@ class Tourney extends Component {
                     <h3>End Time</h3>
                     {endTimePa}
                     <h3>Products:</h3>
-                    <div className="productListDiv">
-                        <div className="exchangeSublist">
-                            {FTXProducts}
-                        </div>
-                    </div>
+                    {FTXProducts}
                 </div>
             )
         }

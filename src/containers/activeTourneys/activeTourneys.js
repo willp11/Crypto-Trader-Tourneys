@@ -49,7 +49,7 @@ class ActiveTourneys extends Component {
         });
         
         axios.get('/getActiveTourneys').then(res => {
-            console.log(res.data);
+
             let tourneys = res.data.response;
             
             // get the time in days, hours, minutes until tournament starts
@@ -91,12 +91,6 @@ class ActiveTourneys extends Component {
         }).catch(err => {
             this.setState({error: true});
         });
-    }
-    
-    componentDidUpdate() {
-        //console.log(this.props.tourneys);
-        //console.log(this.state.tourneys);
-        //console.log(this.state.search);
     }
 
     showProductsHandler = (event, index) => {

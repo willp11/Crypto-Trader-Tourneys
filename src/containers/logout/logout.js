@@ -15,7 +15,8 @@ class Logout extends Component {
     
     componentDidMount() {
         
-        // set the redirect to profile page
+        
+        // set the redirect to login page
         this.props.onSetAuthRedirectPath();
         // check if the user is already logged in
         firebaseAuth.onAuthStateChanged((user) => {
@@ -29,8 +30,12 @@ class Logout extends Component {
         });
     }
     
-    submitHandler = (event) => {
+    submitHandler = () => {
         this.props.onLogout();
+    }
+    
+    goBackHandler = () => {
+        this.props.history.goBack();
     }
 
     render () {
@@ -44,7 +49,7 @@ class Logout extends Component {
                 <div className="logoutSubDiv">
                     {authRedirect}
                     <h3>Are you sure you want to log out?</h3>
-                    <NavLink to="/profile" style={{textDecoration: "none"}}><button className="logoutCancelBtn">Cancel</button></NavLink>
+                    <button className="logoutCancelBtn" onClick={this.goBackHandler}>Cancel</button>
                     <button className="logoutConfirmBtn" onClick={this.submitHandler}>Logout</button>
                 </div>
             </div>
@@ -55,7 +60,7 @@ class Logout extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         onLogout: () => dispatch(actions.logout()),
-        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/login'))
     };
 };
 

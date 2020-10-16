@@ -48,9 +48,7 @@ class RegistrationTourneys extends Component {
             }
         });
         
-        //this.props.getTourneys();
         axios.get('/getAllTourneys').then(res => {
-            console.log(res.data);
             let tourneys = res.data.response;
             
             // get the time in days, hours, minutes until tournament starts
@@ -93,11 +91,10 @@ class RegistrationTourneys extends Component {
             this.setState({error: true});
         });
     }
-
+    
     showProductsHandler = (event, index) => {
         let products;
         let showProducts;
-        console.log(this.state);
         if (!this.state.showProducts) {
             products = this.state.searchArray[index].products;
             showProducts = true;
@@ -108,6 +105,7 @@ class RegistrationTourneys extends Component {
         this.setState({showProducts: showProducts, productsToShow: products, indexToShow: index});
     }
     
+    // SHOW/HIDE FILTERS DIV
     toggleFiltersHandler = (event) => {
         this.setState({showFilters: !this.state.showFilters,
                             search: {
@@ -120,6 +118,7 @@ class RegistrationTourneys extends Component {
                       });
     }
     
+    // handler to update the search object in state
     updateSearch = (event, key) => {
         let newVal = event.target.value;
         let newState = {...this.state.search};
@@ -127,6 +126,7 @@ class RegistrationTourneys extends Component {
         this.setState({search: newState})
     }
     
+    // search all the tournaments
     searchTourneys = () => {
         // copy all the tournaments to an array
         let tourneysFound = [...this.state.tourneys];
@@ -183,10 +183,10 @@ class RegistrationTourneys extends Component {
         this.setState({searchArray: [...tourneysFound]});
     }
     
+    // reset the tournaments table
     resetTourneys = () => {
         this.setState({searchArray: [...this.state.tourneys],
                       search: {tourneyId: '',
-                                tourneyId: '',
                                 host: '',
                                 product: '',
                                 maxEntrants: '',
@@ -195,6 +195,7 @@ class RegistrationTourneys extends Component {
                       });
     }
     
+    // SORT TABLE
     sortColumn = (field) => {
         
         // check the current sorted direction of the field
@@ -231,7 +232,7 @@ class RegistrationTourneys extends Component {
         }
         
         // sort the filtered search array
-        let searchArr = this.state.tourneys;
+        let searchArr = this.state.searchArray;
         len = searchArr.length;
         for (let i = len-1; i>=0; i--) {
             for (let j = 1; j<=i; j++) {

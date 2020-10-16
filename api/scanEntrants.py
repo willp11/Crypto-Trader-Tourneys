@@ -47,7 +47,7 @@ for tournament in activeTournaments:
         
         # get the user Id and starting balance
         userId = query.userId
-        username =query.username
+        username = query.username
         startingBalance = 1000
         # startingbalance = query.startingBalance
         
