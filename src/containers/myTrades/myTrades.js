@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import './myTrades.css';
 import * as actions from '../../store/actions/index';
-import {Redirect} from 'react-router-dom';
+import {Redirect, NavLink} from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import {firebaseAuth} from "../../firebase/firebase";
@@ -47,7 +47,6 @@ class MyTrades extends Component {
                             trades[i]["timestamp"] = timestamp;
                         }
                         this.setState({trades: trades, loading: false, searchArray: res.data.response});
-                        console.log(res.data.response);
                     }).catch(err => {
                         this.setState({error: true});
                     });
@@ -222,7 +221,7 @@ class MyTrades extends Component {
             tableBody = this.state.searchArray.map((trade, index) => {
                 return (
                     <tr key={index}>
-                        <td>{trade.tourneyId}</td>
+                        <td><NavLink style={{"color": "rgb(77, 134, 247)", "fontWeight": "bold"}} to={"/tourneys/"+trade.tourneyId}>{trade.tourneyId}</NavLink></td>
                         <td>{trade.date}</td>
                         <td>{trade.time}</td>
                         <td>{trade.productName}</td>

@@ -181,11 +181,13 @@ class Register extends Component {
     
     render() {
         
+        // REDIRECT
         let authRedirect = null;
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />
         }
-            
+        
+        // ERROR MESSAGES
         let errorMsg = null;
         if (this.state.errorMsg) {
             errorMsg = this.state.errorMsg;
@@ -194,10 +196,14 @@ class Register extends Component {
             errorMsg = <p>{this.props.error}</p>;
         }
             
-                
+        // SUBMIT BTN
+        let submitBtn = <button className='registerSubmitBtn'>Submit</button>
+            
+        // LOADING
         let spinner = null;
         if (this.props.loading) {
             spinner = <Spinner />
+            submitBtn = null;
         }
         
         return (
@@ -211,7 +217,7 @@ class Register extends Component {
                             <Input  type={this.state.controls.email.elementConfig.type} placeholder={this.state.controls.email.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "email")}/> <br/>
                             <Input type={this.state.controls.password.elementConfig.type} placeholder={this.state.controls.password.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "password")}/> <br />
                             <Input type={this.state.controls.repeatPassword.elementConfig.type} placeholder={this.state.controls.repeatPassword.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "repeatPassword")}/> <br />
-                            <button className='registerSubmitBtn'>Submit</button><br />
+                            {submitBtn} <br/>
                             {errorMsg}
                         </form>
                         {spinner}

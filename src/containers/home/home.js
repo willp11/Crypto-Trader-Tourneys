@@ -32,17 +32,38 @@ class Home extends Component {
                             <img className="winMoneyImg" src={winMoneyImg} />
                             <p>Choose from all the publicly listed trading tournaments created by our members from all around the world completely free!</p>
                             <p>To find the tournament that suits you; filter by trading products, host, number of entrants and more!</p>
-                            <p>Create an account with <a href="https://www.ftx.com">FTX Exchange.</a> </p>
-                            <p>Then link your exchange API key and secret found in your FTX account to your <b>CryptoTourneys</b> and start entering tournaments.</p>
+                            <p>Create an account with <a href="https://www.ftx.com">FTX Exchange</a>.</p>
+                            <p>Then link your exchange API key and secret found in your FTX account to your <b>CryptoTourneys</b> account and enter tournaments.</p>
                         </div>
                         <div className="homeLowerSubDiv">
                             <h2>Host Your Own Tournaments</h2>
                             <img className="hostTourneyImg" src={hostTourneyImg} />
                             <p>Host your own trading tournaments in seconds!</p>
-                            <p>Customise your tournament to fit your needs!</p>
+                            <p>Customize your tournament to fit your needs!</p>
                             <p>Choose the trading products, number of entrants, start time and duration of the tournament.</p>
                             <p>Make the tournament public for anyone in the world to enter!</p>
                             <p>Make the tournament private and invite your friends!</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="howItWorksDiv">
+                    <div className="howItWorksSubDiv">
+                        <h2>How It Works</h2>
+                        <div className="stepSubDiv">
+                            <h3>Step 1:</h3>
+                            <p>Create a <NavLink to="/register">CryptoTourneys Account</NavLink>.</p>
+                        </div>
+                        <div className="stepSubDiv">
+                            <h3>Step 2:</h3>
+                            <p>Create a trading account with <a href="https://www.ftx.com">FTX Exchange</a>.</p>
+                        </div>
+                        <div className="stepSubDiv">
+                            <h3>Step 3:</h3>
+                            <p>Link your FTX exchange API key and secret to CryptoTourneys.</p>
+                        </div>
+                        <div className="stepSubDiv">
+                            <h3>Step 4:</h3>
+                            <p>Start competing in trading tournament!</p>
                         </div>
                     </div>
                 </div>

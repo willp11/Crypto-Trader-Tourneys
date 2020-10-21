@@ -35,10 +35,13 @@ class Tourney extends Component {
         tourneyState: null,
         visibility: null,
         showVisibilityConfirm: false,
+        editVisibilityMsg: null,
         addUser: '',
         addedUserMsg: '',
         showRegistrationConfirm: false,
         showUnRegistrationConfirm: false,
+        registerErr: null,
+        unregisterErr: null,
         balanceErrorMsg: null,
         searchEntrants: '',
         visibleEntrants: [],
@@ -48,13 +51,16 @@ class Tourney extends Component {
         editVisibilityLoading: false,
         inviteUserLoading: false,
         deleteTourneyLoading: false,
+        deleteTourneyMsg: null,
         error: false,
         usernameErr: null,
         loadingUsername: false,
         APIErr: false,
         noInviteErr: null,
         inviteCode: null,
-        tourneyCancelled: false
+        tourneyCancelled: false,
+        showTradeSummary: false,
+        positions: []
     }
 
     componentDidMount() {
@@ -167,19 +173,26 @@ class Tourney extends Component {
                         } else if (tourneyState == "active") {
                             // active tournaments
                             axios.post('/getActiveTourneyInfo', {"tourneyId": this.state.tourneyId} ).then(res => { 
-
+                                
                                 let tourneyData = res.data;
                                 let products = tourneyData.products;
+                                
+                                // entrants
                                 let entrants = tourneyData.activeEntrants.entrants;
                                 let entrantProfits = tourneyData.activeEntrants.profits;
-                                let liqEntrants = tourneyData.liqEntrants;
-                                let isLiq = liqEntrants.includes(this.props.username);
                                 let isRegistered = entrants.includes(this.props.username);
-
+                                
                                 let entrantsObjs = [];
                                 for (let i=0; i<entrants.length; i++) {
                                     let entrant = {username: entrants[i], rank: i+1, profit: entrantProfits[i]};
                                     entrantsObjs.push(entrant);
+                                }
+                                
+                                let liqEntrants = tourneyData.liqEntrants;
+                                let isLiq = liqEntrants.entrants.includes(this.props.username);
+                                for (let i=0; i<liqEntrants.length; i++) {
+                                    let liqEntrant = {username: liqEntrants[i], rank: i+1, profit: "liquidated"};
+                                    entrantsObjs.push(liqEntrant);
                                 }
 
                                 // if user is registered gets the entrants balance and profit
@@ -218,8 +231,8 @@ class Tourney extends Component {
                             // active tournaments
                             axios.post('/getCompletedTourneyInfo', {"tourneyId": this.state.tourneyId} ).then(res => { 
                                 let tourneyData = res.data;
-
                                 let products = tourneyData.products;
+                                
                                 let entrants = tourneyData.entrants.entrants;
                                 let isRegistered = entrants.includes(this.props.username);
                                 let entrantProfits = tourneyData.entrants.profits;
@@ -229,12 +242,20 @@ class Tourney extends Component {
                                     let entrant = {username: entrants[i], rank: i+1, profit: entrantProfits[i]};
                                     entrantsObjs.push(entrant);
                                 }
+                                
+                                let liqEntrants = tourneyData.liqEntrants;
+                                let isLiq = liqEntrants.entrants.includes(this.props.username);
+                                for (let i=0; i<liqEntrants.length; i++) {
+                                    let liqEntrant = {username: liqEntrants[i], rank: i+1, profit: "liquidated"};
+                                    entrantsObjs.push(liqEntrant);
+                                }
 
                                 let balance = null;
                                 if (isRegistered) {
                                     // if registered, get the entrant's balance
-                                    axios.post('/getEntrantBalance', {"tourneyType": "registering", "tourneyId": this.state.tourneyId, "userId": user.uid}).then(res => {
+                                    axios.post('/getEntrantBalance', {"tourneyType": "completed", "tourneyId": this.state.tourneyId, "userId": user.uid}).then(res => {
                                         balance = res.data.balance;
+                                        let profit = res.data.profit;
                                         this.setState({host: tourneyData.host,
                                             noEntrants: tourneyData.noEntrants, 
                                             minEntrants: tourneyData.minEntrants,
@@ -253,7 +274,8 @@ class Tourney extends Component {
                                             active: false,
                                             visibility: tourneyData.visibility,
                                             visibleEntrants: entrantsObjs,
-                                            loading: false
+                                            loading: false,
+                                            profit: profit
                                         });
                                     }).catch(err => {
                                         this.setState({error: true});
@@ -328,36 +350,47 @@ class Tourney extends Component {
             let entrants = this.state.entrants;
             this.setState({editBalanceLoading: true});
             if (entrants.includes(this.props.username)) {
+                this.setState({showUnRegistrationConfirm: false});
                 // remove user from db
                 let dbEntrantData = {};
                 dbEntrantData["tourneyId"] = this.state.tourneyId;
                 dbEntrantData["userId"] = this.props.userId;
                 axios.post("/tourneyUnregister", dbEntrantData).then(res => {
-                    axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
-                        let newEntrantsArr = res.data.response.entrants; 
-                        let newProfitsArr = res.data.response.profits; 
+                    // If fail give error message
+                    if (res.data.response == "fail") {
+                        this.setState({unregisterErr: res.data.errorMsg, editBalanceLoading: false});
+                    }
+                    console.log(res.data.errorMsg);
+                    // If success get new entrants list and update state
+                    if (res.data.response == "success") {
+                        axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
+                            let newEntrantsArr = res.data.response.entrants; 
+                            let newProfitsArr = res.data.response.profits; 
 
-                        let entrantsObjs = [];
-                        for (let i=0; i<newEntrantsArr.length; i++) {
-                            let entrant = {username: newEntrantsArr[i], rank: i+1, profit: newProfitsArr[i]};
-                            entrantsObjs.push(entrant);
-                        }
+                            let entrantsObjs = [];
+                            for (let i=0; i<newEntrantsArr.length; i++) {
+                                let entrant = {username: newEntrantsArr[i], rank: i+1, profit: newProfitsArr[i]};
+                                entrantsObjs.push(entrant);
+                            }
 
-                        let currentState = {...this.state};
-                        currentState['showUnRegistrationConfirm'] = false;
-                        currentState['registered'] = false;
-                        currentState['noEntrants'] -= 1;
-                        currentState['entrants'] = newEntrantsArr;
-                        currentState['entrantsObjs'] = entrantsObjs;
-                        currentState['visibleEntrants'] = entrantsObjs;;
-                        currentState['entrantProfits'] = newProfitsArr;
-                        currentState['balance'] = null;
-                        currentState['editBalanceLoading'] = false;
-                        this.setState(currentState);
-                    });
-                })
+                            let currentState = {...this.state};
+                            currentState['registered'] = false;
+                            currentState['noEntrants'] -= 1;
+                            currentState['entrants'] = newEntrantsArr;
+                            currentState['entrantsObjs'] = entrantsObjs;
+                            currentState['visibleEntrants'] = entrantsObjs;;
+                            currentState['entrantProfits'] = newProfitsArr;
+                            currentState['balance'] = null;
+                            currentState['editBalanceLoading'] = false;
+                            this.setState(currentState);
+                        });
+                    }
+                }).catch(err => {
+                    this.setState({unregisterErr: "There was a problem with your request."})
+                });
 
             } else {
+                this.setState({showRegistrationConfirm: false});
                 // add user to db
                 let dbEntrantData = {};
                 dbEntrantData["tourneyId"] = this.state.tourneyId;
@@ -365,8 +398,12 @@ class Tourney extends Component {
                 dbEntrantData["balance"] = this.state.balance;
                 dbEntrantData["inviteCode"] = this.state.inviteCodeInput;
                 axios.post("/tourneyRegistration", dbEntrantData).then(res => {
+                    // If fail give error message
+                    if (res.data.response == "registration failed") {
+                        this.setState({registerErr: res.data.errorMsg, editBalanceLoading: false, showRegistrationConfirm: false});
+                    }
                     // if successful, get the new entrants and update the state
-                    if (res.data.response == "success") {
+                    else if (res.data.response == "success") {
                         axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
 
                             let newEntrantsArr = res.data.response.entrants; 
@@ -451,6 +488,8 @@ class Tourney extends Component {
         this.setState({inviteUserLoading: true});
         axios.post('/sendTourneyInvite', {"hostId": this.props.userId, "host": this.props.username, "tourneyId": this.state.tourneyId, "username": this.state.addUser}).then(res => {
             this.setState({addUser: '', addedUserMsg: res.data.response, inviteUserLoading: false});
+        }).catch(err => {
+            this.setState({error: true});
         })
     }
     
@@ -466,7 +505,9 @@ class Tourney extends Component {
         this.setState({editVisibilityLoading: true});
         // call api and change visibility in database
         axios.post('/updateTourneyVisibility', {"tourneyId": this.state.tourneyId, "userId": this.props.userId, "visibility": this.state.visibility}).then(res => {
-            this.setState({showVisibilityConfirm: false, editVisibilityLoading: false});
+            this.setState({showVisibilityConfirm: false, editVisibilityLoading: false, editVisibilityMsg: res.data.response});
+        }).catch(err => {
+            this.setState({error: true});
         });
     }
     
@@ -485,7 +526,11 @@ class Tourney extends Component {
     confirmDeleteHandler = () => {
         this.setState({deleteTourneyLoading: true})
         axios.post("/deleteTournament", {"tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
-            this.setState({showConfirmDelete: false, tourneyDeleted: true, deleteTourneyLoading: false});
+            if (res.data.response == "success") {
+                this.setState({showConfirmDelete: false, tourneyDeleted: true, deleteTourneyLoading: false});
+            } else if (res.data.response == "fail") {
+                this.setState({showConfirmDelete: false, tourneyDeleted: false, deleteTourneyLoading: false, deleteTourneyMsg: res.data.errorMsg});
+            }
         });
     }
     
@@ -515,6 +560,19 @@ class Tourney extends Component {
         this.setState({searchEntrants: event.target.value, visibleEntrants: visibleEntrants});
     }
     
+    // TRADE SUMMARY HANDLERS
+    showTradeSummary = (event) => {
+        event.preventDefault();
+        this.setState({loadingTradeSummary: true});
+        axios.post('/getPositions', {tourneyId: this.props.match.params.tourneyId, userId: this.props.userId} ).then(res => {
+            this.setState({positions: res.data.response, showTradeSummary: true, loadingTradeSummary: false});
+        });
+    }
+    
+    hideTradeSummary = () => {
+        this.setState({showTradeSummary: false});
+    }
+    
     render() {
         
         // HOST CONTROLS
@@ -535,6 +593,11 @@ class Tourney extends Component {
             confirmationBox = (
                 <Spinner />
             );
+        }
+                
+        let deleteTourneyMsg = null;
+        if (this.state.deleteTourneyMsg) {
+            deleteTourneyMsg = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>{this.state.deleteTourneyMsg}</p>
         }
         
         let visibilityConfirmationBox = null;
@@ -577,6 +640,16 @@ class Tourney extends Component {
                 </div>
             );
         }
+
+        let editVisibilityMsg = null;
+        if (this.state.editVisibilityMsg) {
+            if (this.state.editVisibilityMsg == "Visibility changed successfully.") {
+                editVisibilityMsg = <p style={{"color": "#57eb7e", "fontWeight": "bold"}}>{this.state.editVisibilityMsg}</p>
+            }
+            else {
+                editVisibilityMsg = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>{this.state.editVisibilityMsg}</p>
+            }
+        }
         
         let addedUserMsg = null;
         if (this.state.addedUserMsg) {
@@ -604,9 +677,11 @@ class Tourney extends Component {
                     {addedUserMsg}
                     <h4>Tournament Visibility:</h4>
                     {visibilityButtons}
+                    {editVisibilityMsg}
                     {visibilityConfirmationBox}
                     <h4>Delete tournament:</h4>
                     <button className="deleteTournamentBtn" onClick={this.deleteHandler}>Delete Tournament</button> <br />
+                    {deleteTourneyMsg}
                     {confirmationBox}
                 </div>
             );
@@ -646,11 +721,139 @@ class Tourney extends Component {
             </table>
         );
         
+        
+        /////////////////////////////////
+        // TRADE SUMMARY DIV
+        /////////////////////////////////
+        
+        let tradeSummary = null;
+        
+        if (this.state.showTradeSummary) {
+            
+            let totalProfit = 0;
+            
+            // GET ALL POSITIONS
+            let positions = this.state.positions.map((position, index) => {
+                
+                totalProfit += position.profit;
+                
+                let netPosition;
+                
+                if (position.inventory > 0) {
+                    netPosition = "long";
+                } else if (position.inventory < 0) {
+                    netPosition = "short";
+                } else {
+                    netPosition = "none"
+                }
+                
+                return (
+                    <div className="positionDiv" key={position.productName}>
+                        <h4><u>{position.productName}</u></h4>
+                        <p><b>Last Updated:</b> {position.lastUpdatedStr}</p>
+                        <h4><u>Buys:</u></h4>
+                        <p><b>Amount Bought:</b> {position.amountBought} {position.baseCurrency}</p>
+                        <p><b>Average Buy Price:</b> {position.avgBuyPrice} {position.quoteCurrency}</p>
+                        <p><b>Total:</b> {position.totalBought} {position.quoteCurrency}</p>
+                        <h4><u>Sales:</u></h4>
+                        <p><b>Amount Sold:</b> {position.amountSold} {position.baseCurrency}</p>
+                        <p><b>Average Sell Price:</b> {position.avgSellPrice} {position.quoteCurrency}</p>
+                        <p><b>Total:</b> {position.totalSold} {position.quoteCurrency}</p>
+                        <h4><u>Position:</u></h4>
+                        <p><b>Net position:</b> {netPosition}</p>
+                        <p><b>Inventory:</b> {position.inventory} {position.baseCurrency}</p>
+                        <p><b>Value of Inventory:</b> {position.inventoryValue} {position.quoteCurrency}</p>
+                        <h4><u>Totals:</u></h4>
+                        <p><b>Total Sales:</b> {position.totalSold} {position.quoteCurrency}</p>
+                        <p><b>Value of Inventory:</b> {position.inventoryValue} {position.quoteCurrency}</p>
+                        <p><b>Total Buys:</b> {position.totalBought} {position.quoteCurrency}</p>
+                        <p style={position.profit >= 0 ? {"color": "#57eb7e"} : {"color": "#f7716d"}}><b>Profit:</b> {position.profit} {position.quoteCurrency}</p>
+                    </div>
+                )
+            })
+            
+            if (this.state.quoteCurrency == "BTC") totalProfit = totalProfit.toFixed(9);
+            if (this.state.quoteCurrency == "USD") totalProfit = totalProfit.toFixed(4);
+            
+            tradeSummary = (
+                <div className="tradeSummaryWrapper">
+                    <div className="tradeSummaryDiv">   
+                        <h3>Trade Summary:</h3>
+                        {positions}
+                        <div className="positionDiv">
+                            <h4><u>Total Profit</u></h4>
+                            <p>Starting balance: {this.state.balance} {this.state.quoteCurrency}</p>
+                            <p style={totalProfit >= 0 ? {"color": "#57eb7e"} : {"color": "#f7716d"}}>Profit: {totalProfit} {this.state.quoteCurrency}</p>
+                            <p style={this.state.profit >= 0 ? {"color": "#57eb7e"} : {"color": "#f7716d"}}>Profit (%): {this.state.profit} %</p>
+                        </div>
+                        <button className="resetBtn" onClick={this.hideTradeSummary}>Close</button>
+                    </div>
+                </div>
+            );
+        }
 
-        // BALANCE
-
+        let loadingTradeSummary = null;
+    
+        if (this.state.loadingTradeSummary) {
+            loadingTradeSummary = <Spinner />
+        }
+        
+        /////////////////////////////////
+        // TOURNAMENT OVERVIEW
+        /////////////////////////////////
+            
         // REGISTER BUTTON
         let registerBtn = null;
+
+        let startTimePa =   (
+                            <div>
+                                <p>{this.state.startDate}</p>
+                                <p>{this.state.startTime}</p>
+                            </div>
+                            );
+        let endTimePa = (
+                        <div>
+                            <p>{this.state.endDate}</p>
+                            <p>{this.state.endTime}</p>
+                        </div>
+                        );
+        if (this.state.active) {
+            registerBtn = null;
+            startTimePa = (
+                <div>
+                    <p>The tournament has started.</p>
+                    <p>{this.state.startDate}</p>
+                    <p>{this.state.startTime}</p>
+                </div>
+            )
+        }
+        if (this.state.tourneyState == "completed") {
+            registerBtn = null;
+            startTimePa = (
+                <div>
+                    <p>{this.state.startDate}</p>
+                    <p>{this.state.startTime}</p>
+                </div>
+            )
+            endTimePa = (
+                <div>
+                    <p>The tournament has ended.</p>
+                    <p>{this.state.endDate}</p>
+                    <p>{this.state.endTime}</p>
+                </div>
+            )
+        }
+            
+        /////////////////////////////////////////////////////////
+        ////////    BALANCE  ////////////////////
+        /////////////////////////////////
+            
+        // register error msg
+        let registerErr = null;
+            
+        if (this.state.registerErr) {
+            registerErr = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>{this.state.registerErr}</p>
+        }
         
         // IF NOT REGISTERED AND TOURNAMENT IN REGISTRATION
         let balance;
@@ -670,6 +873,7 @@ class Tourney extends Component {
                 <div>
                     <button className="submitBtn" onClick={this.showRegistrationConfirmHandler}>Register</button>
                     <p style={{"fontWeight": "bold", "color": "#f7716d"}}>{this.state.noInviteErr}</p>
+                    {registerErr}
                 </div>
             );
             balance = (
@@ -678,24 +882,26 @@ class Tourney extends Component {
                     <p>The tournament is in registration.</p>
                     <h3>Starting Balance:</h3>
                     <p>Enter tournament starting balance <b>({this.state.quoteCurrency})</b> to register:</p>
-                    <p style={{"fontSize": "0.9rem"}}>Your tournament starting balance should reflect the size of the positions you trade in your exchange account.</p>
-                    <p style={{"fontSize": "0.9rem"}}>For example, with a starting balance of $1000. If you make $500 trading the products listed in this tournament your profit will be 50%. If at any point your trades for the given products are at a $1000 loss, you are liquidated out of the tournament.</p>
+                    <p style={{"fontSize": "0.9rem"}}>The starting balance is used to determine the profit percentage and liquidation.</p>
+                    <p style={{"fontSize": "0.9rem"}}>For example, with a starting balance of $1000. If you make $1000 profit, your profit percentage will be 100%. If you make a $1000 loss, you will be liquidated out of the tournament.</p>
                     {inviteCodeInput} <br/>
-                    <input className="balanceInput" type="text" placeholder=" Enter Starting Balance" onChange={(event) => this.editBalanceHandler(event)} />
+                    <input className="balanceInput" type="text" placeholder="Enter Starting Balance" onChange={(event) => this.editBalanceHandler(event)} />
                 </div>
             );
         }
-        
+
         // IF REGISTERED AND TOURNAMENT IS ACTIVE
         if (this.state.registered && this.state.tourneyState == "active") {
             balance = (
                 <div>
-                    <h2>Registration:</h2>
-                    <p>The tournament is already active.</p>
+                    <h2>Active Tournament</h2>
                     <h3>Starting Balance:</h3>
                     <p>{this.state.balance} {this.state.quoteCurrency}</p>
                     <h3>Your Profit:</h3>
                     <p>{this.state.profit} %</p>
+                    <button className="showSummaryBtn" onClick={(event)=>this.showTradeSummary(event)}>Trade Summary</button>
+                    {loadingTradeSummary}
+                    {tradeSummary}
                 </div>
             );
         }
@@ -704,10 +910,34 @@ class Tourney extends Component {
         if (!this.state.registered && this.state.tourneyState == "active") {
             balance = (
                 <div>
-                    <h2>Registration:</h2>
-                    <p>The tournament is already active.</p>
+                    <h2>Active Tournament</h2>
+                    <p>You are not registered.</p>
+                </div>
+            )
+        }
+
+        // IF REGISTERED AND TOURNAMENT IS COMPLETED
+        if (this.state.registered && this.state.tourneyState == "completed") {
+            balance = (
+                <div>
+                    <h2>Completed Tournament</h2>
                     <h3>Starting Balance:</h3>
-                    <p>You are not registered</p>
+                    <p>{this.state.balance} {this.state.quoteCurrency}</p>
+                    <h3>Your Profit:</h3>
+                    <p>{this.state.profit} %</p>
+                    <button className="showSummaryBtn" onClick={(event)=>this.showTradeSummary(event)}>Trade Summary</button>
+                    {loadingTradeSummary}
+                    {tradeSummary}
+                </div>
+            );
+        }
+        
+        // IF NOT REGISTERED AND TOURNAMENT IS ACTIVE
+        if (!this.state.registered && this.state.tourneyState == "completed") {
+            balance = (
+                <div>
+                    <h2>Completed Tournament</h2>
+                    <p>You are not registered.</p>
                 </div>
             )
         }
@@ -725,8 +955,18 @@ class Tourney extends Component {
                     <p>{this.state.balance} {this.state.quoteCurrency}</p>
                 </div>
             )
+            
+            // unregister error msg
+            let unregisterErr = null;
+            if (this.state.unregisterErr) {
+                unregisterErr = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>{this.state.unregisterErr}</p>
+            }
+            
             registerBtn = (
-                <button className="resetBtn" onClick={this.showUnRegistrationConfirmHandler}>Unregister</button>
+                <div>
+                    <button className="resetBtn" onClick={this.showUnRegistrationConfirmHandler}>Unregister</button>
+                    {unregisterErr}
+                </div>
             );
             
             if (this.state.editingBalance) {
@@ -743,35 +983,18 @@ class Tourney extends Component {
                 );
             }
         }
+    
         
-        
-        // TOURNAMENT OVERVIEW
-
-        let startTimePa = <p>{this.state.startDate} - {this.state.startTime}</p>
-        let endTimePa = <p>{this.state.endDate} - {this.state.endTime}</p>
-        
-        if (this.state.active) {
+        // IF NOT REGISTERED, TOURNAMENT IS REGISTERING AND MAX NO ENTRANTS REACHED
+        if (this.state.tourneyState == "registering" && this.state.noEntrants == this.state.maxEntrants && this.state.registered == false) {
+            balance = (
+                <div>
+                    <h2>Registration:</h2>
+                    <p>The tournament has the maximum number of entrants.</p>
+                </div>
+            )
+            
             registerBtn = null;
-            startTimePa = (
-                <div>
-                    <p>Started</p>
-                    <p>{this.state.startDate} - {this.state.startTime}</p>
-                </div>
-            )
-        }
-        if (this.state.tourneyState == "completed") {
-            registerBtn = null;
-            startTimePa = (
-                <div>
-                    <p>{this.state.startDate} - {this.state.startTime}</p>
-                </div>
-            )
-            endTimePa = (
-                <div>
-                    <p>Ended</p>
-                    <p>{this.state.endDate} - {this.state.endTime}</p>
-                </div>
-            )
         }
         
         // CONFIRM REGISTRATION MODAL
@@ -817,20 +1040,25 @@ class Tourney extends Component {
             balanceDiv = <Spinner />
         }
         
+        //////////////////
+        // ENTRANTS
+        //////////////////
         let entrantsDiv = <Spinner />
         if (!this.state.loading){
             entrantsDiv = (
                 <div className="entrantsList">
                     {balanceDiv}
-                    <h2>List of Entrants:</h2>
-                    <h3>Search Entrants:</h3>
+                    <h2>Entrants:</h2>
+                    <h3>Search:</h3>
                     <input value={this.state.searchEntrants} className="searchEntrantsInput" placeholder="Username" onChange={(event) => this.searchEntrantsInputHandler(event)}/>
                     <ul>{entrants}</ul>
                 </div>
             );
         } 
-
+        
+        /////////////////////
         // PRODUCTS
+        /////////////////////
         let FTXProducts = null;
 
         if (this.state.products) { 

@@ -118,6 +118,13 @@
     border-radius: 5px;
 }
 
+.verifyEmailBtn {
+    background-color: #303f9f;
+    color: #D9E2EC;
+    padding: 5px;
+    border-radius: 5px;
+}
+
 .apiDiv {
     width: 500px;
     text-align: center;

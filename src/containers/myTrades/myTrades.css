@@ -36,6 +36,8 @@
 
 .MyTradesSubSiv2 {
     min-height: 60vh;
+    max-height: 90vh;
+    overflow: scroll;
     width: 85vw;
     margin: 0 auto;
     box-sizing: border-box;

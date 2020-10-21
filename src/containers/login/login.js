@@ -117,10 +117,15 @@ class Login extends Component {
         if (this.props.error) {
             errorMsg = <p style={{"color": "#f7716d"}}>{this.props.error}</p>
         }
+
+        // SUBMIT BTN
+        let submitBtn = <button className="loginSubmitBtn" onClick={this.submitHandler}>Submit</button>
             
+        // LOADING
         let spinner = null;
         if (this.props.loading) {
             spinner = <Spinner />
+            submitBtn = null;
         }
             
         let resetPasswordModal = null;
@@ -147,7 +152,7 @@ class Login extends Component {
                         <form className="Login" onSubmit={this.submitHandler}>
                             <Input type={this.state.controls.email.elementConfig.type} placeholder={this.state.controls.email.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "email")}/> <br/>
                             <Input type={this.state.controls.password.elementConfig.type} placeholder={this.state.controls.password.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "password")}/> <br />
-                            <button className="loginSubmitBtn" onClick={this.submitHandler}>Submit</button><br/>
+                            {submitBtn} <br />
                             {errorMsg}
                         </form>
                         {spinner}

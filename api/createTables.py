@@ -1,5 +1,5 @@
 from init import db
-from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, Trades, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys, TourneyInvites, AccountBalances, PayoutsCustomProvisional, DepositWithdrawHistory
+from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, Trades, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys, TourneyInvites, AccountBalances, PayoutsCustomProvisional, DepositWithdrawHistory, Positions
 from sqlalchemy.orm import sessionmaker
 
 engine = db.engine
@@ -10,9 +10,9 @@ session = Session()
 # delete a table
 #ProductList.__table__.drop(engine)
 
+TourneyInvites.__table__.drop(engine)
 Entrants.__table__.drop(engine)
 RegisteringProducts.__table__.drop(engine)
-TourneyInvites.__table__.drop(engine)
 RegistrationTourneys.__table__.drop(engine)
 ActiveProducts.__table__.drop(engine)
 ActiveEntrants.__table__.drop(engine)
@@ -20,14 +20,17 @@ ActiveTourneys.__table__.drop(engine)
 CompletedProducts.__table__.drop(engine)
 CompletedEntrants.__table__.drop(engine)
 CompletedTourneys.__table__.drop(engine)
+
 AllTourneys.__table__.drop(engine)
 Trades.__table__.drop(engine)
-#UserAPI.__table__.drop(engine)
-#Usernames.__table__.drop(engine)
+Positions.__table__.drop(engine)
 
 #AccountBalances.__table__.drop(engine)
 #PayoutsCustomProvisional.__table__.drop(engine)
 #DepositWithdrawHistory.__table__.drop(engine)
+
+#UserAPI.__table__.drop(engine)
+#Usernames.__table__.drop(engine)
 
 #session.commit()
 
@@ -36,6 +39,8 @@ Trades.__table__.drop(engine)
 
 #Usernames.__table__.create(session.bind)
 #UserAPI.__table__.create(session.bind)
+#
+AllTourneys.__table__.create(session.bind)
 RegistrationTourneys.__table__.create(session.bind)
 RegisteringProducts.__table__.create(session.bind)
 Entrants.__table__.create(session.bind)
@@ -45,9 +50,10 @@ ActiveProducts.__table__.create(session.bind)
 CompletedTourneys.__table__.create(session.bind)
 CompletedEntrants.__table__.create(session.bind)
 CompletedProducts.__table__.create(session.bind)
-AllTourneys.__table__.create(session.bind)
+#
 TourneyInvites.__table__.create(session.bind)
 Trades.__table__.create(session.bind)
+Positions.__table__.create(session.bind)
 
 #AccountBalances.__table__.create(session.bind)
 #PayoutsCustomProvisional.__table__.create(session.bind)

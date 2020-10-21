@@ -21,6 +21,15 @@
     -webkit-transform: translateZ(0)
 }
 
+.howItWorksDiv {
+    background-color: rgb(240,240,240);
+    padding-bottom: 40px;
+    height: auto;
+    width: 100vw;
+    z-index: 10;
+    -webkit-transform: translateZ(0)
+}
+
 .homeDiv h1 {
     color: rgb(219, 30, 24);
     font-size: 2.4rem;
@@ -62,7 +71,7 @@
     border-radius: 20px;
     top: 20px;
     box-sizing: border-box;
-    background: rgb(20,20,20, 0.8);
+    background: rgb(20,20,20, 0.9);
 }
 
 .infoDiv {
@@ -118,7 +127,7 @@
 
 .hostTourneyImg {
     width: 40vw;
-    height: 26.5vw;
+    height: 30vw;
     max-height: 350px;
     max-width: 525px;
 }
@@ -129,6 +138,37 @@
     font-weight: bold;
 }
 
+.howItWorksSubDiv {
+    width: 90vw;
+    height: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 0 auto;
+    position: relative;
+    top: 20px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.stepSubDiv {
+    width: 80vw;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.stepSubDiv p {
+    font-size: 1.4rem;
+    margin-left: 10px;
+}
+
+.stepSubDiv h3 {
+    font-size: 1.4rem;
+}
+
+
 /* large devices  desktops, 992px to 1200px)*/
 @media (max-width: 1200px) {  
 
@@ -138,6 +178,13 @@
 @media (max-width: 992px) { 
     .homeSubDiv {
         width: 90vw;
+    }
+    .stepSubDiv p {
+        font-size: 1.2rem;
+    }
+
+    .stepSubDiv h3 {
+        font-size: 1.3rem;
     }
 }
 
@@ -152,7 +199,10 @@
     .infoDiv {
         width: 90vw;
     }
-
+    
+    .stepSubDiv {
+        flex-direction: column;
+    }
 }
 
 /* Small devices (landscape phones, 576px and below)*/
@@ -186,5 +236,13 @@
     .hostTourneyImg {
         width: 80vw;
         height: 52.5vw;
+    }
+    
+    .stepSubDiv p {
+        font-size: 1rem;
+    }
+
+    .stepSubDiv h3 {
+        font-size: 1.1rem;
     }
 }

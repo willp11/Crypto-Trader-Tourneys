@@ -153,6 +153,48 @@
     box-sizing: border-box;
 }
 
+.tradeSummaryWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 100000000000000;
+}
+
+.tradeSummaryDiv {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000000000;
+    border: 0.5px solid #121212;
+    background-color: #323232;
+    padding: 20px;
+    height: auto;
+    max-height: 600px;
+    overflow: scroll;
+    width: 400px;
+    box-sizing: border-box;
+}
+
+.positionDiv {
+    width: 320px;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #363636;
+    border: 0.5px solid #121212;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.showSummaryBtn {
+    background-color: #303f9f;
+    color: #D9E2EC;
+    margin-top: 10px;
+}
+
 .entrantsList {
     height: 750px;
     width: 40vw;

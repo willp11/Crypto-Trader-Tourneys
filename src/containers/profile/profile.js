@@ -29,22 +29,33 @@ class Profile extends Component {
         redirectToLogin: false,
         updatePassSuccess: false,
         showVerifyModal: false,
+        email: '',
         emailVerified: false,
         emailSent: false,
         updatePassRepeatError: null,
         APIValidErr: null,
         updatingAPI: false,
         loadingApiInfo: true,
+        loadingAPIErr: null,
         usernameValidErr: null,
         newUsername: '',
         validUsername: true,
-        loadingUsername: true
+        loadingUsername: true,
+        loadingUpdateAPI: false,
+        loadingInvites: true,
+        loadingInvitesErr: null,
+        inviteResponseSuccess: null,
+        removeInviteSuccess: null,
+        passChangeLoading: false,
+        tourneyRegisterErr: false,
+        tourneyRegisterErrMsg: null
     }
     
     componentDidMount() {
         
         let user = firebaseAuth.currentUser;
         if (user) {
+            this.setState({email: user.email});
             // check the user is email verified - if not, show the modal
             if (user.emailVerified == false) {
                 this.setState({showVerifyModal: true, emailVerified: false});
@@ -78,13 +89,18 @@ class Profile extends Component {
                 if (res.data.validity == "invalid") {
                     this.setState({APIValidErr: "Your API key and secret are not valid. Update them to enter tournaments."});
                 }
+            }).catch(error => {
+                this.setState({loadingApiInfo: false, loadingAPIErr: "There was a problem loading your API information."});
             })
             
             // get users tourney invites
             axios.post('/getTourneyInvites',  {"userId": this.props.userId}).then(res => {
                 this.setState({
-                    invites: res.data.response
+                    invites: res.data.response,
+                    loadingInvites: false
                 });
+            }).catch(error => {
+                this.setState({loadingInvites: false, loadingInvitesErr: "There was a problem loading your invitations."});
             })
         }
     }
@@ -104,12 +120,12 @@ class Profile extends Component {
                         "exchange": exchange, 
                         "APIKey": this.state.updateAPIs[exchange].key, 
                         "APISecret": this.state.updateAPIs[exchange].secret};
-        this.setState({updatingAPI: true});
+        this.setState({loadingUpdateAPI: true});
         axios.post('/updateAPI', APIData).then(res => {
             if (res.data.response == "success") {
-                this.setState({APIUpdatedMsg: "API Updated Successfully", APIs: {FTX: {key: APIKey, secret: APISecret}}, updatingAPI: false, APIValidErr: null });
+                this.setState({APIUpdatedMsg: "API Updated Successfully", APIs: {FTX: {key: APIKey, secret: APISecret}}, updatingAPI: false, APIValidErr: null, loadingUpdateAPI: false });
             } else if (res.data.response == "invalid") {
-                this.setState({APIValidErr: "The API Key and Secret you entered were not valid.", updatingAPI: false});
+                this.setState({APIValidErr: "The API Key and Secret you entered were not valid.", updatingAPI: false, loadingUpdateAPI: false});
             }
         })
     }
@@ -122,18 +138,30 @@ class Profile extends Component {
         this.setState({updatingAPI: false});
     }
     
-    declineInvitationHandler = (index) => {
-        axios.post('/removeTourneyInvite', {"userId": this.props.userId, "tourneyId": this.state.invites[index].tourneyId}).then(res => {
+    declineInvitationHandler = (tourneyId) => {
+        this.setState({enterBalance: false, loadingInvites: true});
+        
+        // decline invitiation
+        axios.post('/removeTourneyInvite', {"userId": this.props.userId, "tourneyId": tourneyId}).then(res => {
+            if (res.data.response == "success") {
+                this.setState({removeInviteSuccess: true, inviteResponseSuccess: null});
+            } else {
+                this.setState({removeInviteSuccess: false, inviteResponseSuccess: null});
+            }
+            // get users tourney invites
             axios.post('/getTourneyInvites',  {"userId": this.props.userId}).then(res => {
                 this.setState({
-                    invites: res.data.response
+                    invites: res.data.response, 
+                    loadingInvites: false
                 });
             })
-        })
+        }).catch(error => {
+            this.setState({removeInviteSuccess: false, inviteResponseSuccess: null});
+        });
     }
     
-    acceptInvitationHandler = (tourneyId) => {
-        this.setState({enterBalance: true, inviteTourneyId: tourneyId});
+    acceptInvitationHandler = (tourneyId, index) => {
+        this.setState({enterBalance: true, inviteTourneyId: tourneyId, inviteToShowKey: index});
     }
     
     cancelAcceptInvitationHandler = () => {
@@ -152,23 +180,27 @@ class Profile extends Component {
             "balance": this.state.balance
         }
         
-        let invites = [...this.state.invites];
-        let newInvites = [];
-        
-        for (let i=0; i<invites.length; i++) {
-
-            if (invites[i].tourneyId == tourneyId) {
-                newInvites = invites.splice[i, 1];
-            }
-        }
-        
-        this.setState({invites: newInvites, enterBalance: false});
+        this.setState({enterBalance: false, loadingInvites: true});
         
         axios.post('/tourneyRegistration', data).then(res => {
-            axios.post('/removeTourneyInvite', {"userId": this.props.userId, "tourneyId": tourneyId}).then(res => {
-
-            });
-        });   
+            console.log(res.data.response);
+            if (res.data.response == "success") {
+                this.setState({inviteResponseSuccess: true, removeinviteSuccess: null, tourneyRegisterErr: false});
+            } else if (res.data.response == "registration failed") {
+                this.setState({inviteResponseSuccess: null, removeinviteSuccess: null, tourneyRegisterErr: true, tourneyRegisterErrMsg: res.data.errorMsg});
+            } else {
+                this.setState({inviteResponseSuccess: false, removeinviteSuccess: null, tourneyRegisterErr: false});
+            }
+            // get users tourney invites
+            axios.post('/getTourneyInvites',  {"userId": this.props.userId}).then(res => {
+                this.setState({
+                    invites: res.data.response,
+                    loadingInvites: false
+                });
+            })
+        }).catch(error => {
+            this.setState({inviteResponseSuccess: false, removeinviteSuccess: null, loadingInvites: false});
+        });;   
     }
     
     showPassModalHandler = () => {
@@ -192,17 +224,17 @@ class Profile extends Component {
             this.setState({updatePassRepeatError: "Repeat password does not match!"});
         } else if (this.state.newPassword.password.length < 6) {
             this.setState({updatePassRepeatError: "Passwords must have a length of 6 more characters!"});
-        } else {
+        } else {      
+            this.setState({passChangeLoading: true});
             let user = firebaseAuth.currentUser;
-
             user.updatePassword(this.state.newPassword.password).then((res)=>{
                 // update successful
-                this.setState({updatePassSuccess: true})
+                this.setState({updatePassSuccess: true, passChangeLoading: false})
             }).catch((error)=> {
                 // An error happened.
                 if (error.code == "auth/requires-recent-login") {
                     // update the modal to show the error message with a link to the login page
-                    this.setState({updatePassError: error.message});
+                    this.setState({updatePassError: error.message, passChangeLoading: false});
                     // user clicks link to login page, then logout the user and redirect to login page
                 }
             });
@@ -284,6 +316,7 @@ class Profile extends Component {
             redirect = <Redirect to="/login" />
         }
         
+        // UPDATE PASSWORD
         let updatePassErrMsg = null;
         if (this.state.updatePassRepeatError) 
         {
@@ -292,6 +325,18 @@ class Profile extends Component {
             );
         }
         let updatePassModal = null;
+        let updatePassSpinner = null;
+        let updatePassBtns = (
+                                <div>
+                                    <button className="resetBtn" onClick={this.hidePassModalHandler}>Cancel</button>
+                                    <button className="submitBtn" onClick={this.updatePassword}>Confirm</button>
+                                </div>
+                              );
+            
+        if (this.state.passChangeLoading) {
+            updatePassSpinner = <Spinner />
+            updatePassBtns = null;
+        }
         if (this.state.showUpdatePassModal) {
             updatePassModal = (
                 <div className="darkBg">
@@ -299,13 +344,14 @@ class Profile extends Component {
                         <h2>Update Password</h2>
                         <input className="updatePassInput" type="password" placeholder="Enter Password" onChange={(event)=>this.updatePassInputHandler(event, "password")}/> <br/>
                         <input className="updatePassInput" type="password" placeholder="Repeat Password" onChange={(event)=>this.updatePassInputHandler(event, "repeat")}/> <br/>
-                        <button className="resetBtn" onClick={this.hidePassModalHandler}>Cancel</button>
-                        <button className="submitBtn" onClick={this.updatePassword}>Confirm</button>
+                        {updatePassBtns}
+                        {updatePassSpinner}
                         {updatePassErrMsg}
                     </div>
                 </div>
             )
         }
+        
 
         if (this.state.updatePassError) {
             updatePassModal = (
@@ -333,27 +379,27 @@ class Profile extends Component {
                 <Redirect to="/login" />
             );
         
-        let acceptInvitation = (
-            <button className="yesBtn" onClick={this.acceptInvitationHandler}>Yes</button>
-        );
-        
         let invites = null;
         if (this.state.invites) {
             invites = this.state.invites.map((invite, index) => {
                 let tourneyId=this.state.invites[index].tourneyId;
-                let declineInvitation = <button className="noBtn" onClick={(i) => this.declineInvitationHandler(index)}>No</button>
-                if (this.state.enterBalance == true) {
+                let declineInvitation = <button className="noBtn" onClick={() => this.declineInvitationHandler(tourneyId)}>No</button>
+                let acceptInvitation = (
+                    <button className="yesBtn" onClick={()=>this.acceptInvitationHandler(tourneyId, index)}>Yes</button>
+                );
+                let inputPlaceholder = "Starting Balance (" + invite.quoteCurrency + ")";
+                if (this.state.enterBalance == true && this.state.inviteToShowKey == index) {
                     declineInvitation = null;
                     acceptInvitation = (
-                        <div>
+                        <div key={index}>
                             <button className="noBtn" onClick={this.cancelAcceptInvitationHandler}>Cancel</button>
-                            <input value={this.state.balance} onChange={(event) => this.inputBalanceHandler(event)} style={{"textAlign": "center"}} placeholder="Enter Starting Balance" />
+                            <input type="number" value={this.state.balance} onChange={(event) => this.inputBalanceHandler(event)} style={{"textAlign": "center"}} placeholder={inputPlaceholder} />
                             <button className="yesBtn" onClick={(id) => this.submitAcceptInvitationHandler(tourneyId)}>Confirm</button>
                         </div>
                     );
                 }
                 return (
-                    <tr key="index">
+                    <tr key={index}>
                         <td><NavLink style={{"color": "rgb(77, 134, 247)", "fontWeight": "bold"}} to={"/tourneys/"+tourneyId}>{invite.tourneyId}</NavLink></td>
                         <td>{invite.host}</td>
                         <td>
@@ -363,6 +409,50 @@ class Profile extends Component {
                     </tr>
                 );
             })
+        }
+        
+        let inviteResponse = null;
+        if (this.state.inviteResponseSuccess == true) {
+            inviteResponse = <p style={{"color": "#57eb7e", "fontWeight": "bold"}}>Registration was successful.</p>
+        } else if (this.state.inviteResponseSuccess == false) {
+            inviteResponse = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>Registration failed. Check your connection.</p>
+        }
+        
+        let removeInviteResponse = null;        
+        if (this.state.removeInviteSuccess == true) {
+            removeInviteResponse = <p style={{"color": "#57eb7e", "fontWeight": "bold"}}>Invitation declined.</p>
+        } else if (this.state.removeInviteSuccess == false) {
+            removeInviteResponse = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>Error. Please try again.</p>
+        }
+        
+        let tourneyRegisterErr = null;   
+        if (this.state.tourneyRegisterErr) {
+            tourneyRegisterErr = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>{this.state.tourneyRegisterErrMsg}</p>
+        }
+        
+        let invitesTable = (
+            <table className="invitesTable">
+                <thead>
+                    <tr>
+                        <th>Tournament id</th>
+                        <th>Host</th>
+                        <th>Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {invites}
+                </tbody>
+            </table>
+        );
+
+        if (this.state.loadingInvitesErr) {
+            invitesTable = (
+                <p style={{"color": "#f7716d", "fontWeight": "bold"}}>{this.state.loadingInvitesErr}</p>
+            );
+        }
+
+        if (this.state.loadingInvites) {
+            invitesTable = <Spinner />
         }
         
         let APIUpdatedMsg = null;
@@ -375,8 +465,8 @@ class Profile extends Component {
             APIInvalidErr = <p style={{"color": "#f7716d"}}>{this.state.APIValidErr}</p>
         }
         
-        let verifyEmailMsg = <p>Please check your email address and click the link to confirm your registration. If you have already verified and still see this message, please reload the page.</p> ;
-        if (this.state.emailSent) verifyEmailMsg = <p>E-mail sent. Please click the link to confirm your registration.</p> ;
+        let verifyEmailMsg = <p>Please check your email address and click the link to confirm your registration. If you have already verified and still see this message, please refresh the page.</p>;
+        if (this.state.emailSent) verifyEmailMsg = <p>E-mail sent. Please click the link to confirm your registration.</p>;
         
         let verifyEmailModal = null;
         if (this.state.showVerifyModal) 
@@ -418,10 +508,6 @@ class Profile extends Component {
                 {APIUpdatedMsg}
             </div>
         );
-
-        if (this.state.loadingApiInfo) {
-            apiDiv = <Spinner />
-        }
         
         if (this.state.updatingAPI) {
             apiDiv = (
@@ -437,10 +523,28 @@ class Profile extends Component {
                 </div>
             );
         }
+        
+        if (this.state.loadingApiInfo || this.state.loadingUpdateAPI) {
+            apiDiv = <Spinner />
+        }
+            
+        if (this.state.loadingAPIErr) {
+            apiDiv = (
+                <p style={{"color": "#f7716d", "fontWeight": "bold"}}>{this.state.loadingAPIErr}</p>
+            );
+        }
 
         let verifyEmailBtn = null;
         if (this.state.emailVerified == false) {
-            verifyEmailBtn = <button onClick={this.showVerifyModal}>Verify Email</button>
+            verifyEmailBtn = <button className="verifyEmailBtn" onClick={this.showVerifyModal}>Verify Email</button>
+        }
+            
+        let username = (
+            <p>{this.props.username}</p>
+        );
+            
+        if (this.state.loadingUsername) {
+            username = <Spinner />
         }
 
         let usernameDiv = (
@@ -479,7 +583,7 @@ class Profile extends Component {
                         <div className="profilePanel">
                             {usernameDiv}
                             <h2>Email:</h2>
-                            <p>{this.props.email}</p>
+                            <p>{this.state.email}</p>
                             {verifyEmailBtn}
                             <h2>Update Password</h2>
                             <button className="updatePassBtn" onClick={this.showPassModalHandler}>Update Password</button>
@@ -491,18 +595,10 @@ class Profile extends Component {
                             </div>
                             <div>
                                 <h2>Invitations</h2>
-                                <table className="invitesTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Tournament id</th>
-                                            <th>Host</th>
-                                            <th>Response</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {invites}
-                                    </tbody>
-                                </table>
+                                {invitesTable}
+                                {inviteResponse}
+                                {removeInviteResponse}
+                                {tourneyRegisterErr}
                             </div>
                         </div>
                     </div>

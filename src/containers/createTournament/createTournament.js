@@ -32,7 +32,8 @@ class CreateTournament extends Component {
         newTourneyId: null,
         loading: false,
         authFail: false,
-        error: false
+        error: false,
+        loadingProducts: true
     }
     
     componentDidMount() {
@@ -47,7 +48,7 @@ class CreateTournament extends Component {
                     let productList;
                     axios.get('/getAllProducts').then(res => {
                         productList=res.data;
-                        this.setState({productList: productList});
+                        this.setState({productList: productList, loadingProducts: false});
                     }).catch(err => {
                         this.setState({error: true});
                     });
@@ -105,10 +106,10 @@ class CreateTournament extends Component {
                 errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>You must choose between 1 and 5 trading products.</p>
             }
             
-            if (givenStartTS < earliestTS) {
-                valid = false;
-                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The start time must be more than 1 hour from now.</p>
-            }
+//            if (givenStartTS < earliestTS) {
+//                valid = false;
+//                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The start time must be more than 1 hour from now.</p>
+//            }
             
             if (givenStartTS > latestTS) {
                 valid = false;
@@ -159,7 +160,6 @@ class CreateTournament extends Component {
 
             this.setState({loading: true});
             axios.post('/createTournament', newDbData).then(res => {
-                console.log(res.data.response);
                 let tourneyId = res.data.response.tourneyId;
                 
                 this.props.emptyProductList();
@@ -200,11 +200,7 @@ class CreateTournament extends Component {
     
     render() {
         
-        let spinner = null;
-        if (this.state.loading) {
-            spinner = <Spinner />
-        }
-        
+        // REDIRECTS
         let redirect = null;
         if (this.state.redirect && !this.state.loading) {
             redirect = (
@@ -223,7 +219,8 @@ class CreateTournament extends Component {
                 <Redirect to="/error" />
             )
         }
- 
+        
+        // PRODUCTS
         let FTXSpotProductUSD = null;
         let FTXFuturesProductsUSD = null;
         let FTXSpotProductBTC = null;
@@ -308,6 +305,7 @@ class CreateTournament extends Component {
             } 
         }
         
+        // VISIBILITY
         let visibilityBtns = (
             <div>
                 <button name="public" onClick={(event) => this.selectVisibilityHandler(event)}>Public</button>
@@ -330,46 +328,64 @@ class CreateTournament extends Component {
                 </div>
             );
         }
+        
+        // SUBMIT BTN
+        let submitBtn = <button className="submitTournBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
+        
+        // LOADING AFTER CLICKING SUBMIT
+        let spinner = null;
+        if (this.state.loading) {
+            spinner = <Spinner />
+            submitBtn = null;
+        }
+        
+        // MAIN DIV
+        let createTournamentDiv = (
+            <div className="createTournSubDiv">
+                <h1>Create New Tournament</h1>
+                <form className="createTournForm">
+                    <h3>Minimum Number of Entrants:</h3>
+                    <input type="number" min="2" max="200" placeholder="Min no. entrants" style={{"width": "180px", "textAlign": "center"}} onChange={(event, key) => this.hostInputHandler(event, 'minEntrants')}/> <br />
+                    <h3>Maximum Number of Entrants:</h3>
+                    <input type="number" min="2" max="200" placeholder="Max no. entrants" style={{"width": "180px", "textAlign": "center"}} onChange={(event, key) => this.hostInputHandler(event, 'maxEntrants')}/> <br />
 
+                    <h3>Currency:</h3>
+                    <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>All trading products will use this currency as the quote currency.</p>
+                    {buttonsDiv}
+
+                    <h3>Trading Products:</h3>
+                    {productsDiv}
+                    {selectedProductsTitle}
+                    {selectedProducts}
+
+                    <h3>Start Date:</h3>
+                    <input type="date" onChange={(event, key) => this.hostInputHandler(event, 'startDate')}/>
+                    <h3>Start Time:</h3>
+                    <input type="time" step="3600000" min="00:00" onChange={(event, key) => this.hostInputHandler(event, 'startTime')}/>
+
+                    <h3>Duration:</h3>
+                    <Input type="number" min="1" max="7" placeholder="Duration in days" changed={(event, key) => this.hostInputHandler(event, 'duration')} /> <br/>
+                    <h3 style={{"fontSize":"0.8rem", "fontWeight":"normal"}}>Maximum 30 days</h3>
+
+                    <h3>Visibility:</h3>
+                    {visibilityBtns}
+
+                    {submitBtn}
+                    {this.state.errorMsg}
+                    {spinner}
+                </form>
+            </div>
+        );
+        
+        // LOADING PAGE AT START
+        if (this.state.loadingProducts) {
+            createTournamentDiv = <Spinner />
+        }
         
         return (
             <div className="createTournDiv">
                 {redirect}
-                <div className="createTournSubDiv">
-                    <h1>Create New Tournament</h1>
-                    <form className="createTournForm">
-                        <h3>Minimum Number of Entrants:</h3>
-                        <input type="number" min="2" max="200" placeholder="Min no. entrants" style={{"width": "180px", "textAlign": "center"}} onChange={(event, key) => this.hostInputHandler(event, 'minEntrants')}/> <br />
-                        <h3>Maximum Number of Entrants:</h3>
-                        <input type="number" min="2" max="200" placeholder="Max no. entrants" style={{"width": "180px", "textAlign": "center"}} onChange={(event, key) => this.hostInputHandler(event, 'maxEntrants')}/> <br />
-                            
-                        <h3>Currency:</h3>
-                        <p style={{'fontWeight': 'normal', 'fontSize': '0.8rem'}}>All trading products will use this currency as the quote currency.</p>
-                        {buttonsDiv}
-
-                        <h3>Trading Products:</h3>
-                        {productsDiv}
-                        {selectedProductsTitle}
-                        {selectedProducts}
-
-                        <h3>Start Date:</h3>
-                        <input type="date" onChange={(event, key) => this.hostInputHandler(event, 'startDate')}/>
-                        <h3>Start Time:</h3>
-                        <input type="time" step="3600000" min="00:00" onChange={(event, key) => this.hostInputHandler(event, 'startTime')}/>
-
-                        <h3>Duration:</h3>
-                        <Input type="number" min="1" max="7" placeholder="Duration in days" changed={(event, key) => this.hostInputHandler(event, 'duration')} /> <br/>
-                        <h3 style={{"fontSize":"0.8rem", "fontWeight":"normal"}}>Maximum 30 days</h3>
-
-                        <h3>Visibility:</h3>
-                        {visibilityBtns}
-
-                        <button className="submitTournBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
-                        {this.state.errorMsg}
-                        {spinner}
-                    </form>
-                    
-                </div>
+                {createTournamentDiv}
             </div>
         )
     }
