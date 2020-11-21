@@ -47,7 +47,6 @@ export const logout = () => {
 
         }).catch((error)=> {
             // An error happened.
-            console.log(error);
         });
 
         dispatch(logoutFinal());
@@ -75,9 +74,6 @@ export const auth = (email, password, isSignup, username) => {
         if (!isSignup) {
             firebaseAuth.signInWithEmailAndPassword(email, password)
                 .then((response) => {
-    //                console.log(response.user);
-    //                console.log(response.user.uid);
-    //                console.log(response.user.xa);
 
                     const expirationDate = new Date(new Date().getTime() + 3600*1000);
                     localStorage.setItem('userId', response.user.uid);
@@ -96,9 +92,6 @@ export const auth = (email, password, isSignup, username) => {
         } else if (isSignup) {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .then((response) => {
-    //                console.log(response.user);
-    //                console.log(response.user.uid);
-    //                console.log(response.user.xa);
 
                     const expirationDate = new Date(new Date().getTime() + 3600*1000);
                     localStorage.setItem('userId', response.user.uid);
@@ -113,7 +106,7 @@ export const auth = (email, password, isSignup, username) => {
                         console.error(error);
                     });
                 
-                    axios.post('/createUser', {userId: response.user.uid, username: username, email: email}).then(res => {
+                    axios.post('/api/createUser', {userId: response.user.uid, username: username, email: email}).then(res => {
                         console.log(res.data);                                                              
                     }).catch(error => {
                         console.error(error);
@@ -124,7 +117,6 @@ export const auth = (email, password, isSignup, username) => {
                     // Handle Errors here.
                     const errorCode = error.code;
                     const errorMessage = error.message;
-                    console.log(errorCode, errorMessage);
                     dispatch(authFail(error.message));
                 });
         }
@@ -143,7 +135,7 @@ export const setUsernameEmail = (username, email) => {
 export const getUsernameEmail = (userId, email) => {
     return dispatch => {
         // call API to get username and email
-        axios.post('/getUsernameEmail', {userId: userId}).then(res => {
+        axios.post('/api/getUsernameEmail', {userId: userId}).then(res => {
             let username = res.data.response.username;
             dispatch(setUsernameEmail(username, email));
         })
@@ -183,11 +175,9 @@ export const updatePassword = (newPassword) => {
         
         user.updatePassword(newPassword).then((res)=>{
             // update successful
-            console.log("Password changed");
 
         }).catch((error)=> {
             // An error happened.
-            console.log(error);
         });
 
         return {

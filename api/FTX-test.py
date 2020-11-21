@@ -11,38 +11,33 @@ engine = db.engine
 Session = sessionmaker(bind=engine)
 
 API_key = 'mW4bIM9k5Fz-EnSotKhr-3WdXXbPaF6h_WKveN6z'
-#API_key = 'aaa'
 API_secret = 'ExCgCNok6eaQwCXMwfiohq5Yt580O3ef21ldyljI'
-
-string = "https://ftx.com/api/fills?market=ETC-PERP"
-#string = "https://ftx.com/api/markets"
-
+#string = "https://ftx.com/api/positions"
+string = "https://ftx.com/api/fills"
+#string = "https://ftx.com/api/markets/{market_name}/candles?resolution={resolution}&limit={limit}&start_time={start_time}&end_time={end_time}"
+#string = 'https://ftx.com/api/markets/'+ 'BTC-PERP' + '/candles?resolution=3600&start_time=' + str(1603904400-3600) + '&end_time=' + str(1603904400)
+payload = {"start_time": str(1603904400)}
 ts = int(time.time() * 1000)
-
-request = Request('GET', string)
+request = Request('GET', string, payload)
 prepared = request.prepare()
-
 signature_payload = f'{ts}{prepared.method}{prepared.path_url}'.encode()
 if prepared.body:
     signature_payload += prepared.body
-
 signature = hmac.new(API_secret.encode(), signature_payload, 'sha256').hexdigest()
-
 prepared.headers['FTX-KEY'] = API_key
 prepared.headers['FTX-SIGN'] = signature
 prepared.headers['FTX-TS'] = str(ts)
-
 s = requests.Session()
 res = s.send(prepared)
 
-
-#results = res.json()['result']
-
 if 'result' in res.json():
     results = res.json().get('result')
-    print(results)
+    for result in results:
+        #print(result['future'], result['netSize'])
+        print(result)
 else:
     print("API key not valid")
+    
 
 #session = Session()
 #

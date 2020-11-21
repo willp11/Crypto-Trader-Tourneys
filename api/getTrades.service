@@ -1,0 +1,12 @@
+[Unit]
+Description=Get Trades
+After=multi-user.target
+
+[Service]
+Type=simple
+User=will
+ExecStart=/home/will/cryptotourneys/tourneysenv/bin/python3 /home/will/cryptotourneys/getTrades.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

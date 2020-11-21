@@ -13,23 +13,31 @@
 }
 
 .tourneyDiv h2 {
-    color: #E1E1E1;
+    color: #D1D1D1;
 }
 
 .tourneyDiv h3 {
-    color: #E1E1E1;
+    color: #D1D1D1;
 }
 
 .tourneyDiv h4 {
-    color: #E1E1E1;
+    color: #D1D1D1;
 }
 
 .tourneyDiv p {
-    color: #E1E1E1;
+    color: white;
 }
 
 .tourneyDiv li {
     color: #E1E1E1;
+}
+
+.importPosDiv {
+    font-size: 0.9rem;
+}
+
+.importBtn {
+    width: 50px;
 }
 
 .tourneySubDiv {
@@ -89,7 +97,7 @@
     background-color: #363636;
     flex-wrap: nowrap;
     width: 80vw;
-    margin: 0 auto;
+    margin: 20px auto;
     height: 750px;
     border-radius: 10px;
     box-sizing: border-box;
@@ -102,6 +110,8 @@
     box-sizing: border-box;
     padding: 20px;
     background-color: #363636;
+    border: 1px solid #121212;
+    border-radius: 5px;
 }
 
 .tourneyBody input {
@@ -202,6 +212,7 @@
     overflow: scroll;
     box-sizing: border-box;
     border: 1px solid #121212;
+    border-radius: 5px;
 }
 
 .rankProfitDiv {
@@ -386,6 +397,7 @@
     .entrantsList {
         width: 90vw;
         height: auto;
+        margin-top: 20px;
     }
     
     .tourneyBody {
@@ -396,6 +408,7 @@
 
 /* Small devices (landscape phones, 576px and below)*/
 @media (max-width: 576px) {  
-
-
+    .editBalanceInput {
+        width: 90px;
+    }
 }

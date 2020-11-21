@@ -1,11 +1,11 @@
 .loader,
 .loader:after {
   border-radius: 50%;
-  width: 5em;
-  height: 5em;
+  width: 3.5em;
+  height: 3.5em;
 }
 .loader {
-  margin: 60px auto;
+  margin: 20px auto;
   font-size: 10px;
   position: relative;
   text-indent: -9999em;

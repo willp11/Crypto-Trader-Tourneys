@@ -3,6 +3,7 @@
     text-align: center;
     z-index: 0.9;
     position: absolute;
+    left: 50%;
     background-color: #D9E2EC;
     padding: 20px;
     border: 1px solid #102A43;
@@ -84,10 +85,15 @@
     .modalDiv {
         width: 80vw;
     }
+    .showProducts {
+        left: 45%;
+    }
 }
 
 
 /* Small devices (landscape phones, 576px and below)*/
 @media (max-width: 576px) {  
-
+    .showProducts {
+        left: 35%;
+    }
 }

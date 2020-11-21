@@ -3,8 +3,10 @@ import hmac
 import requests
 from requests import Request, Session
 import datetime
-from init import db
-from models import ProductList
+#from init import db
+#from models import ProductList
+from app import db
+from app import ProductList
 from sqlalchemy.orm import sessionmaker
 
 engine = db.engine

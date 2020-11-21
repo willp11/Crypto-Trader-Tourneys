@@ -6,6 +6,7 @@ import {Redirect, NavLink} from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import {firebaseAuth} from "../../firebase/firebase";
+import NavBottom from "../../components/navigation/nav-bottom/nav-bottom";
 
 class MyTrades extends Component {
     
@@ -37,7 +38,7 @@ class MyTrades extends Component {
                     this.setState({authFail: true});
                 } else {
                     this.props.updateUserIdToken(user.uid, user.xa);
-                    axios.post('/getMyTrades', {"userId": user.uid}).then(res => {
+                    axios.post('/api/getMyTrades', {"userId": user.uid}).then(res => {
                         let trades = res.data.response;
 
                         for (let i=0; i<trades.length; i++) {
@@ -255,33 +256,36 @@ class MyTrades extends Component {
         }
         
         return (
-            <div className="MyTradesDiv">
-                {redirect}
-                <div className="MyTradesSubSiv">
-                    <h1>My Trades</h1>
-                    {spinner}
-                    <div className="MyTradesSubSiv2">
-                        <p>A full list of all trades found from your API for every trading tournament that you have entered.</p>
-                        <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Filter</button>
-                        {filtersDiv}
-                        <table className="TradesTable">
-                            <thead>
-                                <tr>
-                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("tourneyId")}>Tourney id</th>
-                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("timestamp")}>Date</th>
-                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("timestamp")}>Time</th>
-                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("productName")}>Product</th>
-                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("side")}>Side</th>
-                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("quantity")}>Quantity</th>
-                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("price")}>Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {tableBody}
-                            </tbody>
-                        </table>
+            <div>
+                <div className="MyTradesDiv">
+                    {redirect}
+                    <div className="MyTradesSubSiv">
+                        <h1>My Trades</h1>
+                        {spinner}
+                        <div className="MyTradesSubSiv2">
+                            <p>A full list of all trades found from your API for every trading tournament that you have entered.</p>
+                            <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Filter</button>
+                            {filtersDiv}
+                            <table className="TradesTable">
+                                <thead>
+                                    <tr>
+                                        <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("tourneyId")}>Tourney id</th>
+                                        <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("timestamp")}>Date</th>
+                                        <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("timestamp")}>Time</th>
+                                        <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("productName")}>Product</th>
+                                        <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("side")}>Side</th>
+                                        <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("quantity")}>Quantity</th>
+                                        <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("price")}>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {tableBody}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                <NavBottom />
             </div>
         )
     }

@@ -87,7 +87,7 @@
 }
 
 .infoDiv p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #CFCFCF;
 }
 
@@ -110,6 +110,7 @@
 }
 
 .homeLowerSubDiv p {
+    font-size: 1.1rem;
     text-align: left;
 }
 
@@ -118,54 +119,67 @@
     color: rgb(50,50,50);
 }
 
-.winMoneyImg {
-    width: 30vw;
-    height: 30vw;
-    max-height: 350px;
-    max-width: 350px;
-}
-
-.hostTourneyImg {
-    width: 40vw;
-    height: 30vw;
-    max-height: 350px;
-    max-width: 525px;
-}
-
-.homeLowerSubDiv p {
-    font-size: 1rem;
-    color: rgb(20,20,20);
-    font-weight: bold;
-}
-
-.howItWorksSubDiv {
-    width: 90vw;
+.howTourneysWork {
+    width: 60vw;
     height: auto;
     border: 1px solid black;
     border-radius: 10px;
-    margin: 0 auto;
+    margin: 20px auto;
     position: relative;
     top: 20px;
     box-sizing: border-box;
     padding: 20px;
 }
 
-.stepSubDiv {
-    width: 80vw;
-    margin: 0 auto;
-    box-sizing: border-box;
+.howTourneysWork h2 {
+    font-size: 1.8rem;
+    color: rgb(50,50,50);
+}
+
+.howTourneysWork h3 {
+    font-size: 1.4rem;
+    color: rgb(50,50,50);
+}
+
+.howTourneysWork p {
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+.competeDiv {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
 }
 
-.stepSubDiv p {
-    font-size: 1.4rem;
-    margin-left: 10px;
+.competePara {
+    padding: 0 20px;
 }
 
-.stepSubDiv h3 {
-    font-size: 1.4rem;
+.winMoneyImg {
+    width: 30vw;
+    height: 30vw;
+    max-height: 300px;
+    max-width: 300px;
+}
+
+.hostDiv {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+}
+
+.hostPara {
+    padding: 0 20px;
+}
+
+.hostTourneyImg {
+    width: 40vw;
+    height: 30vw;
+    max-height: 220px;
+    max-width: 300px;
 }
 
 
@@ -179,13 +193,7 @@
     .homeSubDiv {
         width: 90vw;
     }
-    .stepSubDiv p {
-        font-size: 1.2rem;
-    }
 
-    .stepSubDiv h3 {
-        font-size: 1.3rem;
-    }
 }
 
 /* medium devices (landscape phones, 576px to 768px)*/
@@ -195,13 +203,17 @@
         width: 100vw;
         margin-top: 40px;
     }
-
+    .howTourneysWork {
+        width: 90vw;
+    }
     .infoDiv {
         width: 90vw;
     }
-    
-    .stepSubDiv {
+    .homeLowerSubDivWrapper {
         flex-direction: column;
+    }
+    .homeLowerSubDiv {
+        width: 90vw;
     }
 }
 
@@ -221,12 +233,6 @@
     .homeDiv h2 {
         font-size: 1.8rem;
     }
-    .homeLowerSubDivWrapper {
-        flex-direction: column;
-    }
-    .homeLowerSubDiv {
-        width: 90vw;
-    }
     
     .winMoneyImg {
         width: 70vw;
@@ -238,11 +244,24 @@
         height: 52.5vw;
     }
     
-    .stepSubDiv p {
+    .competePara {
+        padding: 0 10px;
+    }
+    
+    .hostPara {
+        padding: 0 10px;
+    }
+    
+    .howTourneysWork h2 {
+        font-size: 1.6rem;
+    }
+    
+    .howTourneysWork p {
         font-size: 1rem;
     }
-
-    .stepSubDiv h3 {
-        font-size: 1.1rem;
+    
+    .homeLowerSubDiv p {
+        font-size: 1rem;
     }
+    
 }

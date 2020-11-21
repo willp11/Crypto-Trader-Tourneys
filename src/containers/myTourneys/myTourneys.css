@@ -36,7 +36,7 @@
     background-color: #363636;
     box-sizing: border-box;
     margin: 0 auto;
-    width: 500px;
+    width: 900px;
     padding-bottom: 20px;
     margin-bottom: 20px;
     border: 1px solid black;
@@ -104,6 +104,54 @@
     outline: thin solid #102A43;
 }
 
+.myInvitesDiv {
+    background-color: #363636;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 900px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.invitesTable {
+    width: 600px;
+    margin: 0 auto;
+    border: 0.5px solid black;
+    border-collapse: collapse;
+    background-color: #D9E2EC;
+    color: #121212;
+}
+
+.invitesTable thead {
+    border-collapse: collapse;
+    background-color: #161616;
+    color: #D9E2EC;
+}
+
+.invitesTable th {
+    width: 200px;
+    outline: thin solid #D9E2EC;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.invitesTable td {
+    width: 200px;
+    border-top: thin solid #102A43;
+    border-bottom: thin solid #102A43;
+    font-size: 0.9rem;
+    padding: 5px;
+    border-left: none;
+    border-right: none;
+}
+
+.invitesTable tr {
+    border: 0.5px solid black;
+}
+
+
 /* large devices  desktops, 992px to 1200px)*/
 @media (max-width: 1200px) {  
 
@@ -147,7 +195,7 @@
         width: 720px;
     }
     
-    .AllTourneys p {
+    .AllTourneysDiv p {
         font-size: 0.9rem;
     }
     
@@ -155,6 +203,13 @@
         width: 100vw;
         position: relative;
         left: 0;
+    }
+    
+    .myInvitesDiv {
+        width: 100vw;
+        position: relative;
+        left: 0;
+        margin-bottom: 20px;
     }
 
     .selectTourneyTableDiv button {
@@ -166,5 +221,15 @@
 
 /* Small devices (landscape phones, 576px and below)*/
 @media (max-width: 576px) {  
+    .invitesTable {
+        width: 90vw;
+        overflow: scroll;
+    }
+    .invitesTable th {
+        font-size: 0.8rem;
+    }
 
+    .invitesTable td {
+        font-size: 0.8rem;
+    }
 }

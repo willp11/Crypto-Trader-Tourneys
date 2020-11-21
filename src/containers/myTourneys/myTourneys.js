@@ -8,6 +8,7 @@ import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import {firebaseAuth} from "../../firebase/firebase";
+import NavBottom from "../../components/navigation/nav-bottom/nav-bottom";
 
 class MyTourneys extends Component {
     
@@ -44,7 +45,18 @@ class MyTourneys extends Component {
                                         maxEntrants: null}
                         },
         authFail: false,
-        error: false
+        error: false,
+        invites: [],
+        inviteToShowKey: null,
+        enterBalance: false,
+        invitationBalance: null,
+        balance: '',
+        inviteTourneyId: '',
+        loadingInvites: true,
+        loadingInvitesErr: null,
+        inviteResponseSuccess: null,
+        removeInviteSuccess: null,
+        confirmDeclineInvite: false
     }
     
     componentDidMount() {
@@ -56,16 +68,16 @@ class MyTourneys extends Component {
                 } else {
                     this.props.updateUserIdToken(user.uid, user.xa);
                     
-                    axios.post('/getAllMyTourneys', {"userId": user.uid}).then(res => {
+                    axios.post('/api/getAllMyTourneys', {"userId": user.uid}).then(res => {
                         
                         // REGISTRATION TOURNEYS
                         let tourneys = res.data.response.registrationTourneys;
                         // get the time in days, hours, minutes until tournament starts
                         for (let i=0; i<tourneys.length; i++) {
+                            // get utc timestamp
                             let date = new Date(); 
-                            let timezone = date.getTimezoneOffset() * 60 * 1000;
-
-                            let currentTS = date.getTime() + timezone;
+                            let currentTS = date.getTime();
+                            
                             let startTS = tourneys[i].startTS * 1000;
 
                             let currentHrs = currentTS / 1000 / 60 / 60;
@@ -99,10 +111,10 @@ class MyTourneys extends Component {
                         let activeTourneys = res.data.response.activeTourneys;
                         // get the time in days, hours, minutes until tournament starts
                         for (let i=0; i<activeTourneys.length; i++) {
+                            // get utc timestamp
                             let date = new Date(); 
-                            let timezone = date.getTimezoneOffset() * 60 * 1000;
-
-                            let currentTS = date.getTime() + timezone;
+                            let currentTS = date.getTime();
+                            
                             let endTS = activeTourneys[i].endTS * 1000;
 
                             let currentHrs = currentTS / 1000 / 60 / 60;
@@ -157,7 +169,18 @@ class MyTourneys extends Component {
                         });
                     }).catch(err => {
                         this.setState({error: true});
-                    });      
+                    });  
+                    
+                    // get users tourney invites
+                    axios.post('/api/getTourneyInvites',  {"userId": this.props.userId}).then(res => {
+                        console.log(res.data.response);
+                        this.setState({
+                            invites: res.data.response,
+                            loadingInvites: false
+                        });
+                    }).catch(error => {
+                        this.setState({loadingInvites: false, loadingInvitesErr: "There was a problem loading your invitations."});
+                    })
                 }
             } else {
                 this.setState({authFail: true});
@@ -245,6 +268,80 @@ class MyTourneys extends Component {
         this.setState(currState);
     }
     
+    // INVITATIONS
+    declineInvitationHandler = (tourneyId, index) => {
+        this.setState({confirmDeclineInvite: true, inviteTourneyId: tourneyId, inviteToShowKey: index});
+    }
+    
+    cancelDeclineInvitationHandler = () => {
+        this.setState({confirmDeclineInvite: false});
+    }
+    
+    submitDeclineInvitationHandler = (tourneyId) => {
+        this.setState({enterBalance: false, loadingInvites: true});
+        
+        // decline invitiation
+        axios.post('/api/removeTourneyInvite', {"userId": this.props.userId, "tourneyId": tourneyId}).then(res => {
+            if (res.data.response == "success") {
+                this.setState({removeInviteSuccess: true, inviteResponseSuccess: null});
+            } else {
+                this.setState({removeInviteSuccess: false, inviteResponseSuccess: null});
+            }
+            // get users tourney invites
+            axios.post('/api/getTourneyInvites',  {"userId": this.props.userId}).then(res => {
+                this.setState({
+                    invites: res.data.response, 
+                    loadingInvites: false
+                });
+            })
+        }).catch(error => {
+            this.setState({removeInviteSuccess: false, inviteResponseSuccess: null});
+        });
+    }
+    
+    acceptInvitationHandler = (tourneyId, index) => {
+        this.setState({enterBalance: true, inviteTourneyId: tourneyId, inviteToShowKey: index});
+    }
+    
+    cancelAcceptInvitationHandler = () => {
+        this.setState({enterBalance: false});
+    }
+    
+    inputBalanceHandler = (event) => {
+        this.setState({balance: event.target.value});
+    }
+    
+    submitAcceptInvitationHandler = (tourneyId, index) => {
+        
+        let data = {
+            "tourneyId": tourneyId,
+            "userId": this.props.userId,
+            "balance": this.state.balance,
+            "profitType": this.state.invites[index].profitType
+        }
+        
+        this.setState({enterBalance: false, loadingInvites: true});
+        
+        axios.post('/api/tourneyRegistration', data).then(res => {
+            if (res.data.response == "success") {
+                this.setState({inviteResponseSuccess: true, removeinviteSuccess: null, tourneyRegisterErr: false});
+            } else if (res.data.response == "registration failed") {
+                this.setState({inviteResponseSuccess: null, removeinviteSuccess: null, tourneyRegisterErr: true, tourneyRegisterErrMsg: res.data.errorMsg});
+            } else {
+                this.setState({inviteResponseSuccess: false, removeinviteSuccess: null, tourneyRegisterErr: false});
+            }
+            // get users tourney invites
+            axios.post('/api/getTourneyInvites',  {"userId": this.props.userId}).then(res => {
+                this.setState({
+                    invites: res.data.response,
+                    loadingInvites: false
+                });
+            })
+        }).catch(error => {
+            this.setState({inviteResponseSuccess: false, removeinviteSuccess: null, loadingInvites: false});
+        });;   
+    }
+    
     render (){
         
         // REDIRECT IF NOT LOGGED IN
@@ -292,6 +389,7 @@ class MyTourneys extends Component {
                         <td>{tourney.tourneyId}</td>
                         <td><NavLink to={navPath} style={{textDecoration: "none"}}><button>Go to Lobby</button></NavLink></td>
                         <td>{tourney.host}</td>
+                        <td>{tourney.profitType}</td>
                         <td>
                             <button onClick={(event, i, table) => this.showProductsHandler(event, index, "registration")}>{showProdStr}</button> <br/> 
                             {productsDiv}
@@ -333,6 +431,8 @@ class MyTourneys extends Component {
                         <td>{tourney.tourneyId}</td>
                         <td><NavLink to={navPath} style={{textDecoration: "none"}}><button>Go to Lobby</button></NavLink></td>
                         <td>{tourney.host}</td>
+                        <td>{tourney.rank}</td>
+                        <td>{tourney.profit} {tourney.unitProfit}</td>
                         <td>
                             <button onClick={(event, i, table) => this.showProductsHandler(event, index, "active")}>{showProdStr}</button> <br/> 
                             {productsDiv}
@@ -373,6 +473,8 @@ class MyTourneys extends Component {
                         <td>{tourney.tourneyId}</td>
                         <td><NavLink to={navPath} style={{textDecoration: "none"}}><button>Go to Lobby</button></NavLink></td>
                         <td>{tourney.host}</td>
+                        <td>{tourney.rank}</td>
+                        <td>{tourney.profit} {tourney.unitProfit}</td>
                         <td>
                             <button onClick={(event, i, table) => this.showProductsHandler(event, index, "completed")}>{showProdStr}</button> <br/> 
                             {productsDiv}
@@ -413,6 +515,7 @@ class MyTourneys extends Component {
                         <td>{tourney.tourneyId}</td>
                         <td><NavLink to={navPath} style={{textDecoration: "none"}}><button>Go to Lobby</button></NavLink></td>
                         <td>{tourney.status}</td>
+                        <td>{tourney.profitType}</td>
                         <td>
                             <button onClick={(event, i, table) => this.showProductsHandler(event, index, "hosted")}>{showProdStr}</button> <br/> 
                             {productsDiv}
@@ -475,6 +578,7 @@ class MyTourneys extends Component {
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("tourneyId", "tourneys")}>id</th>
                                 <th>Register</th>
                                 <th>Host</th>
+                                <th>Profit Type</th>
                                 <th>Products</th>
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("maxEntrants", "tourneys")}>Entrants</th>
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("startTS", "tourneys")}>Until Start</th>
@@ -497,6 +601,8 @@ class MyTourneys extends Component {
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("tourneyId", "activeTourneys")}>id</th>
                                 <th>Lobby</th>
                                 <th>Host</th>
+                                <th>Rank</th>
+                                <th>Profit</th>
                                 <th>Products</th>
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("maxEntrants", "activeTourneys")}>Entrants</th>
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("endTS", "activeTourneys")}>Until End</th>
@@ -519,6 +625,8 @@ class MyTourneys extends Component {
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("tourneyId", "completedTourneys")}>id</th>
                                 <th>Lobby</th>
                                 <th>Host</th>
+                                <th>Rank</th>
+                                <th>Profit</th>
                                 <th>Products</th>
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("startTS", "completedTourneys")}>Start Date</th>
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("startTS", "completedTourneys")}>Start Time</th>
@@ -541,6 +649,7 @@ class MyTourneys extends Component {
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("tourneyId", "hostedTourneys")}>id</th>
                                 <th>Lobby</th>
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("status", "hostedTourneys")}>Status</th>
+                                <th>Profit Type</th>
                                 <th>Products</th>
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("startTS", "hostedTourneys")}>Start Date</th>
                                 <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("startTS", "hostedTourneys")}>Start Time</th>
@@ -555,18 +664,129 @@ class MyTourneys extends Component {
             )   
         }
         
+        // INVITATIONS
+        let invites = null;
+        if (this.state.invites) {
+            invites = this.state.invites.map((invite, index) => {
+                let tourneyId=this.state.invites[index].tourneyId;
+                let profitType=this.state.invites[index].profitType;
+                let declineInvitation = <button className="noBtn" onClick={() => this.declineInvitationHandler(tourneyId, index)}>No</button>
+                let acceptInvitation = (
+                    <button className="yesBtn" onClick={()=>this.acceptInvitationHandler(tourneyId, index)}>Yes</button>
+                );
+                let inputPlaceholder = "Starting Balance (" + invite.quoteCurrency + ")";
+                // ACCEPT INVITATION
+                if (this.state.enterBalance == true && this.state.inviteToShowKey == index) {
+                    declineInvitation = null;
+                    if (profitType == "relative") {
+                        acceptInvitation = (
+                            <div key={index}>
+                                <input type="number" value={this.state.balance} onChange={(event) => this.inputBalanceHandler(event)} style={{"textAlign": "center", "margin": "10px 0"}} placeholder={inputPlaceholder} />
+                                <button className="resetBtn" onClick={this.cancelAcceptInvitationHandler}>Cancel</button>
+                                <button className="submitBtn" onClick={() => this.submitAcceptInvitationHandler(tourneyId, index)}>Confirm</button>
+                            </div>
+                        );
+                    } else if (profitType == "absolute") {
+                        acceptInvitation = (
+                            <div key={index}>
+                                <p style={{"color": "black"}}>Are you sure?</p>
+                                <button className="resetBtn" style={{"margin": "5px 0"}} onClick={this.cancelAcceptInvitationHandler}>Cancel</button>
+                                <button className="submitBtn" onClick={() => this.submitAcceptInvitationHandler(tourneyId, index)}>Confirm</button>
+                            </div>
+                        );
+                    }
+                }
+                // DECLINE INVITATION
+                if (this.state.confirmDeclineInvite == true && this.state.inviteToShowKey == index) {
+                    acceptInvitation = null;
+                    declineInvitation = (
+                        <div key={index}>
+                            <p style={{"color": "black"}}>Are you sure?</p>
+                            <button className="resetBtn" style={{"margin": "5px 0"}} onClick={this.cancelDeclineInvitationHandler}>Cancel</button>
+                            <button className="submitBtn" onClick={() => this.submitDeclineInvitationHandler(tourneyId, index)}>Confirm</button>
+                        </div>
+                    );
+                }
+                        
+                return (
+                    <tr key={index}>
+                        <td><NavLink style={{"color": "rgb(77, 134, 247)", "fontWeight": "bold"}} to={"/tourneys/"+tourneyId}>{invite.tourneyId}</NavLink></td>
+                        <td>{invite.host}</td>
+                        <td>
+                            {declineInvitation}
+                            {acceptInvitation}
+                        </td>
+                    </tr>
+                );
+            })
+        }
+        
+        let inviteResponse = null;
+        if (this.state.inviteResponseSuccess == true) {
+            inviteResponse = <p style={{"color": "#57eb7e", "fontWeight": "bold"}}>Registration was successful.</p>
+        } else if (this.state.inviteResponseSuccess == false) {
+            inviteResponse = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>Registration failed. Check your connection.</p>
+        }
+        
+        let removeInviteResponse = null;        
+        if (this.state.removeInviteSuccess == true) {
+            removeInviteResponse = <p style={{"color": "#57eb7e", "fontWeight": "bold"}}>Invitation declined.</p>
+        } else if (this.state.removeInviteSuccess == false) {
+            removeInviteResponse = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>Error. Please try again.</p>
+        }
+        
+        let tourneyRegisterErr = null;   
+        if (this.state.tourneyRegisterErr) {
+            tourneyRegisterErr = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>{this.state.tourneyRegisterErrMsg}</p>
+        }
+        
+        let invitesTable = (
+            <table className="invitesTable">
+                <thead>
+                    <tr>
+                        <th>Tournament id</th>
+                        <th>Host</th>
+                        <th>Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {invites}
+                </tbody>
+            </table>
+        );
+
+        if (this.state.loadingInvitesErr) {
+            invitesTable = (
+                <p style={{"color": "#f7716d", "fontWeight": "bold"}}>{this.state.loadingInvitesErr}</p>
+            );
+        }
+
+        if (this.state.loadingInvites) {
+            invitesTable = <Spinner />
+        }
+        
         return (
-            <div className="AllTourneysDiv">
-                {redirect}
-                <div className="AllTourneys">
-                    <h1>My Tournaments</h1>
-                    {spinner}
-                    <div className="selectTourneyTableDiv">
-                        <h2>Select Table</h2>
-                        {tourneySelectButtons}
+            <div>
+                <div className="AllTourneysDiv">
+                    {redirect}
+                    <div className="AllTourneys">
+                        <h1>My Tournaments</h1>
+                        <div className="myInvitesDiv">
+                            <h2>Invitations</h2>
+                            {invitesTable}
+                            {inviteResponse}
+                            {removeInviteResponse}
+                            {tourneyRegisterErr}
+                        </div>
+                        {spinner}
+                        <div className="selectTourneyTableDiv">
+                            <h2>Select Table</h2>
+                            {tourneySelectButtons}
+                        </div>
+                        {tableToShow}
                     </div>
-                    {tableToShow}
                 </div>
+                <NavBottom />
             </div>
         )
     }

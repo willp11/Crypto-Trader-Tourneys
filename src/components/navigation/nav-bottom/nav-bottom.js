@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './nav-bottom.css';
-import logo from "../../../assets/crown.png";
+import logo from "../../../assets/logoNew1.PNG";
 
 class NavBottom extends Component {
     
@@ -9,10 +9,7 @@ class NavBottom extends Component {
         return (
             <div className="NavBottom">
                 <img alt="Crypto Tourneys Logo" src={logo}/>
-                <h3>FAQ</h3>
-                <h3>Terms of Service</h3>
-                <h3>Privacy Policy</h3>
-                <p>Follow us on Twitter for updates!</p>
+                <p>For all enquiries contact support@cryptotourneys.io</p>
             </div>
         );
     }

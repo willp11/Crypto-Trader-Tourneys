@@ -7,6 +7,7 @@ import {NavLink, Redirect} from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import {firebaseAuth} from "../../firebase/firebase";
+import NavBottom from "../../components/navigation/nav-bottom/nav-bottom";
 
 class CompletedTourneys extends Component {
     
@@ -74,11 +75,11 @@ class CompletedTourneys extends Component {
     
     searchByTourneyIdHandler = (tourneyId) => {
         this.setState({loading: true});
-        axios.post('/getCompletedTourneys', {"fieldToSearch": "tourneyId", "tourneyId": tourneyId}).then(res => {
+        axios.post('/api/getCompletedTourneys', {"fieldToSearch": "tourneyId", "tourneyId": tourneyId}).then(res => {
             let tourneys = res.data.response;
             let notFoundMsg = null;
             if (tourneys.length == 0) {
-                notFoundMsg = <p style={{"fontWeight":"bold", "color":"#C62828"}}>No results found!</p>
+                notFoundMsg = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>No results found!</p>
             } else {
                 for (let i=0; i<tourneys.length; i++) {
                     // duration
@@ -94,12 +95,12 @@ class CompletedTourneys extends Component {
     
     searchByHostHandler = (host) => {
         this.setState({loading: true});
-        axios.post('/getCompletedTourneys', {"fieldToSearch": "host", "host": host}).then(res => {
+        axios.post('/api/getCompletedTourneys', {"fieldToSearch": "host", "host": host}).then(res => {
 
             let tourneys = res.data.response;
             let notFoundMsg = null;
             if (tourneys.length == 0) {
-                notFoundMsg = <p style={{"fontWeight":"bold", "color":"#C62828"}}>No results found!</p>
+                notFoundMsg = <p style={{"color": "#f7716d", "fontWeight": "bold"}}>No results found!</p>
             } else {
                 for (let i=0; i<tourneys.length; i++) {
                     // duration
@@ -154,6 +155,7 @@ class CompletedTourneys extends Component {
                     <td>{data.tourneyId}</td>
                     <td><NavLink to={navPath}><button>Go to Lobby</button></NavLink></td>
                     <td>{data.host}</td>
+                    <td>{data.profitType}</td>
                     <td>
                         <button onClick={(event, i) => this.showProductsHandler(event, index)}>{showProdStr}</button> <br/> 
                         {productsDiv}
@@ -175,6 +177,7 @@ class CompletedTourneys extends Component {
                             <th>id</th>
                             <th>Lobby</th>
                             <th>Host</th>
+                            <th>Profit Type</th>
                             <th>Products</th>
                             <th>Start Date</th>
                             <th>Start Time</th>
@@ -189,22 +192,25 @@ class CompletedTourneys extends Component {
         } 
         
         return (
-            <div className="AllTourneysDiv">
-                {redirect}
-                <div className="AllTourneys">
-                    <h1 >Completed Tournaments</h1>
-                    <div className="TourneyDiv">
-                        <h2>Search</h2>
-                        <p>You can find any tournament that has already been completed by searching for the tournament id or host name.</p>
-                        <input className="searchCompletedTourneysInput" placeholder="Tournament id" onChange={(event) => this.updateSearch(event, "tourneyId")} />
-                        <button className="submitBtn" onClick={() => this.searchByTourneyIdHandler(this.state.search.tourneyId)}>Search</button> <br/>
-                        <input className="searchCompletedTourneysInput" placeholder="Host" onChange={(event) => this.updateSearch(event, "host")} />
-                        <button className="submitBtn" onClick={() => this.searchByHostHandler(this.state.search.host)}>Search</button> <br/>
-                        {spinner}
-                        {tourneyTable}
-                        {notFoundMsg}
+            <div>
+                <div className="AllTourneysDiv">
+                    {redirect}
+                    <div className="AllTourneys">
+                        <h1 >Completed Tournaments</h1>
+                        <div className="TourneyDiv">
+                            <h2>Search</h2>
+                            <p>You can find any tournament that has already been completed by searching for the tournament id or host name.</p>
+                            <input className="searchCompletedTourneysInput" placeholder="Tournament id" onChange={(event) => this.updateSearch(event, "tourneyId")} />
+                            <button className="submitBtn" onClick={() => this.searchByTourneyIdHandler(this.state.search.tourneyId)}>Search</button> <br/>
+                            <input className="searchCompletedTourneysInput" placeholder="Host" onChange={(event) => this.updateSearch(event, "host")} />
+                            <button className="submitBtn" onClick={() => this.searchByHostHandler(this.state.search.host)}>Search</button> <br/>
+                            {spinner}
+                            {tourneyTable}
+                            {notFoundMsg}
+                        </div>
                     </div>
                 </div>
+                <NavBottom />
             </div>
             
         )

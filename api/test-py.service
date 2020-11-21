@@ -1,0 +1,12 @@
+[Unit]
+Description=Test Service
+After=multi-user.target
+
+[Service]
+Type=simple
+User=will
+ExecStart=/home/will/cryptotourneys/tourneysenv/bin/python /home/will/cryptotourneys/tourneysenv/bin/test_service.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

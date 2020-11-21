@@ -5,6 +5,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import './login.css';
 import {firebaseAuth} from "../../firebase/firebase";
 import Spinner from '../../components/UI/Spinner/Spinner';
+import NavBottom from "../../components/navigation/nav-bottom/nav-bottom";
 
 import * as actions from '../../store/actions/index';
 
@@ -44,7 +45,9 @@ class Login extends Component {
         errorMsg: null,
         resetPassword: false,
         resetEmailAddress: '',
-        resetErrorMsg: null
+        loadingResetPass: false,
+        resetPassSuccess: false,
+        resetPassFailure: false
     };
 
     componentDidMount() {
@@ -90,16 +93,17 @@ class Login extends Component {
     }
     // hide the reset pass div
     cancelResetPassword = () => {
-        this.setState({resetPassword: false});
+        this.setState({resetPassword: false, resetPassSuccess: false, resetpassFailure: false});
     }
     // reset the password
     onResetPassword = (email) => {
+        this.setState({loadingResetPass: true});
         firebaseAuth.sendPasswordResetEmail(email).then(() => {
             // pass reset successfully
-            this.setState({resetPassword: false});
+            this.setState({loadingResetPass: false, resetPassSuccess: true});
         })
         .catch(error => {
-            this.setState({resetErrorMsg: error.message});
+            this.setState({loadingResetPass: false, resetPassFailure: true});
         });
     }
 
@@ -127,7 +131,9 @@ class Login extends Component {
             spinner = <Spinner />
             submitBtn = null;
         }
-            
+
+        
+        // RESET PASSWORD    
         let resetPasswordModal = null;
         if (this.state.resetPassword) {
             resetPasswordModal = (
@@ -137,34 +143,68 @@ class Login extends Component {
                         <input className="resetPassInput" value={this.state.resetEmailAddress} placeholder="Email Address" onChange={(event) => this.resetPassEmailInput(event)}/>< br/>
                         <button className="resetBtn" onClick={this.cancelResetPassword}>Cancel</button>
                         <button className="submitBtn" onClick={(email) => this.onResetPassword(this.state.resetEmailAddress)}>Confirm</button>
-                        <p>{this.state.resetErrorMsg}</p>
                     </div>
                 </div>
             );
         }
-        
-        return (
-            <div className="loginDiv">
-                {authRedirect}
-                <div className="loginSubDiv">
-                    <h1>Login</h1>
-                    <div className="loginFormDiv">
-                        <form className="Login" onSubmit={this.submitHandler}>
-                            <Input type={this.state.controls.email.elementConfig.type} placeholder={this.state.controls.email.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "email")}/> <br/>
-                            <Input type={this.state.controls.password.elementConfig.type} placeholder={this.state.controls.password.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "password")}/> <br />
-                            {submitBtn} <br />
-                            {errorMsg}
-                        </form>
-                        {spinner}
-                    </div>
-                    <div className="goToSignUpDiv" style={{textAlign: "center"}}>  
-                        <p>Forgot your password?</p>
-                        <button className="resetPassBtn" onClick={this.resetPassHandler}>Reset Password</button>
-                        <p>Don't have an account yet?</p>
-                        <NavLink to="/register" style={{textDecoration: "none"}}><button className="goToSignUpBtn">Go To Sign-up Page</button></NavLink>
+
+        if (this.state.loadingResetPass) {
+            resetPasswordModal = (
+                <div className="darkBg">
+                    <div className="resetPasswordDiv">
+                        <Spinner />
                     </div>
                 </div>
-                {resetPasswordModal}
+            );
+        }
+
+        if (this.state.resetPassSuccess) {
+            resetPasswordModal = (
+                <div className="darkBg">
+                    <div className="resetPasswordDiv">
+                        <p>Reset password e-mail sent. Please check your e-mail for further instructions.</p>
+                        <button className="loginSubmitBtn" onClick={this.cancelResetPassword}>Close</button>
+                    </div>
+                </div>
+            )
+        }
+
+        if (this.state.resetPassFailure) {
+            resetPasswordModal = (
+                <div className="darkBg">
+                    <div className="resetPasswordDiv">
+                        <p>There was a problem with your request. Please try again and if the problem persists contact support@cryptotourneys.io.</p>
+                        <button className="loginSubmitBtn" onClick={this.cancelResetPassword}>Close</button>
+                    </div>
+                </div>
+            )
+        }
+        
+        return (
+            <div>
+                <div className="loginDiv">
+                    {authRedirect}
+                    <div className="loginSubDiv">
+                        <h1>Login</h1>
+                        <div className="loginFormDiv">
+                            <form className="Login" onSubmit={this.submitHandler}>
+                                <Input type={this.state.controls.email.elementConfig.type} placeholder={this.state.controls.email.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "email")}/> <br/>
+                                <Input type={this.state.controls.password.elementConfig.type} placeholder={this.state.controls.password.elementConfig.placeholder} changed={(event)=>this.changeInputHandler(event, "password")}/> <br />
+                                {submitBtn} <br />
+                                {errorMsg}
+                            </form>
+                            {spinner}
+                        </div>
+                        <div className="goToSignUpDiv" style={{textAlign: "center"}}>  
+                            <p>Forgot your password?</p>
+                            <button className="resetPassBtn" onClick={this.resetPassHandler}>Reset Password</button>
+                            <p>Don't have an account yet?</p>
+                            <NavLink to="/register" style={{textDecoration: "none"}}><button className="goToSignUpBtn">Go To Sign-up Page</button></NavLink>
+                        </div>
+                    </div>
+                    {resetPasswordModal}
+                </div>
+                <NavBottom />
             </div>
         )
     }

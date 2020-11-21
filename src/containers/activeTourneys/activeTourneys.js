@@ -7,6 +7,7 @@ import {NavLink, Redirect} from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import {firebaseAuth} from "../../firebase/firebase";
+import NavBottom from "../../components/navigation/nav-bottom/nav-bottom";
 
 class ActiveTourneys extends Component {
     
@@ -48,16 +49,16 @@ class ActiveTourneys extends Component {
             }
         });
         
-        axios.get('/getActiveTourneys').then(res => {
+        axios.get('/api/getActiveTourneys').then(res => {
 
             let tourneys = res.data.response;
             
             // get the time in days, hours, minutes until tournament starts
             for (let i=0; i<tourneys.length; i++) {
+                // get utc timestamp
                 let date = new Date(); 
-                let timezone = date.getTimezoneOffset() * 60 * 1000;
+                let currentTS = date.getTime();
                 
-                let currentTS = date.getTime() + timezone;
                 let endTS = tourneys[i].endTS * 1000;
                 
                 let currentHrs = currentTS / 1000 / 60 / 60;
@@ -163,10 +164,10 @@ class ActiveTourneys extends Component {
             }
             if (this.state.search.hoursUntilEnd) {
                 
+                // get utc timestamp
                 let date = new Date(); 
-                let timezone = date.getTimezoneOffset() * 60 * 1000;
+                let currentTS = date.getTime();
                 
-                let currentTS = date.getTime() + timezone;
                 let hours = this.state.search.hoursUntilEnd;
                 let endTS = tourneysFound[i].endTS * 1000;
                 if (currentTS < endTS - (hours * 60 * 60 * 1000) || currentTS > endTS) {
@@ -305,6 +306,7 @@ class ActiveTourneys extends Component {
                     <td>{data.tourneyId}</td>
                     <td><NavLink to={navPath}><button>Go to Lobby</button></NavLink></td>
                     <td>{data.host}</td>
+                    <td>{data.profitType}</td>
                     <td>
                         <button onClick={(event, i) => this.showProductsHandler(event, index)}>{showProdStr}</button> <br/> 
                         {productsDiv}
@@ -341,34 +343,37 @@ class ActiveTourneys extends Component {
         }
         
         return (
-            <div className="AllTourneysDiv">
-                {redirect}
-                <div className="AllTourneys">
-                    <h1>Active Tournaments</h1>
-                    {spinner}
-                    <div className="TourneyDiv">
-                        <p>The full list of all tournaments currently in progress.</p>
-                        <p>You can filter the tournaments by id, host, product, maximum number of entrants and hours until the tournament ends.</p>
-                        <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Filter</button>
-                        {filtersDiv}
-                        <table className="TourneyTable">
-                            <thead>
-                                <tr>
-                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("tourneyId")}>id</th>
-                                    <th>Lobby</th>
-                                    <th>Host</th>
-                                    <th>Products</th>
-                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("maxEntrants")}>Entrants</th>
-                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("endTS")}>Until End</th>
-                                    <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("duration")}>Duration</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                               {tourneyData}
-                            </tbody>
-                        </table>
+            <div>
+                <div className="AllTourneysDiv">
+                    {redirect}
+                    <div className="AllTourneys">
+                        <h1>Active Tournaments</h1>
+                        {spinner}
+                        <div className="TourneyDiv">
+                            <p>The full list of all <b>public</b> tournaments currently in progress.</p>
+                            <button className="toggleSearchBtn" onClick={this.toggleFiltersHandler}>Filter</button>
+                            {filtersDiv}
+                            <table className="TourneyTable">
+                                <thead>
+                                    <tr>
+                                        <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("tourneyId")}>id</th>
+                                        <th>Lobby</th>
+                                        <th>Host</th>
+                                        <th>Profit Type</th>
+                                        <th>Products</th>
+                                        <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("maxEntrants")}>Entrants</th>
+                                        <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("endTS")}>Until End</th>
+                                        <th style={{"cursor":"pointer"}} onClick={()=>this.sortColumn("duration")}>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   {tourneyData}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                <NavBottom />
             </div>
             
         )

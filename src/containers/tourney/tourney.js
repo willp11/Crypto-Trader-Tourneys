@@ -6,6 +6,7 @@ import './tourney.css';
 import * as actions from '../../store/actions/index';
 import {Redirect} from 'react-router-dom';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import NavBottom from "../../components/navigation/nav-bottom/nav-bottom";
 
 class Tourney extends Component {
     
@@ -60,7 +61,11 @@ class Tourney extends Component {
         inviteCode: null,
         tourneyCancelled: false,
         showTradeSummary: false,
-        positions: []
+        positions: [],
+        showConfirmImportPos: false,
+        importPositions: false,
+        loadingImportChange: false,
+        importChangeMsg: null
     }
 
     componentDidMount() {
@@ -73,7 +78,7 @@ class Tourney extends Component {
                     // check if we have the username in props - if not call API to get it
                     if (!this.props.username) {
                         // call API to get username 
-                        axios.post('/getUsernameEmail', {userId: user.uid}).then(res => {
+                        axios.post('/api/getUsernameEmail', {userId: user.uid}).then(res => {
                             let username = res.data.response.username;
                             this.props.setUsernameEmail(username, user.email);
                             this.props.updateUserIdToken(user.uid, user.xa);
@@ -87,7 +92,7 @@ class Tourney extends Component {
                         
                     // find which state the tournament is, registering/active/completed
                     // call the API and check which state the tourney is
-                    axios.post('/getTourneyState', {"tourneyId": this.props.match.params.tourneyId} ).then(res => {
+                    axios.post('/api/getTourneyState', {"tourneyId": this.props.match.params.tourneyId} ).then(res => {
                         let tourneyState = res.data.response.state;
                         let hostId = res.data.response.hostId;
                         let visibility = res.data.response.visibility;
@@ -101,13 +106,20 @@ class Tourney extends Component {
                         // registering tournaments
                         if (tourneyState == "registering") {
 
-                            axios.post('/getTourneyInfo', {"tourneyId": this.props.match.params.tourneyId} ).then(res => { 
+                            axios.post('/api/getTourneyInfo', {"tourneyId": this.props.match.params.tourneyId} ).then(res => { 
                                 let tourneyData = res.data;
 
                                 let products = tourneyData.products;
                                 let entrants = tourneyData.entrants.entrants;
                                 let isRegistered = entrants.includes(this.props.username);
                                 let entrantProfits = tourneyData.entrants.profits;
+                                
+                                let unitProfit;
+                                if (tourneyData.profitType == "absolute") {
+                                    unitProfit = tourneyData.quoteCurrency;
+                                } else if (tourneyData.profitType == "relative") {
+                                    unitProfit = "%";
+                                }
 
                                 let entrantsObjs = [];
                                 for (let i=0; i<entrants.length; i++) {
@@ -117,8 +129,8 @@ class Tourney extends Component {
 
                                 let balance = null;
                                 if (isRegistered) {
-                                    // if registered, get the entrant's balance
-                                    axios.post('/getEntrantBalance', {"tourneyType": "registering", "tourneyId": this.state.tourneyId, "userId": user.uid}).then(res => {
+                                    // if registered, get the entrant's balance and import position boolean
+                                    axios.post('/api/getEntrantBalance', {"tourneyType": "registering", "tourneyId": this.state.tourneyId, "userId": user.uid}).then(res => {
                                         balance = res.data.balance;
                                         this.setState({host: tourneyData.host,
                                             noEntrants: tourneyData.noEntrants, 
@@ -139,7 +151,10 @@ class Tourney extends Component {
                                             visibility: tourneyData.visibility,
                                             visibleEntrants: entrantsObjs,
                                             inviteCode: tourneyData.inviteCode,
-                                            loading: false
+                                            loading: false,
+                                            importPositions: res.data.importPositions,
+                                            profitType: tourneyData.profitType,
+                                            unitProfit: unitProfit
                                         });
                                     }).catch(err => {
                                         this.setState({error: true});
@@ -164,7 +179,9 @@ class Tourney extends Component {
                                         visibility: tourneyData.visibility,
                                         visibleEntrants: entrantsObjs,
                                         inviteCode: tourneyData.inviteCode,
-                                        loading: false
+                                        loading: false,
+                                        profitType: tourneyData.profitType,
+                                        unitProfit: unitProfit
                                     });
                                 }
                             }).catch(err => {
@@ -172,15 +189,21 @@ class Tourney extends Component {
                             });
                         } else if (tourneyState == "active") {
                             // active tournaments
-                            axios.post('/getActiveTourneyInfo', {"tourneyId": this.state.tourneyId} ).then(res => { 
+                            axios.post('/api/getActiveTourneyInfo', {"tourneyId": this.state.tourneyId} ).then(res => { 
                                 
                                 let tourneyData = res.data;
                                 let products = tourneyData.products;
                                 
+                                let unitProfit;
+                                if (tourneyData.profitType == "absolute") {
+                                    unitProfit = tourneyData.quoteCurrency;
+                                } else if (tourneyData.profitType == "relative") {
+                                    unitProfit = "%";
+                                }
+                                
                                 // entrants
                                 let entrants = tourneyData.activeEntrants.entrants;
                                 let entrantProfits = tourneyData.activeEntrants.profits;
-                                let isRegistered = entrants.includes(this.props.username);
                                 
                                 let entrantsObjs = [];
                                 for (let i=0; i<entrants.length; i++) {
@@ -190,13 +213,17 @@ class Tourney extends Component {
                                 
                                 let liqEntrants = tourneyData.liqEntrants;
                                 let isLiq = liqEntrants.entrants.includes(this.props.username);
-                                for (let i=0; i<liqEntrants.length; i++) {
-                                    let liqEntrant = {username: liqEntrants[i], rank: i+1, profit: "liquidated"};
+                                for (let i=0; i<liqEntrants.entrants.length; i++) {
+                                    let liqEntrant = {username: liqEntrants.entrants[i], rank: i+1, profit: "liquidated"};
                                     entrantsObjs.push(liqEntrant);
+                                    entrants.push(liqEntrants.entrants[i]);
+                                    entrantProfits.push("liquidated");
                                 }
+                                
+                                let isRegistered = entrants.includes(this.props.username);
 
                                 // if user is registered gets the entrants balance and profit
-                                axios.post('/getEntrantBalance', {"tourneyType": "active", "tourneyId": this.state.tourneyId, "userId": user.uid}).then(res => {
+                                axios.post('/api/getEntrantBalance', {"tourneyType": "active", "tourneyId": this.state.tourneyId, "userId": user.uid}).then(res => {
                                     let balance = res.data.balance;
                                     let profit = res.data.profit;
                                     this.setState({host: tourneyData.host,
@@ -218,7 +245,9 @@ class Tourney extends Component {
                                                 visibility: tourneyData.visibility,
                                                 visibleEntrants: entrantsObjs,
                                                 loading: false,
-                                                profit: profit
+                                                profit: profit,
+                                                profitType: tourneyData.profitType,
+                                                unitProfit: unitProfit
                                     });
                                 }).catch(err => {
                                     this.setState({error: true});
@@ -229,12 +258,18 @@ class Tourney extends Component {
                             });
                         } else if (tourneyState == "completed") {
                             // active tournaments
-                            axios.post('/getCompletedTourneyInfo', {"tourneyId": this.state.tourneyId} ).then(res => { 
+                            axios.post('/api/getCompletedTourneyInfo', {"tourneyId": this.state.tourneyId} ).then(res => { 
                                 let tourneyData = res.data;
                                 let products = tourneyData.products;
                                 
+                                let unitProfit;
+                                if (tourneyData.profitType == "absolute") {
+                                    unitProfit = tourneyData.quoteCurrency;
+                                } else if (tourneyData.profitType == "relative") {
+                                    unitProfit = "%";
+                                }
+                                
                                 let entrants = tourneyData.entrants.entrants;
-                                let isRegistered = entrants.includes(this.props.username);
                                 let entrantProfits = tourneyData.entrants.profits;
 
                                 let entrantsObjs = [];
@@ -245,15 +280,21 @@ class Tourney extends Component {
                                 
                                 let liqEntrants = tourneyData.liqEntrants;
                                 let isLiq = liqEntrants.entrants.includes(this.props.username);
-                                for (let i=0; i<liqEntrants.length; i++) {
-                                    let liqEntrant = {username: liqEntrants[i], rank: i+1, profit: "liquidated"};
+                                for (let i=0; i<liqEntrants.entrants.length; i++) {
+                                    let liqEntrant = {username: liqEntrants.entrants[i], rank: i+1, profit: "liquidated"};
                                     entrantsObjs.push(liqEntrant);
+                                    entrants.push(liqEntrants.entrants[i]);
+                                    entrantProfits.push("liquidated");
                                 }
+                                
+                                let isRegistered = entrants.includes(this.props.username);
+                                
+                                console.log(entrants);
 
                                 let balance = null;
                                 if (isRegistered) {
                                     // if registered, get the entrant's balance
-                                    axios.post('/getEntrantBalance', {"tourneyType": "completed", "tourneyId": this.state.tourneyId, "userId": user.uid}).then(res => {
+                                    axios.post('/api/getEntrantBalance', {"tourneyType": "completed", "tourneyId": this.state.tourneyId, "userId": user.uid}).then(res => {
                                         balance = res.data.balance;
                                         let profit = res.data.profit;
                                         this.setState({host: tourneyData.host,
@@ -275,7 +316,9 @@ class Tourney extends Component {
                                             visibility: tourneyData.visibility,
                                             visibleEntrants: entrantsObjs,
                                             loading: false,
-                                            profit: profit
+                                            profit: profit,
+                                            profitType: tourneyData.profitType,
+                                            unitProfit: unitProfit
                                         });
                                     }).catch(err => {
                                         this.setState({error: true});
@@ -299,7 +342,9 @@ class Tourney extends Component {
                                         active: false,
                                         visibility: tourneyData.visibility,
                                         visibleEntrants: entrantsObjs,
-                                        loading: false
+                                        loading: false,
+                                        profitType: tourneyData.profitType,
+                                        unitProfit: unitProfit
                                     });
                                 }
                             }).catch(err => {
@@ -320,7 +365,7 @@ class Tourney extends Component {
     }
     
     showRegistrationConfirmHandler = () => {
-        if (this.state.balance) {
+        if ((this.state.balance && this.state.profitType == "relative") || this.state.profitType == "absolute") {
             this.setState({showRegistrationConfirm: true});
         } else {
             let errorMsg = <p style={{"color": "#C62828", "fontWeight": "bold"}}>Please enter a starting balance.</p>
@@ -355,15 +400,14 @@ class Tourney extends Component {
                 let dbEntrantData = {};
                 dbEntrantData["tourneyId"] = this.state.tourneyId;
                 dbEntrantData["userId"] = this.props.userId;
-                axios.post("/tourneyUnregister", dbEntrantData).then(res => {
+                axios.post("/api/tourneyUnregister", dbEntrantData).then(res => {
                     // If fail give error message
                     if (res.data.response == "fail") {
                         this.setState({unregisterErr: res.data.errorMsg, editBalanceLoading: false});
                     }
-                    console.log(res.data.errorMsg);
                     // If success get new entrants list and update state
                     if (res.data.response == "success") {
-                        axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
+                        axios.post('/api/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
                             let newEntrantsArr = res.data.response.entrants; 
                             let newProfitsArr = res.data.response.profits; 
 
@@ -397,14 +441,15 @@ class Tourney extends Component {
                 dbEntrantData["userId"] = this.props.userId;
                 dbEntrantData["balance"] = this.state.balance;
                 dbEntrantData["inviteCode"] = this.state.inviteCodeInput;
-                axios.post("/tourneyRegistration", dbEntrantData).then(res => {
+                dbEntrantData["profitType"] = this.state.profitType;
+                axios.post("/api/tourneyRegistration", dbEntrantData).then(res => {
                     // If fail give error message
                     if (res.data.response == "registration failed") {
                         this.setState({registerErr: res.data.errorMsg, editBalanceLoading: false, showRegistrationConfirm: false});
                     }
                     // if successful, get the new entrants and update the state
                     else if (res.data.response == "success") {
-                        axios.post('/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
+                        axios.post('/api/getTourneyEntrants', {"tourneyId": this.state.tourneyId}).then(res => {
 
                             let newEntrantsArr = res.data.response.entrants; 
                             let newProfitsArr = res.data.response.profits; 
@@ -475,9 +520,10 @@ class Tourney extends Component {
     submitBalanceHandler = (event) => {
         this.setState({editBalanceLoading: true});
         if (this.state.balance <= 0) {
-            alert("Please enter a number greater than 0.")
+            this.setState({editBalanceLoading: false});
+            alert("Please enter a number greater than 0.");
         } else {
-            axios.post("/updateStartBalance", {"balance": this.state.balance, "tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
+            axios.post("/api/updateStartBalance", {"balance": this.state.balance, "tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
                 this.setState({editingBalance: false, editBalanceLoading: false});
             });
         }
@@ -486,7 +532,7 @@ class Tourney extends Component {
     // HOST CONTROL HANDLERS
     inviteUserHandler = () => {
         this.setState({inviteUserLoading: true});
-        axios.post('/sendTourneyInvite', {"hostId": this.props.userId, "host": this.props.username, "tourneyId": this.state.tourneyId, "username": this.state.addUser}).then(res => {
+        axios.post('/api/sendTourneyInvite', {"hostId": this.props.userId, "host": this.props.username, "tourneyId": this.state.tourneyId, "username": this.state.addUser}).then(res => {
             this.setState({addUser: '', addedUserMsg: res.data.response, inviteUserLoading: false});
         }).catch(err => {
             this.setState({error: true});
@@ -504,7 +550,7 @@ class Tourney extends Component {
     confirmVisibilityChange = () => {
         this.setState({editVisibilityLoading: true});
         // call api and change visibility in database
-        axios.post('/updateTourneyVisibility', {"tourneyId": this.state.tourneyId, "userId": this.props.userId, "visibility": this.state.visibility}).then(res => {
+        axios.post('/api/updateTourneyVisibility', {"tourneyId": this.state.tourneyId, "userId": this.props.userId, "visibility": this.state.visibility}).then(res => {
             this.setState({showVisibilityConfirm: false, editVisibilityLoading: false, editVisibilityMsg: res.data.response});
         }).catch(err => {
             this.setState({error: true});
@@ -525,12 +571,14 @@ class Tourney extends Component {
     
     confirmDeleteHandler = () => {
         this.setState({deleteTourneyLoading: true})
-        axios.post("/deleteTournament", {"tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
+        axios.post("/api/deleteTournament", {"tourneyId": this.state.tourneyId, "userId": this.props.userId}).then(res => {
             if (res.data.response == "success") {
                 this.setState({showConfirmDelete: false, tourneyDeleted: true, deleteTourneyLoading: false});
             } else if (res.data.response == "fail") {
                 this.setState({showConfirmDelete: false, tourneyDeleted: false, deleteTourneyLoading: false, deleteTourneyMsg: res.data.errorMsg});
             }
+        }).catch(err => {
+            this.setState({error: true, deleteTourneyLoading: false});
         });
     }
     
@@ -540,6 +588,32 @@ class Tourney extends Component {
     
     cancelSubmitBalanceHandler = () => {
         this.setState({editingBalance: false});
+    }
+    
+    // IMPORT POSITION HANDLERS 
+    showImportPosHandler = (importPositions) => {
+        if (importPositions == "no" && this.state.importPositions) {
+            this.setState({showConfirmImportPos: true, importPositions: false});
+        } else if (importPositions == "yes" && !this.state.importPositions) {
+            this.setState({showConfirmImportPos: true, importPositions: true});
+        }
+    }
+    
+    cancelImportPosChange = () => {
+        this.setState({importPositions: !this.state.importPositions, showConfirmImportPos: false})
+    }
+    
+    submitImportPosChange = () => {
+        this.setState({loadingImportChange: true});
+        axios.post("/api/updateImportPositions", {"tourneyId": this.state.tourneyId, "userId": this.props.userId, "importPositions": this.state.importPositions}).then(res => {
+            if (res.data.response == "success") {
+                this.setState({showConfirmImportPos: false, loadingImportChange: false, importChangeMsg: <p style={{"color": "#57eb7e", "fontWeight": "bold"}}>Import positions updated successfully.</p>});
+            } else if (res.data.response == "fail") {
+                this.setState({showConfirmImportPos: false, loadingImportChange: false, importChangeMsg: <p style={{"color": "#f7716d", "fontWeight": "bold"}}>There was an error processing your request. Please try again.</p>});
+            }
+        }).catch(err => {
+            this.setState({showConfirmImportPos: false, error: true, loadingImportChange: false});
+        });
     }
     
     // SEARCH ENTRANTS HANDLER
@@ -564,7 +638,7 @@ class Tourney extends Component {
     showTradeSummary = (event) => {
         event.preventDefault();
         this.setState({loadingTradeSummary: true});
-        axios.post('/getPositions', {tourneyId: this.props.match.params.tourneyId, userId: this.props.userId} ).then(res => {
+        axios.post('/api/getPositions', {tourneyId: this.props.match.params.tourneyId, userId: this.props.userId} ).then(res => {
             this.setState({positions: res.data.response, showTradeSummary: true, loadingTradeSummary: false});
         });
     }
@@ -604,10 +678,12 @@ class Tourney extends Component {
         if (this.state.showVisibilityConfirm)
         {
             visibilityConfirmationBox = (
-                <div>
-                    <p>Are you sure?</p>
-                    <button className="resetBtn" onClick={this.cancelVisibilityChange}>Cancel</button>
-                    <button className="submitBtn" onClick={this.confirmVisibilityChange}>Confirm</button>
+                <div className="confirmRegistrationWrapper">
+                    <div className="confirmRegistrationDiv">   
+                        <p>Are you sure?</p>
+                        <button className="resetBtn" onClick={this.cancelVisibilityChange}>Cancel</button>
+                        <button className="submitBtn" onClick={this.confirmVisibilityChange}>Confirm</button>
+                    </div>
                 </div>
             );
         }
@@ -670,16 +746,16 @@ class Tourney extends Component {
                     <h3>Host Controls</h3>
                     <h4>Invite Code</h4>
                     <p>{this.state.inviteCode}</p>
-                    <h4>Invite User:</h4>
+                    <h4>Invite User</h4>
                     <input value={this.state.addUser} placeholder="Enter username" onChange={(event)=>this.addUserInputHandler(event)}/>
                     <button className="submitInviteBtn" onClick={this.inviteUserHandler}>Submit</button> <br />
                     {inviteUserSpinner}
                     {addedUserMsg}
-                    <h4>Tournament Visibility:</h4>
+                    <h4>Tournament Visibility</h4>
                     {visibilityButtons}
                     {editVisibilityMsg}
                     {visibilityConfirmationBox}
-                    <h4>Delete tournament:</h4>
+                    <h4>Delete tournament</h4>
                     <button className="deleteTournamentBtn" onClick={this.deleteHandler}>Delete Tournament</button> <br />
                     {deleteTourneyMsg}
                     {confirmationBox}
@@ -712,7 +788,7 @@ class Tourney extends Component {
                     <tr>
                         <th>Rank</th>
                         <th>Username</th>
-                        <th>Profit (%)</th>
+                        <th>Profit ({this.state.unitProfit})</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -762,6 +838,7 @@ class Tourney extends Component {
                         <h4><u>Position:</u></h4>
                         <p><b>Net position:</b> {netPosition}</p>
                         <p><b>Inventory:</b> {position.inventory} {position.baseCurrency}</p>
+                        <p><b>Current Price ({position.quoteCurrency}):</b> {position.currentPrice} </p>
                         <p><b>Value of Inventory:</b> {position.inventoryValue} {position.quoteCurrency}</p>
                         <h4><u>Totals:</u></h4>
                         <p><b>Total Sales:</b> {position.totalSold} {position.quoteCurrency}</p>
@@ -775,17 +852,31 @@ class Tourney extends Component {
             if (this.state.quoteCurrency == "BTC") totalProfit = totalProfit.toFixed(9);
             if (this.state.quoteCurrency == "USD") totalProfit = totalProfit.toFixed(4);
             
+            let totalProfitDiv = null;
+            if (this.state.profitType == "relative") {
+                totalProfitDiv = (
+                    <div className="positionDiv">
+                        <h4><u>Total Profit</u></h4>
+                        <p>Starting balance: {this.state.balance} {this.state.quoteCurrency}</p>
+                        <p style={totalProfit >= 0 ? {"color": "#57eb7e"} : {"color": "#f7716d"}}>Profit: {totalProfit} {this.state.quoteCurrency}</p>
+                        <p style={this.state.profit >= 0 ? {"color": "#57eb7e"} : {"color": "#f7716d"}}>Profit ({this.state.unitProfit}): {this.state.profit}</p>
+                    </div>
+                )
+            } else if (this.state.profitType == "absolute") {
+                totalProfitDiv = (
+                    <div className="positionDiv">
+                        <h4><u>Total Profit</u></h4>
+                        <p style={this.state.profit >= 0 ? {"color": "#57eb7e"} : {"color": "#f7716d"}}>Profit ({this.state.unitProfit}): {this.state.profit}</p>
+                    </div>
+                )
+            }
+
             tradeSummary = (
                 <div className="tradeSummaryWrapper">
                     <div className="tradeSummaryDiv">   
                         <h3>Trade Summary:</h3>
                         {positions}
-                        <div className="positionDiv">
-                            <h4><u>Total Profit</u></h4>
-                            <p>Starting balance: {this.state.balance} {this.state.quoteCurrency}</p>
-                            <p style={totalProfit >= 0 ? {"color": "#57eb7e"} : {"color": "#f7716d"}}>Profit: {totalProfit} {this.state.quoteCurrency}</p>
-                            <p style={this.state.profit >= 0 ? {"color": "#57eb7e"} : {"color": "#f7716d"}}>Profit (%): {this.state.profit} %</p>
-                        </div>
+                        {totalProfitDiv}
                         <button className="resetBtn" onClick={this.hideTradeSummary}>Close</button>
                     </div>
                 </div>
@@ -876,29 +967,51 @@ class Tourney extends Component {
                     {registerErr}
                 </div>
             );
-            balance = (
-                <div>
-                    <h2>Registration:</h2>
-                    <p>The tournament is in registration.</p>
-                    <h3>Starting Balance:</h3>
-                    <p>Enter tournament starting balance <b>({this.state.quoteCurrency})</b> to register:</p>
-                    <p style={{"fontSize": "0.9rem"}}>The starting balance is used to determine the profit percentage and liquidation.</p>
-                    <p style={{"fontSize": "0.9rem"}}>For example, with a starting balance of $1000. If you make $1000 profit, your profit percentage will be 100%. If you make a $1000 loss, you will be liquidated out of the tournament.</p>
-                    {inviteCodeInput} <br/>
-                    <input className="balanceInput" type="text" placeholder="Enter Starting Balance" onChange={(event) => this.editBalanceHandler(event)} />
-                </div>
-            );
+            if (this.state.profitType == "relative") {
+                balance = (
+                    <div>
+                        <h2>Registration:</h2>
+                        <p>The tournament is in registration.</p>
+                        <h3>Starting Balance:</h3>
+                        <p>Enter tournament starting balance <b>({this.state.quoteCurrency})</b> to register:</p>
+                        <p style={{"fontSize": "0.9rem"}}>The starting balance is used to determine your percentage profit. If you have losses equal to or greater than your starting balance you will be liquidated out of the tournament.</p>
+                        {inviteCodeInput} <br/>
+                        <input className="balanceInput" type="text" placeholder="Enter Starting Balance" onChange={(event) => this.editBalanceHandler(event)} />
+                    </div>
+                );
+            } else if (this.state.profitType == "absolute") {
+                balance = (
+                    <div>
+                        <h2>Registration:</h2>
+                        <p>The tournament is in registration.</p>
+                        <p style={{"fontSize": "0.9rem"}}>This tournament ranks entrants based on their absolute profit in <b>{this.state.quoteCurrency}</b></p>
+                        {inviteCodeInput} <br/>
+                    </div>
+                );
+            }
+                
         }
 
         // IF REGISTERED AND TOURNAMENT IS ACTIVE
-        if (this.state.registered && this.state.tourneyState == "active") {
+        if (this.state.registered && this.state.tourneyState == "active" && this.state.profitType == "relative") {
             balance = (
                 <div>
                     <h2>Active Tournament</h2>
                     <h3>Starting Balance:</h3>
                     <p>{this.state.balance} {this.state.quoteCurrency}</p>
                     <h3>Your Profit:</h3>
-                    <p>{this.state.profit} %</p>
+                    <p>{this.state.profit} {this.state.unitProfit}</p>
+                    <button className="showSummaryBtn" onClick={(event)=>this.showTradeSummary(event)}>Trade Summary</button>
+                    {loadingTradeSummary}
+                    {tradeSummary}
+                </div>
+            );
+        } else if (this.state.registered && this.state.tourneyState == "active" && this.state.profitType == "absolute") {
+            balance = (
+                <div>
+                    <h2>Active Tournament</h2>
+                    <h3>Your Profit:</h3>
+                    <p>{this.state.profit} {this.state.unitProfit}</p>
                     <button className="showSummaryBtn" onClick={(event)=>this.showTradeSummary(event)}>Trade Summary</button>
                     {loadingTradeSummary}
                     {tradeSummary}
@@ -932,7 +1045,7 @@ class Tourney extends Component {
             );
         }
         
-        // IF NOT REGISTERED AND TOURNAMENT IS ACTIVE
+        // IF NOT REGISTERED AND TOURNAMENT IS COMPLETED
         if (!this.state.registered && this.state.tourneyState == "completed") {
             balance = (
                 <div>
@@ -941,18 +1054,75 @@ class Tourney extends Component {
                 </div>
             )
         }
+
+        // CONFIRM IMPORT POSITION MODAL
+        let confirmImportPos = null;
+        if (this.state.showConfirmImportPos) {
+            confirmImportPos = (
+                <div className="confirmRegistrationWrapper">
+                    <div className="confirmRegistrationDiv">   
+                        <p>Are you sure?</p>
+                        <button className="resetBtn" onClick={this.cancelImportPosChange}>Cancel</button>
+                        <button className="submitBtn" onClick={this.submitImportPosChange}>Submit</button>
+                    </div>
+                </div>
+            )
+        }
         
         // IF REGISTERED AND THE TOURNAMENT IN REGISTRATION 
         // EDIT BALANCE 
         let editStartBalanceBtn = null;
+        let importPositions = null;
         if (this.state.registered && this.state.tourneyState == "registering") {
             
-            balance = (
-                <div>
-                    <h2>Registration:</h2>
-                    <p>You are already registered.</p>
-                    <h3>Starting Balance:</h3>
-                    <p>{this.state.balance} {this.state.quoteCurrency}</p>
+            if (this.state.profitType == "relative") {
+                balance = (
+                    <div>
+                        <h2>Registration:</h2>
+                        <p>You are already registered.</p>
+                        <h3>Starting Balance:</h3>
+                        <p>{this.state.balance} {this.state.quoteCurrency}</p>
+                    </div>
+                )
+            } else if (this.state.profitType == "absolute") {
+                balance = (
+                    <div>
+                        <h2>Registration:</h2>
+                        <p>You are already registered.</p>
+                    </div>
+                )
+            }
+            
+            let importPosBtns;
+            if (this.state.importPositions == false) {
+                importPosBtns = (
+                    <div>
+                        <button className="importBtn highlight" onClick={()=>this.showImportPosHandler("no")}>No</button>
+                        <button className="importBtn" onClick={()=>this.showImportPosHandler("yes")}>Yes</button><br/>
+                        {this.state.importChangeMsg}
+                    </div>
+                )
+                
+            } else if (this.state.importPositions == true) {
+                importPosBtns = (
+                    <div>
+                        <button className="importBtn" onClick={()=>this.showImportPosHandler("no")}>No</button>
+                        <button className="importBtn highlight" onClick={()=>this.showImportPosHandler("yes")}>Yes</button><br/>
+                        {this.state.importChangeMsg}
+                    </div>
+                )
+            } 
+            
+            if (this.state.loadingImportChange) {
+                importPosBtns = <Spinner />
+            }
+        
+            
+            importPositions = (
+                <div className="importPosDiv">
+                    <p>Would you like to import any positions you already have open when the tournament starts? Only applies to futures products.</p>
+                    {importPosBtns}
+                    {confirmImportPos}
                 </div>
             )
             
@@ -969,19 +1139,22 @@ class Tourney extends Component {
                 </div>
             );
             
-            if (this.state.editingBalance) {
-                editStartBalanceBtn = (
-                    <div className="editStartBalBtnDiv">
-                        <button className="resetBtn" style={{"marginRight": "20px"}} onClick={this.cancelSubmitBalanceHandler}>Cancel</button>
-                        <input className="editBalanceInput" type="number" placeholder={this.state.balance} onChange={(event) => this.editBalanceHandler(event)} />
-                        <button className="submitBtn" onClick={this.submitBalanceHandler}>Submit</button>
-                    </div>
-                );
-            } else {
-                editStartBalanceBtn = (
-                    <button className="editStartBalBtn" onClick={this.showBalanceInput}>Edit Starting Balance</button>
-                );
+            if (this.state.profitType == "relative") {
+                if (this.state.editingBalance) {
+                    editStartBalanceBtn = (
+                        <div className="editStartBalBtnDiv">
+                            <button className="resetBtn" style={{"marginRight": "20px"}} onClick={this.cancelSubmitBalanceHandler}>Cancel</button>
+                            <input className="editBalanceInput" type="number" placeholder={this.state.balance} onChange={(event) => this.editBalanceHandler(event)} />
+                            <button className="submitBtn" onClick={this.submitBalanceHandler}>Submit</button>
+                        </div>
+                    );
+                } else {
+                    editStartBalanceBtn = (
+                        <button className="editStartBalBtn" onClick={this.showBalanceInput}>Edit Starting Balance</button>
+                    );
+                }
             }
+        
         }
     
         
@@ -1033,6 +1206,7 @@ class Tourney extends Component {
                 {registerBtn}<br/>
                 {balanceErrorMsg}
                 {editStartBalanceBtn}<br/>
+                {importPositions}<br/>
             </div>
         )
         
@@ -1049,6 +1223,7 @@ class Tourney extends Component {
                 <div className="entrantsList">
                     {balanceDiv}
                     <h2>Entrants:</h2>
+                    <p>{this.state.noEntrants} / {this.state.maxEntrants} (min. {this.state.minEntrants})</p>
                     <h3>Search:</h3>
                     <input value={this.state.searchEntrants} className="searchEntrantsInput" placeholder="Username" onChange={(event) => this.searchEntrantsInputHandler(event)}/>
                     <ul>{entrants}</ul>
@@ -1101,39 +1276,40 @@ class Tourney extends Component {
         if (this.state.host != null) {
             tourneyBody = (
                 <div className="tourneyBody">
-                    <h2>Overview:</h2>
                     <h3>Status</h3>
                     <p>{this.state.tourneyState}</p>
                     <h3>Host</h3>
                     <p>{this.state.host}</p>
-                    <h3>Entrants</h3>
-                    <p>Minimum: {this.state.minEntrants}</p>
-                    <p>Maximum: {this.state.maxEntrants}</p>
                     <h3>Start Time</h3>
                     {startTimePa}
                     <h3>End Time</h3>
                     {endTimePa}
-                    <h3>Products:</h3>
+                    <h3>Profit Type</h3>
+                    <p>{this.state.profitType}</p>
+                    <h3>Products</h3>
                     {FTXProducts}
                 </div>
             )
         }
 
         return (
-            <div className="tourneyDiv">
-                {redirect}
-                <div className="tourneySubDiv">
-                    <h1>Tournament {this.state.tourneyId}</h1>
-                    {hostControls}
-                </div>
-                <div className="tourneySubDiv2">
-                    <div className="tourneyWrapper">
-                        {tourneyBody}
-                        {entrantsDiv}
+            <div>
+                <div className="tourneyDiv">
+                    {redirect}
+                    <div className="tourneySubDiv">
+                        <h1>Tournament {this.state.tourneyId}</h1>
+                        {hostControls}
                     </div>
+                    <div className="tourneySubDiv2">
+                        <div className="tourneyWrapper">
+                            {tourneyBody}
+                            {entrantsDiv}
+                        </div>
+                    </div>
+                    {confirmRegistration}
+                    {confirmUnRegistration}
                 </div>
-                {confirmRegistration}
-                {confirmUnRegistration}
+                <NavBottom />
             </div>
         )
     }

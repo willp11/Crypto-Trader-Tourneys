@@ -1,5 +1,6 @@
+#from init import db
 from init import db
-from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, Trades, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys, TourneyInvites, AccountBalances, PayoutsCustomProvisional, DepositWithdrawHistory, Positions
+from models import RegistrationTourneys, Usernames, Entrants, UserAPI, RegisteringProducts, ActiveTourneys, ActiveEntrants, ActiveProducts, Trades, ProductList, CompletedTourneys, CompletedEntrants, CompletedProducts, AllTourneys, TourneyInvites, Positions
 from sqlalchemy.orm import sessionmaker
 
 engine = db.engine
@@ -20,10 +21,10 @@ ActiveTourneys.__table__.drop(engine)
 CompletedProducts.__table__.drop(engine)
 CompletedEntrants.__table__.drop(engine)
 CompletedTourneys.__table__.drop(engine)
-
+#
 AllTourneys.__table__.drop(engine)
-Trades.__table__.drop(engine)
-Positions.__table__.drop(engine)
+#Trades.__table__.drop(engine)
+#Positions.__table__.drop(engine)
 
 #AccountBalances.__table__.drop(engine)
 #PayoutsCustomProvisional.__table__.drop(engine)
@@ -32,9 +33,9 @@ Positions.__table__.drop(engine)
 #UserAPI.__table__.drop(engine)
 #Usernames.__table__.drop(engine)
 
-#session.commit()
+session.commit()
 
-# create a table 
+#create a table 
 #ProductList.__table__.create(session.bind)
 
 #Usernames.__table__.create(session.bind)
@@ -50,10 +51,10 @@ ActiveProducts.__table__.create(session.bind)
 CompletedTourneys.__table__.create(session.bind)
 CompletedEntrants.__table__.create(session.bind)
 CompletedProducts.__table__.create(session.bind)
-#
+##
 TourneyInvites.__table__.create(session.bind)
-Trades.__table__.create(session.bind)
-Positions.__table__.create(session.bind)
+#Trades.__table__.create(session.bind)
+#Positions.__table__.create(session.bind)
 
 #AccountBalances.__table__.create(session.bind)
 #PayoutsCustomProvisional.__table__.create(session.bind)

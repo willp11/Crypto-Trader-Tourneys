@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import './logout.css';
 import {firebaseAuth} from "../../firebase/firebase";
+import NavBottom from "../../components/navigation/nav-bottom/nav-bottom";
 
 import * as actions from '../../store/actions/index';
 
@@ -45,13 +46,16 @@ class Logout extends Component {
         }
             
         return (
-            <div className="logoutDiv">  
-                <div className="logoutSubDiv">
-                    {authRedirect}
-                    <h3>Are you sure you want to log out?</h3>
-                    <button className="logoutCancelBtn" onClick={this.goBackHandler}>Cancel</button>
-                    <button className="logoutConfirmBtn" onClick={this.submitHandler}>Logout</button>
+            <div>
+                <div className="logoutDiv">  
+                    <div className="logoutSubDiv">
+                        {authRedirect}
+                        <h3>Are you sure you want to log out?</h3>
+                        <button className="logoutCancelBtn" onClick={this.goBackHandler}>Cancel</button>
+                        <button className="logoutConfirmBtn" onClick={this.submitHandler}>Logout</button>
+                    </div>
                 </div>
+                <NavBottom />
             </div>
         )
     }

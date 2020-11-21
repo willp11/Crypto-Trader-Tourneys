@@ -57,6 +57,7 @@ class RegistrationTourneys(db.Model):
     endTS = db.Column(db.Integer, nullable=False)
     quoteCurrency = db.Column(db.String(16), nullable=False)
     visibility = db.Column(db.String(16), nullable=False)
+    profitType = db.Column(db.String(16), nullable=False)
     entrants = relationship("Entrants", cascade="all, delete")
     products = relationship("RegisteringProducts", cascade="all, delete")
     invitations = relationship("TourneyInvites", cascade="all, delete")
@@ -68,6 +69,7 @@ class Entrants(db.Model):
     userId = db.Column(db.String(50), db.ForeignKey('usernames.userId'), nullable=False)
     username = db.Column(db.String(100), nullable=False)
     balance = db.Column(db.Float, nullable=False)
+    importPositions = db.Column(db.Boolean, nullable=True, default=False)
     
 class RegisteringProducts(db.Model):
     __tablename__ = "registeringProducts"
@@ -96,6 +98,7 @@ class ActiveTourneys(db.Model):
     quoteCurrency = db.Column(db.String(16), nullable=False)
     visibility = db.Column(db.String(16), nullable=False)
     lastUpdated = db.Column(db.Integer, nullable=True)
+    profitType = db.Column(db.String(16), nullable=False)
     entrants = relationship("ActiveEntrants", cascade="all, delete")
     products = relationship("ActiveProducts", cascade="all, delete")
     
@@ -110,6 +113,7 @@ class ActiveEntrants(db.Model):
     balance = db.Column(db.Float, nullable=False)
     liquidated = db.Column(db.Boolean, nullable=False)
     liquidatedTS = db.Column(db.Integer, nullable=True)
+    rank = db.Column(db.Integer, nullable=False)
     
 class ActiveProducts(db.Model):
     __tablename__ = "activeProducts"
@@ -137,6 +141,7 @@ class CompletedTourneys(db.Model):
     endTS = db.Column(db.Integer, nullable=False)
     quoteCurrency = db.Column(db.String(16), nullable=False)
     visibility = db.Column(db.String(16), nullable=False)
+    profitType = db.Column(db.String(16), nullable=False)
     entrants = relationship("CompletedEntrants", cascade="all, delete")
     products = relationship("CompletedProducts", cascade="all, delete")
     
@@ -151,6 +156,7 @@ class CompletedEntrants(db.Model):
     balance = db.Column(db.Float, nullable=False)
     liquidated = db.Column(db.Boolean, nullable=False)
     liquidatedTS = db.Column(db.Integer, nullable=True)
+    rank = db.Column(db.Integer, nullable=False)
     
 class CompletedProducts(db.Model):
     __tablename__ = "completedProducts"
@@ -175,6 +181,7 @@ class Trades(db.Model):
     time = db.Column(db.String(16), nullable=False)
     quoteCurrency = db.Column(db.String(16), nullable=False)
     baseCurrency = db.Column(db.String(16), nullable=False)
+    profitCounted = db.Column(db.Boolean, default=False)
 
 # POSITIONS
 # userId, tourneyId, productName, productPrice, amountBought, amountSold, avgBuyPrice, avgSellPrice, lastUpdated
@@ -194,6 +201,7 @@ class Positions(db.Model):
     profit = db.Column(db.Float, nullable=False)
     quoteCurrency = db.Column(db.String(16), nullable=False)
     baseCurrency = db.Column(db.String(16), nullable=False)
+    currentPrice = db.Column(db.Float, nullable=False)
 
 # TOURNAMENT INVITATIONS
 class TourneyInvites(db.Model):

@@ -1,0 +1,2564 @@
+Calculating profits for tournament 385466254 at: 1603299600
+Calculating profits for tournament 309785740 at: 1603497631.104017
+Calculating profits for tournament 309785740 at: 1603497632.630623
+Calculating profits for tournament 309785740 at: 1603497633.600238
+Calculating profits for tournament 309785740 at: 1603497635.188937
+Calculating profits for tournament 309785740 at: 1603497636.220995
+Calculating profits for tournament 309785740 at: 1603497642.319174
+Calculating profits for tournament 309785740 at: 1603497649.056216
+Calculating profits for tournament 309785740 at: 1603497650.579415
+Calculating profits for tournament 309785740 at: 1603497652.553247
+Calculating profits for tournament 309785740 at: 1603497654.310581
+Calculating profits for tournament 309785740 at: 1603497657.305005
+Calculating profits for tournament 309785740 at: 1603497658.26234
+Calculating profits for tournament 309785740 at: 1603497660.356459
+Calculating profits for tournament 309785740 at: 1603497661.179352
+Calculating profits for tournament 309785740 at: 1603497662.713821
+Calculating profits for tournament 309785740 at: 1603497663.741043
+Calculating profits for tournament 309785740 at: 1603497664.665664
+Calculating profits for tournament 309785740 at: 1603497665.563285
+Calculating profits for tournament 309785740 at: 1603497666.570292
+Calculating profits for tournament 309785740 at: 1603497668.06846
+Calculating profits for tournament 309785740 at: 1603497669.64473
+Calculating profits for tournament 309785740 at: 1603497671.588309
+Calculating profits for tournament 309785740 at: 1603497675.691284
+Calculating profits for tournament 309785740 at: 1603497678.391368
+Calculating profits for tournament 309785740 at: 1603497681.067022
+Calculating profits for tournament 309785740 at: 1603497683.65359
+Calculating profits for tournament 309785740 at: 1603497686.081329
+Calculating profits for tournament 309785740 at: 1603497687.85942
+Calculating profits for tournament 309785740 at: 1603497690.334284
+Calculating profits for tournament 309785740 at: 1603497691.782357
+Calculating profits for tournament 309785740 at: 1603497693.721719
+Calculating profits for tournament 309785740 at: 1603497694.702216
+Calculating profits for tournament 309785740 at: 1603497696.742594
+Calculating profits for tournament 309785740 at: 1603497698.679494
+Calculating profits for tournament 309785740 at: 1603497699.631193
+Calculating profits for tournament 309785740 at: 1603497708.579799
+Calculating profits for tournament 309785740 at: 1603497711.089671
+Calculating profits for tournament 309785740 at: 1603497723.27235
+Calculating profits for tournament 309785740 at: 1603497726.682806
+Calculating profits for tournament 309785740 at: 1603497728.100561
+Calculating profits for tournament 309785740 at: 1603497729.596649
+Calculating profits for tournament 309785740 at: 1603497730.620891
+Calculating profits for tournament 309785740 at: 1603497736.750243
+Calculating profits for tournament 309785740 at: 1603497737.702264
+Calculating profits for tournament 309785740 at: 1603497738.689829
+Calculating profits for tournament 309785740 at: 1603497739.982397
+Calculating profits for tournament 309785740 at: 1603497740.892799
+Calculating profits for tournament 309785740 at: 1603497742.875819
+Calculating profits for tournament 309785740 at: 1603497743.902457
+Calculating profits for tournament 309785740 at: 1603497745.703573
+Calculating profits for tournament 309785740 at: 1603497746.626798
+Calculating profits for tournament 309785740 at: 1603497747.579847
+Calculating profits for tournament 309785740 at: 1603497749.78518
+Calculating profits for tournament 309785740 at: 1603497750.941288
+Calculating profits for tournament 309785740 at: 1603497753.463091
+Calculating profits for tournament 309785740 at: 1603497755.827108
+Calculating profits for tournament 309785740 at: 1603497757.836564
+Calculating profits for tournament 309785740 at: 1603497759.057866
+Calculating profits for tournament 309785740 at: 1603497772.833563
+Calculating profits for tournament 309785740 at: 1603497774.466094
+Calculating profits for tournament 309785740 at: 1603497775.799384
+Calculating profits for tournament 309785740 at: 1603497777.93196
+Calculating profits for tournament 309785740 at: 1603497780.440666
+Calculating profits for tournament 309785740 at: 1603497782.067084
+Calculating profits for tournament 309785740 at: 1603497783.262375
+Calculating profits for tournament 309785740 at: 1603497784.828529
+Calculating profits for tournament 309785740 at: 1603497786.985619
+Calculating profits for tournament 309785740 at: 1603497788.381218
+Calculating profits for tournament 309785740 at: 1603497791.079978
+Calculating profits for tournament 309785740 at: 1603497797.257904
+Calculating profits for tournament 309785740 at: 1603497798.622032
+Calculating profits for tournament 309785740 at: 1603497800.505889
+Calculating profits for tournament 309785740 at: 1603497803.027886
+Calculating profits for tournament 309785740 at: 1603497805.222993
+Calculating profits for tournament 309785740 at: 1603497807.200392
+Calculating profits for tournament 309785740 at: 1603497808.683903
+Calculating profits for tournament 309785740 at: 1603497809.644547
+Calculating profits for tournament 309785740 at: 1603497811.139552
+Calculating profits for tournament 309785740 at: 1603497812.143048
+Calculating profits for tournament 309785740 at: 1603497814.148143
+Calculating profits for tournament 309785740 at: 1603497816.330917
+Calculating profits for tournament 309785740 at: 1603497817.837467
+Calculating profits for tournament 309785740 at: 1603497819.237024
+Calculating profits for tournament 309785740 at: 1603497820.662675
+Calculating profits for tournament 309785740 at: 1603497822.615994
+Calculating profits for tournament 309785740 at: 1603497825.809912
+Calculating profits for tournament 309785740 at: 1603497826.741984
+Calculating profits for tournament 309785740 at: 1603497827.659348
+Calculating profits for tournament 309785740 at: 1603497834.936413
+Calculating profits for tournament 309785740 at: 1603497836.85913
+Calculating profits for tournament 309785740 at: 1603497841.431816
+Calculating profits for tournament 309785740 at: 1603497843.375435
+Calculating profits for tournament 309785740 at: 1603497849.344051
+Calculating profits for tournament 309785740 at: 1603497850.229738
+Calculating profits for tournament 309785740 at: 1603497851.863419
+Calculating profits for tournament 309785740 at: 1603497853.180606
+Calculating profits for tournament 309785740 at: 1603497856.555027
+Calculating profits for tournament 309785740 at: 1603497858.46553
+Calculating profits for tournament 309785740 at: 1603497859.770881
+Calculating profits for tournament 309785740 at: 1603497861.736974
+Calculating profits for tournament 309785740 at: 1603497863.537305
+Calculating profits for tournament 309785740 at: 1603497865.450896
+Calculating profits for tournament 309785740 at: 1603497869.029967
+Calculating profits for tournament 309785740 at: 1603497870.516384
+Calculating profits for tournament 309785740 at: 1603497873.395696
+Calculating profits for tournament 309785740 at: 1603497875.155344
+Calculating profits for tournament 309785740 at: 1603497879.129784
+Calculating profits for tournament 309785740 at: 1603497885.081047
+Calculating profits for tournament 309785740 at: 1603497886.36159
+Calculating profits for tournament 309785740 at: 1603497887.449921
+Calculating profits for tournament 309785740 at: 1603497942.340624
+Calculating profits for tournament 309785740 at: 1603497943.877911
+Calculating profits for tournament 309785740 at: 1603497945.702771
+Calculating profits for tournament 309785740 at: 1603497947.414604
+Calculating profits for tournament 309785740 at: 1603497948.370656
+Calculating profits for tournament 309785740 at: 1603497949.534531
+Calculating profits for tournament 309785740 at: 1603497950.585881
+Calculating profits for tournament 309785740 at: 1603497953.645323
+Calculating profits for tournament 309785740 at: 1603497955.229454
+Calculating profits for tournament 309785740 at: 1603497956.254562
+Calculating profits for tournament 309785740 at: 1603497958.242387
+Calculating profits for tournament 309785740 at: 1603497959.807019
+Calculating profits for tournament 309785740 at: 1603497961.691022
+Calculating profits for tournament 309785740 at: 1603497963.471523
+Calculating profits for tournament 309785740 at: 1603497964.875379
+Calculating profits for tournament 309785740 at: 1603497968.72172
+Calculating profits for tournament 309785740 at: 1603497976.115227
+Calculating profits for tournament 309785740 at: 1603497979.066119
+Calculating profits for tournament 309785740 at: 1603497981.570642
+Calculating profits for tournament 309785740 at: 1603497984.198911
+Calculating profits for tournament 309785740 at: 1603497987.62052
+Calculating profits for tournament 309785740 at: 1603497992.316841
+Calculating profits for tournament 309785740 at: 1603497995.52204
+Calculating profits for tournament 309785740 at: 1603497996.690816
+Calculating profits for tournament 309785740 at: 1603498003.97783
+Calculating profits for tournament 309785740 at: 1603498005.519543
+Calculating profits for tournament 309785740 at: 1603498008.150155
+Calculating profits for tournament 309785740 at: 1603498010.362408
+Calculating profits for tournament 309785740 at: 1603498011.74352
+Calculating profits for tournament 309785740 at: 1603498012.62071
+Calculating profits for tournament 309785740 at: 1603498014.221097
+Calculating profits for tournament 309785740 at: 1603498016.112916
+Calculating profits for tournament 309785740 at: 1603498017.241851
+Calculating profits for tournament 309785740 at: 1603498018.77954
+Calculating profits for tournament 309785740 at: 1603498020.857983
+Calculating profits for tournament 309785740 at: 1603498023.826355
+Calculating profits for tournament 309785740 at: 1603498026.830932
+Calculating profits for tournament 309785740 at: 1603498028.368201
+Calculating profits for tournament 309785740 at: 1603498030.443932
+Calculating profits for tournament 309785740 at: 1603498031.426868
+Calculating profits for tournament 309785740 at: 1603498034.941647
+Calculating profits for tournament 309785740 at: 1603498036.281592
+Calculating profits for tournament 309785740 at: 1603498038.190517
+Calculating profits for tournament 309785740 at: 1603498039.633591
+Calculating profits for tournament 309785740 at: 1603498041.05166
+Calculating profits for tournament 309785740 at: 1603498043.219158
+Calculating profits for tournament 309785740 at: 1603498045.65646
+Calculating profits for tournament 309785740 at: 1603498046.745296
+Calculating profits for tournament 309785740 at: 1603498048.413613
+Calculating profits for tournament 309785740 at: 1603498050.179008
+Calculating profits for tournament 309785740 at: 1603498051.211064
+Calculating profits for tournament 309785740 at: 1603498052.707613
+Calculating profits for tournament 309785740 at: 1603498054.252213
+Calculating profits for tournament 309785740 at: 1603498058.101372
+Calculating profits for tournament 309785740 at: 1603498059.669453
+Calculating profits for tournament 309785740 at: 1603498061.38134
+Calculating profits for tournament 309785740 at: 1603498062.453561
+Calculating profits for tournament 309785740 at: 1603498064.508289
+Calculating profits for tournament 309785740 at: 1603498066.057071
+Calculating profits for tournament 309785740 at: 1603498067.352625
+Calculating profits for tournament 309785740 at: 1603498068.623696
+Calculating profits for tournament 309785740 at: 1603498070.068893
+Calculating profits for tournament 309785740 at: 1603498071.17259
+Calculating profits for tournament 309785740 at: 1603498074.002157
+Calculating profits for tournament 309785740 at: 1603498077.345211
+Calculating profits for tournament 309785740 at: 1603498078.372724
+Calculating profits for tournament 309785740 at: 1603498079.544673
+Calculating profits for tournament 309785740 at: 1603498081.145905
+Calculating profits for tournament 309785740 at: 1603498082.967456
+Calculating profits for tournament 309785740 at: 1603498083.993507
+Calculating profits for tournament 309785740 at: 1603498087.598003
+Calculating profits for tournament 309785740 at: 1603498090.596065
+Calculating profits for tournament 309785740 at: 1603498092.986254
+Calculating profits for tournament 309785740 at: 1603498094.524371
+Calculating profits for tournament 309785740 at: 1603498095.543557
+Calculating profits for tournament 309785740 at: 1603498097.983652
+Calculating profits for tournament 309785740 at: 1603498101.066207
+Calculating profits for tournament 309785740 at: 1603498104.966748
+Calculating profits for tournament 309785740 at: 1603498108.252808
+Calculating profits for tournament 309785740 at: 1603498109.332672
+Calculating profits for tournament 309785740 at: 1603498112.025533
+Calculating profits for tournament 309785740 at: 1603498114.146382
+Calculating profits for tournament 309785740 at: 1603498115.75442
+Calculating profits for tournament 309785740 at: 1603498117.363008
+Calculating profits for tournament 309785740 at: 1603498118.372968
+Calculating profits for tournament 309785740 at: 1603498120.146577
+Calculating profits for tournament 309785740 at: 1603498121.960491
+Calculating profits for tournament 309785740 at: 1603498123.556361
+Calculating profits for tournament 309785740 at: 1603498124.681319
+Calculating profits for tournament 309785740 at: 1603498125.716196
+Calculating profits for tournament 309785740 at: 1603498126.721699
+Calculating profits for tournament 309785740 at: 1603498127.813513
+Calculating profits for tournament 309785740 at: 1603498129.177759
+Calculating profits for tournament 309785740 at: 1603498130.273094
+Calculating profits for tournament 309785740 at: 1603498133.533098
+Calculating profits for tournament 309785740 at: 1603498134.785885
+Calculating profits for tournament 309785740 at: 1603498136.819606
+Calculating profits for tournament 309785740 at: 1603498137.891976
+Calculating profits for tournament 309785740 at: 1603498139.455791
+Calculating profits for tournament 309785740 at: 1603498140.489101
+Calculating profits for tournament 309785740 at: 1603498141.532695
+Calculating profits for tournament 309785740 at: 1603498142.94515
+Calculating profits for tournament 309785740 at: 1603498144.596039
+Calculating profits for tournament 309785740 at: 1603498146.590832
+Calculating profits for tournament 309785740 at: 1603498148.291577
+Calculating profits for tournament 309785740 at: 1603498152.797358
+Calculating profits for tournament 309785740 at: 1603498155.435184
+Calculating profits for tournament 309785740 at: 1603498156.451188
+Calculating profits for tournament 309785740 at: 1603498158.02441
+Calculating profits for tournament 309785740 at: 1603498161.718128
+Calculating profits for tournament 309785740 at: 1603498163.047153
+Calculating profits for tournament 309785740 at: 1603498165.840673
+Calculating profits for tournament 309785740 at: 1603498167.394153
+Calculating profits for tournament 309785740 at: 1603498169.551262
+Calculating profits for tournament 309785740 at: 1603498170.786634
+Calculating profits for tournament 309785740 at: 1603498172.386121
+Calculating profits for tournament 309785740 at: 1603498175.211507
+Calculating profits for tournament 309785740 at: 1603498176.220673
+Calculating profits for tournament 309785740 at: 1603498179.346275
+Calculating profits for tournament 309785740 at: 1603498180.400599
+Calculating profits for tournament 309785740 at: 1603498181.40761
+Calculating profits for tournament 309785740 at: 1603498182.960394
+Calculating profits for tournament 309785740 at: 1603498184.039471
+Calculating profits for tournament 309785740 at: 1603498187.280685
+Calculating profits for tournament 309785740 at: 1603498191.012834
+Calculating profits for tournament 309785740 at: 1603498193.806959
+Calculating profits for tournament 309785740 at: 1603498195.019189
+Calculating profits for tournament 309785740 at: 1603498197.219715
+Calculating profits for tournament 309785740 at: 1603498200.892152
+Calculating profits for tournament 309785740 at: 1603498202.158265
+Calculating profits for tournament 309785740 at: 1603498204.199683
+Calculating profits for tournament 309785740 at: 1603498206.177489
+Calculating profits for tournament 309785740 at: 1603498207.662996
+Calculating profits for tournament 309785740 at: 1603498210.48292
+Calculating profits for tournament 309785740 at: 1603498212.370587
+Calculating profits for tournament 309785740 at: 1603498213.654002
+Calculating profits for tournament 309785740 at: 1603498214.727882
+Calculating profits for tournament 309785740 at: 1603498217.428973
+Calculating profits for tournament 309785740 at: 1603498218.487482
+Calculating profits for tournament 309785740 at: 1603498220.267433
+Calculating profits for tournament 309785740 at: 1603498221.403147
+Calculating profits for tournament 309785740 at: 1603498225.571724
+Calculating profits for tournament 309785740 at: 1603498226.865439
+Calculating profits for tournament 309785740 at: 1603498228.327161
+Calculating profits for tournament 309785740 at: 1603498231.654821
+Calculating profits for tournament 309785740 at: 1603498232.834031
+Calculating profits for tournament 309785740 at: 1603498234.000508
+Calculating profits for tournament 309785740 at: 1603498235.065234
+Calculating profits for tournament 309785740 at: 1603498238.368678
+Calculating profits for tournament 309785740 at: 1603498240.026316
+Calculating profits for tournament 309785740 at: 1603498241.823851
+Calculating profits for tournament 309785740 at: 1603498244.887604
+Calculating profits for tournament 309785740 at: 1603498249.133743
+Calculating profits for tournament 309785740 at: 1603498250.367112
+Calculating profits for tournament 309785740 at: 1603498251.423472
+Calculating profits for tournament 309785740 at: 1603498252.371763
+Calculating profits for tournament 309785740 at: 1603498254.372678
+Calculating profits for tournament 309785740 at: 1603498255.841895
+Calculating profits for tournament 309785740 at: 1603498256.920043
+Calculating profits for tournament 309785740 at: 1603498258.298722
+Calculating profits for tournament 309785740 at: 1603498263.011022
+Calculating profits for tournament 309785740 at: 1603498265.066637
+Calculating profits for tournament 309785740 at: 1603498266.706828
+Calculating profits for tournament 309785740 at: 1603498267.71126
+Calculating profits for tournament 309785740 at: 1603498269.128381
+Calculating profits for tournament 309785740 at: 1603498271.164923
+Calculating profits for tournament 309785740 at: 1603498272.263285
+Calculating profits for tournament 309785740 at: 1603498274.052767
+Calculating profits for tournament 309785740 at: 1603498276.218844
+Calculating profits for tournament 309785740 at: 1603498278.700054
+Calculating profits for tournament 309785740 at: 1603498280.86321
+Calculating profits for tournament 309785740 at: 1603498282.074778
+Calculating profits for tournament 309785740 at: 1603498284.129715
+Calculating profits for tournament 309785740 at: 1603498285.173098
+Calculating profits for tournament 309785740 at: 1603498287.184172
+Calculating profits for tournament 309785740 at: 1603498288.30274
+Calculating profits for tournament 309785740 at: 1603498289.925169
+Calculating profits for tournament 309785740 at: 1603498291.263984
+Calculating profits for tournament 309785740 at: 1603498293.934745
+Calculating profits for tournament 309785740 at: 1603498295.464341
+Calculating profits for tournament 309785740 at: 1603498296.483973
+Calculating profits for tournament 309785740 at: 1603498297.513888
+Calculating profits for tournament 309785740 at: 1603498298.997138
+Calculating profits for tournament 309785740 at: 1603498300.65162
+Calculating profits for tournament 309785740 at: 1603498301.722964
+Calculating profits for tournament 309785740 at: 1603498304.478807
+Calculating profits for tournament 309785740 at: 1603498305.833813
+Calculating profits for tournament 309785740 at: 1603498307.944755
+Calculating profits for tournament 309785740 at: 1603498310.587065
+Calculating profits for tournament 309785740 at: 1603498313.133178
+Calculating profits for tournament 309785740 at: 1603498314.142354
+Calculating profits for tournament 309785740 at: 1603498315.214754
+Calculating profits for tournament 309785740 at: 1603498317.235454
+Calculating profits for tournament 309785740 at: 1603498318.746717
+Calculating profits for tournament 309785740 at: 1603498319.745229
+Calculating profits for tournament 309785740 at: 1603498322.293297
+Calculating profits for tournament 309785740 at: 1603498325.644046
+Calculating profits for tournament 309785740 at: 1603498327.550316
+Calculating profits for tournament 309785740 at: 1603498329.609795
+Calculating profits for tournament 309785740 at: 1603498331.283451
+Calculating profits for tournament 309785740 at: 1603498332.93019
+Calculating profits for tournament 309785740 at: 1603498339.55249
+Calculating profits for tournament 309785740 at: 1603498341.677293
+Calculating profits for tournament 309785740 at: 1603498344.085904
+Calculating profits for tournament 309785740 at: 1603498345.136572
+Calculating profits for tournament 309785740 at: 1603498346.215342
+Calculating profits for tournament 309785740 at: 1603498348.443406
+Calculating profits for tournament 309785740 at: 1603498350.045809
+Calculating profits for tournament 309785740 at: 1603498351.549384
+Calculating profits for tournament 309785740 at: 1603498352.811462
+Calculating profits for tournament 309785740 at: 1603498353.78562
+Calculating profits for tournament 309785740 at: 1603498356.450187
+Calculating profits for tournament 309785740 at: 1603498358.971262
+Calculating profits for tournament 309785740 at: 1603498360.01874
+Calculating profits for tournament 309785740 at: 1603498362.026889
+Calculating profits for tournament 309785740 at: 1603498363.936283
+Calculating profits for tournament 309785740 at: 1603498365.054576
+Calculating profits for tournament 309785740 at: 1603498366.080048
+Calculating profits for tournament 309785740 at: 1603498367.98261
+Calculating profits for tournament 309785740 at: 1603498369.804109
+Calculating profits for tournament 309785740 at: 1603498371.214358
+Calculating profits for tournament 309785740 at: 1603498377.907878
+Calculating profits for tournament 309785740 at: 1603498380.26114
+Calculating profits for tournament 309785740 at: 1603498382.612032
+Calculating profits for tournament 309785740 at: 1603498384.235206
+Calculating profits for tournament 309785740 at: 1603498386.364533
+Calculating profits for tournament 309785740 at: 1603498388.19398
+Calculating profits for tournament 309785740 at: 1603498389.262701
+Calculating profits for tournament 309785740 at: 1603498390.664291
+Calculating profits for tournament 309785740 at: 1603498392.7414
+Calculating profits for tournament 309785740 at: 1603498394.242995
+Calculating profits for tournament 309785740 at: 1603498397.38075
+Calculating profits for tournament 309785740 at: 1603498398.940719
+Calculating profits for tournament 309785740 at: 1603498401.394602
+Calculating profits for tournament 309785740 at: 1603498404.023788
+Calculating profits for tournament 309785740 at: 1603498405.287748
+Calculating profits for tournament 309785740 at: 1603498406.362465
+Calculating profits for tournament 309785740 at: 1603498409.142733
+Calculating profits for tournament 309785740 at: 1603498411.373139
+Calculating profits for tournament 309785740 at: 1603498413.090217
+Calculating profits for tournament 309785740 at: 1603498415.934245
+Calculating profits for tournament 309785740 at: 1603498417.635097
+Calculating profits for tournament 309785740 at: 1603498419.284671
+Calculating profits for tournament 309785740 at: 1603498421.045534
+Calculating profits for tournament 309785740 at: 1603498422.853839
+Calculating profits for tournament 309785740 at: 1603498424.34597
+Calculating profits for tournament 309785740 at: 1603498428.662134
+Calculating profits for tournament 309785740 at: 1603498429.675225
+Calculating profits for tournament 309785740 at: 1603498432.234008
+Calculating profits for tournament 309785740 at: 1603498433.581042
+Calculating profits for tournament 309785740 at: 1603498434.559166
+Calculating profits for tournament 309785740 at: 1603498436.562434
+Calculating profits for tournament 309785740 at: 1603498437.658842
+Calculating profits for tournament 309785740 at: 1603498440.215405
+Calculating profits for tournament 309785740 at: 1603498441.615298
+Calculating profits for tournament 309785740 at: 1603498442.663973
+Calculating profits for tournament 309785740 at: 1603498444.77537
+Calculating profits for tournament 309785740 at: 1603498448.508877
+Calculating profits for tournament 309785740 at: 1603498452.943773
+Calculating profits for tournament 309785740 at: 1603498455.135729
+Calculating profits for tournament 309785740 at: 1603498456.370972
+Calculating profits for tournament 309785740 at: 1603498459.945303
+Calculating profits for tournament 309785740 at: 1603498461.18982
+Calculating profits for tournament 309785740 at: 1603498462.816079
+Calculating profits for tournament 309785740 at: 1603498464.661106
+Calculating profits for tournament 309785740 at: 1603498465.708762
+Calculating profits for tournament 309785740 at: 1603498466.818981
+Calculating profits for tournament 309785740 at: 1603498469.426189
+Calculating profits for tournament 309785740 at: 1603498470.425064
+Calculating profits for tournament 309785740 at: 1603498476.437102
+Calculating profits for tournament 309785740 at: 1603498478.448335
+Calculating profits for tournament 309785740 at: 1603498479.510038
+Calculating profits for tournament 309785740 at: 1603498481.432698
+Calculating profits for tournament 309785740 at: 1603498484.128123
+Calculating profits for tournament 309785740 at: 1603498487.205146
+Calculating profits for tournament 309785740 at: 1603498490.434871
+Calculating profits for tournament 309785740 at: 1603498491.448999
+Calculating profits for tournament 309785740 at: 1603498493.711068
+Calculating profits for tournament 309785740 at: 1603498495.430458
+Calculating profits for tournament 309785740 at: 1603498497.980073
+Calculating profits for tournament 309785740 at: 1603498499.357157
+Calculating profits for tournament 309785740 at: 1603498503.111374
+Calculating profits for tournament 309785740 at: 1603498506.109136
+Calculating profits for tournament 309785740 at: 1603498508.120069
+Calculating profits for tournament 309785740 at: 1603498510.389427
+Calculating profits for tournament 309785740 at: 1603498511.99895
+Calculating profits for tournament 309785740 at: 1603498515.254824
+Calculating profits for tournament 309785740 at: 1603498517.245941
+Calculating profits for tournament 309785740 at: 1603498519.02055
+Calculating profits for tournament 309785740 at: 1603498520.066091
+Calculating profits for tournament 309785740 at: 1603498522.475529
+Calculating profits for tournament 309785740 at: 1603498523.527361
+Calculating profits for tournament 309785740 at: 1603498524.582675
+Calculating profits for tournament 309785740 at: 1603498526.221281
+Calculating profits for tournament 309785740 at: 1603498527.348872
+Calculating profits for tournament 309785740 at: 1603498529.104586
+Calculating profits for tournament 309785740 at: 1603498530.898531
+Calculating profits for tournament 309785740 at: 1603498532.871467
+Calculating profits for tournament 309785740 at: 1603498533.961344
+Calculating profits for tournament 309785740 at: 1603498535.315651
+Calculating profits for tournament 309785740 at: 1603498543.669498
+Calculating profits for tournament 309785740 at: 1603498547.787346
+Calculating profits for tournament 309785740 at: 1603498548.865904
+Calculating profits for tournament 309785740 at: 1603498555.686178
+Calculating profits for tournament 309785740 at: 1603498556.625828
+Calculating profits for tournament 309785740 at: 1603498558.030726
+Calculating profits for tournament 309785740 at: 1603498559.642013
+Calculating profits for tournament 309785740 at: 1603498563.248224
+Calculating profits for tournament 309785740 at: 1603498565.880164
+Calculating profits for tournament 309785740 at: 1603498566.89304
+Calculating profits for tournament 309785740 at: 1603498568.347996
+Calculating profits for tournament 309785740 at: 1603498570.605167
+Calculating profits for tournament 309785740 at: 1603498571.631548
+Calculating profits for tournament 309785740 at: 1603498572.765858
+Calculating profits for tournament 309785740 at: 1603498573.806632
+Calculating profits for tournament 309785740 at: 1603498575.266826
+Calculating profits for tournament 309785740 at: 1603498577.624339
+Calculating profits for tournament 309785740 at: 1603498580.146744
+Calculating profits for tournament 309785740 at: 1603498581.720864
+Calculating profits for tournament 309785740 at: 1603498582.708904
+Calculating profits for tournament 309785740 at: 1603498585.371529
+Calculating profits for tournament 309785740 at: 1603498586.487171
+Calculating profits for tournament 309785740 at: 1603498588.439044
+Calculating profits for tournament 309785740 at: 1603498590.001057
+Calculating profits for tournament 309785740 at: 1603498592.467039
+Calculating profits for tournament 309785740 at: 1603498595.833407
+Calculating profits for tournament 309785740 at: 1603498602.867771
+Calculating profits for tournament 309785740 at: 1603498604.7434
+Calculating profits for tournament 309785740 at: 1603498606.066545
+Calculating profits for tournament 309785740 at: 1603498607.714716
+Calculating profits for tournament 309785740 at: 1603498608.885427
+Calculating profits for tournament 309785740 at: 1603498610.286542
+Calculating profits for tournament 309785740 at: 1603498611.797662
+Calculating profits for tournament 309785740 at: 1603498613.31304
+Calculating profits for tournament 309785740 at: 1603498614.515358
+Calculating profits for tournament 309785740 at: 1603498616.83928
+Calculating profits for tournament 309785740 at: 1603498618.241211
+Calculating profits for tournament 309785740 at: 1603498620.317231
+Calculating profits for tournament 309785740 at: 1603498622.829369
+Calculating profits for tournament 309785740 at: 1603498626.172323
+Calculating profits for tournament 309785740 at: 1603498627.916285
+Calculating profits for tournament 309785740 at: 1603498629.536877
+Calculating profits for tournament 309785740 at: 1603498631.02676
+Calculating profits for tournament 309785740 at: 1603498637.236401
+Calculating profits for tournament 309785740 at: 1603498639.489083
+Calculating profits for tournament 309785740 at: 1603498641.615715
+Calculating profits for tournament 309785740 at: 1603498644.242135
+Calculating profits for tournament 309785740 at: 1603498646.384216
+Calculating profits for tournament 309785740 at: 1603498647.651979
+Calculating profits for tournament 309785740 at: 1603498648.668028
+Calculating profits for tournament 309785740 at: 1603498650.6111
+Calculating profits for tournament 309785740 at: 1603498653.014942
+Calculating profits for tournament 309785740 at: 1603498654.98677
+Calculating profits for tournament 309785740 at: 1603498656.276976
+Calculating profits for tournament 309785740 at: 1603498659.282441
+Calculating profits for tournament 309785740 at: 1603498662.385716
+Calculating profits for tournament 309785740 at: 1603498664.241339
+Calculating profits for tournament 309785740 at: 1603498665.36512
+Calculating profits for tournament 309785740 at: 1603498666.635182
+Calculating profits for tournament 309785740 at: 1603498668.264327
+Calculating profits for tournament 309785740 at: 1603498669.597658
+Calculating profits for tournament 309785740 at: 1603498672.536627
+Calculating profits for tournament 309785740 at: 1603498675.746932
+Calculating profits for tournament 309785740 at: 1603498676.796143
+Calculating profits for tournament 309785740 at: 1603498678.416789
+Calculating profits for tournament 309785740 at: 1603498680.486084
+Calculating profits for tournament 309785740 at: 1603498683.307637
+Calculating profits for tournament 309785740 at: 1603498684.396994
+Calculating profits for tournament 309785740 at: 1603498691.816095
+Calculating profits for tournament 309785740 at: 1603498692.88273
+Calculating profits for tournament 309785740 at: 1603498696.174134
+Calculating profits for tournament 309785740 at: 1603498697.555712
+Calculating profits for tournament 309785740 at: 1603498699.161675
+Calculating profits for tournament 309785740 at: 1603498700.827129
+Calculating profits for tournament 309785740 at: 1603498703.93143
+Calculating profits for tournament 309785740 at: 1603498705.986673
+Calculating profits for tournament 309785740 at: 1603498707.356193
+Calculating profits for tournament 309785740 at: 1603498710.4318
+Calculating profits for tournament 309785740 at: 1603498713.212108
+Calculating profits for tournament 309785740 at: 1603498715.752403
+Calculating profits for tournament 309785740 at: 1603498722.797396
+Calculating profits for tournament 309785740 at: 1603498724.057174
+Calculating profits for tournament 309785740 at: 1603498725.157383
+Calculating profits for tournament 309785740 at: 1603498726.857397
+Calculating profits for tournament 309785740 at: 1603498729.927092
+Calculating profits for tournament 309785740 at: 1603498731.706941
+Calculating profits for tournament 309785740 at: 1603498733.307539
+Calculating profits for tournament 309785740 at: 1603498734.46981
+Calculating profits for tournament 309785740 at: 1603498739.156694
+Calculating profits for tournament 309785740 at: 1603498740.737504
+Calculating profits for tournament 309785740 at: 1603498742.367583
+Calculating profits for tournament 309785740 at: 1603498743.757551
+Calculating profits for tournament 309785740 at: 1603498745.447317
+Calculating profits for tournament 309785740 at: 1603498747.028691
+Calculating profits for tournament 309785740 at: 1603498748.557
+Calculating profits for tournament 309785740 at: 1603498750.204684
+Calculating profits for tournament 309785740 at: 1603498751.246925
+Calculating profits for tournament 309785740 at: 1603498752.927736
+Calculating profits for tournament 309785740 at: 1603498754.006667
+Calculating profits for tournament 309785740 at: 1603498755.296818
+Calculating profits for tournament 309785740 at: 1603498756.582698
+Calculating profits for tournament 309785740 at: 1603498759.002985
+Calculating profits for tournament 309785740 at: 1603498760.084824
+Calculating profits for tournament 309785740 at: 1603498761.712453
+Calculating profits for tournament 309785740 at: 1603498762.867714
+Calculating profits for tournament 309785740 at: 1603498763.996731
+Calculating profits for tournament 309785740 at: 1603498765.114206
+Calculating profits for tournament 309785740 at: 1603498766.370755
+Calculating profits for tournament 309785740 at: 1603498769.237007
+Calculating profits for tournament 309785740 at: 1603498776.41757
+Calculating profits for tournament 309785740 at: 1603498778.087219
+Calculating profits for tournament 309785740 at: 1603498779.180189
+Calculating profits for tournament 309785740 at: 1603498781.274877
+Calculating profits for tournament 309785740 at: 1603498788.698007
+Calculating profits for tournament 309785740 at: 1603498791.33515
+Calculating profits for tournament 309785740 at: 1603498792.899226
+Calculating profits for tournament 309785740 at: 1603498794.017071
+Calculating profits for tournament 309785740 at: 1603498795.487512
+Calculating profits for tournament 309785740 at: 1603498797.865874
+Calculating profits for tournament 309785740 at: 1603498803.097802
+Calculating profits for tournament 309785740 at: 1603498805.127993
+Calculating profits for tournament 309785740 at: 1603498808.256429
+Calculating profits for tournament 309785740 at: 1603498814.39719
+Calculating profits for tournament 309785740 at: 1603498816.337728
+Calculating profits for tournament 309785740 at: 1603498821.137211
+Calculating profits for tournament 309785740 at: 1603498835.837928
+Calculating profits for tournament 309785740 at: 1603498837.0677
+Calculating profits for tournament 309785740 at: 1603498838.258344
+Calculating profits for tournament 309785740 at: 1603498839.368548
+Calculating profits for tournament 309785740 at: 1603498840.481447
+Calculating profits for tournament 309785740 at: 1603498842.627948
+Calculating profits for tournament 309785740 at: 1603498844.077393
+Calculating profits for tournament 309785740 at: 1603498846.438585
+Calculating profits for tournament 309785740 at: 1603498847.758046
+Calculating profits for tournament 309785740 at: 1603498849.50341
+Calculating profits for tournament 309785740 at: 1603498851.238334
+Calculating profits for tournament 309785740 at: 1603498853.647417
+Calculating profits for tournament 309785740 at: 1603498855.268442
+Calculating profits for tournament 309785740 at: 1603498857.009417
+Calculating profits for tournament 309785740 at: 1603498865.083997
+Calculating profits for tournament 309785740 at: 1603498866.657497
+Calculating profits for tournament 309785740 at: 1603498869.948484
+Calculating profits for tournament 309785740 at: 1603498872.018505
+Calculating profits for tournament 309785740 at: 1603498873.608443
+Calculating profits for tournament 309785740 at: 1603498875.18631
+Calculating profits for tournament 309785740 at: 1603498876.295551
+Calculating profits for tournament 309785740 at: 1603498877.458303
+Calculating profits for tournament 309785740 at: 1603498879.323647
+Calculating profits for tournament 309785740 at: 1603498881.308606
+Calculating profits for tournament 309785740 at: 1603498884.538263
+Calculating profits for tournament 309785740 at: 1603498885.858579
+Calculating profits for tournament 309785740 at: 2020-10-24 07:43:58.312371
+Calculating profits for tournament 309785740 at: 2020-10-24 07:44:21.960191
+Calculating profits for tournament 309785740 at: 2020-10-24 07:45:53.626159
+Calculating profits for tournament 309785740 at: 2020-10-24 07:45:56.453921
+Calculating profits for tournament 309785740 at: 2020-10-24 07:45:57.538162
+Calculating profits for tournament 309785740 at: 2020-10-24 07:45:58.682724
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:00.733142
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:03.691766
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:04.958471
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:05.978775
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:07.099909
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:09.780881
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:12.418807
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:14.435275
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:16.802631
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:19.242800
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:20.318414
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:21.962709
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:23.091953
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:24.750055
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:26.175505
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:27.878250
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:34.373221
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:36.419773
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:37.479954
+Calculating profits for tournament 309785740 at: 2020-10-24 07:46:38.642917
+Calculating profits for tournament 309785740 at: 2020-10-24 07:47:41.211352
+Calculating profits for tournament 309785740 at: 2020-10-24 07:47:42.413101
+Calculating profits for tournament 309785740 at: 2020-10-24 07:47:44.033768
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:00.178279
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:06.530066
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:08.393740
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:09.470710
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:10.523802
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:11.601694
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:14.384036
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:15.853621
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:18.526646
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:19.596031
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:23.881096
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:26.530824
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:29.107682
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:33.938059
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:35.853440
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:37.155762
+Calculating profits for tournament 309785740 at: 2020-10-24 07:48:38.165119
+Calculating profits for tournament 309785740 at: 2020-10-24 07:50:53.148577
+Calculating profits for tournament 309785740 at: 2020-10-24 07:50:55.671076
+Calculating profits for tournament 309785740 at: 2020-10-24 07:51:00.026392
+Calculating profits for tournament 309785740 at: 2020-10-24 07:51:14.910403
+Calculating profits for tournament 309785740 at: 2020-10-24 07:51:19.822770
+Calculating profits for tournament 309785740 at: 2020-10-24 07:51:21.949673
+Calculating profits for tournament 309785740 at: 2020-10-24 07:51:36.410628
+Calculating profits for tournament 309785740 at: 2020-10-24 07:51:39.261938
+Calculating profits for tournament 309785740 at: 2020-10-24 07:51:43.923462
+Calculating profits for tournament 309785740 at: 2020-10-24 07:51:46.558408
+Calculating profits for tournament 309785740 at: 2020-10-24 07:51:53.680155
+Calculating profits for tournament 309785740 at: 2020-10-24 07:51:56.717204
+Calculating profits for tournament 309785740 at: 2020-10-24 07:51:58.783508
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:03.167403
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:05.297699
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:07.383858
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:09.971073
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:12.690764
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:14.775608
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:17.482118
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:20.816951
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:23.991608
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:26.158595
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:29.261502
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:31.487697
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:33.538437
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:37.849406
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:40.594250
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:42.760379
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:47.524523
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:49.613141
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:52.674252
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:54.785369
+Calculating profits for tournament 309785740 at: 2020-10-24 07:52:57.927135
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:00.632504
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:03.854432
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:11.229173
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:14.275692
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:16.392564
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:18.523624
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:20.695959
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:23.586613
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:26.473541
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:29.916604
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:32.224866
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:34.920239
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:40.093296
+Calculating profits for tournament 309785740 at: 2020-10-24 07:53:42.220363
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:08.698063
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:11.399544
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:13.517232
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:16.053424
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:19.978331
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:22.156955
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:26.098248
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:28.235610
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:30.710501
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:32.849314
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:34.991910
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:42.258433
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:44.793254
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:47.915310
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:50.593470
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:54.629694
+Calculating profits for tournament 309785740 at: 2020-10-24 07:54:58.645268
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:01.759203
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:03.907582
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:05.984687
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:08.592422
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:10.628791
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:12.822761
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:18.358366
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:23.581463
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:26.468372
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:31.515705
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:34.220349
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:36.290388
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:39.458869
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:44.542659
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:47.298880
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:51.717820
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:54.585859
+Calculating profits for tournament 309785740 at: 2020-10-24 07:55:57.717119
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:00.238802
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:02.902740
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:05.427452
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:09.162850
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:12.414186
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:14.531148
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:17.461770
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:22.999943
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:27.124653
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:29.775683
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:32.395563
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:34.629017
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:38.497631
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:42.298416
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:47.257573
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:53.413872
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:55.590036
+Calculating profits for tournament 309785740 at: 2020-10-24 07:56:58.180125
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:00.350596
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:02.528274
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:05.519054
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:07.648067
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:09.727009
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:11.823522
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:14.484903
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:18.360455
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:20.502313
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:23.486417
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:26.082594
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:29.260804
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:32.486974
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:34.695721
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:37.908906
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:41.195971
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:44.556128
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:47.681521
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:50.798811
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:53.450245
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:55.568697
+Calculating profits for tournament 309785740 at: 2020-10-24 07:57:58.249497
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:01.315893
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:05.283609
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:07.597600
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:12.045145
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:15.280515
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:18.065082
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:21.182115
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:24.632827
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:27.079177
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:29.134521
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:31.151451
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:36.497291
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:38.678858
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:42.255704
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:45.030851
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:50.101085
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:52.353125
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:55.825488
+Calculating profits for tournament 309785740 at: 2020-10-24 07:58:59.041148
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:01.033975
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:04.063777
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:07.518517
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:09.846482
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:12.439539
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:16.199572
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:19.231261
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:21.279134
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:24.502621
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:27.179568
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:30.699389
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:34.559950
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:37.459068
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:40.009864
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:42.930574
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:45.971828
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:50.336036
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:52.980331
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:56.476666
+Calculating profits for tournament 309785740 at: 2020-10-24 07:59:58.505010
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:02.270871
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:05.504135
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:08.811190
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:11.338391
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:13.388623
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:15.949661
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:19.528446
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:21.564551
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:24.680933
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:26.640336
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:28.674994
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:31.863422
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:33.890783
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:37.515868
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:39.546214
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:41.646295
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:43.991985
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:47.085444
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:49.517506
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:52.437115
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:54.510990
+Calculating profits for tournament 309785740 at: 2020-10-24 08:00:58.150344
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:01.155092
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:03.183755
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:12.470266
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:14.560831
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:17.318006
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:20.860492
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:22.852828
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:24.952867
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:26.912499
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:29.354699
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:31.460698
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:34.098821
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:36.598980
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:38.591119
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:41.022267
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:43.218223
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:50.369214
+Calculating profits for tournament 309785740 at: 2020-10-24 08:01:52.640212
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:07.146944
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:09.238823
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:12.350561
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:15.413956
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:19.155163
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:21.594960
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:24.688289
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:26.756571
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:29.619467
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:32.761857
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:34.883173
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:37.502853
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:40.562704
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:44.253535
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:49.728246
+Calculating profits for tournament 309785740 at: 2020-10-24 08:02:51.777556
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:00.160531
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:02.320653
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:04.941310
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:08.450174
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:11.848498
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:14.975962
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:18.292235
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:20.285356
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:23.296116
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:25.380749
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:27.987449
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:31.138964
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:35.089663
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:37.785397
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:39.857650
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:43.502061
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:45.871034
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:50.977223
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:53.657455
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:55.628984
+Calculating profits for tournament 309785740 at: 2020-10-24 08:03:58.750114
+Calculating profits for tournament 309785740 at: 2020-10-24 08:04:01.841383
+Calculating profits for tournament 309785740 at: 2020-10-24 08:04:13.004022
+Calculating profits for tournament 309785740 at: 2020-10-24 08:04:15.485364
+Calculating profits for tournament 309785740 at: 2020-10-24 08:04:17.740985
+Calculating profits for tournament 309785740 at: 2020-10-24 08:04:25.561843
+Calculating profits for tournament 309785740 at: 2020-10-24 08:04:39.409825
+Calculating profits for tournament 309785740 at: 2020-10-24 08:04:41.442938
+Calculating profits for tournament 309785740 at: 2020-10-24 08:04:44.090368
+Calculating profits for tournament 309785740 at: 2020-10-24 08:04:47.661414
+Error: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None)) 309785740 at: 2020-10-24 08:04:50.685652+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:08.564584
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:10.493118
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:13.001901
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:15.159194
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:17.991295
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:20.087423
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:23.342883
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:33.881968
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:41.914440
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:43.963874
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:46.232490
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:49.720119
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:51.800711
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:53.830501
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:55.887863
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:57.646349
+Calculating profits for tournament 309785740 at: 2020-10-24 08:06:59.596192
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:01.542202
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:04.120055
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:06.106383
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:08.099843
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:10.343232
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:12.337922
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:14.169009
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:16.353713
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:18.070927
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:20.181196
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:22.225280
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:24.096453
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:26.772467
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:28.811659
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:40.375564
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:44.196783
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:47.032363
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:49.439108
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:51.967146
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:53.830585
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:55.586213
+Calculating profits for tournament 309785740 at: 2020-10-24 08:07:57.551347
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:00.129226
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:02.380181
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:06.879355
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:09.067975
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:11.111764
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:13.028455
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:16.682821
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:19.050167
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:21.335730
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:23.400790
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:25.543193
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:27.369585
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:29.112448
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:31.239927
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:32.951049
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:34.712286
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:36.597498
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:39.431833
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:41.150312
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:43.082093
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:44.870557
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:47.120408
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:49.183434
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:50.910678
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:52.788651
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:54.708519
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:56.512889
+Calculating profits for tournament 309785740 at: 2020-10-24 08:08:58.263669
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:00.404107
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:06.174463
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:08.033656
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:09.906544
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:11.923765
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:13.766354
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:15.711640
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:18.156764
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:20.484648
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:22.182343
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:23.996361
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:25.860464
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:27.960120
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:29.937878
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:31.988491
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:33.761242
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:36.799451
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:38.736915
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:43.022494
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:44.909909
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:46.681412
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:48.910739
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:50.696383
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:53.824790
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:55.841271
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:57.641975
+Calculating profits for tournament 309785740 at: 2020-10-24 08:09:59.660642
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:04.444647
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:06.226245
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:10.043266
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:13.383620
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:15.415356
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:18.248614
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:20.839053
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:22.578008
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:24.367433
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:26.593994
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:29.021888
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:31.888360
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:35.489566
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:39.840884
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:42.045482
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:43.815578
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:45.841613
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:47.532468
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:49.378859
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:51.060202
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:52.791184
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:54.722278
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:56.962693
+Calculating profits for tournament 309785740 at: 2020-10-24 08:10:59.547565
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:01.520799
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:03.608121
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:05.547920
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:07.344933
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:09.314022
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:11.455281
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:16.315659
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:18.090174
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:20.035469
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:22.630503
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:24.589225
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:26.261569
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:28.212903
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:30.111219
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:31.907247
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:33.646812
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:35.492268
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:37.760481
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:39.671347
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:41.459894
+Calculating profits for tournament 309785740 at: 2020-10-24 08:11:43.260935
+Error: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')) 309785740 at: 2020-10-24 08:12:05.192531+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:12:15.260364
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x044426B8>: Failed to establish a new connection: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond')) 309785740 at: 2020-10-24 08:12:57.345354+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:13:07.400402
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04428460>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:13:18.896001+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:13:28.901475
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04428580>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:13:30.914511+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:13:40.918509
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04428550>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:13:52.964162+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:14:03.027346
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x05785D00>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:14:03.043008+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:14:13.122692
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04409C58>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:14:13.169573+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:14:23.249098
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04432DA8>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:14:23.264730+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:14:33.329036
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04432FD0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:14:33.329036+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:14:43.381679
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x057B88C8>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:14:43.397330+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:14:53.403261
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04428A60>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:14:53.418508+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:15:03.443274
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04428898>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:15:03.443274+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:15:13.444996
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x044286A0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:15:13.460202+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:15:23.463081
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04432310>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:15:23.478412+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:15:33.479078
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04432730>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:15:33.494260+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:15:43.496351
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x044327C0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:15:43.511560+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:15:53.652266
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04442A30>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:15:53.667897+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:16:03.769492
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x044421A8>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:16:03.779548+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:16:13.875553
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x044326A0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:16:13.875553+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:16:23.986249
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04428088>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:16:24.064537+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:16:34.069936
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04428418>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:16:34.078938+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:16:44.084193
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04428F88>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:16:44.092195+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:16:54.096603
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04428A00>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:16:54.112234+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:17:04.115765
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x044096D0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:17:04.122766+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:17:14.129462
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04442BE0>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:17:14.137501+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:17:24.152165
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04442238>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:17:24.167704+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:17:34.168774
+Error: HTTPSConnectionPool(host='ftx.com', port=443): Max retries exceeded with url: /api/markets/BTC/USD (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x04442568>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed')) 309785740 at: 2020-10-24 08:17:34.168774+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:17:44.279886
+Calculating profits for tournament 309785740 at: 2020-10-24 08:17:47.007211
+Calculating profits for tournament 309785740 at: 2020-10-24 08:17:50.186393
+Calculating profits for tournament 309785740 at: 2020-10-24 08:17:52.390356
+Calculating profits for tournament 309785740 at: 2020-10-24 08:17:54.597692
+Calculating profits for tournament 309785740 at: 2020-10-24 08:17:56.829267
+Calculating profits for tournament 309785740 at: 2020-10-24 08:17:59.046539
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:01.372416
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:05.527317
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:08.076703
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:11.157872
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:13.095740
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:15.132019
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:16.988184
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:19.143637
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:20.988627
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:23.129625
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:25.533939
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:29.224204
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:32.551959
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:34.619652
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:44.959328
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:47.166643
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:49.336515
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:51.993081
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:53.881630
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:55.664054
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:57.556396
+Calculating profits for tournament 309785740 at: 2020-10-24 08:18:59.556796
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:01.468965
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:03.368572
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:05.192995
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:07.338485
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:09.984513
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:12.089703
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:14.054426
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:15.793556
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:17.887704
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:19.670877
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:21.435327
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:23.373112
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:25.185659
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:27.138255
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:29.091628
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:30.879439
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:33.093313
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:34.914542
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:36.748519
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:38.550940
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:40.909449
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:42.729567
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:44.656085
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:46.531821
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:49.329377
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:51.095282
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:53.235908
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:55.160690
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:57.095784
+Calculating profits for tournament 309785740 at: 2020-10-24 08:19:59.052607
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:01.350845
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:04.323127
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:06.934327
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:09.552706
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:11.848538
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:14.558004
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:33.273340
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:35.086999
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:36.976658
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:38.889509
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:40.929874
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:42.749731
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:45.440747
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:47.230060
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:48.915229
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:50.625400
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:52.629123
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:54.665483
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:56.449413
+Calculating profits for tournament 309785740 at: 2020-10-24 08:20:58.276973
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:00.185632
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:01.947673
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:03.797527
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:07.859810
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:16.654262
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:26.013596
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:40.495329
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:43.315520
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:45.720037
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:47.624972
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:49.394232
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:51.331104
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:53.207629
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:55.458370
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:57.348641
+Calculating profits for tournament 309785740 at: 2020-10-24 08:21:59.106344
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:01.175814
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:03.129049
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:04.865283
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:06.875506
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:08.975201
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:10.991977
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:14.475631
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:16.382237
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:18.397468
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:20.291823
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:22.243239
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:24.148358
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:26.072632
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:28.284907
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:30.182867
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:31.984975
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:34.592047
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:36.503478
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:38.370694
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:40.854840
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:42.691935
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:44.867222
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:46.743026
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:48.528468
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:50.497159
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:52.604967
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:54.751155
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:56.514821
+Calculating profits for tournament 309785740 at: 2020-10-24 08:22:58.593642
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:00.467896
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:02.264567
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:04.176270
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:06.090015
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:07.876616
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:09.970011
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:12.035441
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:13.868359
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:15.849160
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:17.751775
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:19.881846
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:21.807074
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:23.733243
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:26.222015
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:28.444649
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:30.318514
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:32.409244
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:34.212727
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:36.188944
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:38.140699
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:40.130596
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:42.020560
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:45.683381
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:47.817250
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:50.600734
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:52.501386
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:54.319133
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:56.538088
+Calculating profits for tournament 309785740 at: 2020-10-24 08:23:58.492100
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:00.647447
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:02.650171
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:04.614654
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:06.461945
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:08.416043
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:10.368879
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:12.248423
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:14.018498
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:15.792654
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:17.556874
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:19.370736
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:21.277676
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:23.264501
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:25.326064
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:27.308722
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:29.203197
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:31.100728
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:32.965121
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:34.771775
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:36.792941
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:38.741322
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:40.660233
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:42.467160
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:44.342875
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:47.077020
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:48.938620
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:51.416765
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:53.270872
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:55.156720
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:57.048041
+Calculating profits for tournament 309785740 at: 2020-10-24 08:24:58.888824
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:00.756409
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:02.667526
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:04.730144
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:06.816009
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:08.952160
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:10.775172
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:14.209609
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:16.000372
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:17.924799
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:19.854985
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:21.809815
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:23.826169
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:25.636050
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:28.307555
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:30.988254
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:33.058907
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:35.199408
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:37.032673
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:38.881855
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:41.117723
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:43.178932
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:45.083433
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:46.915506
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:48.835743
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:50.853296
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:53.696395
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:55.620023
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:57.502351
+Calculating profits for tournament 309785740 at: 2020-10-24 08:25:59.338922
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:01.448349
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:03.688755
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:05.662870
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:07.654137
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:09.981660
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:11.919000
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:13.798890
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:15.630511
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:17.418745
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:19.450417
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:21.442291
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:23.547827
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:25.514900
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:27.485648
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:29.954457
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:36.297558
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:38.086839
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:40.084392
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:42.036050
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:43.781100
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:45.677265
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:47.614234
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:49.518843
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:51.325270
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:53.558409
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:55.510250
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:57.393485
+Calculating profits for tournament 309785740 at: 2020-10-24 08:26:59.223351
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:01.527567
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:03.504127
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:05.270457
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:07.176268
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:09.068026
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:11.023579
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:13.161791
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:15.318129
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:17.256103
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:19.006194
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:20.841199
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:22.766758
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:25.051640
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:26.819584
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:29.289396
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:31.338563
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:33.606166
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:35.431466
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:37.293437
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:39.190877
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:41.853980
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:44.099372
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:46.170148
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:48.404457
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:51.558349
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:53.376646
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:55.371568
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:57.184524
+Calculating profits for tournament 309785740 at: 2020-10-24 08:27:59.809191
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:01.815844
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:06.923430
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:08.778087
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:11.512810
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:13.358604
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:15.318052
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:17.156273
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:19.156942
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:22.100165
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:24.120601
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:26.673613
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:28.868156
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:31.502210
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:33.248366
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:35.085337
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:38.456317
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:40.378781
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:42.411969
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:44.608543
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:47.595042
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:49.555478
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:51.378971
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:53.241428
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:55.149683
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:57.187995
+Calculating profits for tournament 309785740 at: 2020-10-24 08:28:59.174698
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:01.066214
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:06.018780
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:08.065657
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:10.356179
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:12.336690
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:14.138064
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:15.911806
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:17.947406
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:19.751783
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:21.493983
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:23.901003
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:25.652273
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:27.741817
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:29.880807
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:31.703017
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:33.530952
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:35.611064
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:37.356078
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:39.183650
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:41.306949
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:43.500050
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:45.349261
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:47.243726
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:49.110291
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:51.186976
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:52.891796
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:54.923362
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:57.078248
+Calculating profits for tournament 309785740 at: 2020-10-24 08:29:58.870518
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:01.694588
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:04.782347
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:06.834230
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:08.894985
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:10.686168
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:12.477129
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:14.440381
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:16.284021
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:18.080800
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:20.253171
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:22.081344
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:23.919945
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:25.835337
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:27.866752
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:30.755788
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:32.458242
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:34.395002
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:36.505729
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:38.474986
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:40.760936
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:42.608317
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:44.637287
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:46.650732
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:48.537745
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:50.445172
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:53.003031
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:54.981811
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:56.765313
+Calculating profits for tournament 309785740 at: 2020-10-24 08:30:58.510051
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:01.240715
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:03.162428
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:05.083613
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:06.843290
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:08.617204
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:10.401551
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:12.263019
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:14.241415
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:16.435749
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:18.246142
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:20.019509
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:21.813059
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:23.709041
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:25.552855
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:27.614529
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:29.393654
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:31.597821
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:33.813474
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:35.610137
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:37.610971
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:39.324709
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:41.515771
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:43.328085
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:45.015376
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:47.953405
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:50.164157
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:52.046469
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:54.486601
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:56.785763
+Calculating profits for tournament 309785740 at: 2020-10-24 08:31:58.632997
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:00.346429
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:02.313896
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:04.132065
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:05.927270
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:07.730466
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:09.612657
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:11.619123
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:13.468661
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:15.307503
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:17.081043
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:18.865247
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:20.687605
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:22.443224
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:24.544242
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:26.411878
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:28.271583
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:30.131560
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:32.010099
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:33.811626
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:35.663416
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:38.034414
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:39.884763
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:42.048562
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:43.812906
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:45.555578
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:48.343075
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:50.232191
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:52.139672
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:53.889044
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:56.143048
+Calculating profits for tournament 309785740 at: 2020-10-24 08:32:59.003147
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:00.812683
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:06.748305
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:10.686539
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:13.233654
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:15.253868
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:17.143343
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:19.264870
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:21.251293
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:23.030892
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:25.046388
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:27.252839
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:29.390912
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:31.406470
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:33.345315
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:35.150396
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:39.685652
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:41.620013
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:43.630286
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:45.600083
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:47.671688
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:49.824387
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:51.697503
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:54.159187
+Calculating profits for tournament 309785740 at: 2020-10-24 08:33:58.112218
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:00.307903
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:02.238380
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:04.166808
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:05.925183
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:07.891924
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:09.743254
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:11.642344
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:13.587751
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:15.539060
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:17.262936
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:19.075320
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:21.075066
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:22.934466
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:24.945640
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:29.934913
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:32.607004
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:35.229080
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:37.541297
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:40.691530
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:43.139647
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:46.617491
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:49.140051
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:52.728874
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:54.665594
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:56.544912
+Calculating profits for tournament 309785740 at: 2020-10-24 08:34:58.588343
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:00.560181
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:02.464784
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:04.546192
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:06.296715
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:08.380081
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:10.179435
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:12.198464
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:15.242014
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:17.264045
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:19.128243
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:20.928684
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:22.975005
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:25.188807
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:27.096686
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:29.159310
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:31.018881
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:32.956696
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:35.096965
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:37.360961
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:39.608204
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:41.491653
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:43.457880
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:45.441303
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:47.322771
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:49.291621
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:51.271448
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:53.208715
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:55.026957
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:56.873212
+Calculating profits for tournament 309785740 at: 2020-10-24 08:35:58.778035
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:00.702722
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:02.910773
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:04.902718
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:07.055223
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:08.891509
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:10.711762
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:12.600960
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:14.746581
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:16.587514
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:18.666162
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:22.305470
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:24.309789
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:26.193872
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:27.955917
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:30.522840
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:33.437527
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:35.635096
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:37.558058
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:39.592226
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:42.453026
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:44.753882
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:46.690311
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:48.782368
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:50.610238
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:52.389710
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:54.125201
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:55.978503
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:57.845573
+Calculating profits for tournament 309785740 at: 2020-10-24 08:36:59.735067
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:01.644959
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:03.863614
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:05.937072
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:08.251443
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:10.775514
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:12.965086
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:15.201232
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:17.714897
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:19.550389
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:21.656619
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:23.495663
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:25.503770
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:27.325450
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:29.166218
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:31.688189
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:33.458933
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:35.295185
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:37.193590
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:39.053252
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:40.929731
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:42.744601
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:44.644012
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:46.689528
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:49.992822
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:52.259102
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:54.087038
+Calculating profits for tournament 309785740 at: 2020-10-24 08:37:55.904926
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:00.430542
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:02.766085
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:05.836393
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:07.856441
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:09.959764
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:12.024329
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:14.043954
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:16.290057
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:18.337226
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:20.810773
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:23.277246
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:25.857596
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:28.791120
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:30.717978
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:32.494025
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:34.388346
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:36.321903
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:38.219327
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:40.755620
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:42.563412
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:44.523465
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:46.565264
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:48.328986
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:50.287399
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:52.284531
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:54.283059
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:56.346710
+Calculating profits for tournament 309785740 at: 2020-10-24 08:38:58.174967
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:01.057005
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:02.924439
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:05.059498
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:06.931481
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:08.961887
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:11.519959
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:13.968966
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:16.152288
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:18.396297
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:20.254681
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:22.090732
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:24.091400
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:26.370784
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:28.425557
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:30.468288
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:32.319445
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:34.682334
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:36.470740
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:38.947773
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:40.860088
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:43.044567
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:46.266556
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:49.919697
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:51.967950
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:54.441586
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:57.643496
+Calculating profits for tournament 309785740 at: 2020-10-24 08:39:59.512710
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:02.887212
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:05.918500
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:08.929404
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:11.729610
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:14.009360
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:16.009763
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:18.613187
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:20.649796
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:22.531277
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:25.028873
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:27.048052
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:28.901568
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:30.771001
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:33.253554
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:36.082367
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:38.294243
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:40.832794
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:43.098528
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:45.369819
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:47.671862
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:50.257286
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:52.347729
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:54.380797
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:57.142022
+Calculating profits for tournament 309785740 at: 2020-10-24 08:40:59.138222
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:01.162766
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:03.601954
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:05.994846
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:07.891330
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:09.868124
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:12.334957
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:14.679739
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:16.571177
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:18.898383
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:21.540802
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:23.555577
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:25.321317
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:27.244465
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:30.071011
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:33.011371
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:36.342681
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:38.101536
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:39.814444
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:41.594591
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:43.515779
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:45.579098
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:47.447827
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:49.513969
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:51.614685
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:53.702530
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:55.798461
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:57.698280
+Calculating profits for tournament 309785740 at: 2020-10-24 08:41:59.706385
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:01.565258
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:03.781547
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:06.249139
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:08.155929
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:10.141710
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:12.234642
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:14.638796
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:16.548886
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:18.424572
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:21.073574
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:23.100500
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:25.424120
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:27.163223
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:29.708144
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:31.650563
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:33.410834
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:35.385234
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:38.107080
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:39.805659
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:41.709170
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:43.790967
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:45.594269
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:47.681194
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:49.554501
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:51.377658
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:53.668855
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:55.469830
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:57.179437
+Calculating profits for tournament 309785740 at: 2020-10-24 08:42:58.949646
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:01.040538
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:02.883892
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:04.697781
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:06.555904
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:09.578214
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:11.354085
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:13.463078
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:16.557789
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:18.496301
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:20.417418
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:22.434474
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:24.721023
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:26.618914
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:28.702125
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:31.067967
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:32.951586
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:34.829742
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:36.795163
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:39.318434
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:41.674689
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:43.484072
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:45.250735
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:47.967896
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:49.773768
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:51.769538
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:53.807525
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:56.651406
+Calculating profits for tournament 309785740 at: 2020-10-24 08:43:58.439165
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:00.626924
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:02.908252
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:05.049507
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:06.831605
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:08.722355
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:10.672635
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:12.611855
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:14.937501
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:17.097226
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:19.238537
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:21.488584
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:23.552505
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:25.984196
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:29.239921
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:31.054099
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:33.491197
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:35.228822
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:37.648626
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:39.702911
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:42.649726
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:44.751808
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:46.741713
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:48.761614
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:50.649730
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:53.112042
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:55.087550
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:57.370457
+Calculating profits for tournament 309785740 at: 2020-10-24 08:44:59.609399
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:01.939510
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:03.781367
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:06.293340
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:11.413526
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:13.809661
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:15.814947
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:21.372176
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:23.608488
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:26.639131
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:31.327570
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:33.724567
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:38.771538
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:40.676919
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:42.500905
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:46.119966
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:47.962284
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:49.960970
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:51.927236
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:53.873246
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:55.804519
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:58.026450
+Calculating profits for tournament 309785740 at: 2020-10-24 08:45:59.963742
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:01.859426
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:03.639155
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:05.758718
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:07.872385
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:09.925271
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:13.817983
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:15.896660
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:17.897144
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:20.174331
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:22.007551
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:24.507839
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:26.336749
+Calculating profits for tournament 309785740 at: 2020-10-24 08:46:28.243484
+Error: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)) 309785740 at: 2020-10-24 08:46:52.992659+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:03.008170
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:06.596449
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:09.335729
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:11.575730
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:15.140216
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:18.029580
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:22.101234
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:24.000966
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:25.985034
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:27.970675
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:30.831308
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:33.299285
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:35.393377
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:37.424330
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:39.913946
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:42.837230
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:44.627988
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:46.431970
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:48.836581
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:52.305564
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:54.552874
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:57.412250
+Calculating profits for tournament 309785740 at: 2020-10-24 08:47:59.327716
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:02.538447
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:04.594822
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:06.861150
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:08.720777
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:10.687294
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:13.888036
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:16.413424
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:18.135172
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:19.926625
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:21.722271
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:24.578054
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:26.643584
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:28.526316
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:30.592350
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:32.832851
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:35.558982
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:37.547341
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:41.513165
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:43.623995
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:48.674541
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:50.766147
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:52.897604
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:54.905092
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:56.901991
+Calculating profits for tournament 309785740 at: 2020-10-24 08:48:59.248048
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:01.240174
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:03.079705
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:04.940621
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:07.713929
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:11.351214
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:13.737925
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:15.636350
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:17.831851
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:20.312795
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:22.241842
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:24.114200
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:26.005113
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:28.025316
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:30.125331
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:32.196022
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:34.017272
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:35.893328
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:37.813517
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:39.639123
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:43.130819
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:45.100428
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:47.288651
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:49.064343
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:51.367384
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:54.846278
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:56.963266
+Calculating profits for tournament 309785740 at: 2020-10-24 08:49:59.018525
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:01.057621
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:02.918022
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:04.762675
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:07.349690
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:09.309840
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:11.158669
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:13.223564
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:15.460371
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:17.591525
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:20.473790
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:22.442173
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:24.391967
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:26.433216
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:28.332403
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:30.239822
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:32.054652
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:33.902495
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:35.752582
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:39.684261
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:41.463828
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:43.420482
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:45.383622
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:47.802467
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:49.630543
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:51.470255
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:53.219389
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:55.032884
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:57.118058
+Calculating profits for tournament 309785740 at: 2020-10-24 08:50:58.918919
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:00.935509
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:02.690910
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:04.645137
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:07.882754
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:09.802177
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:11.696847
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:13.489449
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:15.279537
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:17.484647
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:19.361934
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:21.175304
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:23.419340
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:25.240243
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:27.488431
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:29.345308
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:31.330680
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:33.135580
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:34.975819
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:36.799585
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:38.501357
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:40.589036
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:42.445427
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:44.252279
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:46.077469
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:47.936941
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:49.827707
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:52.354477
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:55.505101
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:57.480275
+Calculating profits for tournament 309785740 at: 2020-10-24 08:51:59.343326
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:01.130477
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:03.356796
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:05.427521
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:07.415459
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:09.325528
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:11.172047
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:13.202781
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:15.063372
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:17.152565
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:18.952687
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:20.719126
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:22.546513
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:25.115143
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:28.334338
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:30.987433
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:32.785170
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:34.545893
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:36.717481
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:38.493979
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:40.515968
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:42.474988
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:46.727210
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:51.167963
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:53.096450
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:55.136195
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:57.194839
+Calculating profits for tournament 309785740 at: 2020-10-24 08:52:58.927334
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:00.942707
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:03.138328
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:05.076775
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:07.055840
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:09.110210
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:10.855960
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:12.605362
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:14.419644
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:16.157624
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:18.102298
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:19.894100
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:21.991176
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:23.755473
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:25.875621
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:27.726346
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:29.592772
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:31.535228
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:33.359855
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:35.165845
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:36.920339
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:38.703049
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:40.430023
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:42.274628
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:43.983429
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:45.887231
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:47.673104
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:49.429459
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:51.175834
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:52.904354
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:54.741308
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:56.598200
+Calculating profits for tournament 309785740 at: 2020-10-24 08:53:58.451323
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:00.216748
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:03.392574
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:05.610665
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:07.546547
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:10.177011
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:11.991066
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:14.162651
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:16.036506
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:17.757118
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:19.961737
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:21.860460
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:23.695406
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:25.715661
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:27.858888
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:30.034066
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:31.965416
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:33.793549
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:35.659846
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:37.539335
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:40.000769
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:41.785606
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:43.577334
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:45.364645
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:47.156344
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:49.730691
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:51.650840
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:53.643000
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:55.489590
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:57.396870
+Calculating profits for tournament 309785740 at: 2020-10-24 08:54:59.884569
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:02.101016
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:04.756905
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:06.602996
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:08.688252
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:10.476971
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:12.366888
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:14.450654
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:17.069742
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:19.749122
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:22.515802
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:25.286452
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:28.265432
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:35.009767
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:37.792983
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:40.022605
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:43.207411
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:45.625589
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:47.705466
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:50.167634
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:52.098030
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:53.991064
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:55.942044
+Calculating profits for tournament 309785740 at: 2020-10-24 08:55:58.331447
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:00.215444
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:01.977279
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:03.842913
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:05.815477
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:07.807687
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:09.614609
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:12.644155
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:14.440123
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:16.345880
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:18.299990
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:20.081609
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:21.873853
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:23.722522
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:25.598978
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:27.585796
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:29.638667
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:31.536504
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:33.716394
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:35.715102
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:37.671948
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:39.405684
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:41.212445
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:43.216035
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:45.087636
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:46.896393
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:48.990850
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:51.151300
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:53.116788
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:55.340602
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:57.439543
+Calculating profits for tournament 309785740 at: 2020-10-24 08:56:59.386231
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:01.257285
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:03.161911
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:05.009264
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:06.911341
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:08.840319
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:10.809372
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:12.690614
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:14.734099
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:16.758401
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:18.716300
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:20.814135
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:22.666934
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:24.581588
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:26.403025
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:28.721362
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:30.581261
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:38.233123
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:41.719806
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:45.396754
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:51.666045
+Calculating profits for tournament 309785740 at: 2020-10-24 08:57:55.399934
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:00.115691
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:02.982684
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:07.163886
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:18.331280
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:24.801277
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:28.592721
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:30.610143
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:32.505837
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:34.491620
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:36.914816
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:39.590326
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:42.842384
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:45.199638
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:47.642689
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:50.540483
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:53.470126
+Calculating profits for tournament 309785740 at: 2020-10-24 08:58:57.407288
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:00.728431
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:04.797012
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:10.674553
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:15.105995
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:19.844880
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:31.868711
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:35.820459
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:37.959274
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:40.812922
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:45.893475
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:50.819111
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:54.549178
+Calculating profits for tournament 309785740 at: 2020-10-24 08:59:58.111228
+Calculating profits for tournament 309785740 at: 2020-10-24 09:00:01.434595
+Calculating profits for tournament 309785740 at: 2020-10-24 09:00:11.615288
+Calculating profits for tournament 309785740 at: 2020-10-24 09:00:20.272820
+Error: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)) 309785740 at: 2020-10-24 09:00:47.654911+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 09:00:57.663563
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:01.194874
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:07.316176
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:10.648651
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:13.935668
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:17.999225
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:26.250967
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:29.516832
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:37.284573
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:39.772065
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:42.502052
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:46.844559
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:49.801044
+Calculating profits for tournament 309785740 at: 2020-10-24 09:01:51.952483
+Error: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)) 309785740 at: 2020-10-24 09:02:12.457223+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 09:02:22.485603
+Calculating profits for tournament 309785740 at: 2020-10-24 09:02:30.628382
+Calculating profits for tournament 309785740 at: 2020-10-24 09:02:32.415886
+Calculating profits for tournament 309785740 at: 2020-10-24 09:02:35.057135
+Calculating profits for tournament 309785740 at: 2020-10-24 09:02:36.975032
+Calculating profits for tournament 309785740 at: 2020-10-24 09:02:38.856471
+Calculating profits for tournament 309785740 at: 2020-10-24 09:02:40.863310
+Calculating profits for tournament 309785740 at: 2020-10-24 09:02:57.724941
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:01.052078
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:04.016494
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:06.666540
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:08.364588
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:11.710573
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:14.416171
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:17.331878
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:20.162591
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:22.215156
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:24.942037
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:26.679593
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:28.625223
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:32.462090
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:34.781109
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:36.683114
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:38.783627
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:42.240532
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:46.688647
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:49.946953
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:51.776815
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:53.809169
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:56.272281
+Calculating profits for tournament 309785740 at: 2020-10-24 09:03:58.319700
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:01.351771
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:04.399064
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:09.486388
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:14.791489
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:18.323317
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:21.835144
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:23.729741
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:27.549027
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:30.698523
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:33.876529
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:37.365154
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:43.113103
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:47.395612
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:52.499839
+Calculating profits for tournament 309785740 at: 2020-10-24 09:04:58.008754
+Calculating profits for tournament 309785740 at: 2020-10-24 09:05:08.409087
+Calculating profits for tournament 309785740 at: 2020-10-24 09:05:14.605802
+Calculating profits for tournament 309785740 at: 2020-10-24 09:05:38.747084
+Calculating profits for tournament 309785740 at: 2020-10-24 09:05:47.382421
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:06.718994
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:15.746565
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:18.674642
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:20.653755
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:27.381164
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:29.794963
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:31.697759
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:33.641575
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:35.567449
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:37.350686
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:39.282678
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:41.817835
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:43.776566
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:47.282721
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:51.330426
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:53.268350
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:55.221383
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:57.009904
+Calculating profits for tournament 309785740 at: 2020-10-24 09:06:58.861227
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:00.650470
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:02.565995
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:04.800155
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:06.566817
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:09.028986
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:10.866650
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:12.648244
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:14.942274
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:16.695915
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:18.538094
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:20.802393
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:23.772717
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:25.932949
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:27.769275
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:30.747900
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:32.834441
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:34.768798
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:36.887410
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:38.978260
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:40.791168
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:42.805469
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:48.129707
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:50.836509
+Calculating profits for tournament 309785740 at: 2020-10-24 09:07:57.246663
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:00.294280
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:02.855757
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:04.955751
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:06.870560
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:09.782404
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:11.639395
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:13.421191
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:15.252181
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:17.010061
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:18.812991
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:20.642503
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:22.363706
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:24.189208
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:26.000908
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:28.062863
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:29.968111
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:32.075482
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:33.973247
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:35.859563
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:38.134125
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:40.242066
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:42.002899
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:43.863373
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:45.972040
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:47.816120
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:49.816923
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:53.502252
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:55.401972
+Calculating profits for tournament 309785740 at: 2020-10-24 09:08:58.427685
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:01.053049
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:03.210720
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:05.053176
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:07.612646
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:09.538762
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:11.773570
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:13.809870
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:16.305911
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:18.206522
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:20.828014
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:22.635919
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:24.918882
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:27.041809
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:29.959657
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:32.672711
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:35.778056
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:38.558095
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:40.587102
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:42.545698
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:45.027875
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:46.870332
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:49.278948
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:51.566905
+Calculating profits for tournament 309785740 at: 2020-10-24 09:09:56.904746
+Error: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)) 309785740 at: 2020-10-24 09:10:12.517218+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 09:10:22.518500
+Calculating profits for tournament 309785740 at: 2020-10-24 09:10:36.370788
+Calculating profits for tournament 309785740 at: 2020-10-24 09:10:39.768092
+Calculating profits for tournament 309785740 at: 2020-10-24 09:10:45.405235
+Calculating profits for tournament 309785740 at: 2020-10-24 09:10:51.961457
+Calculating profits for tournament 309785740 at: 2020-10-24 09:10:53.977085
+Calculating profits for tournament 309785740 at: 2020-10-24 09:10:55.805243
+Calculating profits for tournament 309785740 at: 2020-10-24 09:10:59.013135
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:01.524346
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:03.762853
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:05.617244
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:07.494351
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:10.041013
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:12.041278
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:13.818933
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:19.166990
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:21.277689
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:23.341629
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:26.187848
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:28.004080
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:31.403805
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:33.329981
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:35.238079
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:37.498543
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:39.426822
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:41.918838
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:45.140779
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:46.997076
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:49.492217
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:51.308802
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:53.689146
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:56.578963
+Calculating profits for tournament 309785740 at: 2020-10-24 09:11:58.426508
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:00.424660
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:02.264318
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:04.410447
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:06.471420
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:08.253338
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:13.395095
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:15.222839
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:19.536514
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:22.981473
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:26.396071
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:30.828399
+Calculating profits for tournament 309785740 at: 2020-10-24 09:12:35.101057
+Calculating profits for tournament 309785740 at: 2020-10-24 09:13:01.401431
+Error: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)) 309785740 at: 2020-10-24 09:13:33.219467+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 09:13:43.231830
+Calculating profits for tournament 309785740 at: 2020-10-24 09:13:46.997212
+Calculating profits for tournament 309785740 at: 2020-10-24 09:13:48.879179
+Calculating profits for tournament 309785740 at: 2020-10-24 09:13:51.792534
+Calculating profits for tournament 309785740 at: 2020-10-24 09:13:53.940285
+Calculating profits for tournament 309785740 at: 2020-10-24 09:13:56.065691
+Calculating profits for tournament 309785740 at: 2020-10-24 09:13:58.635367
+Calculating profits for tournament 309785740 at: 2020-10-24 09:14:00.690971
+Calculating profits for tournament 309785740 at: 2020-10-24 09:14:04.080896
+Calculating profits for tournament 309785740 at: 2020-10-24 09:14:11.044272
+Error: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)) 309785740 at: 2020-10-24 09:14:34.554488+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 09:14:44.558491
+Calculating profits for tournament 309785740 at: 2020-10-24 09:14:52.913299
+Calculating profits for tournament 309785740 at: 2020-10-24 09:14:57.248579
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:00.470840
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:02.921142
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:05.422033
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:08.469134
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:10.630294
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:13.678702
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:16.614960
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:18.453395
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:20.531816
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:22.360173
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:26.454370
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:28.429044
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:31.519123
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:33.832421
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:40.378400
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:42.238216
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:45.001245
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:46.953514
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:48.711403
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:50.611534
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:52.341784
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:55.569402
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:57.538363
+Calculating profits for tournament 309785740 at: 2020-10-24 09:15:59.337874
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:01.000902
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:03.053394
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:06.825192
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:08.747053
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:12.406456
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:15.946792
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:17.746863
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:20.295395
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:23.328307
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:26.230915
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:27.995813
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:30.559170
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:32.773654
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:36.075591
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:37.760790
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:40.122860
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:41.931565
+Error: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)) 309785740 at: 2020-10-24 09:16:46.607598+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:56.610956
+Calculating profits for tournament 309785740 at: 2020-10-24 09:16:59.373166
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:01.141816
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:02.916543
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:06.658074
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:08.462052
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:11.360012
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:13.077635
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:15.473628
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:17.391141
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:19.253116
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:21.411732
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:23.139329
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:25.284203
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:28.332820
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:31.448475
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:33.280236
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:35.922787
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:37.812883
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:40.204528
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:46.831664
+Calculating profits for tournament 309785740 at: 2020-10-24 09:17:54.975243
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:03.909756
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:09.070597
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:16.409701
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:20.415197
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:22.763198
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:28.862834
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:32.637141
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:34.812998
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:36.729074
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:41.429821
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:43.425273
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:49.389860
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:52.615157
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:55.767232
+Calculating profits for tournament 309785740 at: 2020-10-24 09:18:58.969011
+Calculating profits for tournament 309785740 at: 2020-10-24 09:19:01.346374
+Calculating profits for tournament 309785740 at: 2020-10-24 09:19:03.029566
+Calculating profits for tournament 309785740 at: 2020-10-24 09:19:05.506557
+Calculating profits for tournament 309785740 at: 2020-10-24 09:19:07.303277
+Calculating profits for tournament 309785740 at: 2020-10-24 09:19:10.140872
+Error: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)) 309785740 at: 2020-10-24 09:19:22.872673+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 09:19:32.923709
+Calculating profits for tournament 309785740 at: 2020-10-24 09:19:47.410640
+Calculating profits for tournament 309785740 at: 2020-10-24 09:19:54.651951
+Calculating profits for tournament 309785740 at: 2020-10-24 09:20:00.910328
+Calculating profits for tournament 309785740 at: 2020-10-24 09:20:06.661912
+Calculating profits for tournament 309785740 at: 2020-10-24 09:20:09.935778
+Calculating profits for tournament 309785740 at: 2020-10-24 09:20:16.736671
+Calculating profits for tournament 309785740 at: 2020-10-24 09:20:19.006496
+Calculating profits for tournament 309785740 at: 2020-10-24 09:20:22.052136
+Calculating profits for tournament 309785740 at: 2020-10-24 09:20:28.912001
+Calculating profits for tournament 309785740 at: 2020-10-24 09:20:32.978595
+Calculating profits for tournament 309785740 at: 2020-10-24 09:20:37.064228
+Error: ('Connection aborted.', ConnectionAbortedError(10053, 'An established connection was aborted by the software in your host machine', None, 10053, None)) 309785740 at: 2020-10-24 09:21:00.828591+00:00
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:10.837621
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:13.474773
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:17.363238
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:21.080654
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:24.134445
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:26.199335
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:28.656850
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:31.192425
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:34.602171
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:37.943104
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:39.980159
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:42.717304
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:45.370183
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:48.744365
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:51.416122
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:53.613966
+Calculating profits for tournament 309785740 at: 2020-10-24 09:21:58.006610
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:00.065109
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:03.503731
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:10.777548
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:14.139067
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:29.395779
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:32.839829
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:37.393757
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:40.819829
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:49.197755
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:53.425623
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:56.697755
+Calculating profits for tournament 309785740 at: 2020-10-24 09:22:58.992111
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:03.102499
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:06.274548
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:09.627641
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:12.322346
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:14.368709
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:18.842935
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:20.870374
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:24.509880
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:27.306721
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:30.065081
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:33.359366
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:40.386606
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:43.217641
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:45.257514
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:47.752753
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:50.827041
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:53.036966
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:55.518896
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:57.587540
+Calculating profits for tournament 309785740 at: 2020-10-24 09:23:59.917456
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:02.077917
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:05.119443
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:07.783574
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:09.796291
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:13.326978
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:15.398096
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:18.189351
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:20.958951
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:23.062967
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:26.321833
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:28.396806
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:30.412961
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:32.432420
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:34.463383
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:37.230810
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:39.295685
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:41.726911
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:43.885374
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:45.999735
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:49.107883
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:52.996838
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:55.171994
+Calculating profits for tournament 309785740 at: 2020-10-24 09:24:59.072953
+Calculating profits for tournament 309785740 at: 2020-10-24 09:25:02.851708
+Calculating profits for tournament 309785740 at: 2020-10-24 09:25:06.991566
+Calculating profits for tournament 309785740 at: 2020-10-24 09:25:11.714138
+Calculating profits for tournament 309785740 at: 2020-10-24 09:25:14.215306
+Calculating profits for tournament 309785740 at: 2020-10-24 09:25:17.503554
+Calculating profits for tournament 309785740 at: 2020-10-24 09:25:25.597854
+Calculating profits for tournament 309785740 at: 2020-10-24 09:25:28.141351
+Calculating profits for tournament 309785740 at: 2020-10-24 09:25:34.750817
+Calculating profits for tournament 309785740 at: 2020-10-24 09:25:36.805040
+Calculating profits for tournament 309785740 at: 2020-10-24 09:25:44.949592

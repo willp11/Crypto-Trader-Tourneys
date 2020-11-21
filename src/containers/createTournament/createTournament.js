@@ -6,7 +6,7 @@ import CheckDropdown from '../../components/UI/CheckDropDown/CheckDropDown';
 import * as actions from '../../store/actions/index';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
-import NavTop from '../../components/navigation/nav-top/nav-top';
+import NavBottom from '../../components/navigation/nav-bottom/nav-bottom';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 import { firebaseAuth } from '../../firebase/firebase';
@@ -23,7 +23,8 @@ class CreateTournament extends Component {
             startTime: null,
             duration: null,
             quoteCurrency: null,
-            visibility: null
+            visibility: null,
+            profitType: null
         },
         redirect: false,
         errorMsg: '',
@@ -46,9 +47,13 @@ class CreateTournament extends Component {
                     this.props.updateUserIdToken(user.uid, user.xa);
                     if (!this.props.username) this.props.getUsernameEmail(user.uid);
                     let productList;
-                    axios.get('/getAllProducts').then(res => {
-                        productList=res.data;
-                        this.setState({productList: productList, loadingProducts: false});
+                    axios.get('/api/getAllProducts').then(res => {
+                        if (res.data.error) {
+                            this.setState({error: true});
+                        } else {
+                            productList=res.data;
+                            this.setState({productList: productList, loadingProducts: false});
+                        }
                     }).catch(err => {
                         this.setState({error: true});
                     });
@@ -83,7 +88,7 @@ class CreateTournament extends Component {
         } else {
             if (parseInt(dbData.maxEntrants) < 2 || parseInt(dbData.maxEntrants) > 200) {
                 valid = false;
-                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>YThe maximum number of entrants must be between 2 and 200.</p>
+                errorMsg = <p style={{"fontWeight": "bold", "color": "#f7716d"}}>The maximum number of entrants must be between 2 and 200.</p>
             }
 
             if (parseInt(dbData.minEntrants) < 2 || parseInt(dbData.minEntrants) > 200) {
@@ -155,11 +160,12 @@ class CreateTournament extends Component {
                 "duration": this.state.formData.duration,
                 "quoteCurrency": this.state.formData.quoteCurrency,
                 "visibility": this.state.formData.visibility,
-                "products": this.props.productList
+                "products": this.props.productList,
+                "profitType": this.state.formData.profitType
             }
 
             this.setState({loading: true});
-            axios.post('/createTournament', newDbData).then(res => {
+            axios.post('/api/createTournament', newDbData).then(res => {
                 let tourneyId = res.data.response.tourneyId;
                 
                 this.props.emptyProductList();
@@ -197,6 +203,13 @@ class CreateTournament extends Component {
         this.setState({formData: newData});
     }
     
+    selectProfitTypeHandler = (event) => {
+        event.preventDefault();
+        let profitType = event.target.name;
+        let newData = {...this.state.formData};
+        newData['profitType'] = profitType;
+        this.setState({formData: newData});
+    }
     
     render() {
         
@@ -329,6 +342,30 @@ class CreateTournament extends Component {
             );
         }
         
+        // PROFIT TYPE
+        let profitTypeBtns = (
+            <div>
+                <button name="relative" onClick={(event) => this.selectProfitTypeHandler(event)}>Relative</button>
+                <button name="absolute" onClick={(event) => this.selectProfitTypeHandler(event)}>Absolute</button>
+            </div>
+        )
+        
+        if (this.state.formData.profitType == "relative") {
+            profitTypeBtns = (
+                <div>
+                    <button name="relative" className="Selected" onClick={(event) => this.selectProfitTypeHandler(event)}>Relative</button>
+                    <button name="absolute" onClick={(event) => this.selectProfitTypeHandler(event)}>Absolute</button>
+                </div>
+            )
+        } else if (this.state.formData.profitType == "absolute") {
+            profitTypeBtns = (
+                <div>
+                    <button name="relative" onClick={(event) => this.selectProfitTypeHandler(event)}>Relative</button>
+                    <button name="absolute" className="Selected" onClick={(event) => this.selectProfitTypeHandler(event)}>Absolute</button>
+                </div>
+            )
+        }
+        
         // SUBMIT BTN
         let submitBtn = <button className="submitTournBtn" type="submit" onClick={(event) => this.submitHandler(event)}>Submit</button>
         
@@ -368,7 +405,10 @@ class CreateTournament extends Component {
                     <h3 style={{"fontSize":"0.8rem", "fontWeight":"normal"}}>Maximum 30 days</h3>
 
                     <h3>Visibility:</h3>
-                    {visibilityBtns}
+                    {visibilityBtns}    
+
+                    <h3>Profit Type:</h3>
+                    {profitTypeBtns}
 
                     {submitBtn}
                     {this.state.errorMsg}
@@ -383,9 +423,12 @@ class CreateTournament extends Component {
         }
         
         return (
-            <div className="createTournDiv">
-                {redirect}
-                {createTournamentDiv}
+            <div>
+                <div className="createTournDiv">
+                    {redirect}
+                    {createTournamentDiv}
+                </div>
+                <NavBottom />
             </div>
         )
     }
